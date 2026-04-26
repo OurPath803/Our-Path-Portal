@@ -33,6 +33,24 @@ export default function SessionZero() {
       setError('Something went wrong. Please try again or email hello@ourpathguidance.co.uk')
     } else {
       setSubmitted(true)
+      // Notify admin (best effort — don't block the success state on this).
+      try {
+        await fetch('/.netlify/functions/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'new_application',
+            to: form.email, // ignored server-side; admin gets it
+            data: {
+              name: form.name,
+              email: form.email,
+              motivation: form.motivation,
+              preferred_rhythm: form.rhythm,
+              preferred_mode: form.mode,
+            },
+          }),
+        })
+      } catch (_) { /* ignore — application is already saved */ }
     }
     setLoading(false)
   }
@@ -40,12 +58,16 @@ export default function SessionZero() {
   if (submitted) {
     return (
       <div style={{ minHeight: '100vh', background: 'var(--cream)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ maxWidth: 480, textAlign: 'center', padding: 48 }}>
+        <div style={{ maxWidth: 520, textAlign: 'center', padding: 48 }}>
           <div className="eyebrow" style={{ textAlign: 'center' }}>Thank you</div>
-          <h1 style={{ color: 'var(--teal)' }}>Your request has been received.</h1>
-          <p style={{ fontFamily: 'Fraunces, serif', fontStyle: 'italic', fontSize: 17, lineHeight: 1.6, color: 'var(--ink-soft)', marginBottom: 32 }}>
-            We'll be in touch within 48 hours to arrange a time that works.
-            Nothing is decided yet — this is just a conversation.
+          <h1 style={{ color: 'var(--teal)', fontFamily: 'Fraunces, serif' }}>
+            You're on the waiting list.
+          </h1>
+          <p style={{
+            fontFamily: 'Fraunces, serif', fontStyle: 'italic', fontSize: 18,
+            lineHeight: 1.6, color: 'var(--ink-soft)', marginBottom: 32,
+          }}>
+            Shakil reviews each application personally. We'll be in touch within 48 hours.
           </p>
           <Link to="/" className="btn btn-ghost">Back to home</Link>
         </div>

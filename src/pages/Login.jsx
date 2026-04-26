@@ -56,7 +56,7 @@ export default function Login() {
         <p style={{ color: 'var(--ink-soft)', marginBottom: 24, fontSize: 14 }}>
           {tab === 'in'
             ? 'Sign in to access your portal.'
-            : 'You\'ll need to have completed Session Zero first.'}
+            : 'Sign up to access your reflective journal and message your future mentor. Your first booked session will count as Session Zero.'}
         </p>
 
         <div className="auth-tab">
@@ -114,6 +114,12 @@ export default function Login() {
             {loading ? 'Please wait…' : tab === 'in' ? 'Sign in' : 'Create account'}
           </button>
         </form>
+
+        {tab === 'in' && (
+          <p style={{ marginTop: 14, fontSize: 13, color: 'var(--mute)', textAlign: 'center' }}>
+            <Link to="/forgot-password">Forgot password?</Link>
+          </p>
+        )}
 
         <p style={{ marginTop: 24, fontSize: 13, color: 'var(--mute)', textAlign: 'center' }}>
           Not yet a mentee?{' '}

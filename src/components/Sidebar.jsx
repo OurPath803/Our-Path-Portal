@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
-const NAV = [
+const MENTEE_NAV = [
   { to: '/dashboard', ico: '◐', label: 'Home' },
   { to: '/journal',   ico: '◇', label: 'Journal' },
   { to: '/sessions',  ico: '◈', label: 'Sessions' },
@@ -12,9 +12,17 @@ const NAV = [
   { to: '/settings',  ico: '◌', label: 'Settings' },
 ]
 
+const MENTOR_NAV = [
+  { to: '/mentor',              ico: '◐', label: 'Mentees' },
+  { to: '/between',             ico: '◉', label: 'Messages' },
+  { to: '/mentor/applications', ico: '◇', label: 'Applications' },
+  { to: '/settings',            ico: '◌', label: 'Settings' },
+]
+
 function NavItems({ onClose }) {
   const { profile, signOut } = useAuth()
   const navigate = useNavigate()
+  const NAV = profile?.role === 'mentor' ? MENTOR_NAV : MENTEE_NAV
 
   async function handleSignOut() {
     await signOut()
@@ -46,8 +54,11 @@ function NavItems({ onClose }) {
       <div className="sidebar-foot">
         <div className="who">{firstName} {lastName ? lastName[0] + '.' : ''}</div>
         <div className="role">
-          {profile?.rhythm ? `${profile.rhythm.charAt(0).toUpperCase() + profile.rhythm.slice(1)} rhythm` : 'No rhythm yet'}
-          {' · with Shakil'}
+          {profile?.role === 'mentor'
+            ? 'Mentor'
+            : (profile?.rhythm
+                ? `${profile.rhythm.charAt(0).toUpperCase() + profile.rhythm.slice(1)} rhythm · with Shakil`
+                : 'No rhythm yet · with Shakil')}
         </div>
         <button
           onClick={handleSignOut}

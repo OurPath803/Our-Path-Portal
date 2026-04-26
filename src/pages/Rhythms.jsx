@@ -2,6 +2,16 @@ import { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import Sidebar from '../components/Sidebar'
 
+// Vite only inlines `import.meta.env.VITE_*` references that are statically
+// referenced. A dynamic key like `import.meta.env[priceKey]` always returns
+// `undefined` in production builds. Map the priceKey strings to their
+// statically-referenced env var values here.
+const PRICE_IDS = {
+  VITE_STRIPE_PRICE_MONTHLY: import.meta.env.VITE_STRIPE_PRICE_MONTHLY,
+  VITE_STRIPE_PRICE_FORTNIGHTLY: import.meta.env.VITE_STRIPE_PRICE_FORTNIGHTLY,
+  VITE_STRIPE_PRICE_WEEKLY: import.meta.env.VITE_STRIPE_PRICE_WEEKLY,
+}
+
 const TIERS = [
   {
     name: 'Monthly Rhythm',
@@ -70,7 +80,7 @@ export default function Rhythms() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          priceId: import.meta.env[priceKey],
+          priceId: PRICE_IDS[priceKey],
           userId: user.id,
           email: user.email,
           tierName,

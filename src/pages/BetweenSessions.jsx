@@ -91,6 +91,29 @@ export default function BetweenSessions() {
     if (data) {
       setMessages(ms => [...ms, data])
       scrollToBottom()
+
+      // Notify the receiver (5-minute throttle handled server-side).
+      try {
+        const { data: receiver } = await supabase
+          .from('profiles')
+          .select('email')
+          .eq('id', mentorId)
+          .maybeSingle()
+        if (receiver?.email) {
+          fetch('/.netlify/functions/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              type: 'new_message',
+              to: receiver.email,
+              data: {
+                senderName: profile?.full_name ?? 'Your mentee',
+                snippet: msg.content,
+              },
+            }),
+          }).catch(() => {})
+        }
+      } catch (_) { /* best effort */ }
     }
     setText('')
     setSending(false)
