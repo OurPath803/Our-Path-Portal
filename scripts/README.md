@@ -12,7 +12,7 @@ The script is idempotent — re-running it skips products / prices that already
 exist.
 
 ```bash
-STRIPE_SECRET_KEY=sk_test_... node scripts/setup-stripe.js
+STRIPE_SECRET_KEY=sk_test_... node scripts/setup-stripe.cjs
 ```
 
 After it finishes, copy the `VITE_STRIPE_PRICE_*` lines from the output into
@@ -39,7 +39,7 @@ true deletion of products that have prices — archiving is the cleanest way to
 start over in test mode.
 
 ```bash
-STRIPE_SECRET_KEY=sk_test_... node scripts/teardown-stripe.js
+STRIPE_SECRET_KEY=sk_test_... node scripts/teardown-stripe.cjs
 ```
 
 Re-run `setup-stripe.js` afterwards to create a fresh set.
