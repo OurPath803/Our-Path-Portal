@@ -41,23 +41,34 @@ function CalendlyEmbed({ url, name, email }) {
 export default function Sessions() {
   const { user, profile } = useAuth()
   const [upcomingSessions, setUpcomingSessions] = useState([])
+  const [subscription, setSubscription] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (!user) return
-    supabase
-      .from('sessions')
-      .select('*')
-      .eq('mentee_id', user.id)
-      .gte('scheduled_at', new Date().toISOString())
-      .order('scheduled_at', { ascending: true })
-      .then(({ data }) => {
-        setUpcomingSessions(data ?? [])
-        setLoading(false)
-      })
+    Promise.all([
+      supabase
+        .from('sessions')
+        .select('*')
+        .eq('mentee_id', user.id)
+        .gte('scheduled_at', new Date().toISOString())
+        .order('scheduled_at', { ascending: true }),
+      supabase
+        .from('subscriptions')
+        .select('*')
+        .eq('mentee_id', user.id)
+        .order('started_at', { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+    ]).then(([sessionsRes, subRes]) => {
+      setUpcomingSessions(sessionsRes.data ?? [])
+      setSubscription(subRes.data)
+      setLoading(false)
+    })
   }, [user])
 
-  const rhythm = profile?.rhythm ?? 'fortnightly'
+  const rhythm = subscription?.rhythm ?? 'fortnightly'
+  const subscriptionActive = subscription?.status === 'active'
 
   function formatSessionDate(d) {
     return new Date(d).toLocaleDateString('en-GB', {
@@ -82,7 +93,6 @@ export default function Sessions() {
             </p>
           </div>
 
-          {/* Upcoming sessions list — visible regardless of subscription status */}
           <div className="card" style={{ marginBottom: 22 }}>
             <div className="card-title">
               <h3>Upcoming sessions</h3>
@@ -100,14 +110,14 @@ export default function Sessions() {
                     {formatSessionDate(s.scheduled_at)}
                   </div>
                   <div style={{ fontSize: 13, color: 'var(--ink-soft)', marginTop: 2 }}>
-                    60 minutes · {s.mode ?? 'Video'} · With Shakil
+                    60 minutes · {s.mode ?? 'video'} · With Shakil
                   </div>
                 </div>
               ))
             )}
           </div>
 
-          {profile?.subscription_status !== 'active' ? (
+          {!subscriptionActive ? (
             <div className="card" style={{ textAlign: 'center', padding: '40px 28px' }}>
               <div className="eyebrow" style={{ textAlign: 'center' }}>Sessions are part of a rhythm</div>
               <h2 style={{

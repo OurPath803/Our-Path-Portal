@@ -9,7 +9,7 @@ const supabase = createClient(
 const CALENDLY_WEBHOOK_SECRET = process.env.CALENDLY_WEBHOOK_SECRET
 
 // Verify Calendly's signature header.
-// Header format (v1): "t=<timestamp>,v1=<signature>"
+// Format (v1): "t=<timestamp>,v1=<signature>"
 // Signature = HMAC-SHA256( "<timestamp>.<rawBody>", secret )
 function verifyCalendlySignature(rawBody, signatureHeader) {
   if (!CALENDLY_WEBHOOK_SECRET) return false
@@ -115,7 +115,8 @@ exports.handler = async (event) => {
     }
   }
 
-  // Resolve mentor — fall back to the single mentor in the system if missing.
+  // Resolve mentor — use the assigned one, falling back to the most-recent
+  // mentor profile.
   let mentorId = profile.mentor_id
   if (!mentorId) {
     const { data: mentor } = await supabase
@@ -144,7 +145,7 @@ exports.handler = async (event) => {
     return { statusCode: 500, body: 'Insert failed' }
   }
 
-  // Notify the mentee that their session was booked.
+  // Notify the mentee.
   await sendSessionBookedEmail(profile.email, {
     name: profile.full_name || inviteeName,
     scheduled_at: scheduledAt,

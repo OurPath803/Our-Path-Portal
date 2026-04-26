@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import Sidebar from '../components/Sidebar'
@@ -26,7 +26,6 @@ function daysUntil(d) {
 
 export default function Dashboard() {
   const { user, profile } = useAuth()
-  const navigate = useNavigate()
   const [nextSession, setNextSession] = useState(null)
   const [lastJournal, setLastJournal] = useState(null)
   const [stats, setStats] = useState({ sessions: 0, entries: 0, commitments: 0 })
@@ -52,7 +51,7 @@ export default function Dashboard() {
         supabase
           .from('journal_entries')
           .select('*')
-          .eq('user_id', user.id)
+          .eq('mentee_id', user.id)
           .order('created_at', { ascending: false })
           .limit(1)
           .maybeSingle(),
@@ -63,11 +62,11 @@ export default function Dashboard() {
         supabase
           .from('journal_entries')
           .select('id', { count: 'exact' })
-          .eq('user_id', user.id),
+          .eq('mentee_id', user.id),
         supabase
           .from('commitments')
           .select('*')
-          .eq('user_id', user.id)
+          .eq('mentee_id', user.id)
           .eq('completed', false)
           .order('created_at', { ascending: false })
           .limit(3),
@@ -90,6 +89,17 @@ export default function Dashboard() {
     await supabase.from('commitments').update({ completed: !done }).eq('id', id)
     setCommitments(cs => cs.map(c => c.id === id ? { ...c, completed: !done } : c))
   }
+
+  // The journal stores prompt answers in `question_*` columns; pick the first
+  // non-empty one (or freewrite_text) to surface a snippet.
+  const journalSnippet = lastJournal && (
+    lastJournal.question_1_current_reality ||
+    lastJournal.question_2_pressure_cost ||
+    lastJournal.question_3_clarity_learning ||
+    lastJournal.question_4_direction ||
+    lastJournal.question_5_orientation ||
+    lastJournal.freewrite_text || ''
+  )
 
   return (
     <div className="portal-shell">
@@ -124,7 +134,7 @@ export default function Dashboard() {
                     <div className="when">{formatDate(nextSession.scheduled_at)}</div>
                     <div className="with">With Shakil · 60 minutes</div>
                     <div style={{ marginBottom: 16 }}>
-                      <span className="mode-badge">{nextSession.mode ?? 'Video'}</span>
+                      <span className="mode-badge">{nextSession.mode ?? 'video'}</span>
                       <span style={{ fontSize: 13, color: 'var(--ink-soft)' }}>
                         Meet link sent 30 minutes before.
                       </span>
@@ -144,7 +154,7 @@ export default function Dashboard() {
                   </div>
                 )}
 
-                {lastJournal && (lastJournal.q2 || lastJournal.freewrite_content) && (
+                {journalSnippet && (
                   <div className="card">
                     <div className="card-title">
                       <h3>Where you are right now</h3>
@@ -154,8 +164,7 @@ export default function Dashboard() {
                       fontFamily: 'Fraunces, serif', fontStyle: 'italic',
                       fontSize: 16, color: 'var(--teal)', lineHeight: 1.6,
                     }}>
-                      "{(lastJournal.q1 || lastJournal.freewrite_content || '').slice(0, 200)}
-                      {(lastJournal.q1 || lastJournal.freewrite_content || '').length > 200 ? '…' : ''}"
+                      "{journalSnippet.slice(0, 200)}{journalSnippet.length > 200 ? '…' : ''}"
                     </p>
                     <div className="divider" />
                     <div className="row muted small">
@@ -163,7 +172,7 @@ export default function Dashboard() {
                         Captured {new Date(lastJournal.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}
                       </span>
                       <span>·</span>
-                      <span>{lastJournal.type === 'freewrite' ? 'Freewrite' : 'Five questions'}</span>
+                      <span>{lastJournal.mode === 'freewrite' ? 'Freewrite' : 'Five questions'}</span>
                     </div>
                   </div>
                 )}

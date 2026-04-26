@@ -6,9 +6,9 @@ import Sidebar from '../../components/Sidebar'
 
 const EMPTY_NOTE = {
   ground_covered: '',
-  what_was_named_text: '',
-  framework_in_use: '',
-  question_to_sit_with: '',
+  what_was_named: '',
+  framework_used: '',
+  to_sit_with: '',
 }
 
 function formatDate(d) {
@@ -49,7 +49,7 @@ export default function MentorNotes() {
 
     const { data: m, error: mErr } = await supabase
       .from('profiles')
-      .select('id, full_name, email, rhythm')
+      .select('id, full_name, email')
       .eq('id', menteeId)
       .maybeSingle()
 
@@ -82,9 +82,9 @@ export default function MentorNotes() {
       setNoteRowId(existing.id)
       setNote({
         ground_covered: existing.ground_covered ?? '',
-        what_was_named_text: (existing.what_was_named ?? []).join('\n'),
-        framework_in_use: existing.framework_in_use ?? '',
-        question_to_sit_with: existing.question_to_sit_with ?? '',
+        what_was_named: existing.what_was_named ?? '',
+        framework_used: existing.framework_used ?? '',
+        to_sit_with: existing.to_sit_with ?? '',
       })
     } else {
       setNoteRowId(null)
@@ -106,19 +106,13 @@ export default function MentorNotes() {
   async function saveNote() {
     if (!selectedSessionId) return
     setSaving(true)
-    const what_was_named = note.what_was_named_text
-      .split('\n')
-      .map(line => line.trim())
-      .filter(Boolean)
 
     const payload = {
       session_id: selectedSessionId,
-      mentee_id: menteeId,
-      mentor_id: user.id,
       ground_covered: note.ground_covered || null,
-      what_was_named,
-      framework_in_use: note.framework_in_use || null,
-      question_to_sit_with: note.question_to_sit_with || null,
+      what_was_named: note.what_was_named || null,
+      framework_used: note.framework_used || null,
+      to_sit_with: note.to_sit_with || null,
     }
 
     if (noteRowId) {
@@ -136,7 +130,7 @@ export default function MentorNotes() {
   async function addCommitment() {
     if (!newCommitment.trim() || !selectedSessionId) return
     const { data } = await supabase.from('commitments').insert({
-      user_id: menteeId,
+      mentee_id: menteeId,
       session_id: selectedSessionId,
       text: newCommitment.trim(),
     }).select().single()
@@ -167,7 +161,6 @@ export default function MentorNotes() {
               <div className="journal-head">
                 <div className="eyebrow">
                   Notes for {mentee?.full_name ?? mentee?.email}
-                  {mentee?.rhythm && ` · ${mentee.rhythm} rhythm`}
                 </div>
                 <h1>Session notes &amp; commitments</h1>
                 <p className="pull">
@@ -214,19 +207,19 @@ export default function MentorNotes() {
                         <label>What was named</label>
                         <textarea
                           style={{ minHeight: 100 }}
-                          value={note.what_was_named_text}
-                          onChange={e => update('what_was_named_text', e.target.value)}
-                          placeholder="One per line — each line becomes a separate item."
+                          value={note.what_was_named}
+                          onChange={e => update('what_was_named', e.target.value)}
+                          placeholder="One per line — each line will render as a bullet for the mentee."
                         />
-                        <div className="hint">Each line becomes its own bullet for the mentee.</div>
+                        <div className="hint">Each new line becomes its own bullet.</div>
                       </div>
 
                       <div className="form-row">
                         <label>Framework in use</label>
                         <input
                           type="text"
-                          value={note.framework_in_use}
-                          onChange={e => update('framework_in_use', e.target.value)}
+                          value={note.framework_used}
+                          onChange={e => update('framework_used', e.target.value)}
                           placeholder="e.g. Position Map, Cost Audit, Integration Filter"
                         />
                       </div>
@@ -235,8 +228,8 @@ export default function MentorNotes() {
                         <label>Question to sit with</label>
                         <textarea
                           style={{ minHeight: 70 }}
-                          value={note.question_to_sit_with}
-                          onChange={e => update('question_to_sit_with', e.target.value)}
+                          value={note.to_sit_with}
+                          onChange={e => update('to_sit_with', e.target.value)}
                           placeholder="A single question to carry into the week — not to solve."
                         />
                       </div>

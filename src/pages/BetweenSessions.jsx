@@ -6,8 +6,8 @@ import Sidebar from '../components/Sidebar'
 export default function BetweenSessions() {
   const { user, profile } = useAuth()
   const [messages, setMessages] = useState([])
-  const [mentorId, setMentorId] = useState(null)
-  const [mentorName, setMentorName] = useState('Shakil')
+  const [counterpartId, setCounterpartId] = useState(null)
+  const [counterpartName, setCounterpartName] = useState('Shakil')
   const [text, setText] = useState('')
   const [loading, setLoading] = useState(true)
   const [sending, setSending] = useState(false)
@@ -15,33 +15,63 @@ export default function BetweenSessions() {
 
   useEffect(() => {
     if (!user || !profile) return
-    loadMentorAndMessages()
+    loadCounterpartAndMessages()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, profile])
 
-  async function loadMentorAndMessages() {
-    // Find mentor — either from profile.mentor_id or look for any mentor
-    let mId = profile?.mentor_id
+  async function loadCounterpartAndMessages() {
+    // The counterpart depends on role:
+    //   • mentee  → their assigned mentor (profiles.mentor_id)
+    //   • mentor  → if a `with` query param is present, that mentee; otherwise
+    //               the most-recent mentee they have an assignment with.
+    let counterpart = null
 
-    if (!mId) {
-      const { data: mentors } = await supabase
-        .from('profiles')
-        .select('id, full_name')
-        .eq('role', 'mentor')
-        .limit(1)
-        .maybeSingle()
-      if (mentors) { mId = mentors.id; setMentorName(mentors.full_name?.split(' ')[0] ?? 'Shakil') }
+    if (profile?.role === 'mentor') {
+      const params = new URLSearchParams(window.location.search)
+      const withId = params.get('with')
+      if (withId) {
+        const { data } = await supabase
+          .from('profiles').select('id, full_name')
+          .eq('id', withId).maybeSingle()
+        counterpart = data
+      }
+      if (!counterpart) {
+        const { data } = await supabase
+          .from('profiles').select('id, full_name')
+          .eq('mentor_id', user.id)
+          .order('created_at', { ascending: false })
+          .limit(1).maybeSingle()
+        counterpart = data
+      }
     } else {
-      const { data: m } = await supabase.from('profiles').select('full_name').eq('id', mId).maybeSingle()
-      if (m) setMentorName(m.full_name?.split(' ')[0] ?? 'Shakil')
+      // Mentee branch
+      let mId = profile?.mentor_id
+      if (!mId) {
+        const { data } = await supabase
+          .from('profiles').select('id, full_name')
+          .eq('role', 'mentor').order('created_at', { ascending: false })
+          .limit(1).maybeSingle()
+        counterpart = data
+      } else {
+        const { data } = await supabase
+          .from('profiles').select('id, full_name')
+          .eq('id', mId).maybeSingle()
+        counterpart = data
+      }
     }
 
-    setMentorId(mId)
-    if (!mId) { setLoading(false); return }
+    if (!counterpart) {
+      setLoading(false)
+      return
+    }
+
+    setCounterpartId(counterpart.id)
+    setCounterpartName(counterpart.full_name?.split(' ')[0] ?? (profile?.role === 'mentor' ? 'Mentee' : 'Shakil'))
 
     const { data } = await supabase
       .from('messages')
       .select('*')
-      .or(`and(sender_id.eq.${user.id},receiver_id.eq.${mId}),and(sender_id.eq.${mId},receiver_id.eq.${user.id})`)
+      .or(`and(sender_id.eq.${user.id},recipient_id.eq.${counterpart.id}),and(sender_id.eq.${counterpart.id},recipient_id.eq.${user.id})`)
       .order('created_at', { ascending: true })
 
     setMessages(data ?? [])
@@ -51,10 +81,10 @@ export default function BetweenSessions() {
     // Mark unread messages as read
     await supabase
       .from('messages')
-      .update({ read: true })
-      .eq('receiver_id', user.id)
-      .eq('sender_id', mId)
-      .eq('read', false)
+      .update({ read_at: new Date().toISOString() })
+      .eq('recipient_id', user.id)
+      .eq('sender_id', counterpart.id)
+      .is('read_at', null)
 
     // Subscribe to new messages
     const channel = supabase
@@ -63,7 +93,7 @@ export default function BetweenSessions() {
         event: 'INSERT',
         schema: 'public',
         table: 'messages',
-        filter: `receiver_id=eq.${user.id}`,
+        filter: `recipient_id=eq.${user.id}`,
       }, (payload) => {
         setMessages(ms => [...ms, payload.new])
         scrollToBottom()
@@ -80,24 +110,24 @@ export default function BetweenSessions() {
   }
 
   async function send() {
-    if (!text.trim() || !mentorId || sending) return
+    if (!text.trim() || !counterpartId || sending) return
     setSending(true)
     const msg = {
       sender_id: user.id,
-      receiver_id: mentorId,
-      content: text.trim(),
+      recipient_id: counterpartId,
+      body: text.trim(),
     }
     const { data } = await supabase.from('messages').insert(msg).select().single()
     if (data) {
       setMessages(ms => [...ms, data])
       scrollToBottom()
 
-      // Notify the receiver (5-minute throttle handled server-side).
+      // Notify the recipient (5-minute throttle handled server-side).
       try {
         const { data: receiver } = await supabase
           .from('profiles')
           .select('email')
-          .eq('id', mentorId)
+          .eq('id', counterpartId)
           .maybeSingle()
         if (receiver?.email) {
           fetch('/.netlify/functions/send-email', {
@@ -107,8 +137,8 @@ export default function BetweenSessions() {
               type: 'new_message',
               to: receiver.email,
               data: {
-                senderName: profile?.full_name ?? 'Your mentee',
-                snippet: msg.content,
+                senderName: profile?.full_name ?? 'Someone',
+                snippet: msg.body,
               },
             }),
           }).catch(() => {})
@@ -134,13 +164,13 @@ export default function BetweenSessions() {
   }
 
   const lastMessage = messages.length ? messages[messages.length - 1] : null
+  const isMentor = profile?.role === 'mentor'
 
   return (
     <div className="portal-shell">
       <Sidebar />
       <div className="main-area" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         <div className="msg-shell" style={{ flex: 1 }}>
-          {/* Thread list */}
           <div className="thread-list">
             <div className="thread-list-header">
               <h3>Between sessions</h3>
@@ -149,10 +179,10 @@ export default function BetweenSessions() {
               </div>
             </div>
             <div className="thread on">
-              <div className="nm">{mentorName} · Mentor</div>
+              <div className="nm">{counterpartName} · {isMentor ? 'Mentee' : 'Mentor'}</div>
               <div className="snip">
                 {lastMessage
-                  ? lastMessage.content.slice(0, 80) + (lastMessage.content.length > 80 ? '…' : '')
+                  ? lastMessage.body.slice(0, 80) + (lastMessage.body.length > 80 ? '…' : '')
                   : 'Start your first message.'}
               </div>
               {lastMessage && (
@@ -161,11 +191,14 @@ export default function BetweenSessions() {
             </div>
           </div>
 
-          {/* Message area */}
           <div className="msg-body">
             <div className="msg-head">
-              <div className="nm">{mentorName}</div>
-              <div className="meta">Your mentor · usually replies within 48 hours on weekdays</div>
+              <div className="nm">{counterpartName}</div>
+              <div className="meta">
+                {isMentor
+                  ? 'Your mentee · weekday replies'
+                  : 'Your mentor · usually replies within 48 hours on weekdays'}
+              </div>
             </div>
 
             <div className="msg-feed" ref={feedRef}>
@@ -181,7 +214,7 @@ export default function BetweenSessions() {
                     key={m.id}
                     className={'bubble ' + (m.sender_id === user.id ? 'u' : 'm')}
                   >
-                    {m.content}
+                    {m.body}
                     <div className="t">{formatTime(m.created_at)}</div>
                   </div>
                 ))

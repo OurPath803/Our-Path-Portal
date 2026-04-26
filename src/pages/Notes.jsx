@@ -20,13 +20,33 @@ export default function Notes() {
   }, [user])
 
   async function loadNotes() {
-    const { data } = await supabase
-      .from('session_notes')
-      .select('*, sessions(scheduled_at, mode)')
+    // Notes don't carry mentee_id directly — they're linked via session_id.
+    // Fetch the user's sessions then the notes attached to those sessions.
+    const { data: sessionsData } = await supabase
+      .from('sessions')
+      .select('id, scheduled_at, mode')
       .eq('mentee_id', user.id)
+      .order('scheduled_at', { ascending: false })
+
+    const sessionIds = (sessionsData ?? []).map(s => s.id)
+    if (sessionIds.length === 0) {
+      setNotes([])
+      setLoading(false)
+      return
+    }
+
+    const { data: noteRows } = await supabase
+      .from('session_notes')
+      .select('*')
+      .in('session_id', sessionIds)
       .order('created_at', { ascending: false })
-    setNotes(data ?? [])
-    if (data?.length) setSelectedNote(data[0])
+
+    // Hydrate session details onto each note for display.
+    const sessionMap = Object.fromEntries((sessionsData ?? []).map(s => [s.id, s]))
+    const hydrated = (noteRows ?? []).map(n => ({ ...n, session: sessionMap[n.session_id] || null }))
+
+    setNotes(hydrated)
+    if (hydrated.length) setSelectedNote(hydrated[0])
     setLoading(false)
   }
 
@@ -34,7 +54,7 @@ export default function Notes() {
     const { data } = await supabase
       .from('commitments')
       .select('*')
-      .eq('user_id', user.id)
+      .eq('mentee_id', user.id)
       .order('created_at', { ascending: false })
     setCommitments(data ?? [])
   }
@@ -47,11 +67,10 @@ export default function Notes() {
   async function saveFollowUp() {
     if (!followUp.trim()) return
     setSaving(true)
-    // Save as a journal entry tagged to this note session
     await supabase.from('journal_entries').insert({
-      user_id: user.id,
-      type: 'freewrite',
-      freewrite_content: followUp,
+      mentee_id: user.id,
+      mode: 'freewrite',
+      freewrite_text: followUp,
     })
     setSaved(true)
     setSaving(false)
@@ -61,6 +80,17 @@ export default function Notes() {
   function formatDate(d) {
     if (!d) return '—'
     return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+  }
+
+  // Render `what_was_named` either as a list (one per line in the source text)
+  // or as a single paragraph if it has no newlines.
+  function renderNamedItems(text) {
+    if (!text) return null
+    const lines = text.split('\n').map(l => l.trim()).filter(Boolean)
+    if (lines.length > 1) {
+      return <ul>{lines.map((l, i) => <li key={i}>{l}</li>)}</ul>
+    }
+    return <p>{text}</p>
   }
 
   const sessionCommitments = selectedNote
@@ -117,7 +147,6 @@ export default function Notes() {
             </>
           ) : (
             <>
-              {/* Session selector */}
               {notes.length > 1 && (
                 <div style={{ marginBottom: 20, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                   {notes.map(n => (
@@ -126,7 +155,7 @@ export default function Notes() {
                       className={'btn btn-sm ' + (selectedNote?.id === n.id ? 'btn-primary' : 'btn-ghost')}
                       onClick={() => setSelectedNote(n)}
                     >
-                      {formatDate(n.sessions?.scheduled_at ?? n.created_at)}
+                      {formatDate(n.session?.scheduled_at ?? n.created_at)}
                     </button>
                   ))}
                 </div>
@@ -134,7 +163,7 @@ export default function Notes() {
 
               <div className="journal-head">
                 <div className="eyebrow">
-                  Session · {formatDate(selectedNote?.sessions?.scheduled_at ?? selectedNote?.created_at)}
+                  Session · {formatDate(selectedNote?.session?.scheduled_at ?? selectedNote?.created_at)}
                 </div>
                 <h1>Notes from our last conversation</h1>
                 <p className="pull">
@@ -146,15 +175,15 @@ export default function Notes() {
               <div className="note-meta">
                 <div className="m">
                   <div className="l">Date</div>
-                  <div className="v">{formatDate(selectedNote?.sessions?.scheduled_at ?? selectedNote?.created_at)}</div>
+                  <div className="v">{formatDate(selectedNote?.session?.scheduled_at ?? selectedNote?.created_at)}</div>
                 </div>
                 <div className="m">
                   <div className="l">Duration</div>
-                  <div className="v">60 minutes · {selectedNote?.sessions?.mode ?? 'Video'}</div>
+                  <div className="v">60 minutes · {selectedNote?.session?.mode ?? 'video'}</div>
                 </div>
                 <div className="m">
                   <div className="l">Framework</div>
-                  <div className="v">{selectedNote?.framework_in_use ?? '—'}</div>
+                  <div className="v">{selectedNote?.framework_used ?? '—'}</div>
                 </div>
               </div>
 
@@ -167,32 +196,28 @@ export default function Notes() {
                     </div>
                   )}
 
-                  {selectedNote?.what_was_named?.length > 0 && (
+                  {selectedNote?.what_was_named && (
                     <div className="note-block">
                       <h4>What was named</h4>
-                      <ul>
-                        {selectedNote.what_was_named.map((item, i) => (
-                          <li key={i}>{item}</li>
-                        ))}
-                      </ul>
+                      {renderNamedItems(selectedNote.what_was_named)}
                     </div>
                   )}
 
-                  {selectedNote?.framework_in_use && (
+                  {selectedNote?.framework_used && (
                     <div className="note-block">
                       <h4>Framework in use</h4>
-                      <p><strong>{selectedNote.framework_in_use}</strong></p>
+                      <p><strong>{selectedNote.framework_used}</strong></p>
                     </div>
                   )}
 
-                  {selectedNote?.question_to_sit_with && (
+                  {selectedNote?.to_sit_with && (
                     <div className="note-block">
                       <h4>To sit with — not to solve</h4>
                       <p style={{
                         fontFamily: 'Fraunces, serif', fontStyle: 'italic',
                         color: 'var(--teal)', fontSize: 16,
                       }}>
-                        "{selectedNote.question_to_sit_with}"
+                        "{selectedNote.to_sit_with}"
                       </p>
                     </div>
                   )}

@@ -22,11 +22,12 @@ export default function MentorDashboard() {
   }, [user])
 
   async function loadMentees() {
-    // 1) Pull mentees assigned to this mentor.
+    // 1) Mentees assigned to this mentor.
     const { data: mentees } = await supabase
       .from('profiles')
-      .select('id, full_name, email, rhythm, subscription_status')
+      .select('id, full_name, email')
       .eq('mentor_id', user.id)
+      .eq('role', 'mentee')
       .order('created_at', { ascending: false })
 
     if (!mentees || mentees.length === 0) {
@@ -37,8 +38,8 @@ export default function MentorDashboard() {
 
     const ids = mentees.map(m => m.id)
 
-    // 2) Counts and last-journal in parallel.
-    const [sessionsRes, unreadRes, journalsRes] = await Promise.all([
+    // 2) Sessions count, unread messages, last journal, current rhythm.
+    const [sessionsRes, unreadRes, journalsRes, subsRes] = await Promise.all([
       supabase
         .from('sessions')
         .select('mentee_id')
@@ -46,14 +47,19 @@ export default function MentorDashboard() {
       supabase
         .from('messages')
         .select('sender_id')
-        .eq('receiver_id', user.id)
-        .eq('read', false)
+        .eq('recipient_id', user.id)
+        .is('read_at', null)
         .in('sender_id', ids),
       supabase
         .from('journal_entries')
-        .select('user_id, created_at')
-        .in('user_id', ids)
+        .select('mentee_id, created_at')
+        .in('mentee_id', ids)
         .order('created_at', { ascending: false }),
+      supabase
+        .from('subscriptions')
+        .select('mentee_id, rhythm, status, started_at')
+        .in('mentee_id', ids)
+        .order('started_at', { ascending: false }),
     ])
 
     const sessionCount = {}
@@ -68,7 +74,12 @@ export default function MentorDashboard() {
 
     const lastJournal = {}
     ;(journalsRes.data ?? []).forEach(j => {
-      if (!lastJournal[j.user_id]) lastJournal[j.user_id] = j.created_at
+      if (!lastJournal[j.mentee_id]) lastJournal[j.mentee_id] = j.created_at
+    })
+
+    const currentSub = {}
+    ;(subsRes.data ?? []).forEach(s => {
+      if (!currentSub[s.mentee_id]) currentSub[s.mentee_id] = s
     })
 
     setRows(mentees.map(m => ({
@@ -76,6 +87,7 @@ export default function MentorDashboard() {
       sessions: sessionCount[m.id] ?? 0,
       unread: unreadCount[m.id] ?? 0,
       lastJournal: lastJournal[m.id] ?? null,
+      rhythm: currentSub[m.id]?.status === 'active' ? currentSub[m.id]?.rhythm : null,
     })))
     setLoading(false)
   }
@@ -146,7 +158,7 @@ export default function MentorDashboard() {
                         >
                           Notes
                         </Link>
-                        <Link to="/between" className="btn btn-primary btn-sm">
+                        <Link to={`/between?with=${r.id}`} className="btn btn-primary btn-sm">
                           Messages
                         </Link>
                       </td>

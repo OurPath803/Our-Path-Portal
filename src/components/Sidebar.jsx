@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import { supabase } from '../lib/supabase'
 
 const MENTEE_NAV = [
   { to: '/dashboard', ico: '◐', label: 'Home' },
@@ -20,9 +21,26 @@ const MENTOR_NAV = [
 ]
 
 function NavItems({ onClose }) {
-  const { profile, signOut } = useAuth()
+  const { user, profile, signOut } = useAuth()
   const navigate = useNavigate()
   const NAV = profile?.role === 'mentor' ? MENTOR_NAV : MENTEE_NAV
+  const [rhythm, setRhythm] = useState(null)
+
+  // For mentees, load their current rhythm from the subscriptions table
+  // (the source of truth for rhythm + active state).
+  useEffect(() => {
+    if (!user || profile?.role !== 'mentee') return
+    supabase
+      .from('subscriptions')
+      .select('rhythm, status')
+      .eq('mentee_id', user.id)
+      .order('started_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (data?.status === 'active') setRhythm(data.rhythm)
+      })
+  }, [user, profile?.role])
 
   async function handleSignOut() {
     await signOut()
@@ -56,8 +74,8 @@ function NavItems({ onClose }) {
         <div className="role">
           {profile?.role === 'mentor'
             ? 'Mentor'
-            : (profile?.rhythm
-                ? `${profile.rhythm.charAt(0).toUpperCase() + profile.rhythm.slice(1)} rhythm · with Shakil`
+            : (rhythm
+                ? `${rhythm.charAt(0).toUpperCase() + rhythm.slice(1)} rhythm · with Shakil`
                 : 'No rhythm yet · with Shakil')}
         </div>
         <button

@@ -2,13 +2,24 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 
-const RHYTHMS = ['Monthly', 'Fortnightly', 'Weekly', 'Unsure — let\'s discuss']
-const MODES = ['Video', 'Phone', 'In person (London)']
+const RHYTHM_OPTIONS = [
+  { label: 'Monthly', value: 'monthly' },
+  { label: 'Fortnightly', value: 'fortnightly' },
+  { label: 'Weekly', value: 'weekly' },
+  { label: 'Unsure — let\'s discuss', value: 'unsure' },
+]
+
+const MODE_OPTIONS = [
+  { label: 'Video', value: 'video' },
+  { label: 'Phone', value: 'phone' },
+  { label: 'In person (London)', value: 'in_person' },
+]
 
 export default function SessionZero() {
   const [form, setForm] = useState({
     name: '', email: '', motivation: '',
-    rhythm: 'Fortnightly', mode: 'Video',
+    rhythm: 'fortnightly', mode: 'video',
+    consent: false,
   })
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -19,28 +30,34 @@ export default function SessionZero() {
   async function handleSubmit(e) {
     e.preventDefault()
     setError('')
+    if (!form.consent) {
+      setError('Please confirm you understand this creates a record in our system.')
+      return
+    }
     setLoading(true)
 
     const { error } = await supabase.from('applications').insert({
-      name: form.name,
+      applicant_name: form.name,
       email: form.email,
-      motivation: form.motivation,
+      reason_for_support: form.motivation,
       preferred_rhythm: form.rhythm,
       preferred_mode: form.mode,
+      consent: form.consent,
+      // status defaults to 'new'
     })
 
     if (error) {
       setError('Something went wrong. Please try again or email hello@ourpathguidance.co.uk')
     } else {
       setSubmitted(true)
-      // Notify admin (best effort — don't block the success state on this).
+      // Notify admin (best effort).
       try {
         await fetch('/.netlify/functions/send-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             type: 'new_application',
-            to: form.email, // ignored server-side; admin gets it
+            to: form.email,
             data: {
               name: form.name,
               email: form.email,
@@ -50,7 +67,7 @@ export default function SessionZero() {
             },
           }),
         })
-      } catch (_) { /* ignore — application is already saved */ }
+      } catch (_) { /* ignore */ }
     }
     setLoading(false)
   }
@@ -137,13 +154,13 @@ export default function SessionZero() {
             <div className="form-row">
               <label>What rhythm feels right to start with?</label>
               <div className="choices">
-                {RHYTHMS.map(r => (
+                {RHYTHM_OPTIONS.map(r => (
                   <div
-                    key={r}
-                    className={'choice' + (form.rhythm === r ? ' active' : '')}
-                    onClick={() => set('rhythm', r)}
+                    key={r.value}
+                    className={'choice' + (form.rhythm === r.value ? ' active' : '')}
+                    onClick={() => set('rhythm', r.value)}
                   >
-                    {r}
+                    {r.label}
                   </div>
                 ))}
               </div>
@@ -151,20 +168,33 @@ export default function SessionZero() {
             <div className="form-row">
               <label>Preferred mode</label>
               <div className="choices">
-                {MODES.map(m => (
+                {MODE_OPTIONS.map(m => (
                   <div
-                    key={m}
-                    className={'choice' + (form.mode === m ? ' active' : '')}
-                    onClick={() => set('mode', m)}
+                    key={m.value}
+                    className={'choice' + (form.mode === m.value ? ' active' : '')}
+                    onClick={() => set('mode', m.value)}
                   >
-                    {m}
+                    {m.label}
                   </div>
                 ))}
               </div>
             </div>
+            <div className="form-row">
+              <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontWeight: 400 }}>
+                <input
+                  type="checkbox"
+                  checked={form.consent}
+                  onChange={e => set('consent', e.target.checked)}
+                  style={{ marginTop: 4 }}
+                />
+                <span style={{ fontSize: 14, color: 'var(--ink-soft)', lineHeight: 1.5 }}>
+                  I understand this creates a record in OurPath's system, used only to follow up
+                  with me about Session Zero.
+                </span>
+              </label>
+            </div>
             <div className="form-footer">
               <div className="meta">
-                This creates a referral in our system.<br />
                 We'll be in touch within 48 hours.
               </div>
               <button type="submit" className="btn btn-primary" disabled={loading}>

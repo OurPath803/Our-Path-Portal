@@ -6,10 +6,43 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 )
 
+// Tier name (set in Rhythms.jsx → create-checkout) → enum value used by the
+// `subscriptions.rhythm` column (session_rhythm).
 const RHYTHM_MAP = {
   'Monthly Rhythm': 'monthly',
   'Fortnightly Rhythm': 'fortnightly',
   'Weekly Rhythm': 'weekly',
+}
+
+// Stripe subscription.status → our subscription_status enum.
+function mapStatus(stripeStatus) {
+  if (stripeStatus === 'active' || stripeStatus === 'trialing') return 'active'
+  if (stripeStatus === 'paused') return 'paused'
+  // canceled, incomplete, incomplete_expired, past_due, unpaid → cancelled
+  return 'cancelled'
+}
+
+async function upsertSubscription(menteeId, rhythm, stripeSubscriptionId, status) {
+  // Match on stripe_subscription_id when possible, otherwise on mentee.
+  const { data: existing } = await supabase
+    .from('subscriptions')
+    .select('id')
+    .eq('stripe_subscription_id', stripeSubscriptionId)
+    .maybeSingle()
+
+  if (existing) {
+    await supabase.from('subscriptions')
+      .update({ rhythm, status })
+      .eq('id', existing.id)
+    return
+  }
+
+  await supabase.from('subscriptions').insert({
+    mentee_id: menteeId,
+    rhythm: rhythm ?? 'fortnightly',
+    status,
+    stripe_subscription_id: stripeSubscriptionId,
+  })
 }
 
 exports.handler = async (event) => {
@@ -32,28 +65,37 @@ exports.handler = async (event) => {
     const tierName = session.metadata?.tierName
     const rhythm = RHYTHM_MAP[tierName] ?? 'fortnightly'
 
-    if (userId) {
-      await supabase.from('profiles').update({
-        stripe_customer_id: session.customer,
-        stripe_subscription_id: session.subscription,
-        subscription_status: 'active',
-        rhythm,
-      }).eq('id', userId)
+    if (userId && session.subscription) {
+      await upsertSubscription(userId, rhythm, session.subscription, 'active')
+    }
+  }
+
+  if (stripeEvent.type === 'customer.subscription.updated') {
+    const sub = stripeEvent.data.object
+    const tierName = sub.metadata?.tierName
+    const rhythm = RHYTHM_MAP[tierName] // may be undefined; keep existing
+    const status = mapStatus(sub.status)
+
+    const { data: existing } = await supabase
+      .from('subscriptions')
+      .select('id, mentee_id, rhythm')
+      .eq('stripe_subscription_id', sub.id)
+      .maybeSingle()
+
+    if (existing) {
+      await supabase.from('subscriptions').update({
+        status,
+        rhythm: rhythm ?? existing.rhythm,
+      }).eq('id', existing.id)
+    } else if (sub.metadata?.userId) {
+      await upsertSubscription(sub.metadata.userId, rhythm, sub.id, status)
     }
   }
 
   if (stripeEvent.type === 'customer.subscription.deleted') {
     const sub = stripeEvent.data.object
-    await supabase.from('profiles')
-      .update({ subscription_status: 'inactive' })
-      .eq('stripe_subscription_id', sub.id)
-  }
-
-  if (stripeEvent.type === 'customer.subscription.updated') {
-    const sub = stripeEvent.data.object
-    const status = sub.status === 'active' ? 'active' : 'inactive'
-    await supabase.from('profiles')
-      .update({ subscription_status: status })
+    await supabase.from('subscriptions')
+      .update({ status: 'cancelled' })
       .eq('stripe_subscription_id', sub.id)
   }
 

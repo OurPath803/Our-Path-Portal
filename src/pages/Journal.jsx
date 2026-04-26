@@ -8,33 +8,35 @@ const QUESTIONS = [
     num: '01 · Current Reality',
     title: 'Where are you, actually?',
     prompt: 'Not where you\'d like to be. Not where you think you should be. What is present right now — in your work, your relationships, your inner life?',
-    key: 'q1',
+    column: 'question_1_current_reality',
   },
   {
     num: '02 · Pressure & Cost',
     title: 'What is this costing you?',
     prompt: 'Where is the strain showing up — in your body, your time, your relationships? What have you stopped noticing because it\'s become normal?',
-    key: 'q2',
+    column: 'question_2_pressure_cost',
   },
   {
     num: '03 · Clarity & Learning',
     title: 'What is becoming clearer?',
     prompt: 'What have you learned — about yourself, about the situation, about what matters — that you didn\'t see before? Even something small.',
-    key: 'q3',
+    column: 'question_3_clarity_learning',
   },
   {
     num: '04 · Direction',
     title: 'What is the next honest step?',
     prompt: 'Not the whole path. Not the transformation. The next action that would be small, true, and yours.',
-    key: 'q4',
+    column: 'question_4_direction',
   },
   {
     num: '05 · Orientation',
     title: 'Who are you becoming, and is that the direction you want?',
     prompt: 'A position statement. Not an outcome. Where is your compass pointing, and does it match what you say matters?',
-    key: 'q5',
+    column: 'question_5_orientation',
   },
 ]
+
+const EMPTY_ANSWERS = QUESTIONS.reduce((acc, q) => ({ ...acc, [q.column]: '' }), {})
 
 function wordCount(text = '') {
   return text.trim() ? text.trim().split(/\s+/).length : 0
@@ -42,9 +44,9 @@ function wordCount(text = '') {
 
 export default function Journal() {
   const { user } = useAuth()
-  const [mode, setMode] = useState('structured')
+  const [mode, setMode] = useState('structured') // 'structured' | 'freewrite'
   const [entryId, setEntryId] = useState(null)
-  const [answers, setAnswers] = useState({ q1: '', q2: '', q3: '', q4: '', q5: '' })
+  const [answers, setAnswers] = useState(EMPTY_ANSWERS)
   const [freewrite, setFreewrite] = useState('')
   const [saveState, setSaveState] = useState('') // 'saving' | 'saved' | ''
   const [shareConfirm, setShareConfirm] = useState(false)
@@ -62,8 +64,8 @@ export default function Journal() {
     const { data } = await supabase
       .from('journal_entries')
       .select('*')
-      .eq('user_id', user.id)
-      .eq('type', mode)
+      .eq('mentee_id', user.id)
+      .eq('mode', mode)
       .gte('created_at', today.toISOString())
       .order('created_at', { ascending: false })
       .limit(1)
@@ -72,14 +74,14 @@ export default function Journal() {
     if (data) {
       setEntryId(data.id)
       if (mode === 'structured') {
-        setAnswers({ q1: data.q1 || '', q2: data.q2 || '', q3: data.q3 || '', q4: data.q4 || '', q5: data.q5 || '' })
+        setAnswers(QUESTIONS.reduce((acc, q) => ({ ...acc, [q.column]: data[q.column] || '' }), {}))
       } else {
-        setFreewrite(data.freewrite_content || '')
+        setFreewrite(data.freewrite_text || '')
       }
       setShareWithMentor(data.shared_with_mentor || false)
     } else {
       setEntryId(null)
-      setAnswers({ q1: '', q2: '', q3: '', q4: '', q5: '' })
+      setAnswers(EMPTY_ANSWERS)
       setFreewrite('')
       setShareWithMentor(false)
     }
@@ -93,8 +95,8 @@ export default function Journal() {
     }, 1500)
   }
 
-  function updateAnswer(key, val) {
-    const next = { ...answers, [key]: val }
+  function updateAnswer(column, val) {
+    const next = { ...answers, [column]: val }
     setAnswers(next)
     scheduleAutoSave(next, freewrite)
   }
@@ -108,10 +110,10 @@ export default function Journal() {
     if (!user) return
     setSaveState('saving')
     const payload = {
-      user_id: user.id,
-      type: mode,
-      q1: ans.q1, q2: ans.q2, q3: ans.q3, q4: ans.q4, q5: ans.q5,
-      freewrite_content: fw,
+      mentee_id: user.id,
+      mode,
+      ...QUESTIONS.reduce((acc, q) => ({ ...acc, [q.column]: ans[q.column] || null }), {}),
+      freewrite_text: fw || null,
       shared_with_mentor: shared,
       updated_at: new Date().toISOString(),
     }
@@ -160,18 +162,18 @@ export default function Journal() {
           {mode === 'structured' ? (
             <>
               {QUESTIONS.map(q => (
-                <div key={q.key} className="question-block">
+                <div key={q.column} className="question-block">
                   <div className="q-num">{q.num}</div>
                   <div className="q-title">{q.title}</div>
                   <div className="q-prompt">{q.prompt}</div>
                   <div className="q-box">
                     <textarea
-                      value={answers[q.key]}
-                      onChange={e => updateAnswer(q.key, e.target.value)}
+                      value={answers[q.column]}
+                      onChange={e => updateAnswer(q.column, e.target.value)}
                       placeholder="Write what's true…"
                     />
                     <div className="q-meta">
-                      <span>{wordCount(answers[q.key])} words</span>
+                      <span>{wordCount(answers[q.column])} words</span>
                       {saveState === 'saved' && <span className="save-state">Saved a moment ago</span>}
                       {saveState === 'saving' && <span className="save-state" style={{ color: 'var(--mute)' }}>Saving…</span>}
                     </div>

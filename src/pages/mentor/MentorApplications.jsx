@@ -2,7 +2,14 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
 import Sidebar from '../../components/Sidebar'
 
-const STATUSES = ['pending', 'contacted', 'accepted', 'declined']
+const STATUSES = ['new', 'in_review', 'approved', 'declined']
+
+const STATUS_LABEL = {
+  new: 'New',
+  in_review: 'In review',
+  approved: 'Approved',
+  declined: 'Declined',
+}
 
 function formatDate(d) {
   return new Date(d).toLocaleDateString('en-GB', {
@@ -52,13 +59,13 @@ export default function MentorApplications() {
     if (!error) {
       setApps(rows => rows.map(r => r.id === app.id ? { ...r, status: newStatus } : r))
 
-      if (newStatus === 'accepted') {
+      if (newStatus === 'approved') {
         await callSendEmail({
           type: 'application_accepted',
           to: app.email,
-          data: { name: app.name, email: app.email },
+          data: { name: app.applicant_name, email: app.email },
         })
-        setFlash(`Acceptance email sent to ${app.email}.`)
+        setFlash(`Approval email sent to ${app.email}.`)
         setTimeout(() => setFlash(''), 4000)
       }
     }
@@ -90,7 +97,7 @@ export default function MentorApplications() {
               <div key={app.id} className="card" style={{ marginBottom: 16 }}>
                 <div className="card-title">
                   <div>
-                    <h3 style={{ marginBottom: 2 }}>{app.name}</h3>
+                    <h3 style={{ marginBottom: 2 }}>{app.applicant_name}</h3>
                     <div style={{ fontSize: 13, color: 'var(--mute)' }}>
                       {app.email} · submitted {formatDate(app.created_at)}
                     </div>
@@ -107,11 +114,10 @@ export default function MentorApplications() {
                       color: 'var(--teal)',
                       fontFamily: 'inherit',
                       fontSize: 13,
-                      textTransform: 'capitalize',
                     }}
                   >
                     {STATUSES.map(s => (
-                      <option key={s} value={s}>{s}</option>
+                      <option key={s} value={s}>{STATUS_LABEL[s]}</option>
                     ))}
                   </select>
                 </div>
@@ -121,17 +127,19 @@ export default function MentorApplications() {
                     <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--mute)', marginBottom: 4 }}>
                       Preferred rhythm
                     </div>
-                    <div style={{ color: 'var(--teal)' }}>{app.preferred_rhythm ?? '—'}</div>
+                    <div style={{ color: 'var(--teal)', textTransform: 'capitalize' }}>{app.preferred_rhythm ?? '—'}</div>
                   </div>
                   <div>
                     <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--mute)', marginBottom: 4 }}>
                       Preferred mode
                     </div>
-                    <div style={{ color: 'var(--teal)' }}>{app.preferred_mode ?? '—'}</div>
+                    <div style={{ color: 'var(--teal)', textTransform: 'capitalize' }}>
+                      {(app.preferred_mode ?? '—').replace('_', ' ')}
+                    </div>
                   </div>
                 </div>
 
-                {app.motivation && (
+                {app.reason_for_support && (
                   <div>
                     <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--mute)', marginBottom: 6 }}>
                       What's drawing them here
@@ -141,7 +149,7 @@ export default function MentorApplications() {
                       color: 'var(--teal)', lineHeight: 1.6, fontSize: 15,
                       borderLeft: '3px solid var(--gold)', paddingLeft: 14, margin: 0,
                     }}>
-                      "{app.motivation}"
+                      "{app.reason_for_support}"
                     </p>
                   </div>
                 )}

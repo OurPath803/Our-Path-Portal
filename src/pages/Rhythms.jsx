@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
+import { supabase } from '../lib/supabase'
 import Sidebar from '../components/Sidebar'
 
 // Vite only inlines `import.meta.env.VITE_*` references that are statically
@@ -68,8 +69,21 @@ const TIERS = [
 ]
 
 export default function Rhythms() {
-  const { user, profile } = useAuth()
+  const { user } = useAuth()
   const [loading, setLoading] = useState(null)
+  const [subscription, setSubscription] = useState(null)
+
+  useEffect(() => {
+    if (!user) return
+    supabase
+      .from('subscriptions')
+      .select('*')
+      .eq('mentee_id', user.id)
+      .order('started_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+      .then(({ data }) => setSubscription(data))
+  }, [user])
 
   async function startCheckout(priceKey, tierName) {
     if (!user) { window.location.href = '/login'; return }
@@ -96,8 +110,8 @@ export default function Rhythms() {
     }
   }
 
-  const currentRhythm = profile?.rhythm
-  const isActive = profile?.subscription_status === 'active'
+  const currentRhythm = subscription?.rhythm
+  const isActive = subscription?.status === 'active'
 
   return (
     <div className="portal-shell">
