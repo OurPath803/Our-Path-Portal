@@ -25,7 +25,9 @@ export function AuthProvider({ children }) {
   }, [])
 
   async function fetchProfile(userId) {
-    const { data } = await supabase.from('profiles').select('*').eq('id', userId).single()
+    // maybeSingle() rather than single() because the handle_new_user trigger
+    // may not have inserted the profile row yet right after signup.
+    const { data } = await supabase.from('profiles').select('*').eq('id', userId).maybeSingle()
     setProfile(data)
     setLoading(false)
   }
