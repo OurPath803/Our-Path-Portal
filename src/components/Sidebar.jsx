@@ -23,13 +23,14 @@ const MENTOR_NAV = [
 function NavItems({ onClose }) {
   const { user, profile, signOut } = useAuth()
   const navigate = useNavigate()
-  const NAV = profile?.role === 'mentor' ? MENTOR_NAV : MENTEE_NAV
+  const isStaff = profile?.role === 'mentor' || profile?.role === 'admin'
+  const NAV = isStaff ? MENTOR_NAV : MENTEE_NAV
   const [rhythm, setRhythm] = useState(null)
 
   // For mentees, load their current rhythm from the subscriptions table
   // (the source of truth for rhythm + active state).
   useEffect(() => {
-    if (!user || profile?.role !== 'mentee') return
+    if (!user || isStaff) return
     supabase
       .from('subscriptions')
       .select('rhythm, status')
@@ -40,7 +41,7 @@ function NavItems({ onClose }) {
       .then(({ data }) => {
         if (data?.status === 'active') setRhythm(data.rhythm)
       })
-  }, [user, profile?.role])
+  }, [user, isStaff])
 
   async function handleSignOut() {
     await signOut()
@@ -72,11 +73,13 @@ function NavItems({ onClose }) {
       <div className="sidebar-foot">
         <div className="who">{firstName} {lastName ? lastName[0] + '.' : ''}</div>
         <div className="role">
-          {profile?.role === 'mentor'
-            ? 'Mentor'
-            : (rhythm
-                ? `${rhythm.charAt(0).toUpperCase() + rhythm.slice(1)} rhythm · with Shakil`
-                : 'No rhythm yet · with Shakil')}
+          {profile?.role === 'admin'
+            ? 'Admin'
+            : profile?.role === 'mentor'
+              ? 'Mentor'
+              : (rhythm
+                  ? `${rhythm.charAt(0).toUpperCase() + rhythm.slice(1)} rhythm · with Shakil`
+                  : 'No rhythm yet · with Shakil')}
         </div>
         <button
           onClick={handleSignOut}

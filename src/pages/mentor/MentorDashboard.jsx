@@ -22,13 +22,15 @@ export default function MentorDashboard() {
   }, [user])
 
   async function loadMentees() {
-    // 1) Mentees assigned to this mentor.
-    const { data: mentees } = await supabase
+    // Mentors see only their assigned mentees. Admins see all mentees.
+    const isAdmin = profile?.role === 'admin'
+    const query = supabase
       .from('profiles')
       .select('id, full_name, email')
-      .eq('mentor_id', user.id)
       .eq('role', 'mentee')
       .order('created_at', { ascending: false })
+    if (!isAdmin) query.eq('mentor_id', user.id)
+    const { data: mentees } = await query
 
     if (!mentees || mentees.length === 0) {
       setRows([])

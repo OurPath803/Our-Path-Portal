@@ -26,7 +26,8 @@ export default function BetweenSessions() {
     //               the most-recent mentee they have an assignment with.
     let counterpart = null
 
-    if (profile?.role === 'mentor') {
+    const isStaff = profile?.role === 'mentor' || profile?.role === 'admin'
+    if (isStaff) {
       const params = new URLSearchParams(window.location.search)
       const withId = params.get('with')
       if (withId) {
@@ -36,11 +37,14 @@ export default function BetweenSessions() {
         counterpart = data
       }
       if (!counterpart) {
-        const { data } = await supabase
+        // Admins fall back to most-recent mentee in the system; mentors get
+        // their own assigned mentee.
+        const query = supabase
           .from('profiles').select('id, full_name')
-          .eq('mentor_id', user.id)
-          .order('created_at', { ascending: false })
-          .limit(1).maybeSingle()
+          .eq('role', 'mentee')
+          .order('created_at', { ascending: false }).limit(1)
+        if (profile?.role === 'mentor') query.eq('mentor_id', user.id)
+        const { data } = await query.maybeSingle()
         counterpart = data
       }
     } else {
@@ -164,7 +168,7 @@ export default function BetweenSessions() {
   }
 
   const lastMessage = messages.length ? messages[messages.length - 1] : null
-  const isMentor = profile?.role === 'mentor'
+  const isMentor = profile?.role === 'mentor' || profile?.role === 'admin'
 
   return (
     <div className="portal-shell">

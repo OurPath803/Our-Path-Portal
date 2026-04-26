@@ -12,7 +12,8 @@ export default function MentorRoute({ children }) {
     return <Navigate to="/login" replace />
   }
 
-  if (profile?.role !== 'mentor') {
+  // Mentors and admins both get the mentor view (admins for oversight/testing).
+  if (profile?.role !== 'mentor' && profile?.role !== 'admin') {
     return <Navigate to="/dashboard" replace />
   }
 
