@@ -508,6 +508,11 @@ a:hover { border-bottom-color: var(--gold); }
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
+  /* Without this, .mobile-top-bar (sticky) becomes a row-flex child alongside
+     .main-area and squashes the dashboard sideways. Stack vertically. */
+  .portal-shell { flex-direction: column; }
+  .main-area { width: 100%; }
+
   .sidebar { display: none; }
   .mobile-top-bar { display: flex; }
   .main-pad { padding: 24px 20px; }
