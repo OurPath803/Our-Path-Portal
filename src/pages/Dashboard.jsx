@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import Sidebar from '../components/Sidebar'
@@ -100,6 +100,12 @@ export default function Dashboard() {
     lastJournal.question_5_orientation ||
     lastJournal.freewrite_text || ''
   )
+
+  // Mentors and admins land here too if they signed in via the generic flow.
+  // Send them to their proper home (after all hooks have run).
+  if (profile && (profile.role === 'mentor' || profile.role === 'admin')) {
+    return <Navigate to="/mentor" replace />
+  }
 
   return (
     <div className="portal-shell">

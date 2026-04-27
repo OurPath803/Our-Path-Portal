@@ -32,6 +32,24 @@ dashboard:
 >
 > Then copy the signing secret into `STRIPE_WEBHOOK_SECRET` in Netlify env.
 
+## Calendly webhook setup
+
+Subscribes the Calendly webhook to `invitee.created` events for the OurPath
+organisation, pointing at the portal's Netlify function. Idempotent — re-running
+deletes the existing subscription and recreates it so you can capture a fresh
+signing key (Calendly's API does not let us read an existing one).
+
+```bash
+CALENDLY_TOKEN=eyJ... node scripts/setup-calendly-webhook.cjs
+```
+
+Get a token at https://calendly.com/integrations/api_webhooks → "Generate new
+token". Optional `PORTAL_URL=...` env var if you want to target a non-default
+domain (e.g. `https://portal.ourpathguidance.co.uk`).
+
+After it runs, paste the printed `CALENDLY_WEBHOOK_SECRET=…` line into Netlify
+environment variables and trigger a redeploy.
+
 ## Stripe teardown
 
 Archives the three products (and their prices) by name. Stripe doesn't allow

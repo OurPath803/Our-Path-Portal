@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import Sidebar from '../components/Sidebar'
@@ -8,6 +8,12 @@ export default function Settings() {
   const [fullName, setFullName] = useState(profile?.full_name ?? '')
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+
+  // Profile may load after the component mounts (e.g. straight after signup);
+  // sync the local state when that happens.
+  useEffect(() => {
+    if (profile?.full_name) setFullName(profile.full_name)
+  }, [profile?.full_name])
 
   async function save(e) {
     e.preventDefault()
