@@ -541,3 +541,117 @@ a:hover { border-bottom-color: var(--gold); }
   .rhythm-head h1 { font-size: 28px; }
   .positioning { padding: 32px 20px; }
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Portal-specific responsive layouts
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* Sessions page: Calendly + side-card grid (1fr 340px on desktop). */
+.sessions-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Mentor application meta (preferred rhythm + mode). */
+.app-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 14px;
+}
+
+/* Mentor dashboard table: keep desktop layout but allow horizontal scroll
+   on small screens rather than collapsing the whole table. */
+.scroll-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Generic stack on small screens — used by various pages with two-column
+   info rows that should collapse. */
+.stack-on-mobile {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+@media (max-width: 900px) {
+  /* Tighten margins on mobile so cards aren't choked by 44px page padding. */
+  .topline {
+    flex-direction: column; align-items: flex-start; gap: 12px;
+  }
+  .topline .r-side { width: 100%; justify-content: space-between; }
+  .topline .hello h1 { font-size: 24px; }
+
+  .rhythm-head { padding: 36px 24px 22px; }
+  .rhythm-head h1 { font-size: 30px; }
+  .concession-note { padding: 22px 24px; }
+
+  /* Sessions page collapses to single column. The Calendly embed already
+     responds via its own iframe, so just stack the side card under it. */
+  .sessions-layout { grid-template-columns: 1fr; }
+
+  /* Application meta becomes single column. */
+  .app-meta-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  /* Stacked info rows go single column. */
+  .stack-on-mobile { grid-template-columns: 1fr; }
+
+  /* Form footer (button on right, meta on left) stacks. */
+  .form-footer {
+    flex-direction: column; align-items: stretch;
+    gap: 12px;
+  }
+  .form-footer .meta { text-align: center; }
+
+  /* Note meta (date / duration / framework). */
+  .note-meta { grid-template-columns: 1fr; }
+
+  /* Messaging on mobile: iOS Safari counts the URL bar in 100vh which makes
+     the chat input scroll off-screen. Use dvh where supported. */
+  .msg-shell { height: calc(100dvh - 56px); }
+
+  /* Mentor table: don't try to render six columns at once — let it scroll. */
+  .scroll-table-wrap table { min-width: 640px; }
+
+  /* Tier cards drop borders gracefully (already covered above) but the
+     featured "Recommended" flag overlaps the header on narrow widths. */
+  .tier { padding: 32px 24px; }
+  .tier .flag { right: 16px; }
+  .tier h3 { font-size: 20px; }
+  .tier .price { font-size: 36px; }
+
+  /* Mentor side: page heading line wraps cleanly. */
+  .journal-head h1 { font-size: 26px; line-height: 1.15; }
+
+  /* Auth pages: trim padding so 320-wide screens fit. */
+  .auth-right { padding: 36px 22px; }
+}
+
+@media (max-width: 480px) {
+  .main-pad { padding: 20px 16px; }
+  .topline .hello h1 { font-size: 22px; }
+  .topline .r-side .btn { font-size: 12px; padding: 6px 10px; }
+  .topline .r-side .avatar { width: 32px; height: 32px; font-size: 13px; }
+
+  .session-card .when { font-size: 16px; }
+  .session-card .with { font-size: 13px; }
+
+  /* Stat tiles slightly smaller. */
+  .stat .n { font-size: 28px; }
+
+  /* Quote / hero copy on Session Zero shrinks too. */
+  .sz-left h1 { font-size: 30px; }
+  .sz-right { padding: 36px 22px; }
+
+  /* Stripe / Calendly embed iframe height tighter on phones. */
+  .calendly-inline-widget { height: 600px !important; }
+
+  /* Bubble messages don't need 76% — let them go wider. */
+  .bubble { max-width: 88%; }
+
+  /* Sidebar drawer slightly narrower so it doesn't dominate. */
+  .mobile-drawer-inner { width: 84vw; max-width: 280px; }
+}

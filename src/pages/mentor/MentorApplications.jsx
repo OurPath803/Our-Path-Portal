@@ -122,7 +122,7 @@ export default function MentorApplications() {
                   </select>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginBottom: 14 }}>
+                <div className="app-meta-grid">
                   <div>
                     <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--mute)', marginBottom: 4 }}>
                       Preferred rhythm

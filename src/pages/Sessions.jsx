@@ -137,7 +137,7 @@ export default function Sessions() {
               <Link to="/rhythms" className="btn btn-primary">View rhythms</Link>
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 28, alignItems: 'start' }}>
+            <div className="sessions-layout">
               <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
                 <CalendlyEmbed
                   url={CALENDLY_URL}

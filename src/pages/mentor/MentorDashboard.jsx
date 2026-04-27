@@ -117,7 +117,7 @@ export default function MentorDashboard() {
               No mentees assigned yet. New signups are auto-assigned to you.
             </div>
           ) : (
-            <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+            <div className="card scroll-table-wrap" style={{ padding: 0 }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
                 <thead>
                   <tr style={{
