@@ -85,26 +85,45 @@ export default function Rhythms() {
       .then(({ data }) => setSubscription(data))
   }, [user])
 
+  const [checkoutError, setCheckoutError] = useState('')
+
   async function startCheckout(priceKey, tierName) {
     if (!user) { window.location.href = '/login'; return }
-    setLoading(priceKey)
+    setCheckoutError('')
 
+    const priceId = PRICE_IDS[priceKey]
+    if (!priceId) {
+      setCheckoutError(
+        `Configuration error: ${priceKey} is missing. Email hello@ourpathguidance.co.uk and we'll sort it.`
+      )
+      return
+    }
+
+    setLoading(priceKey)
     try {
       const res = await fetch('/.netlify/functions/create-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          priceId: PRICE_IDS[priceKey],
-          userId: user.id,
-          email: user.email,
-          tierName,
-        }),
+        body: JSON.stringify({ priceId, userId: user.id, email: user.email, tierName }),
       })
-      const { url, error } = await res.json()
-      if (error) throw new Error(error)
-      window.location.href = url
+
+      let body = {}
+      try { body = await res.json() } catch (_) { /* non-JSON response */ }
+
+      if (!res.ok) {
+        // Surface the real Stripe / function error so we can diagnose.
+        const message = body?.error || `Checkout function returned ${res.status}.`
+        throw new Error(message)
+      }
+
+      if (!body?.url) throw new Error('Checkout URL missing from response.')
+      window.location.href = body.url
     } catch (err) {
-      alert('Something went wrong. Please try again or contact hello@ourpathguidance.co.uk')
+      console.error('Checkout error:', err)
+      setCheckoutError(
+        `Couldn't start checkout: ${err.message} ` +
+        `If this keeps happening, email hello@ourpathguidance.co.uk.`
+      )
     } finally {
       setLoading(null)
     }
@@ -125,6 +144,12 @@ export default function Rhythms() {
             enough space to integrate, enough frequency to stay honest.
           </p>
         </div>
+
+        {checkoutError && (
+          <div className="auth-error" style={{ margin: '20px 40px', maxWidth: 760 }}>
+            {checkoutError}
+          </div>
+        )}
 
         {isActive && currentRhythm && (
           <div style={{
@@ -160,8 +185,7 @@ export default function Rhythms() {
         </div>
 
         <div className="concession-note">
-          <strong>Concession rates available.</strong> OurPath is a CIC — a Community Interest Company.
-          If cost is a genuine barrier, write to us at{' '}
+          <strong>Concession rates available.</strong> If cost is a genuine barrier, write to us at{' '}
           <a href="mailto:hello@ourpathguidance.co.uk">hello@ourpathguidance.co.uk</a>.
           We hold concessionary places at every rhythm for students, those in transition, and low-income mentees.
           No form. No justification essay. Just a short email.

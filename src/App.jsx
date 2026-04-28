@@ -18,6 +18,7 @@ import Settings from './pages/Settings'
 
 import MentorDashboard from './pages/mentor/MentorDashboard'
 import MentorNotes from './pages/mentor/MentorNotes'
+import MentorJournal from './pages/mentor/MentorJournal'
 import MentorApplications from './pages/mentor/MentorApplications'
 
 export default function App() {
@@ -44,6 +45,7 @@ export default function App() {
           {/* Mentor only */}
           <Route path="/mentor" element={<MentorRoute><MentorDashboard /></MentorRoute>} />
           <Route path="/mentor/notes/:menteeId" element={<MentorRoute><MentorNotes /></MentorRoute>} />
+          <Route path="/mentor/journal/:menteeId" element={<MentorRoute><MentorJournal /></MentorRoute>} />
           <Route path="/mentor/applications" element={<MentorRoute><MentorApplications /></MentorRoute>} />
 
           {/* Fallback */}
