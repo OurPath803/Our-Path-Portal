@@ -17,7 +17,7 @@ const TIERS = [
   {
     name: 'Monthly Rhythm',
     cadence: 'One session per month',
-    price: '£39',
+    price: '£50',
     priceKey: 'VITE_STRIPE_PRICE_MONTHLY',
     desc: 'Steady check-in for those already doing the work. Light-touch orientation.',
     features: [
@@ -33,7 +33,7 @@ const TIERS = [
   {
     name: 'Fortnightly Rhythm',
     cadence: 'Our standard cadence',
-    price: '£75',
+    price: '£80',
     priceKey: 'VITE_STRIPE_PRICE_FORTNIGHTLY',
     desc: 'The rhythm we most often recommend. Enough space to integrate; enough frequency to stay with what matters.',
     features: [
@@ -52,7 +52,7 @@ const TIERS = [
   {
     name: 'Weekly Rhythm',
     cadence: 'Intensive stretch',
-    price: '£140',
+    price: '£120',
     priceKey: 'VITE_STRIPE_PRICE_WEEKLY',
     desc: 'For a concentrated season — a decision, a transition, or work that needs close attention.',
     features: [

@@ -154,6 +154,13 @@ export default function MentorDashboard() {
                       <td style={{ padding: '14px 16px', color: 'var(--ink-soft)' }}>{formatDate(r.lastJournal)}</td>
                       <td style={{ padding: '14px 16px', textAlign: 'right', whiteSpace: 'nowrap' }}>
                         <Link
+                          to={`/mentor/manage/${r.id}`}
+                          className="btn btn-ghost btn-sm"
+                          style={{ marginRight: 6 }}
+                        >
+                          Manage
+                        </Link>
+                        <Link
                           to={`/mentor/journal/${r.id}`}
                           className="btn btn-ghost btn-sm"
                           style={{ marginRight: 6 }}
