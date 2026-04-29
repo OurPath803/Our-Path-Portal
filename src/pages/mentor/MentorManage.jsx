@@ -118,6 +118,8 @@ export default function MentorManage() {
     setSavingSub(true)
     setSubFlash('')
 
+    const previousStatus = subscription?.status
+
     if (subscription) {
       // Update existing
       const { error } = await supabase
@@ -148,6 +150,30 @@ export default function MentorManage() {
     }
     setSavingSub(false)
     setTimeout(() => setSubFlash(''), 4000)
+
+    // Lifecycle email if status changed (or first activation).
+    if (mentee?.email && previousStatus !== subForm.status) {
+      const typeMap = {
+        active: 'subscription_activated',
+        paused: 'subscription_paused',
+        cancelled: 'subscription_cancelled',
+      }
+      const type = typeMap[subForm.status]
+      if (type) {
+        fetch('/.netlify/functions/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type,
+            to: mentee.email,
+            data: {
+              name: mentee.full_name,
+              rhythm: subForm.rhythm,
+            },
+          }),
+        }).catch(() => {})
+      }
+    }
   }
 
   async function addSession(e) {

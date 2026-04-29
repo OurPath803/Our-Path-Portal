@@ -50,24 +50,29 @@ export default function SessionZero() {
       setError('Something went wrong. Please try again or email hello@ourpathguidance.co.uk')
     } else {
       setSubmitted(true)
-      // Notify admin (best effort).
-      try {
-        await fetch('/.netlify/functions/send-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            type: 'new_application',
-            to: form.email,
-            data: {
-              name: form.name,
-              email: form.email,
-              motivation: form.motivation,
-              preferred_rhythm: form.rhythm,
-              preferred_mode: form.mode,
-            },
-          }),
-        })
-      } catch (_) { /* ignore */ }
+      // Notify admin (best effort) AND auto-reply to applicant.
+      const sendEmail = (payload) => fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).catch(() => {})
+
+      sendEmail({
+        type: 'new_application',
+        to: form.email, // routed to admin server-side
+        data: {
+          name: form.name,
+          email: form.email,
+          motivation: form.motivation,
+          preferred_rhythm: form.rhythm,
+          preferred_mode: form.mode,
+        },
+      })
+      sendEmail({
+        type: 'application_received',
+        to: form.email,
+        data: { name: form.name },
+      })
     }
     setLoading(false)
   }

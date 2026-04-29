@@ -6,27 +6,24 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 )
 
-// Tier name (set in Rhythms.jsx → create-checkout) → enum value used by the
-// `subscriptions.rhythm` column (session_rhythm).
+const SITE_URL = process.env.URL || 'https://portal.ourpathguidance.co.uk'
+
 const RHYTHM_MAP = {
   'Monthly Rhythm': 'monthly',
   'Fortnightly Rhythm': 'fortnightly',
   'Weekly Rhythm': 'weekly',
 }
 
-// Stripe subscription.status → our subscription_status enum.
 function mapStatus(stripeStatus) {
   if (stripeStatus === 'active' || stripeStatus === 'trialing') return 'active'
   if (stripeStatus === 'paused') return 'paused'
-  // canceled, incomplete, incomplete_expired, past_due, unpaid → cancelled
   return 'cancelled'
 }
 
 async function upsertSubscription(menteeId, rhythm, stripeSubscriptionId, status) {
-  // Match on stripe_subscription_id when possible, otherwise on mentee.
   const { data: existing } = await supabase
     .from('subscriptions')
-    .select('id')
+    .select('id, status')
     .eq('stripe_subscription_id', stripeSubscriptionId)
     .maybeSingle()
 
@@ -34,7 +31,7 @@ async function upsertSubscription(menteeId, rhythm, stripeSubscriptionId, status
     await supabase.from('subscriptions')
       .update({ rhythm, status })
       .eq('id', existing.id)
-    return
+    return existing.status
   }
 
   await supabase.from('subscriptions').insert({
@@ -43,6 +40,31 @@ async function upsertSubscription(menteeId, rhythm, stripeSubscriptionId, status
     status,
     stripe_subscription_id: stripeSubscriptionId,
   })
+  return null
+}
+
+async function fireLifecycleEmail(menteeId, type, rhythm) {
+  if (!type || !menteeId) return
+  try {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('email, full_name')
+      .eq('id', menteeId)
+      .maybeSingle()
+    if (!profile?.email) return
+
+    await fetch(`${SITE_URL}/.netlify/functions/send-email`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type,
+        to: profile.email,
+        data: { name: profile.full_name, rhythm },
+      }),
+    })
+  } catch (err) {
+    console.error('lifecycle email failed', err)
+  }
 }
 
 exports.handler = async (event) => {
@@ -66,19 +88,24 @@ exports.handler = async (event) => {
     const rhythm = RHYTHM_MAP[tierName] ?? 'fortnightly'
 
     if (userId && session.subscription) {
-      await upsertSubscription(userId, rhythm, session.subscription, 'active')
+      const previousStatus = await upsertSubscription(
+        userId, rhythm, session.subscription, 'active'
+      )
+      if (previousStatus !== 'active') {
+        await fireLifecycleEmail(userId, 'subscription_activated', rhythm)
+      }
     }
   }
 
   if (stripeEvent.type === 'customer.subscription.updated') {
     const sub = stripeEvent.data.object
     const tierName = sub.metadata?.tierName
-    const rhythm = RHYTHM_MAP[tierName] // may be undefined; keep existing
+    const rhythm = RHYTHM_MAP[tierName]
     const status = mapStatus(sub.status)
 
     const { data: existing } = await supabase
       .from('subscriptions')
-      .select('id, mentee_id, rhythm')
+      .select('id, mentee_id, rhythm, status')
       .eq('stripe_subscription_id', sub.id)
       .maybeSingle()
 
@@ -87,6 +114,15 @@ exports.handler = async (event) => {
         status,
         rhythm: rhythm ?? existing.rhythm,
       }).eq('id', existing.id)
+
+      if (existing.status !== status) {
+        const typeMap = {
+          active:    'subscription_activated',
+          paused:    'subscription_paused',
+          cancelled: 'subscription_cancelled',
+        }
+        await fireLifecycleEmail(existing.mentee_id, typeMap[status], rhythm ?? existing.rhythm)
+      }
     } else if (sub.metadata?.userId) {
       await upsertSubscription(sub.metadata.userId, rhythm, sub.id, status)
     }
@@ -94,9 +130,21 @@ exports.handler = async (event) => {
 
   if (stripeEvent.type === 'customer.subscription.deleted') {
     const sub = stripeEvent.data.object
-    await supabase.from('subscriptions')
-      .update({ status: 'cancelled' })
+    const { data: existing } = await supabase
+      .from('subscriptions')
+      .select('id, mentee_id, rhythm, status')
       .eq('stripe_subscription_id', sub.id)
+      .maybeSingle()
+
+    if (existing) {
+      await supabase.from('subscriptions')
+        .update({ status: 'cancelled' })
+        .eq('id', existing.id)
+
+      if (existing.status !== 'cancelled') {
+        await fireLifecycleEmail(existing.mentee_id, 'subscription_cancelled', existing.rhythm)
+      }
+    }
   }
 
   return { statusCode: 200, body: JSON.stringify({ received: true }) }

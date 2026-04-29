@@ -161,15 +161,48 @@ export default function Journal() {
       updated_at: new Date().toISOString(),
     }
 
+    let savedEntry = null
     if (entryId) {
-      await supabase.from('journal_entries').update(payload).eq('id', entryId)
+      const { data } = await supabase.from('journal_entries').update(payload).eq('id', entryId).select().single()
+      savedEntry = data
     } else {
       const { data } = await supabase.from('journal_entries').insert(payload).select().single()
-      if (data) setEntryId(data.id)
+      if (data) {
+        setEntryId(data.id)
+        savedEntry = data
+      }
     }
     setSaveState('saved')
     if (showConfirm && shared) setShareConfirm(true)
     setTimeout(() => setSaveState(''), 3000)
+
+    // Fire mentor-shared notification on the first transition to shared=true.
+    // The send-email function dedupes by subjectId so re-saves are safe.
+    if (savedEntry && shared && !savedEntry.mentor_notified_at) {
+      const entryDate = new Date(savedEntry.created_at).toLocaleDateString('en-GB', {
+        weekday: 'long', day: 'numeric', month: 'long',
+      })
+      fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'journal_shared',
+          to: '', // admin-bound, ignored server-side
+          subjectId: savedEntry.id,
+          data: {
+            menteeName: user.user_metadata?.full_name ?? user.email,
+            entryDate,
+            entryUrl: `${window.location.origin}/mentor/journal/${user.id}`,
+          },
+        }),
+      }).then(() => {
+        // Mark this entry so we don't send again even before the page reloads.
+        supabase.from('journal_entries')
+          .update({ mentor_notified_at: new Date().toISOString() })
+          .eq('id', savedEntry.id)
+          .then(() => {})
+      }).catch(() => {})
+    }
   }
 
   const totalWords = mode === 'structured'

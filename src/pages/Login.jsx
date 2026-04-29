@@ -27,7 +27,19 @@ export default function Login() {
       if (!fullName.trim()) { setError('Please enter your name.'); setLoading(false); return }
       const { error } = await signUp(email, password, fullName)
       if (error) { setError(error.message); setLoading(false) }
-      else setSuccess('Check your email to confirm your account, then sign in.')
+      else {
+        setSuccess('Check your email to confirm your account, then sign in.')
+        // Welcome email — fire and forget, doesn't block UI feedback
+        fetch('/.netlify/functions/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'welcome',
+            to: email,
+            data: { name: fullName.trim() },
+          }),
+        }).catch(() => {})
+      }
       setLoading(false)
     }
   }
