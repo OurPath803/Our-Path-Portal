@@ -137,6 +137,12 @@ export default function Login() {
           Not yet a mentee?{' '}
           <Link to="/session-zero">Request Session Zero</Link>
         </p>
+
+        <p style={{ marginTop: 18, fontSize: 11, color: 'var(--mute)', textAlign: 'center', lineHeight: 1.6 }}>
+          By {tab === 'in' ? 'signing in' : 'creating an account'} you agree to our{' '}
+          <Link to="/terms">terms of service</Link> and{' '}
+          <Link to="/privacy">privacy policy</Link>.
+        </p>
       </div>
     </div>
   )

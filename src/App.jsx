@@ -22,6 +22,10 @@ import MentorJournal from './pages/mentor/MentorJournal'
 import MentorManage from './pages/mentor/MentorManage'
 import MentorApplications from './pages/mentor/MentorApplications'
 
+import Privacy from './pages/legal/Privacy'
+import Terms from './pages/legal/Terms'
+import Cookies from './pages/legal/Cookies'
+
 export default function App() {
   return (
     <AuthProvider>
@@ -34,6 +38,11 @@ export default function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/session-zero" element={<SessionZero />} />
           <Route path="/rhythms" element={<Rhythms />} />
+
+          {/* Legal — public */}
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/cookies" element={<Cookies />} />
 
           {/* Protected portal — mentees */}
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 export default function Landing() {
   return (
@@ -47,6 +48,7 @@ export default function Landing() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

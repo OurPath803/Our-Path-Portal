@@ -20,6 +20,25 @@ const MENTOR_NAV = [
   { to: '/settings',            ico: '◌', label: 'Settings' },
 ]
 
+// Logo lockup — uses the horizontal light-on-dark logo if the file exists in
+// /public, with the typographic wordmark as a fallback. Hides the broken-image
+// icon if the asset is missing in this environment.
+function Logo() {
+  const [imgFailed, setImgFailed] = useState(false)
+  if (imgFailed) {
+    return <div className="logo">OurPath<span> Guidance</span></div>
+  }
+  return (
+    <div className="logo logo-img">
+      <img
+        src="/ourpath-horizontal-light.png"
+        alt="OurPath Guidance"
+        onError={() => setImgFailed(true)}
+      />
+    </div>
+  )
+}
+
 function NavItems({ onClose }) {
   const { user, profile, signOut } = useAuth()
   const navigate = useNavigate()
@@ -27,8 +46,6 @@ function NavItems({ onClose }) {
   const NAV = isStaff ? MENTOR_NAV : MENTEE_NAV
   const [rhythm, setRhythm] = useState(null)
 
-  // For mentees, load their current rhythm from the subscriptions table
-  // (the source of truth for rhythm + active state).
   useEffect(() => {
     if (!user || isStaff) return
     supabase
@@ -50,13 +67,10 @@ function NavItems({ onClose }) {
 
   const firstName = profile?.full_name?.split(' ')[0] ?? 'You'
   const lastName = profile?.full_name?.split(' ').slice(1).join(' ')
-  const initials = profile?.full_name
-    ? profile.full_name.split(' ').map(n => n[0]).join('').slice(0, 2)
-    : '?'
 
   return (
     <>
-      <div className="logo">OurPath<span> ·</span></div>
+      <Logo />
 
       {NAV.map(({ to, ico, label }) => (
         <NavLink
@@ -100,18 +114,15 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Desktop sidebar */}
       <aside className="sidebar">
         <NavItems />
       </aside>
 
-      {/* Mobile top bar */}
       <div className="mobile-top-bar">
-        <div className="logo">OurPath<span> ·</span></div>
+        <Logo />
         <button className="hamburger" onClick={() => setDrawerOpen(true)}>☰</button>
       </div>
 
-      {/* Mobile drawer */}
       {drawerOpen && (
         <div className="mobile-drawer">
           <div className="mobile-drawer-inner">

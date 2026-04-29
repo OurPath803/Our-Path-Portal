@@ -660,3 +660,111 @@ a:hover { border-bottom-color: var(--gold); }
   /* Sidebar drawer slightly narrower so it doesn't dominate. */
   .mobile-drawer-inner { width: 84vw; max-width: 280px; }
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Legal pages (privacy / terms / cookies) + shared Footer
+   ──────────────────────────────────────────────────────────────────────── */
+.legal-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 22px 48px; border-bottom: 1px solid var(--line);
+  background: #FFFCF6;
+}
+.legal-logo {
+  font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500;
+  color: var(--teal); border-bottom: none; letter-spacing: 0.01em;
+}
+.legal-logo span { color: var(--gold); font-style: italic; }
+.legal-nav { display: flex; gap: 18px; align-items: center; font-size: 14px; }
+.legal-nav a:not(.btn) { color: var(--ink-soft); border-bottom: none; }
+.legal-nav a:not(.btn):hover { color: var(--teal); }
+
+.legal-main {
+  flex: 1; display: flex; justify-content: center;
+  padding: 48px 24px 64px;
+}
+.legal-content {
+  max-width: 760px; width: 100%;
+}
+.legal-content .eyebrow { margin-bottom: 14px; }
+.legal-content h1 { font-size: 40px; line-height: 1.1; }
+
+.legal-prose { font-size: 16px; line-height: 1.7; color: var(--ink-soft); }
+.legal-prose h2 {
+  font-family: 'Fraunces', serif; color: var(--teal);
+  font-size: 22px; margin: 36px 0 12px;
+}
+.legal-prose p { margin: 0 0 14px; }
+.legal-prose ul { padding-left: 22px; margin: 0 0 16px; }
+.legal-prose li { margin-bottom: 6px; }
+.legal-prose a { color: var(--teal); }
+.legal-prose strong { color: var(--teal); font-weight: 500; }
+
+/* Footer used on legal pages + at bottom of public-facing routes */
+.public-footer, .portal-footer {
+  background: var(--cream-deep); border-top: 1px solid var(--line);
+  padding: 24px 40px;
+}
+.portal-footer { background: transparent; padding: 18px 24px; }
+.footer-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 18px; flex-wrap: wrap;
+  max-width: 1200px; margin: 0 auto;
+}
+.footer-brand { display: flex; flex-direction: column; gap: 4px; }
+.footer-logo {
+  font-family: 'Fraunces', serif; font-size: 16px;
+  color: var(--teal); letter-spacing: 0.01em;
+}
+.footer-logo span { color: var(--gold); font-style: italic; }
+.footer-meta { font-size: 12px; color: var(--mute); }
+.footer-links { display: flex; gap: 18px; align-items: center; font-size: 13px; }
+.footer-links a { color: var(--ink-soft); border-bottom: none; }
+.footer-links a:hover { color: var(--teal); }
+
+@media (max-width: 700px) {
+  .legal-header { padding: 18px 22px; flex-wrap: wrap; gap: 14px; }
+  .legal-main { padding: 32px 18px 48px; }
+  .legal-content h1 { font-size: 32px; }
+  .legal-prose h2 { font-size: 19px; }
+  .public-footer { padding: 22px 22px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 14px; }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Sidebar logo image (Sidebar.jsx → <Logo>)
+   ──────────────────────────────────────────────────────────────────────── */
+.sidebar .logo.logo-img,
+.mobile-top-bar .logo.logo-img {
+  display: flex; align-items: center;
+}
+.sidebar .logo.logo-img img {
+  max-width: 170px; height: auto;
+  display: block;
+  filter: none; /* the light-variant PNG already renders correctly on teal */
+}
+.mobile-top-bar .logo.logo-img img {
+  max-height: 26px; width: auto;
+  display: block;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Form control alignment polish
+   ──────────────────────────────────────────────────────────────────────── */
+/* Inline checkbox-and-text label (used on SessionZero consent, anywhere else
+   with this pattern). Checkbox is fixed-size, doesn't stretch with the
+   flex parent. */
+.checkbox-row {
+  display: flex; align-items: flex-start; gap: 12px;
+  cursor: pointer; user-select: none;
+}
+.checkbox-row input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  margin: 2px 0 0; padding: 0;
+  accent-color: var(--teal);
+  cursor: pointer;
+}
+.checkbox-row .check-text {
+  flex: 1; font-size: 14px; color: var(--ink-soft); line-height: 1.5;
+  font-weight: 400;
+}

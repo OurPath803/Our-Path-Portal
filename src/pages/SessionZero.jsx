@@ -185,16 +185,18 @@ export default function SessionZero() {
               </div>
             </div>
             <div className="form-row">
-              <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontWeight: 400 }}>
+              <label className="checkbox-row">
                 <input
                   type="checkbox"
                   checked={form.consent}
                   onChange={e => set('consent', e.target.checked)}
-                  style={{ marginTop: 4 }}
                 />
-                <span style={{ fontSize: 14, color: 'var(--ink-soft)', lineHeight: 1.5 }}>
+                <span className="check-text">
                   I understand this creates a record in OurPath's system, used only to follow up
-                  with me about Session Zero.
+                  with me about Session Zero. I've read the{' '}
+                  <a href="/privacy" target="_blank" rel="noreferrer">privacy policy</a>{' '}
+                  and the{' '}
+                  <a href="/terms" target="_blank" rel="noreferrer">terms of service</a>.
                 </span>
               </label>
             </div>

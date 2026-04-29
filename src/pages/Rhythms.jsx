@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import Sidebar from '../components/Sidebar'
+import Footer from '../components/Footer'
 
 // Vite only inlines `import.meta.env.VITE_*` references that are statically
 // referenced. A dynamic key like `import.meta.env[priceKey]` always returns
@@ -190,6 +191,7 @@ export default function Rhythms() {
           We hold concessionary places at every rhythm for students, those in transition, and low-income mentees.
           No form. No justification essay. Just a short email.
         </div>
+        <Footer inPortal />
       </div>
     </div>
   )
