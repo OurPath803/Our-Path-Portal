@@ -42,6 +42,28 @@ function wordCount(text = '') {
   return text.trim() ? text.trim().split(/\s+/).length : 0
 }
 
+function formatPastDate(d) {
+  const date = new Date(d)
+  const now = new Date()
+  const sameYear = date.getFullYear() === now.getFullYear()
+  return date.toLocaleDateString('en-GB', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'long',
+    ...(sameYear ? {} : { year: 'numeric' }),
+  })
+}
+
+function entrySnippet(entry) {
+  if (entry.mode === 'freewrite') {
+    return (entry.freewrite_text || '').trim()
+  }
+  for (const q of QUESTIONS) {
+    if (entry[q.column]?.trim()) return entry[q.column].trim()
+  }
+  return ''
+}
+
 export default function Journal() {
   const { user } = useAuth()
   const [mode, setMode] = useState('structured') // 'structured' | 'freewrite'
@@ -51,10 +73,13 @@ export default function Journal() {
   const [saveState, setSaveState] = useState('') // 'saving' | 'saved' | ''
   const [shareConfirm, setShareConfirm] = useState(false)
   const [shareWithMentor, setShareWithMentor] = useState(false)
+  const [pastEntries, setPastEntries] = useState([])
+  const [openEntryId, setOpenEntryId] = useState(null)
   const saveTimer = useRef(null)
 
   useEffect(() => {
     loadTodayEntry()
+    loadPastEntries()
   }, [user, mode])
 
   async function loadTodayEntry() {
@@ -85,6 +110,24 @@ export default function Journal() {
       setFreewrite('')
       setShareWithMentor(false)
     }
+  }
+
+  // Load every entry for this mentee + mode that ISN'T today's. Used to render
+  // the "Past entries" archive below the editable form.
+  async function loadPastEntries() {
+    if (!user) return
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const { data } = await supabase
+      .from('journal_entries')
+      .select('*')
+      .eq('mentee_id', user.id)
+      .eq('mode', mode)
+      .lt('created_at', today.toISOString())
+      .order('created_at', { ascending: false })
+      .limit(50)
+
+    setPastEntries(data ?? [])
   }
 
   function scheduleAutoSave(newAnswers, newFreewrite) {
@@ -245,6 +288,136 @@ export default function Journal() {
                 </button>
               </div>
             </>
+          )}
+
+          {/* ──────────────── Past entries ──────────────── */}
+          {pastEntries.length > 0 && (
+            <div style={{ marginTop: 56, paddingTop: 32, borderTop: '1px solid var(--line)' }}>
+              <div className="journal-head" style={{ borderBottom: 'none', marginBottom: 18 }}>
+                <div className="eyebrow">
+                  Past entries · {pastEntries.length} {mode === 'freewrite' ? 'freewrite' : 'reflective'}
+                </div>
+                <h2 style={{ color: 'var(--teal)', fontFamily: 'Fraunces, serif' }}>What you've sat with before</h2>
+                <p className="pull">
+                  Old entries are read-only — they're a record of where you were on each day.
+                  Click one to expand.
+                </p>
+              </div>
+
+              {pastEntries.map(entry => {
+                const isOpen = openEntryId === entry.id
+                const snippet = entrySnippet(entry)
+                return (
+                  <div
+                    key={entry.id}
+                    className="card"
+                    style={{ marginBottom: 12, padding: 0, overflow: 'hidden' }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setOpenEntryId(isOpen ? null : entry.id)}
+                      style={{
+                        width: '100%', textAlign: 'left',
+                        background: 'transparent', border: 'none',
+                        padding: '16px 20px', cursor: 'pointer',
+                        display: 'flex', alignItems: 'center', gap: 14,
+                      }}
+                    >
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{
+                          fontFamily: 'Fraunces, serif', fontSize: 15,
+                          color: 'var(--teal)', marginBottom: 2,
+                        }}>
+                          {formatPastDate(entry.created_at)}
+                        </div>
+                        <div style={{
+                          fontSize: 13, color: 'var(--mute)', fontStyle: 'italic',
+                          whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+                        }}>
+                          {snippet ? snippet.slice(0, 120) + (snippet.length > 120 ? '…' : '') : '(empty)'}
+                        </div>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+                        {entry.shared_with_mentor && (
+                          <span className="tag" style={{
+                            background: 'var(--teal)', color: 'var(--cream)',
+                            fontSize: 10, padding: '3px 8px',
+                          }}>
+                            Shared
+                          </span>
+                        )}
+                        <span style={{
+                          fontSize: 18, color: 'var(--mute)',
+                          transform: isOpen ? 'rotate(90deg)' : 'none',
+                          transition: 'transform 0.15s',
+                        }}>
+                          ›
+                        </span>
+                      </div>
+                    </button>
+
+                    {isOpen && (
+                      <div style={{
+                        padding: '0 20px 20px',
+                        borderTop: '1px solid var(--line)',
+                      }}>
+                        {entry.mode === 'freewrite' ? (
+                          entry.freewrite_text ? (
+                            <p style={{
+                              fontFamily: 'Fraunces, serif', fontSize: 16,
+                              lineHeight: 1.7, color: 'var(--ink-soft)',
+                              whiteSpace: 'pre-wrap', marginTop: 16,
+                            }}>
+                              {entry.freewrite_text}
+                            </p>
+                          ) : (
+                            <p style={{ fontStyle: 'italic', color: 'var(--mute)', marginTop: 16 }}>
+                              (Empty freewrite.)
+                            </p>
+                          )
+                        ) : (
+                          <div style={{ marginTop: 14 }}>
+                            {QUESTIONS.map(q => {
+                              const val = entry[q.column]
+                              if (!val || !val.trim()) return null
+                              return (
+                                <div key={q.column} style={{ marginBottom: 18 }}>
+                                  <div style={{
+                                    fontFamily: 'Fraunces, serif', fontSize: 12,
+                                    color: 'var(--gold)', letterSpacing: '0.15em',
+                                    textTransform: 'uppercase', marginBottom: 4,
+                                  }}>
+                                    {q.num}
+                                  </div>
+                                  <div style={{
+                                    fontFamily: 'Fraunces, serif', fontSize: 15,
+                                    color: 'var(--teal)', marginBottom: 6,
+                                  }}>
+                                    {q.title}
+                                  </div>
+                                  <p style={{
+                                    fontSize: 15, lineHeight: 1.65,
+                                    color: 'var(--ink-soft)', whiteSpace: 'pre-wrap', margin: 0,
+                                  }}>
+                                    {val}
+                                  </p>
+                                </div>
+                              )
+                            })}
+
+                            {!QUESTIONS.some(q => entry[q.column]?.trim()) && (
+                              <p style={{ fontStyle: 'italic', color: 'var(--mute)', marginTop: 14 }}>
+                                (No questions answered.)
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
           )}
         </div>
       </div>
