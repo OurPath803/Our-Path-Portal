@@ -16,6 +16,7 @@ export default function Footer({ inPortal = false }) {
           <Link to="/privacy">Privacy</Link>
           <Link to="/terms">Terms</Link>
           <Link to="/cookies">Cookies</Link>
+          <Link to="/safeguarding">Safeguarding</Link>
           <a href="mailto:hello@ourpathguidance.co.uk">Contact</a>
         </nav>
       </div>

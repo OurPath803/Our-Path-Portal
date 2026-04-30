@@ -431,6 +431,102 @@ return to them. If you'd like to restart later — same rhythm or different —
 just reply to this email.</p>
 <p>${SIGN_OFF}</p>`,
   }),
+
+  // ───────────── Post-Session-Zero nurture sequence ─────────────
+
+  // Day 2 — gentle "anything come up?" follow-up
+  nurture_day2: ({ name }) => ({
+    subject: 'Anything come up after our conversation?',
+    text:
+`Hello ${name || 'there'},
+
+It's a couple of days since you submitted your Session Zero application.
+Sometimes things settle in after a conversation — even one only with
+yourself, on a form.
+
+Anything new come into focus?  Anything you wish you'd written that you
+left out?  Anything you've been turning over since?
+
+There's no need to reply unless you want to. We'll be in touch soon
+with our response.
+
+${SIGN_OFF}`,
+    html:
+\`<p>Hello ${esc(name || 'there')},</p>
+<p>It's a couple of days since you submitted your Session Zero application.
+Sometimes things settle in after a conversation — even one only with
+yourself, on a form.</p>
+<p>Anything new come into focus? Anything you wish you'd written that you
+left out? Anything you've been turning over since?</p>
+<p>There's no need to reply unless you want to. We'll be in touch soon
+with our response.</p>
+<p>${SIGN_OFF}</p>\`,
+  }),
+
+  // Day 7 — share a public Reflective Tool that fits what they brought
+  nurture_day7: ({ name }) => ({
+    subject: 'A small tool you might find useful',
+    text:
+`Hello ${name || 'there'},
+
+A short note to share something practical.
+
+OurPath uses a small set of structured reflection tools — guided exercises
+that help you sort facts from fears, name what's actually yours to carry,
+and notice the season you might be in.
+
+The Clarity Map is the one most people start with. It's a single page
+that helps when your head feels too full to make sense of a decision.
+
+You can read about it (and try it) on our site:
+https://ourpathguidance.co.uk/tools
+
+Use it lightly. It's a starting point, not a solution.
+
+${SIGN_OFF}`,
+    html:
+\`<p>Hello ${esc(name || 'there')},</p>
+<p>A short note to share something practical.</p>
+<p>OurPath uses a small set of structured reflection tools — guided exercises
+that help you sort facts from fears, name what's actually yours to carry,
+and notice the season you might be in.</p>
+<p>The <strong>Clarity Map</strong> is the one most people start with. It's a single
+page that helps when your head feels too full to make sense of a decision.</p>
+<p>You can read about it (and try it) on our site:<br/>
+<a href="https://ourpathguidance.co.uk/tools">ourpathguidance.co.uk/tools</a></p>
+<p>Use it lightly. It's a starting point, not a solution.</p>
+<p>${SIGN_OFF}</p>\`,
+  }),
+
+  // Day 14 — soft pointer to rhythms, no pressure
+  nurture_day14: ({ name }) => ({
+    subject: 'When you\'re ready',
+    text:
+`Hello ${name || 'there'},
+
+We don't push people. The work only really starts when you're ready,
+and there's no virtue in choosing it before then.
+
+If at some point you'd like to begin properly, the rhythms are here:
+${SITE_URL}/rhythms
+
+Three options — Monthly, Fortnightly, Weekly — each with the journal
+and messaging included from day one. You can pause or cancel any month.
+
+If you want to talk it through first, just reply to this email.
+
+${SIGN_OFF}`,
+    html:
+\`<p>Hello ${esc(name || 'there')},</p>
+<p>We don't push people. The work only really starts when you're ready,
+and there's no virtue in choosing it before then.</p>
+<p>If at some point you'd like to begin properly, the rhythms are here:<br/>
+<a href="${SITE_URL}/rhythms">${SITE_URL}/rhythms</a></p>
+<p>Three options — Monthly, Fortnightly, Weekly — each with the journal
+and messaging included from day one. You can pause or cancel any month.</p>
+<p>If you want to talk it through first, just reply to this email.</p>
+<p>${SIGN_OFF}</p>\`,
+  }),
 }
 
 // ---------------------------------------------------------------------------
@@ -542,6 +638,9 @@ exports.handler = async (event) => {
     'session_reminder_2h',
     'journal_shared',
     're_engagement',
+    'nurture_day2',
+    'nurture_day7',
+    'nurture_day14',
   ]
   if (subjectScopedTypes.includes(type) && subjectId) {
     if (await alreadyNotifiedSubject(type, subjectId)) {

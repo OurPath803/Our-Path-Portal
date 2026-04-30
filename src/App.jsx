@@ -25,6 +25,7 @@ import MentorApplications from './pages/mentor/MentorApplications'
 import Privacy from './pages/legal/Privacy'
 import Terms from './pages/legal/Terms'
 import Cookies from './pages/legal/Cookies'
+import Safeguarding from './pages/legal/Safeguarding'
 
 export default function App() {
   return (
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/cookies" element={<Cookies />} />
+          <Route path="/safeguarding" element={<Safeguarding />} />
 
           {/* Protected portal — mentees */}
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
