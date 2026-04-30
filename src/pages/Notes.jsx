@@ -109,7 +109,7 @@ export default function Notes() {
               <div className="journal-head">
                 <h1>Notes & commitments</h1>
                 <p className="pull">
-                  After each session, Shakil will write notes here — what was covered,
+                  After each session, Ustadh Shakil will write notes here — what was covered,
                   what was named, and any commitments you made.
                 </p>
               </div>
@@ -119,7 +119,7 @@ export default function Notes() {
                   <div>
                     <div className="note-block">
                       <h4>No session notes yet</h4>
-                      <p>Notes will appear here after your first session with Shakil.</p>
+                      <p>Notes will appear here after your first session with Ustadh Shakil.</p>
                     </div>
                   </div>
                   <div>
@@ -167,7 +167,7 @@ export default function Notes() {
                 </div>
                 <h1>Notes from our last conversation</h1>
                 <p className="pull">
-                  Written by Shakil after the session. Nothing here is a prescription — it's what
+                  Written by Ustadh Shakil after the session. Nothing here is a prescription — it's what
                   was named, and what you said you'd sit with.
                 </p>
               </div>

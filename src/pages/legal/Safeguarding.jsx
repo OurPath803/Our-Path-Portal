@@ -125,7 +125,7 @@ export default function Safeguarding() {
       <p>
         Questions about safeguarding?{' '}
         <a href="mailto:hello@ourpathguidance.co.uk">hello@ourpathguidance.co.uk</a>.
-        Designated safeguarding lead: Shakil Uddin.
+        Designated safeguarding lead: Ustadh Shakil Moazzem.
       </p>
     </LegalShell>
   )

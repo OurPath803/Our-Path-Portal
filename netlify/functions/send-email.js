@@ -82,7 +82,7 @@ Thank you for applying for Session Zero. Your application has been accepted.
 To finish setting up, sign in (or create an account) here:
 ${link}
 
-Once you're in, you can write in your reflective journal, message Shakil, and
+Once you're in, you can write in your reflective journal, message Ustadh Shakil, and
 choose a rhythm to book your first session.
 
 If anything is unclear, just reply to this email.
@@ -93,7 +93,7 @@ ${SIGN_OFF}`,
 <p>Thank you for applying for Session Zero. Your application has been accepted.</p>
 <p>To finish setting up, sign in (or create an account) here:<br/>
 <a href="${link}">${link}</a></p>
-<p>Once you're in, you can write in your reflective journal, message Shakil, and
+<p>Once you're in, you can write in your reflective journal, message Ustadh Shakil, and
 choose a rhythm to book your first session.</p>
 <p>If anything is unclear, just reply to this email.</p>
 <p>${SIGN_OFF}</p>`,
@@ -130,7 +130,7 @@ ${esc((snippet || '').slice(0, 240))}
       text:
 `Hello ${name || 'there'},
 
-Your session with Shakil is booked for:
+Your session with Ustadh Shakil is booked for:
 ${when} (UK time)
 
 A meeting link or location detail will be sent 30 minutes before we meet.
@@ -140,7 +140,7 @@ Calendly confirmation email.
 ${SIGN_OFF}`,
       html:
 `<p>Hello ${esc(name || 'there')},</p>
-<p>Your session with Shakil is booked for:<br/>
+<p>Your session with Ustadh Shakil is booked for:<br/>
 <strong>${esc(when)}</strong> (UK time)</p>
 <p>A meeting link or location detail will be sent 30 minutes before we meet.
 If you need to reschedule, please do so at least 24 hours in advance via the
@@ -180,7 +180,7 @@ Three things you can do at your own pace:
   1. Write your first journal entry. Five questions, or freewrite.
      ${SITE_URL}/journal
 
-  2. Send Shakil a message. No pressure for polish — a few lines is enough.
+  2. Send Ustadh Shakil a message. No pressure for polish — a few lines is enough.
      ${SITE_URL}/between
 
   3. When you're ready, choose a rhythm and book your first session.
@@ -196,7 +196,7 @@ ${SIGN_OFF}`,
 <ol style="line-height:1.7;">
   <li><strong>Write your first journal entry.</strong> Five questions, or freewrite.<br/>
       <a href="${SITE_URL}/journal">${SITE_URL}/journal</a></li>
-  <li><strong>Send Shakil a message.</strong> No pressure for polish — a few lines is enough.<br/>
+  <li><strong>Send Ustadh Shakil a message.</strong> No pressure for polish — a few lines is enough.<br/>
       <a href="${SITE_URL}/between">${SITE_URL}/between</a></li>
   <li><strong>When you're ready</strong>, choose a rhythm and book your first session.<br/>
       <a href="${SITE_URL}/rhythms">${SITE_URL}/rhythms</a></li>
@@ -215,7 +215,7 @@ The work doesn't start with a grand plan. It starts with where you actually are.
 
 Thank you for your Session Zero application. You're on the waiting list.
 
-Shakil reviews each application personally. We'll be in touch within 48 hours.
+Ustadh Shakil reviews each application personally. We'll be in touch within 48 hours.
 
 If anything has changed since you submitted, just reply to this email.
 
@@ -223,7 +223,7 @@ ${SIGN_OFF}`,
     html:
 `<p>Hello ${esc(name || 'there')},</p>
 <p>Thank you for your Session Zero application. You're on the waiting list.</p>
-<p>Shakil reviews each application personally. We'll be in touch within 48 hours.</p>
+<p>Ustadh Shakil reviews each application personally. We'll be in touch within 48 hours.</p>
 <p>If anything has changed since you submitted, just reply to this email.</p>
 <p>${SIGN_OFF}</p>`,
   }),
@@ -232,11 +232,11 @@ ${SIGN_OFF}`,
   session_reminder_24h: ({ name, scheduled_at }) => {
     const when = formatWhen(scheduled_at)
     return {
-      subject: 'Your session with Shakil — tomorrow',
+      subject: 'Your session with Ustadh Shakil — tomorrow',
       text:
 `Hello ${name || 'there'},
 
-Just a quiet reminder: your session with Shakil is tomorrow.
+Just a quiet reminder: your session with Ustadh Shakil is tomorrow.
 
 ${when} (UK time)
 
@@ -249,7 +249,7 @@ least 24 hours in advance.
 ${SIGN_OFF}`,
       html:
 `<p>Hello ${esc(name || 'there')},</p>
-<p>Just a quiet reminder: your session with Shakil is tomorrow.</p>
+<p>Just a quiet reminder: your session with Ustadh Shakil is tomorrow.</p>
 <p><strong>${esc(when)}</strong> (UK time)</p>
 <p>If you'd like to share a journal entry beforehand, you can: <a href="${SITE_URL}/journal">open the journal</a>.</p>
 <p>If you need to reschedule, please use the Calendly confirmation email at
@@ -262,11 +262,11 @@ least 24 hours in advance.</p>
   session_reminder_2h: ({ name, scheduled_at }) => {
     const when = formatWhen(scheduled_at)
     return {
-      subject: 'Your session with Shakil — in 2 hours',
+      subject: 'Your session with Ustadh Shakil — in 2 hours',
       text:
 `Hello ${name || 'there'},
 
-Your session with Shakil is in about two hours — ${when} (UK time).
+Your session with Ustadh Shakil is in about two hours — ${when} (UK time).
 
 The meeting link or details should be in your Calendly confirmation email.
 If you can't find it, reply to this email and we'll resend.
@@ -274,7 +274,7 @@ If you can't find it, reply to this email and we'll resend.
 ${SIGN_OFF}`,
       html:
 `<p>Hello ${esc(name || 'there')},</p>
-<p>Your session with Shakil is in about two hours — <strong>${esc(when)}</strong> (UK time).</p>
+<p>Your session with Ustadh Shakil is in about two hours — <strong>${esc(when)}</strong> (UK time).</p>
 <p>The meeting link or details should be in your Calendly confirmation email.
 If you can't find it, reply to this email and we'll resend.</p>
 <p>${SIGN_OFF}</p>`,
@@ -377,7 +377,7 @@ message. There's no expectation here — life ebbs and flows.</p>
     text:
 `Hello ${name || 'there'},
 
-Your ${rhythm || ''} rhythm with Shakil is now active.
+Your ${rhythm || ''} rhythm with Ustadh Shakil is now active.
 
 Book your first session whenever you're ready:
 ${SITE_URL}/sessions
@@ -385,7 +385,7 @@ ${SITE_URL}/sessions
 ${SIGN_OFF}`,
     html:
 `<p>Hello ${esc(name || 'there')},</p>
-<p>Your <strong>${esc(rhythm || '')}</strong> rhythm with Shakil is now active.</p>
+<p>Your <strong>${esc(rhythm || '')}</strong> rhythm with Ustadh Shakil is now active.</p>
 <p><a href="${SITE_URL}/sessions">Book your first session</a> whenever you're ready.</p>
 <p>${SIGN_OFF}</p>`,
   }),

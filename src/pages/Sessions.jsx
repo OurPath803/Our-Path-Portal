@@ -87,7 +87,7 @@ export default function Sessions() {
                rhythm === 'fortnightly' ? 'Your rhythm includes 2 sessions this month' :
                'Your rhythm includes 1 session this month'}
             </div>
-            <h1>Book your next session with Shakil.</h1>
+            <h1>Book your next session with Ustadh Shakil.</h1>
             <p className="pull">
               Select a date and time that works for you. A confirmation will be sent to your email.
             </p>
@@ -110,7 +110,7 @@ export default function Sessions() {
                     {formatSessionDate(s.scheduled_at)}
                   </div>
                   <div style={{ fontSize: 13, color: 'var(--ink-soft)', marginTop: 2 }}>
-                    60 minutes · {s.mode ?? 'video'} · With Shakil
+                    60 minutes · {s.mode ?? 'video'} · With Ustadh Shakil
                   </div>
                 </div>
               ))
@@ -131,7 +131,7 @@ export default function Sessions() {
                 fontSize: 15, lineHeight: 1.6, color: 'var(--ink-soft)',
                 maxWidth: 480, margin: '0 auto 24px',
               }}>
-                Your journal and messaging stay open. To book a session with Shakil,
+                Your journal and messaging stay open. To book a session with Ustadh Shakil,
                 pick the cadence that fits the season you're in. Pause or cancel any month.
               </p>
               <Link to="/rhythms" className="btn btn-primary">View rhythms</Link>

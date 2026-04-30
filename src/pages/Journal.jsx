@@ -259,7 +259,7 @@ export default function Journal() {
 
               {shareConfirm && (
                 <div className="auth-success" style={{ marginBottom: 16 }}>
-                  Shared with Shakil. He'll read it before your next session.
+                  Shared with Ustadh Shakil. He'll read it before your next session.
                 </div>
               )}
 
@@ -279,7 +279,7 @@ export default function Journal() {
                     doSave(answers, freewrite, next, true)
                   }}
                 >
-                  {shareWithMentor ? '✓ Shared with Shakil' : 'Share with Shakil (optional)'}
+                  {shareWithMentor ? '✓ Shared with Ustadh Shakil' : 'Share with Ustadh Shakil (optional)'}
                 </button>
                 <span className="muted small" style={{ marginLeft: 'auto' }}>
                   Only shared if you tick. Your words are yours.
@@ -317,7 +317,7 @@ export default function Journal() {
                     doSave(answers, freewrite, next, true)
                   }}
                 >
-                  {shareWithMentor ? '✓ Shared with Shakil' : 'Share with Shakil'}
+                  {shareWithMentor ? '✓ Shared with Ustadh Shakil' : 'Share with Ustadh Shakil'}
                 </button>
               </div>
             </>

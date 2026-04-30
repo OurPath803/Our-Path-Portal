@@ -82,7 +82,7 @@ export default function MentorJournal() {
                 <div className="eyebrow">Shared journal · {mentee?.full_name ?? mentee?.email}</div>
                 <h1>What they've chosen to share</h1>
                 <p className="pull">
-                  Only entries marked "Share with Shakil" are shown here. Their unshared entries
+                  Only entries marked "Share with Ustadh Shakil" are shown here. Their unshared entries
                   remain private to them.
                 </p>
               </div>

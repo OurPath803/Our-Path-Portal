@@ -138,7 +138,7 @@ export default function Dashboard() {
                       <span className="tag">{daysUntil(nextSession.scheduled_at)}</span>
                     </div>
                     <div className="when">{formatDate(nextSession.scheduled_at)}</div>
-                    <div className="with">With Shakil · 60 minutes</div>
+                    <div className="with">With Ustadh Shakil · 60 minutes</div>
                     <div style={{ marginBottom: 16 }}>
                       <span className="mode-badge">{nextSession.mode ?? 'video'}</span>
                       <span style={{ fontSize: 13, color: 'var(--ink-soft)' }}>

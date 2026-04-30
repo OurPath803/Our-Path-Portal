@@ -92,8 +92,8 @@ function NavItems({ onClose }) {
             : profile?.role === 'mentor'
               ? 'Mentor'
               : (rhythm
-                  ? `${rhythm.charAt(0).toUpperCase() + rhythm.slice(1)} rhythm · with Shakil`
-                  : 'No rhythm yet · with Shakil')}
+                  ? `${rhythm.charAt(0).toUpperCase() + rhythm.slice(1)} rhythm · with Ustadh Shakil`
+                  : 'No rhythm yet · with Ustadh Shakil')}
         </div>
         <button
           onClick={handleSignOut}

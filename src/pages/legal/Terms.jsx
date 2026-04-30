@@ -83,7 +83,7 @@ export default function Terms() {
       </p>
       <p>
         Your private journal entries are private to you. They become visible
-        to your mentor only when you tick "Share with Shakil" on a specific
+        to your mentor only when you tick "Share with Ustadh Shakil" on a specific
         entry.
       </p>
 

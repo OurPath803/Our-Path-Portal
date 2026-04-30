@@ -89,7 +89,7 @@ export default function SessionZero() {
             fontFamily: 'Fraunces, serif', fontStyle: 'italic', fontSize: 18,
             lineHeight: 1.6, color: 'var(--ink-soft)', marginBottom: 32,
           }}>
-            Shakil reviews each application personally. We'll be in touch within 48 hours.
+            Ustadh Shakil reviews each application personally. We'll be in touch within 48 hours.
           </p>
           <Link to="/" className="btn btn-ghost">Back to home</Link>
         </div>
@@ -109,7 +109,7 @@ export default function SessionZero() {
             we'll say so plainly.
           </p>
           <p style={{ marginTop: 18 }}>
-            You'll speak with a mentor. Currently that's Shakil. If it feels right after, we'll set
+            You'll speak with a mentor. Currently that's Ustadh Shakil. If it feels right after, we'll set
             a rhythm. If it doesn't, that's also fine.
           </p>
           <div className="quote">

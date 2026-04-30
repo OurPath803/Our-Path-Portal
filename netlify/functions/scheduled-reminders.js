@@ -2,8 +2,8 @@
 //
 // Sweeps the sessions table for two time windows and sends reminders to the
 // mentee for each:
-//   • starts in ~24h    → "Your session with Shakil — tomorrow"
-//   • starts in ~2h     → "Your session with Shakil — in 2 hours"
+//   • starts in ~24h    → "Your session with Ustadh Shakil — tomorrow"
+//   • starts in ~2h     → "Your session with Ustadh Shakil — in 2 hours"
 //
 // Per-session dedupe is handled inside send-email.js via notifications_log
 // (subjectId = session.id). Re-running the function in the same window is

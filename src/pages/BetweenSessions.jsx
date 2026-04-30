@@ -7,7 +7,7 @@ export default function BetweenSessions() {
   const { user, profile } = useAuth()
   const [messages, setMessages] = useState([])
   const [counterpartId, setCounterpartId] = useState(null)
-  const [counterpartName, setCounterpartName] = useState('Shakil')
+  const [counterpartName, setCounterpartName] = useState('Ustadh Shakil')
   const [text, setText] = useState('')
   const [loading, setLoading] = useState(true)
   const [sending, setSending] = useState(false)
@@ -70,7 +70,14 @@ export default function BetweenSessions() {
     }
 
     setCounterpartId(counterpart.id)
-    setCounterpartName(counterpart.full_name?.split(' ')[0] ?? (profile?.role === 'mentor' ? 'Mentee' : 'Shakil'))
+    // Display name: keep the title prefix for honorifics so "Ustadh Shakil
+    // Moazzem" reads as "Ustadh Shakil" rather than just "Ustadh".
+    const parts = (counterpart.full_name ?? '').split(' ').filter(Boolean)
+    const TITLES = ['Ustadh', 'Shaykh', 'Shaikh', 'Sheikh', 'Imam', 'Dr', 'Mr', 'Mrs', 'Ms', 'Mx']
+    const display = parts.length === 0
+      ? (profile?.role === 'mentor' || profile?.role === 'admin' ? 'Mentee' : 'Ustadh Shakil')
+      : (TITLES.includes(parts[0]) && parts.length > 1 ? `${parts[0]} ${parts[1]}` : parts[0])
+    setCounterpartName(display)
 
     const { data } = await supabase
       .from('messages')
