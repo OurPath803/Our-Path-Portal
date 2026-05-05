@@ -782,3 +782,83 @@ a:hover { border-bottom-color: var(--gold); }
   flex: 1; font-size: 14px; color: var(--ink-soft); line-height: 1.5;
   font-weight: 400;
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Theme variants — applied via [data-theme="…"] on <html> by lib/theme.js.
+   Default ("cream") inherits the :root tokens above; the others override.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ───── Night ───── */
+[data-theme="night"] {
+  --cream: #0E1A1F;
+  --cream-deep: #142028;
+  --ink: #E8EFE8;
+  --ink-soft: #B8C4C8;
+  --mute: #6A7A80;
+  --line: #2A3A40;
+  --teal-light: #2A3A40;
+  --gold-soft: #8A6A2A;
+}
+[data-theme="night"] .card,
+[data-theme="night"] .stat,
+[data-theme="night"] .commitments-box {
+  background: #1A2A30;
+  border-color: var(--line);
+}
+[data-theme="night"] input,
+[data-theme="night"] textarea,
+[data-theme="night"] select {
+  background: #1A2A30;
+  color: var(--ink);
+  border-color: var(--line);
+}
+[data-theme="night"] .auth-right,
+[data-theme="night"] .sz-right {
+  background: #16252B;
+}
+[data-theme="night"] .legal-header,
+[data-theme="night"] .public-footer { background: #142028; }
+[data-theme="night"] .bubble.m { background: #1A2A30; border-color: var(--line); color: var(--ink); }
+[data-theme="night"] .msg-head,
+[data-theme="night"] .msg-input { background: #16252B; }
+[data-theme="night"] .q-box textarea,
+[data-theme="night"] .freewrite-box textarea {
+  background: #16252B;
+}
+[data-theme="night"] .session-card { background: #1A2A30; }
+
+/* ───── Sand ───── */
+[data-theme="sand"] {
+  --cream: #EDE3CC;
+  --cream-deep: #E2D6B8;
+  --gold: #B8884F;
+  --gold-soft: #D9C28A;
+  --line: #C9BE9E;
+}
+[data-theme="sand"] .card,
+[data-theme="sand"] .stat,
+[data-theme="sand"] .commitments-box {
+  background: #FFF4DB;
+}
+[data-theme="sand"] input,
+[data-theme="sand"] textarea,
+[data-theme="sand"] select { background: #FFF4DB; }
+
+/* ───── Forest ───── */
+[data-theme="forest"] {
+  --teal: #142B30;
+  --teal-soft: #1F3A40;
+  --cream: #EBEEDD;
+  --cream-deep: #DBDDC2;
+  --gold: #8B7E3E;
+  --gold-soft: #C9C295;
+  --line: #C2C5A8;
+}
+[data-theme="forest"] .card,
+[data-theme="forest"] .stat,
+[data-theme="forest"] .commitments-box {
+  background: #F8FAEC;
+}
+[data-theme="forest"] input,
+[data-theme="forest"] textarea,
+[data-theme="forest"] select { background: #F8FAEC; }

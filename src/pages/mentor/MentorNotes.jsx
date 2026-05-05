@@ -31,6 +31,8 @@ export default function MentorNotes() {
   const [newCommitment, setNewCommitment] = useState('')
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [saveError, setSaveError] = useState('')
+  const [commitError, setCommitError] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -106,6 +108,7 @@ export default function MentorNotes() {
   async function saveNote() {
     if (!selectedSessionId) return
     setSaving(true)
+    setSaveError('')
 
     const payload = {
       session_id: selectedSessionId,
@@ -115,31 +118,53 @@ export default function MentorNotes() {
       to_sit_with: note.to_sit_with || null,
     }
 
+    let result
     if (noteRowId) {
-      await supabase.from('session_notes').update(payload).eq('id', noteRowId)
+      result = await supabase.from('session_notes').update(payload).eq('id', noteRowId).select().single()
     } else {
-      const { data } = await supabase.from('session_notes').insert(payload).select().single()
-      if (data) setNoteRowId(data.id)
+      result = await supabase.from('session_notes').insert(payload).select().single()
+      if (result.data) setNoteRowId(result.data.id)
     }
 
     setSaving(false)
+    if (result.error) {
+      setSaveError(`Save failed: ${result.error.message}`)
+      return
+    }
+    if (!result.data) {
+      setSaveError("Save returned no data — likely an RLS block. Tell the developer.")
+      return
+    }
     setSaved(true)
     setTimeout(() => setSaved(false), 2500)
   }
 
   async function addCommitment() {
     if (!newCommitment.trim() || !selectedSessionId) return
-    const { data } = await supabase.from('commitments').insert({
+    setCommitError('')
+    const { data, error } = await supabase.from('commitments').insert({
       mentee_id: menteeId,
       session_id: selectedSessionId,
       text: newCommitment.trim(),
     }).select().single()
-    if (data) setCommitments(cs => [...cs, data])
+    if (error) {
+      setCommitError(`Add failed: ${error.message}`)
+      return
+    }
+    if (!data) {
+      setCommitError("Insert returned no data — likely an RLS block.")
+      return
+    }
+    setCommitments(cs => [...cs, data])
     setNewCommitment('')
   }
 
   async function removeCommitment(id) {
-    await supabase.from('commitments').delete().eq('id', id)
+    const { error } = await supabase.from('commitments').delete().eq('id', id)
+    if (error) {
+      setCommitError(`Delete failed: ${error.message}`)
+      return
+    }
     setCommitments(cs => cs.filter(c => c.id !== id))
   }
 
@@ -234,6 +259,7 @@ export default function MentorNotes() {
                         />
                       </div>
 
+                      {saveError && <div className="auth-error">{saveError}</div>}
                       <button className="btn btn-primary" onClick={saveNote} disabled={saving}>
                         {saving ? 'Saving…' : noteRowId ? 'Update note' : 'Save note'}
                       </button>
@@ -275,6 +301,7 @@ export default function MentorNotes() {
                           placeholder="What did they say they'd do?"
                         />
                       </div>
+                      {commitError && <div className="auth-error">{commitError}</div>}
                       <button
                         className="btn btn-primary btn-sm"
                         onClick={addCommitment}
