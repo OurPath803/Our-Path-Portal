@@ -22,7 +22,7 @@ export default function Privacy() {
 
       <h2>What we collect</h2>
       <ul>
-        <li><strong>Account information</strong> — your name and email address, provided when you sign up or apply for Session Zero.</li>
+        <li><strong>Account information</strong> — your name and email address, provided when you sign up or book a triage call.</li>
         <li><strong>Reflective journal entries</strong> — content you write in your reflective journal. This is private to you unless you actively choose to share an entry with your mentor.</li>
         <li><strong>Session records</strong> — the date, time, mode (video, phone, in person), and notes your mentor writes after each session.</li>
         <li><strong>Messages</strong> — text you send and receive between sessions inside the portal.</li>

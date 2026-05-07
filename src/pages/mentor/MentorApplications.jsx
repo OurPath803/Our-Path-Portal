@@ -79,7 +79,7 @@ export default function MentorApplications() {
         <div className="main-pad">
           <div className="journal-head">
             <div className="eyebrow">Applications · {apps.length} total</div>
-            <h1>Session Zero applications</h1>
+            <h1>Triage call requests</h1>
             <p className="pull">
               Each row is a person who's asked to be considered. Review what they wrote,
               and move the status when you've responded.

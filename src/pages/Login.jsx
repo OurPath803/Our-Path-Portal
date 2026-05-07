@@ -68,7 +68,7 @@ export default function Login() {
         <p style={{ color: 'var(--ink-soft)', marginBottom: 24, fontSize: 14 }}>
           {tab === 'in'
             ? 'Sign in to access your portal.'
-            : 'Sign up to access your reflective journal and message your future mentor. Your first booked session will count as Session Zero.'}
+            : "Sign up free to use the reflective journal and message your future mentor. When you're ready, book a triage call or your first session."}
         </p>
 
         <div className="auth-tab">
@@ -135,7 +135,7 @@ export default function Login() {
 
         <p style={{ marginTop: 24, fontSize: 13, color: 'var(--mute)', textAlign: 'center' }}>
           Not yet a mentee?{' '}
-          <Link to="/session-zero">Request Session Zero</Link>
+          <Link to="/triage-call">Book a triage call</Link>
         </p>
 
         <p style={{ marginTop: 18, fontSize: 11, color: 'var(--mute)', textAlign: 'center', lineHeight: 1.6 }}>

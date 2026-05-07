@@ -1,6 +1,6 @@
 // Netlify Scheduled Function — runs daily at 11:00 UTC.
 //
-// For each Session Zero application that's still 'new' or 'in_review', sends
+// For each triage call request that's still 'new' or 'in_review', sends
 // the appropriate nurture email based on how long ago it was submitted:
 //
 //   ~2 days  ago → nurture_day2  ("anything come up?")

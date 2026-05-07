@@ -13,7 +13,7 @@ export default function LegalShell({ title, updated, children }) {
         </Link>
         <nav className="legal-nav">
           <Link to="/login">Sign in</Link>
-          <Link to="/session-zero" className="btn btn-primary btn-sm">Begin Session Zero</Link>
+          <Link to="/triage-call" className="btn btn-primary btn-sm">Book a triage call</Link>
         </nav>
       </header>
 

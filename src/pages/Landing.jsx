@@ -15,7 +15,7 @@ export default function Landing() {
         </nav>
         <div className="mkt-cta-set">
           <Link to="/login" className="btn btn-ghost btn-sm">Sign in</Link>
-          <Link to="/session-zero" className="btn btn-primary btn-sm">Request Session Zero</Link>
+          <Link to="/triage-call" className="btn btn-primary btn-sm">Book a triage call</Link>
         </div>
       </header>
 
@@ -27,7 +27,7 @@ export default function Landing() {
           and start locating themselves. Developmental, not therapeutic. Orientation, not optimisation.
         </p>
         <div className="hero-ctas">
-          <Link to="/session-zero" className="btn btn-primary">Begin with Session Zero</Link>
+          <Link to="/triage-call" className="btn btn-primary">Book a free triage call</Link>
           <a href="#approach" className="btn btn-ghost">Read the approach</a>
         </div>
       </div>

@@ -43,9 +43,9 @@ const SIGN_OFF = '— OurPath Guidance'
 const TEMPLATES = {
   // ───────────── Existing four ─────────────
   new_application: ({ name, email, motivation, preferred_rhythm, preferred_mode }) => ({
-    subject: `New Session Zero application — ${name}`,
+    subject: `New triage call request — ${name}`,
     text:
-`A new Session Zero application has just been submitted.
+`A new triage call request has just come in.
 
 Name: ${name}
 Email: ${email}
@@ -59,7 +59,7 @@ Review and reply within 48 hours.
 
 ${SIGN_OFF}`,
     html:
-`<p>A new Session Zero application has just been submitted.</p>
+`<p>A new triage call request has just come in.</p>
 <p><strong>Name:</strong> ${esc(name)}<br/>
 <strong>Email:</strong> ${esc(email)}<br/>
 <strong>Preferred rhythm:</strong> ${esc(preferred_rhythm || '—')}<br/>
@@ -77,7 +77,7 @@ ${SIGN_OFF}`,
       text:
 `Hello ${name || 'there'},
 
-Thank you for applying for Session Zero. Your application has been accepted.
+Thank you. Your account is ready and your first session is booked or available to book.
 
 To finish setting up, sign in (or create an account) here:
 ${link}
@@ -90,7 +90,7 @@ If anything is unclear, just reply to this email.
 ${SIGN_OFF}`,
       html:
 `<p>Hello ${esc(name || 'there')},</p>
-<p>Thank you for applying for Session Zero. Your application has been accepted.</p>
+<p>Thank you. Your account is ready and your first session is booked or available to book.</p>
 <p>To finish setting up, sign in (or create an account) here:<br/>
 <a href="${link}">${link}</a></p>
 <p>Once you're in, you can write in your reflective journal, message Ustadh Shakil, and
@@ -207,13 +207,13 @@ The work doesn't start with a grand plan. It starts with where you actually are.
 <p>${SIGN_OFF}</p>`,
   }),
 
-  // C — Session Zero auto-reply to applicant
+  // C — triage-call auto-reply
   application_received: ({ name }) => ({
-    subject: 'Your Session Zero application — received',
+    subject: 'Your triage call request — received',
     text:
 `Hello ${name || 'there'},
 
-Thank you for your Session Zero application. You're on the waiting list.
+Thank you for requesting a triage call. We'll be in touch within 48 hours to confirm.
 
 Ustadh Shakil reviews each application personally. We'll be in touch within 48 hours.
 
@@ -222,7 +222,7 @@ If anything has changed since you submitted, just reply to this email.
 ${SIGN_OFF}`,
     html:
 `<p>Hello ${esc(name || 'there')},</p>
-<p>Thank you for your Session Zero application. You're on the waiting list.</p>
+<p>Thank you for requesting a triage call. We'll be in touch within 48 hours to confirm.</p>
 <p>Ustadh Shakil reviews each application personally. We'll be in touch within 48 hours.</p>
 <p>If anything has changed since you submitted, just reply to this email.</p>
 <p>${SIGN_OFF}</p>`,
@@ -306,7 +306,7 @@ If you can't find it, reply to this email and we'll resend.</p>
 `A quick weekly summary.
 
 This past week:
-  • ${newApplications} new Session Zero application(s)
+  • ${newApplications} new triage call request(s)
   • ${newSignups} new portal signup(s)
   • ${sharedJournals} journal entries shared with you
   • ${messagesReceived} message(s) sent to you
@@ -325,7 +325,7 @@ ${SIGN_OFF}`,
 `<p>A quick weekly summary.</p>
 <p><strong>This past week:</strong></p>
 <ul style="line-height:1.7;">
-  <li>${newApplications} new Session Zero application(s)</li>
+  <li>${newApplications} new triage call request(s)</li>
   <li>${newSignups} new portal signup(s)</li>
   <li>${sharedJournals} journal entries shared with you</li>
   <li>${messagesReceived} message(s) sent to you</li>
@@ -440,7 +440,7 @@ just reply to this email.</p>
     text:
 `Hello ${name || 'there'},
 
-It's a couple of days since you submitted your Session Zero application.
+It's a couple of days since you got in touch.
 Sometimes things settle in after a conversation — even one only with
 yourself, on a form.
 
@@ -453,7 +453,7 @@ with our response.
 ${SIGN_OFF}`,
     html:
 \`<p>Hello ${esc(name || 'there')},</p>
-<p>It's a couple of days since you submitted your Session Zero application.
+<p>It's a couple of days since you got in touch.
 Sometimes things settle in after a conversation — even one only with
 yourself, on a form.</p>
 <p>Anything new come into focus? Anything you wish you'd written that you

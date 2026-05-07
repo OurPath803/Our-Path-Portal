@@ -7,7 +7,7 @@ import Landing from './pages/Landing'
 import Login from './pages/Login'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
-import SessionZero from './pages/SessionZero'
+import TriageCall from './pages/TriageCall'
 import Dashboard from './pages/Dashboard'
 import Journal from './pages/Journal'
 import Sessions from './pages/Sessions'
@@ -37,7 +37,10 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/session-zero" element={<SessionZero />} />
+          <Route path="/triage-call" element={<TriageCall />} />
+          {/* Old /session-zero URL — redirect to the new triage call page so any
+              external links still work. */}
+          <Route path="/session-zero" element={<Navigate to="/triage-call" replace />} />
           <Route path="/rhythms" element={<Rhythms />} />
 
           {/* Legal — public */}
