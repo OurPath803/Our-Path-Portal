@@ -15,6 +15,8 @@ import BetweenSessions from './pages/BetweenSessions'
 import Notes from './pages/Notes'
 import Rhythms from './pages/Rhythms'
 import Settings from './pages/Settings'
+import Blog from './pages/Blog'
+import BlogPost from './pages/BlogPost'
 
 import MentorDashboard from './pages/mentor/MentorDashboard'
 import MentorNotes from './pages/mentor/MentorNotes'
@@ -42,6 +44,8 @@ export default function App() {
               external links still work. */}
           <Route path="/session-zero" element={<Navigate to="/triage-call" replace />} />
           <Route path="/rhythms" element={<Rhythms />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
 
           {/* Legal — public */}
           <Route path="/privacy" element={<Privacy />} />
