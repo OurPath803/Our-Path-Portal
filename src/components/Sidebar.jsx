@@ -10,6 +10,7 @@ const MENTEE_NAV = [
   { to: '/between',   ico: '◉', label: 'Between sessions' },
   { to: '/notes',     ico: '◎', label: 'Notes & commitments' },
   { to: '/rhythms',   ico: '◍', label: 'Rhythm & billing' },
+  { to: '/blog',      ico: '◆', label: 'Reading' },
   { to: '/settings',  ico: '◌', label: 'Settings' },
 ]
 
@@ -17,6 +18,7 @@ const MENTOR_NAV = [
   { to: '/mentor',              ico: '◐', label: 'Mentees' },
   { to: '/between',             ico: '◉', label: 'Messages' },
   { to: '/mentor/applications', ico: '◇', label: 'Applications' },
+  { to: '/blog',                ico: '◆', label: 'Reading' },
   { to: '/settings',            ico: '◌', label: 'Settings' },
 ]
 
