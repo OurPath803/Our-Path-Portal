@@ -11,7 +11,7 @@
 //
 // Env vars (set in Netlify UI):
 //   NOTION_TOKEN              — internal integration secret (secret_...)
-//   NOTION_DATABASE_ID        — 1dd52d69-3050-4ed4-a85d-130bde572558
+//   NOTION_DATABASE_ID        — the UUID of your OurPath Blog Notion database
 
 const NOTION_API = 'https://api.notion.com/v1'
 const NOTION_VERSION = '2022-06-28'
