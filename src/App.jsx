@@ -29,6 +29,14 @@ import MentorJournal from './pages/mentor/MentorJournal'
 import MentorManage from './pages/mentor/MentorManage'
 import MentorApplications from './pages/mentor/MentorApplications'
 
+import Training from './pages/Training'
+
+import OCSCheckin from './pages/tools/OCSCheckin'
+import PositionMap from './pages/tools/PositionMap'
+import CostAudit from './pages/tools/CostAudit'
+import IntegrationFilter from './pages/tools/IntegrationFilter'
+import OrientationFramework from './pages/tools/OrientationFramework'
+
 import Privacy from './pages/legal/Privacy'
 import Terms from './pages/legal/Terms'
 import Cookies from './pages/legal/Cookies'
@@ -56,6 +64,7 @@ export default function App() {
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/referral" element={<Referral />} />
+          <Route path="/training" element={<Training />} />
 
           {/* Legal — public */}
           <Route path="/privacy" element={<Privacy />} />
@@ -70,6 +79,13 @@ export default function App() {
           <Route path="/between" element={<ProtectedRoute><BetweenSessions /></ProtectedRoute>} />
           <Route path="/notes" element={<ProtectedRoute><Notes /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+
+          {/* Gated tools */}
+          <Route path="/tools/ocs-checkin"        element={<ProtectedRoute><OCSCheckin /></ProtectedRoute>} />
+          <Route path="/tools/position-map"        element={<ProtectedRoute><PositionMap /></ProtectedRoute>} />
+          <Route path="/tools/cost-audit"          element={<ProtectedRoute><CostAudit /></ProtectedRoute>} />
+          <Route path="/tools/integration-filter"  element={<ProtectedRoute><IntegrationFilter /></ProtectedRoute>} />
+          <Route path="/tools/orientation"         element={<ProtectedRoute><OrientationFramework /></ProtectedRoute>} />
 
           {/* Mentor only */}
           <Route path="/mentor" element={<MentorRoute><MentorDashboard /></MentorRoute>} />

@@ -101,7 +101,7 @@ export default function Contact() {
                 <label className="form-label" htmlFor="message">Message</label>
                 <textarea className="form-textarea" id="message" name="message" value={form.message} onChange={handleChange} required rows={6} />
               </div>
-              <button type="submit" className="btn btn-primary" disabled={status === 'submitting'} style={{ alignSelf: 'flex-start' }}>
+              <button type="submit" className="btn btn-gold" disabled={status === 'submitting'} style={{ alignSelf: 'flex-start' }}>
                 {status === 'submitting' ? 'Sending…' : 'Send Message'}
               </button>
             </form>

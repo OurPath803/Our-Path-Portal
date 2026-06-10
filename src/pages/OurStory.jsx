@@ -95,7 +95,7 @@ export default function OurStory() {
         <h2>If this sounds like where you are — that's the point.</h2>
         <p>Start with a free 20-minute conversation. No commitment. Just an honest introduction.</p>
         <div className="cta-btns">
-          <Link to="/referral" className="btn btn-primary">Book a Free Conversation</Link>
+          <Link to="/referral" className="btn btn-gold">Book a Free Conversation</Link>
           <Link to="/triage-call" className="btn btn-ghost">Explore Mentoring</Link>
         </div>
       </section>

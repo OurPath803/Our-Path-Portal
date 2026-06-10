@@ -11,6 +11,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { BB_EPISODES, BB_ANCHORS } from '../lib/constants/barakah-episodes'
+import MarketingHeader from '../components/MarketingHeader'
 import Footer from '../components/Footer'
 
 // Human-readable label for each icon key (used as eyebrow on cards)
@@ -133,19 +134,7 @@ export default function BarakahBase() {
   return (
     <div style={{ background: 'var(--cream)', minHeight: '100vh' }}>
 
-      {/* Header — reuses existing marketing header styles */}
-      <header className="mkt-header">
-        <div className="mkt-logo">OurPath<span> Guidance</span></div>
-        <nav className="mkt-nav">
-          <Link to="/" style={{ borderBottom: 'none', color: 'var(--ink-soft)' }}>Home</Link>
-          <Link to="/triage-call" style={{ borderBottom: 'none', color: 'var(--ink-soft)' }}>Mentoring</Link>
-          <Link to="/blog" style={{ borderBottom: 'none', color: 'var(--ink-soft)' }}>Journal</Link>
-        </nav>
-        <div className="mkt-cta-set">
-          <Link to="/login" className="btn btn-ghost btn-sm">Sign in</Link>
-          <Link to="/triage-call" className="btn btn-primary btn-sm">Book a triage call</Link>
-        </div>
-      </header>
+      <MarketingHeader variant="light" />
 
       {/* Hero */}
       <section className="bb-hero">

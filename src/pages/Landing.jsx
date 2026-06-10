@@ -17,7 +17,7 @@ export default function Landing() {
           It's something quieter, and more honest.
         </p>
         <div className="hero-ctas">
-          <Link to="/referral" className="btn btn-primary">Book a Free Conversation</Link>
+          <Link to="/referral" className="btn btn-gold">Book a Free Conversation</Link>
           <Link to="/triage-call" className="btn btn-ghost">See How It Works</Link>
         </div>
       </section>
@@ -78,36 +78,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Our Approach */}
-      <section className="mkt-section mkt-section--off-white">
-        <div className="section-inner">
-          <div className="section-lead">
-            <div className="eyebrow">Our Approach</div>
-            <h2>Three commitments. One framework.</h2>
-            <p>
-              A structured approach to personal development, informed by Islamic scholarship
-              and lived through honest conversation.
-            </p>
-          </div>
-          <div className="approach-cards">
-            <div className="approach-card">
-              <div className="eyebrow">Clarity</div>
-              <h3>See where you actually stand</h3>
-              <p>Map your roles, distinguish what you chose from what you inherited.</p>
-            </div>
-            <div className="approach-card">
-              <div className="eyebrow">Responsibility</div>
-              <h3>Own what's genuinely yours</h3>
-              <p>Release what isn't. Name the real cost of what you carry.</p>
-            </div>
-            <div className="approach-card">
-              <div className="eyebrow">Orientation</div>
-              <h3>Choose your direction deliberately</h3>
-              <p>Identify what this season of life requires of you.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <hr className="section-rule section-rule--center" />
 
       {/* Three Pathways */}
       <section className="mkt-section" style={{ background: 'var(--cream)' }}>
@@ -168,36 +139,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* We Meet You Where You Are */}
-      <section className="mkt-section" style={{ background: 'var(--cream)' }}>
-        <div className="section-inner">
-          <div className="section-lead">
-            <div className="eyebrow">We Meet You Where You Are</div>
-            <h2>Three starting points. One framework.</h2>
-          </div>
-          <div className="starting-grid">
-            <div className="starting-card">
-              <div className="starting-num">01</div>
-              <h3>I'm doing everything right but I feel stuck.</h3>
-              <p>Career, faith, relationships. It's all handled. Effort on its own isn't producing growth any more.</p>
-              <Link to="/referral" className="btn btn-ghost btn-sm" style={{ alignSelf: 'flex-start', borderColor: 'rgba(245,238,217,0.3)', color: 'var(--cream)' }}>Start a conversation →</Link>
-            </div>
-            <div className="starting-card">
-              <div className="starting-num">02</div>
-              <h3>I'm carrying more than I chose.</h3>
-              <p>Roles and expectations accumulated before you could assess them. You need to name the cost.</p>
-              <Link to="/referral" className="btn btn-ghost btn-sm" style={{ alignSelf: 'flex-start', borderColor: 'rgba(245,238,217,0.3)', color: 'var(--cream)' }}>Start a conversation →</Link>
-            </div>
-            <div className="starting-card">
-              <div className="starting-num">03</div>
-              <h3>I know what I want but I can't move.</h3>
-              <p>The destination is clear. The paralysis is seeing too many paths at once.</p>
-              <Link to="/referral" className="btn btn-ghost btn-sm" style={{ alignSelf: 'flex-start', borderColor: 'rgba(245,238,217,0.3)', color: 'var(--cream)' }}>Start a conversation →</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Testimonials */}
       <section className="mkt-section mkt-section--off-white">
         <div className="section-inner">
@@ -243,8 +184,8 @@ export default function Landing() {
         <h2>Ready to move from managing to growing?</h2>
         <p>Book a free 20-minute conversation. There's no commitment. It's just a chance to talk.</p>
         <div className="cta-btns">
-          <Link to="/referral" className="btn btn-primary">Book a Free Conversation</Link>
-          <Link to="/referral" className="btn btn-ghost">Submit a Referral</Link>
+          <Link to="/referral" className="btn btn-gold">Book a Free Conversation</Link>
+          <Link to="/triage-call" className="btn btn-ghost">See How It Works</Link>
         </div>
       </section>
 

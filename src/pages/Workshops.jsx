@@ -15,7 +15,7 @@ export default function Workshops() {
           A guided personal development experience built around structured reflective practice.
           Small cohort, weekly sessions, and practical tools you keep for life.
         </p>
-        <Link to="/referral" className="btn btn-primary">Book a Screening Conversation</Link>
+        <Link to="/referral" className="btn btn-gold">Book a Screening Conversation</Link>
       </section>
 
       {/* Journey intro */}
@@ -129,7 +129,7 @@ export default function Workshops() {
         <h2>Ready to start your development?</h2>
         <p>Book a free conversation to explore whether the workshop series is right for you.</p>
         <div className="cta-btns">
-          <Link to="/referral" className="btn btn-primary">Book a Free Conversation</Link>
+          <Link to="/referral" className="btn btn-gold">Book a Free Conversation</Link>
           <Link to="/triage-call" className="btn btn-ghost">Explore 1-1 Mentoring</Link>
         </div>
       </section>

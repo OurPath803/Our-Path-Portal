@@ -48,7 +48,7 @@ export default function TriageCall() {
           space to see clearly, take ownership, and choose deliberately — with someone holding
           the framework alongside you.
         </p>
-        <Link to="/referral" className="btn btn-primary">Begin Session Zero</Link>
+        <Link to="/referral" className="btn btn-gold">Begin Session Zero</Link>
       </section>
 
       {/* How It Works */}
@@ -189,7 +189,7 @@ export default function TriageCall() {
         <h2>Submit a referral instead.</h2>
         <p>Fill in the intake form and we'll be in touch within 48 hours to arrange your conversation.</p>
         <div className="cta-btns">
-          <Link to="/referral" className="btn btn-primary">Submit a Referral</Link>
+          <Link to="/referral" className="btn btn-gold">Submit a Referral</Link>
           <Link to="/" className="btn btn-ghost">Back to Home</Link>
         </div>
       </section>

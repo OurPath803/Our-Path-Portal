@@ -24,12 +24,21 @@ function daysUntil(d) {
   return `In ${diff} days`
 }
 
+const TOOL_ROUTES = {
+  'ocs-checkin':        { label: 'OCS Check-In',          path: '/tools/ocs-checkin',       description: 'Rate your five dimensions' },
+  'position-map':       { label: 'Position Map',           path: '/tools/position-map',       description: 'See where you stand' },
+  'cost-audit':         { label: 'Cost Audit',             path: '/tools/cost-audit',         description: 'Name the cost of what you carry' },
+  'integration-filter': { label: 'Integration Filter',     path: '/tools/integration-filter', description: 'Sort experience from accumulation' },
+  'orientation':        { label: 'Orientation Framework',  path: '/tools/orientation',        description: 'Choose your direction deliberately' },
+}
+
 export default function Dashboard() {
   const { user, profile } = useAuth()
   const [nextSession, setNextSession] = useState(null)
   const [lastJournal, setLastJournal] = useState(null)
   const [stats, setStats] = useState({ sessions: 0, entries: 0, commitments: 0 })
   const [commitments, setCommitments] = useState([])
+  const [assignedTools, setAssignedTools] = useState([])
   const [loading, setLoading] = useState(true)
 
   const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
@@ -38,7 +47,7 @@ export default function Dashboard() {
   useEffect(() => {
     if (!user) return
     async function load() {
-      const [sessionRes, journalRes, statsSessionRes, statsJournalRes, commitRes] = await Promise.all([
+      const [sessionRes, journalRes, statsSessionRes, statsJournalRes, commitRes, toolRes] = await Promise.all([
         supabase
           .from('sessions')
           .select('*')
@@ -70,6 +79,11 @@ export default function Dashboard() {
           .eq('completed', false)
           .order('created_at', { ascending: false })
           .limit(3),
+        supabase
+          .from('tool_assignments')
+          .select('tool_slug')
+          .eq('mentee_id', user.id)
+          .is('revoked_at', null),
       ])
 
       setNextSession(sessionRes.data)
@@ -80,6 +94,7 @@ export default function Dashboard() {
         commitments: commitRes.data?.length ?? 0,
       })
       setCommitments(commitRes.data ?? [])
+      setAssignedTools((toolRes.data ?? []).map(t => t.tool_slug))
       setLoading(false)
     }
     load()
@@ -224,6 +239,45 @@ export default function Dashboard() {
                     View all commitments →
                   </Link>
                 </div>
+
+                {assignedTools.length > 0 && (
+                  <div className="card" style={{ marginTop: 20 }}>
+                    <div className="card-title">
+                      <h3>Your Tools</h3>
+                      <span className="tag">{assignedTools.length} assigned</span>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      {assignedTools.map(slug => {
+                        const tool = TOOL_ROUTES[slug]
+                        if (!tool) return null
+                        return (
+                          <Link
+                            key={slug}
+                            to={tool.path}
+                            style={{
+                              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                              padding: '10px 14px',
+                              background: 'var(--off-white)',
+                              borderRadius: 4,
+                              border: '1px solid var(--line)',
+                              textDecoration: 'none',
+                            }}
+                          >
+                            <div>
+                              <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--navy)' }}>
+                                {tool.label}
+                              </div>
+                              <div style={{ fontSize: 12, color: 'var(--mute)', marginTop: 2 }}>
+                                {tool.description}
+                              </div>
+                            </div>
+                            <span style={{ fontSize: 13, color: 'var(--gold)' }}>→</span>
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}

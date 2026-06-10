@@ -4,6 +4,14 @@ import { useAuth } from '../../contexts/AuthContext'
 import { supabase } from '../../lib/supabase'
 import Sidebar from '../../components/Sidebar'
 
+const TOOL_OPTIONS = [
+  { slug: 'ocs-checkin',        label: 'OCS Check-In' },
+  { slug: 'position-map',       label: 'Position Map' },
+  { slug: 'cost-audit',         label: 'Cost Audit' },
+  { slug: 'integration-filter', label: 'Integration Filter' },
+  { slug: 'orientation',        label: 'Orientation Framework' },
+]
+
 const RHYTHM_OPTIONS = [
   { value: 'monthly', label: 'Monthly (1×/month)' },
   { value: 'fortnightly', label: 'Fortnightly (2×/month)' },
@@ -67,6 +75,13 @@ export default function MentorManage() {
   const [savingSub, setSavingSub] = useState(false)
   const [subFlash, setSubFlash] = useState('')
 
+  // Tool assignment state
+  const [toolAssignments, setToolAssignments] = useState([])
+  const [assigningTool, setAssigningTool] = useState('')
+  const [assignNotes, setAssignNotes] = useState('')
+  const [savingTool, setSavingTool] = useState(false)
+  const [toolFlash, setToolFlash] = useState('')
+
   // Session form state
   const [sesForm, setSesForm] = useState({
     scheduled_at: defaultSessionTime(),
@@ -86,7 +101,7 @@ export default function MentorManage() {
     setLoading(true)
     setError('')
 
-    const [menteeRes, subRes, sesRes] = await Promise.all([
+    const [menteeRes, subRes, sesRes, toolRes] = await Promise.all([
       supabase.from('profiles')
         .select('id, full_name, email, role::text, mentor_id')
         .eq('id', menteeId).maybeSingle(),
@@ -96,6 +111,9 @@ export default function MentorManage() {
       supabase.from('sessions')
         .select('*').eq('mentee_id', menteeId)
         .order('scheduled_at', { ascending: false }),
+      supabase.from('tool_assignments')
+        .select('*').eq('mentee_id', menteeId)
+        .order('assigned_at', { ascending: false }),
     ])
 
     if (menteeRes.error || !menteeRes.data) {
@@ -107,6 +125,7 @@ export default function MentorManage() {
     setMentee(menteeRes.data)
     setSubscription(subRes.data)
     setSessions(sesRes.data ?? [])
+    setToolAssignments(toolRes.data ?? [])
     if (subRes.data) {
       setSubForm({ rhythm: subRes.data.rhythm, status: subRes.data.status })
     }
@@ -207,6 +226,47 @@ export default function MentorManage() {
     setTimeout(() => setSesFlash(''), 4000)
   }
 
+  async function assignTool(e) {
+    e.preventDefault()
+    if (!assigningTool) { setToolFlash('Select a tool first.'); return }
+    setSavingTool(true)
+    setToolFlash('')
+
+    const alreadyActive = toolAssignments.find(
+      t => t.tool_slug === assigningTool && !t.revoked_at
+    )
+    if (alreadyActive) {
+      setToolFlash('This tool is already assigned.')
+      setSavingTool(false)
+      setTimeout(() => setToolFlash(''), 3000)
+      return
+    }
+
+    const { error } = await supabase.from('tool_assignments').insert({
+      mentee_id:   menteeId,
+      assigned_by: user.id,
+      tool_slug:   assigningTool,
+      notes:       assignNotes || null,
+    })
+
+    if (error) {
+      setToolFlash(`Failed: ${error.message}`)
+    } else {
+      setToolFlash('Tool assigned.')
+      setAssigningTool('')
+      setAssignNotes('')
+      await load()
+    }
+    setSavingTool(false)
+    setTimeout(() => setToolFlash(''), 4000)
+  }
+
+  async function revokeTool(id) {
+    if (!confirm('Revoke access to this tool? The mentee will no longer see it on their dashboard.')) return
+    await supabase.from('tool_assignments').update({ revoked_at: new Date().toISOString() }).eq('id', id)
+    await load()
+  }
+
   async function cancelSession(id) {
     if (!confirm('Cancel this session? It will be marked cancelled, not deleted.')) return
     await supabase.from('sessions').update({ status: 'cancelled' }).eq('id', id)
@@ -241,6 +301,108 @@ export default function MentorManage() {
                   Use these for comp rates, friends-and-family access, mentees who paid outside
                   of Stripe, or to backfill sessions you had before the portal existed.
                 </p>
+              </div>
+
+              {/* ──────────────── Tool assignment panel ──────────────── */}
+              <div className="card" style={{ marginBottom: 24 }}>
+                <div className="card-title">
+                  <h3>Assigned Tools</h3>
+                  <span className="tag">
+                    {toolAssignments.filter(t => !t.revoked_at).length} active
+                  </span>
+                </div>
+
+                {toolFlash && (
+                  <div className={toolFlash.startsWith('Failed') || toolFlash.startsWith('Select') ? 'auth-error' : 'auth-success'}>
+                    {toolFlash}
+                  </div>
+                )}
+
+                <form onSubmit={assignTool} style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 16 }}>
+                  <select
+                    value={assigningTool}
+                    onChange={e => setAssigningTool(e.target.value)}
+                    style={{
+                      flex: '1 0 200px', padding: '10px 12px',
+                      border: '1px solid var(--line)', borderRadius: 4,
+                      background: 'var(--cream)', color: 'var(--navy)',
+                      fontFamily: 'inherit', fontSize: 14,
+                    }}
+                  >
+                    <option value="">Select a tool…</option>
+                    {TOOL_OPTIONS.map(t => (
+                      <option key={t.slug} value={t.slug}>{t.label}</option>
+                    ))}
+                  </select>
+                  <input
+                    type="text"
+                    value={assignNotes}
+                    onChange={e => setAssignNotes(e.target.value)}
+                    placeholder="Notes (optional)"
+                    style={{
+                      flex: '2 0 200px', padding: '10px 12px',
+                      border: '1px solid var(--line)', borderRadius: 4,
+                      background: 'var(--cream)', color: 'var(--navy)',
+                      fontFamily: 'inherit', fontSize: 14,
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-sm"
+                    disabled={savingTool}
+                  >
+                    {savingTool ? 'Assigning…' : 'Assign'}
+                  </button>
+                </form>
+
+                {toolAssignments.length === 0 ? (
+                  <p style={{ fontSize: 14, color: 'var(--mute)', fontStyle: 'italic' }}>
+                    No tools assigned yet.
+                  </p>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {toolAssignments.map(t => {
+                      const meta = TOOL_OPTIONS.find(o => o.slug === t.tool_slug)
+                      return (
+                        <div
+                          key={t.id}
+                          style={{
+                            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                            padding: '10px 12px',
+                            background: t.revoked_at ? 'transparent' : 'var(--off-white)',
+                            borderRadius: 4,
+                            border: '1px solid var(--line)',
+                            opacity: t.revoked_at ? 0.5 : 1,
+                          }}
+                        >
+                          <div>
+                            <div style={{ fontSize: 14, color: 'var(--navy)', fontWeight: 500 }}>
+                              {meta?.label ?? t.tool_slug}
+                            </div>
+                            {t.notes && (
+                              <div style={{ fontSize: 12, color: 'var(--mute)', marginTop: 2 }}>{t.notes}</div>
+                            )}
+                            <div style={{ fontSize: 11, color: 'var(--mute)', marginTop: 2 }}>
+                              {t.revoked_at
+                                ? `Revoked ${formatDate(t.revoked_at)}`
+                                : `Assigned ${formatDate(t.assigned_at)}`}
+                            </div>
+                          </div>
+                          {!t.revoked_at && (
+                            <button
+                              type="button"
+                              onClick={() => revokeTool(t.id)}
+                              className="btn btn-ghost btn-sm"
+                              style={{ fontSize: 11, padding: '4px 8px', flexShrink: 0 }}
+                            >
+                              Revoke
+                            </button>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
               </div>
 
               <div className="grid-2" style={{ alignItems: 'start' }}>

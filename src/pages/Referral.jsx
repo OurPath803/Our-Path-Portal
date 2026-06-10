@@ -264,7 +264,7 @@ export default function Referral() {
             and sessions.
           </label>
 
-          <button type="submit" className="btn btn-primary" disabled={status === 'submitting'} style={{ alignSelf: 'flex-start' }}>
+          <button type="submit" className="btn btn-gold" disabled={status === 'submitting'} style={{ alignSelf: 'flex-start' }}>
             {status === 'submitting' ? 'Submitting…' : 'Submit Referral →'}
           </button>
         </form>
