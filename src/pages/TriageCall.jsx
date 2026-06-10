@@ -1,10 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import MarketingHeader from '../components/MarketingHeader'
 import Footer from '../components/Footer'
 
-// 15-min free triage call. The actual booking happens on Calendly via a new
-// event type the user creates at this slug. If you change the slug in
-// Calendly, update this constant.
 const CALENDLY_URL = 'https://calendly.com/hello-ourpathguidance/triage-call'
 
 function CalendlyEmbed({ url }) {
@@ -39,44 +37,163 @@ function CalendlyEmbed({ url }) {
 export default function TriageCall() {
   return (
     <div style={{ background: 'var(--cream)', minHeight: '100vh' }}>
-      <div className="session-zero">
-        {/* Left column — same layout as the old SessionZero left side */}
-        <div className="sz-left">
-          <div className="eyebrow">Triage call · 15 minutes · No charge</div>
-          <h1>A short conversation before any commitment.</h1>
-          <p>
-            A triage call is a brief mapping conversation with Ustadh Shakil — to understand where
-            you are, what you're carrying, and whether mentoring is the right next step. Not a
-            sales call.
-          </p>
-          <p style={{ marginTop: 18 }}>
-            If it feels right, we'll book your first paid session. If it doesn't, we'll say so
-            plainly and signpost you to whatever might serve you better.
-          </p>
-          <div className="quote">
-            "We don't start with goals. We start with where you actually are."
-            <cite>— OurPath</cite>
-          </div>
+      <MarketingHeader />
 
-          <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid rgba(245,238,217,0.15)' }}>
-            <p style={{ color: 'var(--gold-soft)', fontSize: 13, fontStyle: 'italic', marginBottom: 12 }}>
-              Don't want to talk on a call?
+      {/* Hero */}
+      <section className="mentoring-hero">
+        <div className="eyebrow">Personal Development · 1-1 Mentoring</div>
+        <h1>Guided development through reflective practice.</h1>
+        <p>
+          Some growth can only happen in conversation. 1-1 mentoring gives you a structured
+          space to see clearly, take ownership, and choose deliberately — with someone holding
+          the framework alongside you.
+        </p>
+        <Link to="/referral" className="btn btn-primary">Begin Session Zero</Link>
+      </section>
+
+      {/* How It Works */}
+      <section className="how-it-works">
+        <div className="section-inner">
+          <div className="section-lead">
+            <div className="eyebrow">How It Works</div>
+            <h2>Four stages. One developmental arc.</h2>
+            <p>
+              This isn't therapy or life coaching. It's guided personal development — structured
+              reflective practice with someone who can hold the questions alongside you.
             </p>
-            <p style={{ color: 'rgba(245,238,217,0.82)', fontSize: 14 }}>
-              You can also{' '}
-              <Link to="/login" style={{ color: 'var(--gold-soft)', borderBottomColor: 'var(--gold-soft)' }}>
-                sign up free
-              </Link>{' '}
-              and start with the journal. No call needed. We're here when you're ready to talk.
-            </p>
+          </div>
+          <div className="how-stages">
+            <div className="how-stage">
+              <div className="how-stage-num">1</div>
+              <div className="how-stage-meta">20 min · No obligation</div>
+              <h4>Free Conversation</h4>
+              <p>An honest introduction to the framework and whether it's right for you.</p>
+            </div>
+            <div className="how-stage">
+              <div className="how-stage-num">2</div>
+              <div className="how-stage-meta">Intake · Where you stand</div>
+              <h4>Session Zero</h4>
+              <p>Map your current position, roles, and what's drawing you here.</p>
+            </div>
+            <div className="how-stage">
+              <div className="how-stage-num">3</div>
+              <div className="how-stage-meta">50–60 min · Weekly or fortnightly</div>
+              <h4>Development Sessions</h4>
+              <p>Structured reflective work building through al-Masīr phases.</p>
+            </div>
+            <div className="how-stage">
+              <div className="how-stage-num">4</div>
+              <div className="how-stage-meta">Continue, pause, or close</div>
+              <h4>Review &amp; Next Steps</h4>
+              <p>Assess progress and decide what this season of life requires next.</p>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Right column — Calendly embed */}
-        <div className="sz-right" style={{ padding: '0', overflow: 'hidden' }}>
+      {/* Pricing */}
+      <section className="pricing-section">
+        <div className="section-inner">
+          <div className="section-lead">
+            <div className="eyebrow">Your Investment</div>
+            <h2>Three levels. One commitment to growth.</h2>
+          </div>
+          <div className="pricing-grid">
+            <div className="pricing-card">
+              <div className="pricing-tier">Try It</div>
+              <h3>Single Session</h3>
+              <div className="pricing-price">£30</div>
+              <div className="pricing-per">one-off session</div>
+              <ul className="pricing-features">
+                <li>1 structured session</li>
+                <li>50–60 minutes</li>
+                <li>Online or in-person</li>
+              </ul>
+            </div>
+            <div className="pricing-card pricing-card--featured">
+              <div className="pricing-tier">Starter</div>
+              <h3>4 Sessions</h3>
+              <div className="pricing-price">£120</div>
+              <div className="pricing-per">£30 per session</div>
+              <ul className="pricing-features">
+                <li>4 structured sessions</li>
+                <li>Session Zero included</li>
+                <li>Online or in-person</li>
+              </ul>
+            </div>
+            <div className="pricing-card">
+              <div className="pricing-tier">Standard</div>
+              <h3>8 Sessions</h3>
+              <div className="pricing-price">£240</div>
+              <div className="pricing-per">£30 per session</div>
+              <ul className="pricing-features">
+                <li>8 structured sessions</li>
+                <li>Session Zero included</li>
+                <li>Mid-point review</li>
+              </ul>
+            </div>
+            <div className="pricing-card">
+              <div className="pricing-tier">Comprehensive</div>
+              <h3>12 Sessions</h3>
+              <div className="pricing-price">£360</div>
+              <div className="pricing-per">£30 per session</div>
+              <ul className="pricing-features">
+                <li>12 structured sessions</li>
+                <li>Mid-point &amp; final reviews</li>
+                <li>Orientation Statement</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="faq-section">
+        <div className="section-inner">
+          <div className="section-lead">
+            <div className="eyebrow">Common Questions</div>
+            <h2>Three questions everyone asks.</h2>
+          </div>
+          <div className="faq-list">
+            <div className="faq-item">
+              <p className="faq-q">Is this therapy?</p>
+              <p className="faq-a">No. OurPath is personal development — developmental guidance and mentoring, not clinical intervention. If therapeutic support would serve you better, we'll help you find the right fit.</p>
+            </div>
+            <div className="faq-item">
+              <p className="faq-q">How is this different from coaching?</p>
+              <p className="faq-a">Coaching focuses on performance and goals. OurPath focuses on personal development through reflective practice — helping you see where you stand and choose your direction from clarity.</p>
+            </div>
+            <div className="faq-item">
+              <p className="faq-q">What if I need something different?</p>
+              <p className="faq-a">That's a valuable outcome. Part of personal development is recognising what you actually need. We maintain referral pathways and will support you in finding the right fit.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Calendly booking */}
+      <section className="calendly-section">
+        <div className="calendly-inner">
+          <div className="calendly-intro">
+            <div className="eyebrow">Start Here</div>
+            <h2>Begin with a free conversation.</h2>
+            <p>20 minutes. No obligation. We'll explore whether OurPath mentoring is the right fit for your development right now.</p>
+          </div>
           <CalendlyEmbed url={CALENDLY_URL} />
         </div>
-      </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="section-cta">
+        <div className="eyebrow">Prefer to write?</div>
+        <h2>Submit a referral instead.</h2>
+        <p>Fill in the intake form and we'll be in touch within 48 hours to arrange your conversation.</p>
+        <div className="cta-btns">
+          <Link to="/referral" className="btn btn-primary">Submit a Referral</Link>
+          <Link to="/" className="btn btn-ghost">Back to Home</Link>
+        </div>
+      </section>
+
       <Footer />
     </div>
   )

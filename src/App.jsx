@@ -18,6 +18,10 @@ import Settings from './pages/Settings'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import BarakahBase from './pages/BarakahBase'
+import OurStory from './pages/OurStory'
+import Workshops from './pages/Workshops'
+import Contact from './pages/Contact'
+import Referral from './pages/Referral'
 
 import MentorDashboard from './pages/mentor/MentorDashboard'
 import MentorNotes from './pages/mentor/MentorNotes'
@@ -48,6 +52,10 @@ export default function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/barakah-base" element={<BarakahBase />} />
+          <Route path="/our-story" element={<OurStory />} />
+          <Route path="/workshops" element={<Workshops />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/referral" element={<Referral />} />
 
           {/* Legal — public */}
           <Route path="/privacy" element={<Privacy />} />

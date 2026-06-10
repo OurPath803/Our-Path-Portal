@@ -70,6 +70,29 @@ ${SIGN_OFF}`,
 <p>${SIGN_OFF}</p>`,
   }),
 
+  contact_enquiry: ({ name, email, subject, message }) => ({
+    subject: `Contact form — ${subject || 'General enquiry'} from ${name}`,
+    text:
+`New contact form submission.
+
+Name: ${name}
+Email: ${email}
+Subject: ${subject || '—'}
+
+Message:
+${message || '(none provided)'}
+
+${SIGN_OFF}`,
+    html:
+`<p>New contact form submission.</p>
+<p><strong>Name:</strong> ${esc(name)}<br/>
+<strong>Email:</strong> ${esc(email)}<br/>
+<strong>Subject:</strong> ${esc(subject || '—')}</p>
+<p><strong>Message:</strong><br/>
+<em>${esc(message || '(none provided)').replace(/\n/g, '<br/>')}</em></p>
+<p>${SIGN_OFF}</p>`,
+  }),
+
   application_accepted: ({ name, email }) => {
     const link = `${SITE_URL}/login?email=${encodeURIComponent(email || '')}`
     return {
@@ -618,7 +641,7 @@ exports.handler = async (event) => {
   }
 
   // Admin-bound templates: route to EMAIL_FROM regardless of `to`.
-  const adminBound = ['new_application', 'journal_shared', 'weekly_digest']
+  const adminBound = ['new_application', 'journal_shared', 'weekly_digest', 'contact_enquiry']
   const recipient = adminBound.includes(type) ? EMAIL_FROM : to
   if (!recipient) {
     return { statusCode: 400, body: 'Missing recipient' }

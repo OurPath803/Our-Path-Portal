@@ -1017,3 +1017,261 @@ a:hover { border-bottom-color: var(--gold); }
   .bb-modal-head { padding: 22px 22px 18px; }
   .bb-modal-body { padding: 20px 22px 24px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MARKETING PAGES — shared section utilities
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mkt-section { padding: 80px 48px; }
+.mkt-section--navy { background: var(--navy); color: var(--cream); }
+.mkt-section--off-white { background: var(--off-white); }
+
+.section-inner { max-width: 1100px; margin: 0 auto; }
+
+.section-lead { margin-bottom: 48px; }
+.section-lead .eyebrow { margin-bottom: 12px; }
+.section-lead h2 { font-size: 36px; margin: 0 0 16px; color: var(--navy); }
+.mkt-section--navy .section-lead h2 { color: var(--cream); }
+.section-lead p { font-size: 17px; line-height: 1.6; color: var(--ink-soft); max-width: 600px; margin: 0; }
+.mkt-section--navy .section-lead p { color: rgba(245,238,217,0.75); }
+
+/* ─── Managing section (navy) ─── */
+.managing-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.managing-item { border-left: 2px solid var(--gold); padding: 0 0 0 20px; }
+.managing-num { font-family: var(--font-display); font-size: 36px; color: var(--gold); line-height: 1; margin-bottom: 12px; }
+.managing-item p { font-size: 15px; line-height: 1.6; color: rgba(245,238,217,0.82); margin: 0; }
+
+/* ─── Reflection section (cream) ─── */
+.reflection-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.reflection-item { background: var(--off-white); border: 1px solid var(--line); border-top: 3px solid var(--gold); padding: 28px 24px; }
+.reflection-num { font-family: var(--font-display); font-size: 36px; color: var(--gold); line-height: 1; margin-bottom: 12px; }
+.reflection-item p { font-size: 15px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+
+/* ─── Approach cards ─── */
+.approach-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.approach-card { background: var(--cream); border: 1px solid var(--line); padding: 32px 28px; }
+.approach-card .eyebrow { margin-bottom: 12px; }
+.approach-card h3 { font-size: 22px; color: var(--navy); margin: 0 0 12px; }
+.approach-card p { font-size: 15px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+
+/* ─── Three Pathways ─── */
+.pathways-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.pathway-card { background: var(--off-white); border: 1px solid var(--line); padding: 32px 28px; display: flex; flex-direction: column; }
+.pathway-type { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-family: var(--font-body); font-weight: 600; margin-bottom: 8px; }
+.pathway-card h3 { font-family: var(--font-display); font-size: 22px; color: var(--navy); margin: 0 0 10px; }
+.pathway-card > p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; margin: 0 0 20px; flex: 1; }
+
+/* ─── Positioning diagram (navy) ─── */
+.pos-diagram { display: flex; gap: 2px; margin-top: 40px; }
+.pos-cell { flex: 1; padding: 28px 20px; text-align: center; background: rgba(245,238,217,0.08); }
+.pos-cell--active { background: var(--gold); }
+.pos-cell-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-family: var(--font-body); color: rgba(245,238,217,0.55); margin-bottom: 8px; }
+.pos-cell--active .pos-cell-label { color: var(--navy); }
+.pos-cell-name { font-family: var(--font-display); font-size: 20px; color: var(--cream); }
+.pos-cell--active .pos-cell-name { color: var(--navy); font-weight: 600; }
+.pos-sub { font-size: 14px; color: rgba(245,238,217,0.65); max-width: 560px; line-height: 1.6; margin-top: 24px; }
+
+/* ─── Starting Points ─── */
+.starting-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.starting-card { background: var(--navy); color: var(--cream); padding: 32px 28px; display: flex; flex-direction: column; }
+.starting-num { font-family: var(--font-display); font-size: 44px; color: var(--gold); line-height: 1; margin-bottom: 16px; }
+.starting-card h3 { font-family: var(--font-display); font-size: 20px; color: var(--cream); margin: 0 0 12px; line-height: 1.3; }
+.starting-card > p { font-size: 14px; color: rgba(245,238,217,0.75); line-height: 1.6; margin: 0 0 20px; flex: 1; }
+
+/* ─── Testimonials ─── */
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.testimonial-card { background: var(--cream); border: 1px solid var(--line); padding: 28px; }
+.testimonial-quote { font-family: var(--font-display); font-size: 16px; line-height: 1.7; color: var(--navy); font-style: italic; margin: 0 0 20px; }
+.testimonial-attr { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); font-family: var(--font-body); }
+
+/* ─── Partners ─── */
+.partner-card { display: inline-flex; align-items: center; gap: 24px; background: var(--off-white); border: 1px solid var(--line); padding: 24px 32px; margin-top: 32px; flex-wrap: wrap; }
+.partner-card h3 { font-family: var(--font-display); font-size: 18px; color: var(--navy); margin: 0 0 4px; }
+.partner-card p { font-size: 13px; color: var(--mute); margin: 0; font-family: var(--font-body); }
+
+/* ─── Bottom CTA (navy) ─── */
+.section-cta { background: var(--navy); padding: 80px 48px; text-align: center; }
+.section-cta .eyebrow { color: var(--gold); margin-bottom: 16px; }
+.section-cta h2 { font-size: 40px; color: var(--cream); margin: 0 auto 16px; max-width: 600px; }
+.section-cta > p { font-size: 17px; color: rgba(245,238,217,0.75); max-width: 480px; margin: 0 auto 36px; line-height: 1.6; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MENTORING / TRIAGE CALL PAGE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mentoring-hero { background: var(--navy); color: var(--cream); padding: 80px 48px 70px; }
+.mentoring-hero .eyebrow { color: var(--gold); margin-bottom: 16px; }
+.mentoring-hero h1 { font-size: 48px; line-height: 1.1; color: var(--cream); max-width: 680px; margin: 0 0 18px; }
+.mentoring-hero > p { font-size: 17px; color: rgba(245,238,217,0.78); max-width: 560px; line-height: 1.6; margin: 0 0 32px; }
+
+.how-it-works { background: var(--off-white); padding: 72px 48px; }
+.how-stages { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 40px; position: relative; }
+.how-stages::before { content: ''; position: absolute; top: 28px; left: 10%; width: 80%; height: 1px; background: var(--line); z-index: 0; }
+.how-stage { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+.how-stage-num { width: 56px; height: 56px; border-radius: 50%; background: var(--navy); color: var(--cream); font-family: var(--font-display); font-size: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+.how-stage h4 { font-family: var(--font-display); font-size: 17px; color: var(--navy); margin: 0 0 6px; }
+.how-stage-meta { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-family: var(--font-body); margin-bottom: 10px; }
+.how-stage > p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; margin: 0; }
+
+.pricing-section { background: var(--cream); padding: 72px 48px; }
+.pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; }
+.pricing-card { background: var(--off-white); border: 1px solid var(--line); border-top: 3px solid transparent; padding: 28px 24px; }
+.pricing-card--featured { border-top-color: var(--gold); background: var(--navy); color: var(--cream); }
+.pricing-tier { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-family: var(--font-body); font-weight: 600; color: var(--gold); margin-bottom: 8px; }
+.pricing-card h3 { font-family: var(--font-display); font-size: 22px; color: var(--navy); margin: 0 0 4px; }
+.pricing-card--featured h3 { color: var(--cream); }
+.pricing-price { font-family: var(--font-display); font-size: 40px; color: var(--navy); line-height: 1; margin: 16px 0 4px; }
+.pricing-card--featured .pricing-price { color: var(--cream); }
+.pricing-per { font-size: 12px; color: var(--mute); font-family: var(--font-body); margin-bottom: 20px; }
+.pricing-card--featured .pricing-per { color: rgba(245,238,217,0.6); }
+.pricing-features { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); padding-top: 16px; }
+.pricing-card--featured .pricing-features { border-top-color: rgba(245,238,217,0.15); }
+.pricing-features li { font-size: 13px; color: var(--ink-soft); padding: 6px 0 6px 16px; position: relative; }
+.pricing-card--featured .pricing-features li { color: rgba(245,238,217,0.8); }
+.pricing-features li::before { content: '–'; position: absolute; left: 0; color: var(--gold); }
+
+.faq-section { background: var(--off-white); padding: 72px 48px; }
+.faq-list { margin-top: 40px; display: flex; flex-direction: column; max-width: 740px; }
+.faq-item { border-bottom: 1px solid var(--line); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid var(--line); }
+.faq-q { font-family: var(--font-display); font-size: 19px; color: var(--navy); margin: 0 0 10px; }
+.faq-a { font-size: 15px; color: var(--ink-soft); line-height: 1.65; margin: 0; }
+
+.calendly-section { background: var(--cream); padding: 72px 48px 0; }
+.calendly-inner { max-width: 860px; margin: 0 auto; }
+.calendly-intro { text-align: center; margin-bottom: 32px; }
+.calendly-intro h2 { font-size: 32px; color: var(--navy); margin: 0 0 10px; }
+.calendly-intro p { font-size: 16px; color: var(--ink-soft); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   OUR STORY PAGE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.story-hero { background: var(--navy); color: var(--cream); padding: 80px 48px 70px; }
+.story-hero .eyebrow { color: var(--gold); margin-bottom: 16px; }
+.story-hero h1 { font-size: 52px; line-height: 1.1; color: var(--cream); max-width: 720px; margin: 0 0 24px; }
+.story-hero > p { font-size: 17px; color: rgba(245,238,217,0.78); max-width: 560px; line-height: 1.6; margin: 0; }
+
+.stats-bar { background: var(--gold); display: grid; grid-template-columns: repeat(3, 1fr); }
+.stat-item { padding: 36px 40px; border-right: 1px solid rgba(27,43,75,0.15); text-align: center; }
+.stat-item:last-child { border-right: none; }
+.stat-num { font-family: var(--font-display); font-size: 44px; color: var(--navy); line-height: 1; margin-bottom: 8px; }
+.stat-label { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); font-family: var(--font-body); font-weight: 600; opacity: 0.75; }
+
+.story-founder { background: var(--cream); padding: 72px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.founder-text h2 { font-size: 36px; color: var(--navy); margin: 0 0 20px; }
+.founder-text p { font-size: 16px; color: var(--ink-soft); line-height: 1.7; margin: 0 0 16px; }
+.founder-text p:last-child { margin-bottom: 0; }
+.founder-quote { border-left: 3px solid var(--gold); padding: 28px 32px; background: var(--navy); }
+.founder-quote blockquote { font-family: var(--font-display); font-size: 22px; line-height: 1.5; font-style: italic; color: var(--cream); margin: 0 0 16px; }
+.founder-quote cite { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-family: var(--font-body); font-style: normal; }
+
+.beliefs-section { background: var(--off-white); padding: 72px 48px; }
+.beliefs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px; }
+.belief-card { background: var(--cream); border: 1px solid var(--line); border-top: 3px solid var(--gold); padding: 28px; }
+.belief-card h3 { font-family: var(--font-display); font-size: 20px; color: var(--navy); margin: 0 0 10px; }
+.belief-card p { font-size: 15px; color: var(--ink-soft); line-height: 1.65; margin: 0; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   WORKSHOPS PAGE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.workshops-hero { background: var(--navy); color: var(--cream); padding: 80px 48px 70px; }
+.workshops-hero .eyebrow { color: var(--gold); margin-bottom: 16px; }
+.workshops-hero h1 { font-size: 52px; line-height: 1.1; color: var(--cream); max-width: 680px; margin: 0 0 18px; }
+.workshops-hero > p { font-size: 17px; color: rgba(245,238,217,0.78); max-width: 560px; line-height: 1.6; margin: 0 0 32px; }
+
+.sessions-section { background: var(--cream); padding: 72px 48px; }
+.sessions-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; }
+.session-card { background: var(--off-white); border: 1px solid var(--line); border-top: 3px solid var(--gold); padding: 28px 22px; }
+.session-num { font-family: var(--font-display); font-size: 44px; color: var(--gold); line-height: 1; margin-bottom: 14px; }
+.session-action { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-family: var(--font-body); font-weight: 600; margin-bottom: 6px; }
+.session-card h3 { font-family: var(--font-display); font-size: 20px; color: var(--navy); margin: 0 0 8px; }
+.session-tool { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); font-family: var(--font-body); background: var(--cream-deep); display: inline-block; padding: 3px 8px; border-radius: 2px; }
+
+.workshop-format { background: var(--off-white); padding: 56px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.format-block h2 { font-size: 28px; color: var(--navy); margin: 0 0 16px; }
+.format-block p { font-size: 16px; color: var(--ink-soft); line-height: 1.7; margin: 0 0 16px; }
+.format-block p:last-child { margin-bottom: 0; }
+.format-details { list-style: none; padding: 0; margin: 16px 0 0; border-top: 1px solid var(--line); padding-top: 16px; }
+.format-details li { font-size: 14px; color: var(--ink-soft); padding: 8px 0 8px 20px; border-bottom: 1px solid var(--line); position: relative; }
+.format-details li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONTACT PAGE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.contact-section { background: var(--cream); padding: 80px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.contact-left h1 { font-size: 44px; color: var(--navy); margin: 0 0 12px; }
+.contact-left .eyebrow { margin-bottom: 12px; }
+.contact-left > p { font-size: 16px; color: var(--ink-soft); line-height: 1.65; margin: 0 0 32px; }
+.contact-direct { background: var(--navy); padding: 24px 28px; margin-top: 16px; }
+.contact-direct p { font-size: 14px; color: rgba(245,238,217,0.75); margin: 0 0 6px; font-family: var(--font-body); }
+.contact-direct a { color: var(--gold); font-family: var(--font-body); font-size: 16px; font-weight: 500; text-decoration: none; border-bottom: 1px solid transparent; }
+.contact-direct a:hover { border-bottom-color: var(--gold); }
+
+/* ─── Shared form styles (contact + referral) ─── */
+.mkt-form { display: flex; flex-direction: column; gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--font-body); font-weight: 600; color: var(--navy); }
+.form-input,
+.form-select,
+.form-textarea {
+  font-family: var(--font-body); font-size: 15px; color: var(--charcoal);
+  background: var(--off-white); border: 1px solid var(--line); padding: 12px 14px;
+  border-radius: 2px; width: 100%; box-sizing: border-box;
+  transition: border-color 0.15s; outline: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--navy); }
+.form-textarea { resize: vertical; min-height: 100px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-section-title { font-family: var(--font-display); font-size: 20px; color: var(--navy); padding-top: 8px; border-top: 1px solid var(--line); margin: 0; }
+.form-success { background: var(--navy); color: var(--cream); padding: 48px; text-align: center; border-radius: 2px; }
+.form-success h2 { font-size: 28px; color: var(--cream); margin: 0 0 12px; }
+.form-success p { color: rgba(245,238,217,0.78); font-size: 16px; margin: 0; }
+.form-error { background: var(--danger); color: #fff; padding: 12px 16px; font-size: 14px; border-radius: 2px; }
+.consent-label { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink-soft); line-height: 1.6; cursor: pointer; font-family: var(--font-body); }
+.consent-label input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; accent-color: var(--navy); width: 16px; height: 16px; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REFERRAL PAGE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.referral-hero { background: var(--navy); color: var(--cream); padding: 64px 48px 56px; }
+.referral-hero .eyebrow { color: var(--gold); margin-bottom: 12px; }
+.referral-hero h1 { font-size: 44px; color: var(--cream); margin: 0 0 14px; }
+.referral-hero > p { font-size: 16px; color: rgba(245,238,217,0.78); max-width: 560px; line-height: 1.6; margin: 0; }
+
+.referral-form-section { background: var(--cream); padding: 64px 48px 80px; display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: start; }
+.referral-sidebar h2 { font-size: 22px; color: var(--navy); margin: 0 0 12px; }
+.referral-sidebar > p { font-size: 14px; color: var(--ink-soft); line-height: 1.65; margin: 0 0 20px; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — all marketing pages
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .mkt-section { padding: 56px 24px; }
+  .managing-list, .reflection-list, .approach-cards, .pathways-grid,
+  .starting-grid, .testimonials-grid, .how-stages, .pricing-grid,
+  .sessions-grid { grid-template-columns: 1fr; }
+  .beliefs-grid { grid-template-columns: 1fr; }
+  .pos-diagram { flex-direction: column; }
+  .story-founder, .workshop-format, .contact-section,
+  .referral-form-section { grid-template-columns: 1fr; gap: 40px; }
+  .how-stages::before { display: none; }
+  .mentoring-hero h1, .workshops-hero h1 { font-size: 34px; }
+  .story-hero h1 { font-size: 36px; }
+  .section-cta h2 { font-size: 28px; }
+  .form-row { grid-template-columns: 1fr; }
+  .stats-bar { grid-template-columns: 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid rgba(27,43,75,0.15); }
+  .stat-item:last-child { border-bottom: none; }
+  .mentoring-hero, .story-hero, .workshops-hero, .referral-hero { padding: 56px 24px 48px; }
+  .pricing-section, .faq-section, .how-it-works, .calendly-section,
+  .sessions-section, .beliefs-section { padding: 56px 24px; }
+  .story-founder, .workshop-format { padding: 56px 24px; }
+  .contact-section, .referral-form-section { padding: 56px 24px; }
+  .section-cta { padding: 56px 24px; }
+}
