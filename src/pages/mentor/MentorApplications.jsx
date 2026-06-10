@@ -111,7 +111,7 @@ export default function MentorApplications() {
                       border: '1px solid var(--line)',
                       borderRadius: 4,
                       background: 'var(--cream)',
-                      color: 'var(--teal)',
+                      color: 'var(--navy)',
                       fontFamily: 'inherit',
                       fontSize: 13,
                     }}
@@ -127,13 +127,13 @@ export default function MentorApplications() {
                     <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--mute)', marginBottom: 4 }}>
                       Preferred rhythm
                     </div>
-                    <div style={{ color: 'var(--teal)', textTransform: 'capitalize' }}>{app.preferred_rhythm ?? '—'}</div>
+                    <div style={{ color: 'var(--navy)', textTransform: 'capitalize' }}>{app.preferred_rhythm ?? '—'}</div>
                   </div>
                   <div>
                     <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--mute)', marginBottom: 4 }}>
                       Preferred mode
                     </div>
-                    <div style={{ color: 'var(--teal)', textTransform: 'capitalize' }}>
+                    <div style={{ color: 'var(--navy)', textTransform: 'capitalize' }}>
                       {(app.preferred_mode ?? '—').replace('_', ' ')}
                     </div>
                   </div>
@@ -145,8 +145,8 @@ export default function MentorApplications() {
                       What's drawing them here
                     </div>
                     <p style={{
-                      fontFamily: 'Fraunces, serif', fontStyle: 'italic',
-                      color: 'var(--teal)', lineHeight: 1.6, fontSize: 15,
+                      fontFamily: 'Cormorant Garamond, serif', fontStyle: 'italic',
+                      color: 'var(--navy)', lineHeight: 1.6, fontSize: 15,
                       borderLeft: '3px solid var(--gold)', paddingLeft: 14, margin: 0,
                     }}>
                       "{app.reason_for_support}"

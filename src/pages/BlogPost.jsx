@@ -33,7 +33,7 @@ function PostBody({ status, post }) {
             })}
             {post.members_only && (
               <span style={{
-                marginLeft: '0.75rem', background: 'var(--gold, #C4993C)',
+                marginLeft: '0.75rem', background: 'var(--gold, #C9A84C)',
                 color: '#fff', padding: '0.2rem 0.55rem', borderRadius: 4,
               }}>Members only</span>
             )}
@@ -53,7 +53,7 @@ function PostBody({ status, post }) {
           )}
           <div
             className="post-body"
-            style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--ink, #1A2F36)' }}
+            style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--ink, #2C2C2C)' }}
             dangerouslySetInnerHTML={{ __html: post.html }}
           />
           <hr style={{ margin: '3rem 0 2rem', border: 0, borderTop: '1px solid var(--rule, rgba(0,0,0,0.08))' }} />

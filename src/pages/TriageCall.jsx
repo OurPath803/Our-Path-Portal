@@ -23,7 +23,7 @@ function CalendlyEmbed({ url }) {
   const params = new URLSearchParams({
     hide_landing_page_details: '1',
     hide_gdpr_banner: '1',
-    primary_color: '1a2f36',
+    primary_color: '1b2b4b',
   })
 
   return (
@@ -58,11 +58,11 @@ export default function TriageCall() {
             <cite>— OurPath</cite>
           </div>
 
-          <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid rgba(245,240,232,0.15)' }}>
+          <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid rgba(245,238,217,0.15)' }}>
             <p style={{ color: 'var(--gold-soft)', fontSize: 13, fontStyle: 'italic', marginBottom: 12 }}>
               Don't want to talk on a call?
             </p>
-            <p style={{ color: 'rgba(245,240,232,0.82)', fontSize: 14 }}>
+            <p style={{ color: 'rgba(245,238,217,0.82)', fontSize: 14 }}>
               You can also{' '}
               <Link to="/login" style={{ color: 'var(--gold-soft)', borderBottomColor: 'var(--gold-soft)' }}>
                 sign up free

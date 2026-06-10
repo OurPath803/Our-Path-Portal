@@ -100,7 +100,7 @@ function NavItems({ onClose }) {
         <button
           onClick={handleSignOut}
           style={{
-            marginTop: 12, background: 'transparent', color: 'rgba(245,240,232,0.5)',
+            marginTop: 12, background: 'transparent', color: 'rgba(245,238,217,0.5)',
             fontSize: 12, padding: 0, letterSpacing: '0.05em',
           }}
         >

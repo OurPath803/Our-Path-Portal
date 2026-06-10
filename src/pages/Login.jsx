@@ -50,9 +50,9 @@ export default function Login() {
         <div className="logo">OurPath<span> Guidance</span></div>
         <h1>A space for honest reflection.</h1>
         <p>Your journal, your sessions, and your commitments — all in one place.</p>
-        <div style={{ marginTop: 40, borderTop: '1px solid rgba(245,240,232,0.15)', paddingTop: 30 }}>
+        <div style={{ marginTop: 40, borderTop: '1px solid rgba(245,238,217,0.15)', paddingTop: 30 }}>
           <p style={{
-            fontFamily: 'Fraunces, Georgia, serif', fontStyle: 'italic',
+            fontFamily: 'Cormorant Garamond, Georgia, serif', fontStyle: 'italic',
             color: 'var(--gold-soft)', fontSize: 16, lineHeight: 1.55
           }}>
             "We don't start with goals. We start with where you actually are."

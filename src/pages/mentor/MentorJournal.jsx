@@ -104,7 +104,7 @@ export default function MentorJournal() {
                     {entry.mode === 'freewrite' ? (
                       entry.freewrite_text ? (
                         <p style={{
-                          fontFamily: 'Fraunces, serif',
+                          fontFamily: 'Cormorant Garamond, serif',
                           fontSize: 16,
                           lineHeight: 1.7,
                           color: 'var(--ink-soft)',
@@ -125,7 +125,7 @@ export default function MentorJournal() {
                           return (
                             <div key={col} style={{ marginBottom: 18 }}>
                               <div style={{
-                                fontFamily: 'Fraunces, serif',
+                                fontFamily: 'Cormorant Garamond, serif',
                                 fontSize: 12,
                                 color: 'var(--gold)',
                                 letterSpacing: '0.15em',

@@ -289,7 +289,7 @@ export default function MentorManage() {
                         style={{
                           width: '100%', padding: '10px 12px',
                           border: '1px solid var(--line)', borderRadius: 4,
-                          background: 'var(--cream)', color: 'var(--teal)',
+                          background: 'var(--cream)', color: 'var(--navy)',
                           fontFamily: 'inherit', fontSize: 14,
                         }}
                       >
@@ -306,7 +306,7 @@ export default function MentorManage() {
                         style={{
                           width: '100%', padding: '10px 12px',
                           border: '1px solid var(--line)', borderRadius: 4,
-                          background: 'var(--cream)', color: 'var(--teal)',
+                          background: 'var(--cream)', color: 'var(--navy)',
                           fontFamily: 'inherit', fontSize: 14,
                         }}
                       >
@@ -373,7 +373,7 @@ export default function MentorManage() {
                         style={{
                           width: '100%', padding: '10px 12px',
                           border: '1px solid var(--line)', borderRadius: 4,
-                          background: 'var(--cream)', color: 'var(--teal)',
+                          background: 'var(--cream)', color: 'var(--navy)',
                           fontFamily: 'inherit', fontSize: 14,
                         }}
                       >
@@ -390,7 +390,7 @@ export default function MentorManage() {
                         style={{
                           width: '100%', padding: '10px 12px',
                           border: '1px solid var(--line)', borderRadius: 4,
-                          background: 'var(--cream)', color: 'var(--teal)',
+                          background: 'var(--cream)', color: 'var(--navy)',
                           fontFamily: 'inherit', fontSize: 14,
                         }}
                       >
@@ -430,7 +430,7 @@ export default function MentorManage() {
                         }}
                       >
                         <div>
-                          <div style={{ fontFamily: 'Fraunces, serif', fontSize: 14, color: 'var(--teal)' }}>
+                          <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 14, color: 'var(--navy)' }}>
                             {formatDate(s.scheduled_at)}
                           </div>
                           <div style={{ fontSize: 12, color: 'var(--mute)', marginTop: 2 }}>

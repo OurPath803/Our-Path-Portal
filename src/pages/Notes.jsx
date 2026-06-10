@@ -214,8 +214,8 @@ export default function Notes() {
                     <div className="note-block">
                       <h4>To sit with — not to solve</h4>
                       <p style={{
-                        fontFamily: 'Fraunces, serif', fontStyle: 'italic',
-                        color: 'var(--teal)', fontSize: 16,
+                        fontFamily: 'Cormorant Garamond, serif', fontStyle: 'italic',
+                        color: 'var(--navy)', fontSize: 16,
                       }}>
                         "{selectedNote.to_sit_with}"
                       </p>
@@ -246,7 +246,7 @@ export default function Notes() {
                   </div>
 
                   <div className="card" style={{ marginTop: 18 }}>
-                    <h4 style={{ color: 'var(--teal)', fontFamily: 'Fraunces, serif', marginBottom: 8 }}>
+                    <h4 style={{ color: 'var(--navy)', fontFamily: 'Cormorant Garamond, serif', marginBottom: 8 }}>
                       Follow up here
                     </h4>
                     <textarea

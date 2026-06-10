@@ -122,8 +122,8 @@ export default function MentorDashboard() {
                 <thead>
                   <tr style={{
                     background: 'var(--cream-deep)',
-                    color: 'var(--teal)',
-                    fontFamily: 'Fraunces, serif',
+                    color: 'var(--navy)',
+                    fontFamily: 'Cormorant Garamond, serif',
                     fontSize: 13,
                     textAlign: 'left',
                   }}>
@@ -139,7 +139,7 @@ export default function MentorDashboard() {
                   {rows.map(r => (
                     <tr key={r.id} style={{ borderTop: '1px solid var(--line)' }}>
                       <td style={{ padding: '14px 16px' }}>
-                        <div style={{ color: 'var(--teal)', fontWeight: 500 }}>{r.full_name ?? '—'}</div>
+                        <div style={{ color: 'var(--navy)', fontWeight: 500 }}>{r.full_name ?? '—'}</div>
                         <div style={{ fontSize: 12, color: 'var(--mute)' }}>{r.email}</div>
                       </td>
                       <td style={{ padding: '14px 16px', textTransform: 'capitalize' }}>

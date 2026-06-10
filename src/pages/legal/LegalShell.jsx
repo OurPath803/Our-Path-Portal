@@ -20,7 +20,7 @@ export default function LegalShell({ title, updated, children }) {
       <main className="legal-main">
         <div className="legal-content">
           <div className="eyebrow">{updated ? `Last updated ${updated}` : 'Legal'}</div>
-          <h1 style={{ color: 'var(--teal)', marginBottom: 28 }}>{title}</h1>
+          <h1 style={{ color: 'var(--navy)', marginBottom: 28 }}>{title}</h1>
           <div className="legal-prose">
             {children}
           </div>

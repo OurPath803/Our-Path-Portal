@@ -272,7 +272,7 @@ export default function Journal() {
                 </button>
                 <button
                   className={'btn btn-ghost' + (shareWithMentor ? ' btn-primary' : '')}
-                  style={shareWithMentor ? { background: 'var(--teal)', color: 'var(--cream)' } : {}}
+                  style={shareWithMentor ? { background: 'var(--navy)', color: 'var(--cream)' } : {}}
                   onClick={() => {
                     const next = !shareWithMentor
                     setShareWithMentor(next)
@@ -310,7 +310,7 @@ export default function Journal() {
                 </button>
                 <button
                   className={'btn btn-ghost btn-sm' + (shareWithMentor ? '' : '')}
-                  style={shareWithMentor ? { background: 'var(--teal)', color: 'var(--cream)', border: '1px solid var(--teal)' } : {}}
+                  style={shareWithMentor ? { background: 'var(--navy)', color: 'var(--cream)', border: '1px solid var(--navy)' } : {}}
                   onClick={() => {
                     const next = !shareWithMentor
                     setShareWithMentor(next)
@@ -330,7 +330,7 @@ export default function Journal() {
                 <div className="eyebrow">
                   Past entries · {pastEntries.length} {mode === 'freewrite' ? 'freewrite' : 'reflective'}
                 </div>
-                <h2 style={{ color: 'var(--teal)', fontFamily: 'Fraunces, serif' }}>What you've sat with before</h2>
+                <h2 style={{ color: 'var(--navy)', fontFamily: 'Cormorant Garamond, serif' }}>What you've sat with before</h2>
                 <p className="pull">
                   Old entries are read-only — they're a record of where you were on each day.
                   Click one to expand.
@@ -358,8 +358,8 @@ export default function Journal() {
                     >
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{
-                          fontFamily: 'Fraunces, serif', fontSize: 15,
-                          color: 'var(--teal)', marginBottom: 2,
+                          fontFamily: 'Cormorant Garamond, serif', fontSize: 15,
+                          color: 'var(--navy)', marginBottom: 2,
                         }}>
                           {formatPastDate(entry.created_at)}
                         </div>
@@ -373,7 +373,7 @@ export default function Journal() {
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
                         {entry.shared_with_mentor && (
                           <span className="tag" style={{
-                            background: 'var(--teal)', color: 'var(--cream)',
+                            background: 'var(--navy)', color: 'var(--cream)',
                             fontSize: 10, padding: '3px 8px',
                           }}>
                             Shared
@@ -397,7 +397,7 @@ export default function Journal() {
                         {entry.mode === 'freewrite' ? (
                           entry.freewrite_text ? (
                             <p style={{
-                              fontFamily: 'Fraunces, serif', fontSize: 16,
+                              fontFamily: 'Cormorant Garamond, serif', fontSize: 16,
                               lineHeight: 1.7, color: 'var(--ink-soft)',
                               whiteSpace: 'pre-wrap', marginTop: 16,
                             }}>
@@ -416,15 +416,15 @@ export default function Journal() {
                               return (
                                 <div key={q.column} style={{ marginBottom: 18 }}>
                                   <div style={{
-                                    fontFamily: 'Fraunces, serif', fontSize: 12,
+                                    fontFamily: 'Cormorant Garamond, serif', fontSize: 12,
                                     color: 'var(--gold)', letterSpacing: '0.15em',
                                     textTransform: 'uppercase', marginBottom: 4,
                                   }}>
                                     {q.num}
                                   </div>
                                   <div style={{
-                                    fontFamily: 'Fraunces, serif', fontSize: 15,
-                                    color: 'var(--teal)', marginBottom: 6,
+                                    fontFamily: 'Cormorant Garamond, serif', fontSize: 15,
+                                    color: 'var(--navy)', marginBottom: 6,
                                   }}>
                                     {q.title}
                                   </div>

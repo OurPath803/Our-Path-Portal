@@ -167,8 +167,8 @@ export default function Dashboard() {
                       <span className="tag">From last journal</span>
                     </div>
                     <p style={{
-                      fontFamily: 'Fraunces, serif', fontStyle: 'italic',
-                      fontSize: 16, color: 'var(--teal)', lineHeight: 1.6,
+                      fontFamily: 'Cormorant Garamond, serif', fontStyle: 'italic',
+                      fontSize: 16, color: 'var(--navy)', lineHeight: 1.6,
                     }}>
                       "{journalSnippet.slice(0, 200)}{journalSnippet.length > 200 ? '…' : ''}"
                     </p>

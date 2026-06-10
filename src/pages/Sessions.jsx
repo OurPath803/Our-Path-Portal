@@ -23,7 +23,7 @@ function CalendlyEmbed({ url, name, email }) {
   const params = new URLSearchParams({
     hide_landing_page_details: '1',
     hide_gdpr_banner: '1',
-    primary_color: '1a2f36',
+    primary_color: '1b2b4b',
   })
   if (name) params.set('name', name)
   if (email) params.set('email', email)
@@ -106,7 +106,7 @@ export default function Sessions() {
             ) : (
               upcomingSessions.map(s => (
                 <div key={s.id} style={{ marginBottom: 14, paddingBottom: 14, borderBottom: '1px solid var(--line)' }}>
-                  <div style={{ fontFamily: 'Fraunces, serif', fontSize: 15, color: 'var(--teal)' }}>
+                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 15, color: 'var(--navy)' }}>
                     {formatSessionDate(s.scheduled_at)}
                   </div>
                   <div style={{ fontSize: 13, color: 'var(--ink-soft)', marginTop: 2 }}>
@@ -121,8 +121,8 @@ export default function Sessions() {
             <div className="card" style={{ textAlign: 'center', padding: '40px 28px' }}>
               <div className="eyebrow" style={{ textAlign: 'center' }}>Sessions are part of a rhythm</div>
               <h2 style={{
-                color: 'var(--teal)',
-                fontFamily: 'Fraunces, serif',
+                color: 'var(--navy)',
+                fontFamily: 'Cormorant Garamond, serif',
                 marginBottom: 12,
               }}>
                 Choose a rhythm to book sessions
@@ -148,7 +148,7 @@ export default function Sessions() {
 
               <div>
                 <div className="card" style={{ background: 'var(--cream-deep)', border: 'none' }}>
-                  <h4 style={{ color: 'var(--teal)', fontFamily: 'Fraunces, serif', marginBottom: 8 }}>
+                  <h4 style={{ color: 'var(--navy)', fontFamily: 'Cormorant Garamond, serif', marginBottom: 8 }}>
                     About sessions
                   </h4>
                   <p style={{ fontSize: 13, lineHeight: 1.6 }}>

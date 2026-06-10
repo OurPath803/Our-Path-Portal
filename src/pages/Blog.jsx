@@ -43,7 +43,7 @@ function BlogList({ posts, error }) {
                   {post.members_only && (
                     <span style={{
                       fontSize: '.7rem', letterSpacing: '0.1em',
-                      background: 'var(--gold, #C4993C)', color: '#fff',
+                      background: 'var(--gold, #C9A84C)', color: '#fff',
                       padding: '0.2rem 0.55rem', borderRadius: 4, textTransform: 'uppercase',
                     }}>Members</span>
                   )}

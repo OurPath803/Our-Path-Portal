@@ -6,9 +6,9 @@ import { useTheme, THEMES } from '../lib/theme'
 
 // Tiny preview swatches that hint at each theme's palette.
 const PREVIEWS = {
-  cream:  { bg: '#F5F0E8', card: '#FFFCF6', accent: '#C4993C', text: '#1A2F36' },
-  night:  { bg: '#0E1A1F', card: '#1A2A30', accent: '#C4993C', text: '#E8EFE8' },
-  sand:   { bg: '#EDE3CC', card: '#FFF4DB', accent: '#B8884F', text: '#1A2F36' },
+  cream:  { bg: '#F5EED9', card: '#FAF7F0', accent: '#C9A84C', text: '#1B2B4B' },
+  night:  { bg: '#0E1A1F', card: '#1A2A30', accent: '#C9A84C', text: '#E8EFE8' },
+  sand:   { bg: '#EDE3CC', card: '#FFF4DB', accent: '#B8884F', text: '#1B2B4B' },
   forest: { bg: '#EBEEDD', card: '#F8FAEC', accent: '#8B7E3E', text: '#142B30' },
 }
 
@@ -131,8 +131,8 @@ export default function Settings() {
                       marginBottom: 4,
                     }}>
                       <span style={{
-                        fontFamily: 'Fraunces, serif', fontSize: 16,
-                        color: 'var(--teal)', fontWeight: 500,
+                        fontFamily: 'Cormorant Garamond, serif', fontSize: 16,
+                        color: 'var(--navy)', fontWeight: 500,
                       }}>
                         {t.label}
                       </span>

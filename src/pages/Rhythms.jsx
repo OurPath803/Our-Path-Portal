@@ -156,7 +156,7 @@ export default function Rhythms() {
           <div style={{
             textAlign: 'center', padding: '16px 40px', background: '#E8F5EE',
             borderBottom: '1px solid var(--line)', fontSize: 14,
-            color: 'var(--success)', fontStyle: 'italic', fontFamily: 'Fraunces, serif',
+            color: 'var(--success)', fontStyle: 'italic', fontFamily: 'Cormorant Garamond, serif',
           }}>
             You're currently on the <strong>{currentRhythm}</strong> rhythm. To change or cancel, email{' '}
             <a href="mailto:hello@ourpathguidance.co.uk">hello@ourpathguidance.co.uk</a>
