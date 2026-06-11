@@ -5,7 +5,13 @@ import { supabase } from '../../lib/supabase'
 import Sidebar from '../../components/Sidebar'
 
 const TOOL_OPTIONS = [
-  { slug: 'ocs-checkin',        label: 'OCS Check-In' },
+  { slug: 'ocs-checkin',        label: 'OCS Check-In (Pre · OCS · Post)' },
+  { slug: 'nine-domains',       label: 'Nine Reflection Domains' },
+  { slug: 'progress-review',    label: 'Progress Review' },
+  { slug: 'clarity-map',        label: 'Clarity Map' },
+  { slug: 'decision-sheet',     label: 'Decision Discernment Sheet' },
+  { slug: 'energy-audit',       label: 'Energy & Capacity Audit' },
+  { slug: 'values-alignment',   label: 'Values-to-Actions Alignment' },
   { slug: 'position-map',       label: 'Position Map' },
   { slug: 'cost-audit',         label: 'Cost Audit' },
   { slug: 'integration-filter', label: 'Integration Filter' },

@@ -36,6 +36,12 @@ import PositionMap from './pages/tools/PositionMap'
 import CostAudit from './pages/tools/CostAudit'
 import IntegrationFilter from './pages/tools/IntegrationFilter'
 import OrientationFramework from './pages/tools/OrientationFramework'
+import NineDomains from './pages/tools/NineDomains'
+import ProgressReview from './pages/tools/ProgressReview'
+import ClarityMap from './pages/tools/ClarityMap'
+import DecisionSheet from './pages/tools/DecisionSheet'
+import EnergyAudit from './pages/tools/EnergyAudit'
+import ValuesAlignment from './pages/tools/ValuesAlignment'
 
 import Privacy from './pages/legal/Privacy'
 import Terms from './pages/legal/Terms'
@@ -82,6 +88,12 @@ export default function App() {
 
           {/* Gated tools */}
           <Route path="/tools/ocs-checkin"        element={<ProtectedRoute><OCSCheckin /></ProtectedRoute>} />
+          <Route path="/tools/nine-domains"        element={<ProtectedRoute><NineDomains /></ProtectedRoute>} />
+          <Route path="/tools/progress-review"     element={<ProtectedRoute><ProgressReview /></ProtectedRoute>} />
+          <Route path="/tools/clarity-map"         element={<ProtectedRoute><ClarityMap /></ProtectedRoute>} />
+          <Route path="/tools/decision-sheet"      element={<ProtectedRoute><DecisionSheet /></ProtectedRoute>} />
+          <Route path="/tools/energy-audit"        element={<ProtectedRoute><EnergyAudit /></ProtectedRoute>} />
+          <Route path="/tools/values-alignment"    element={<ProtectedRoute><ValuesAlignment /></ProtectedRoute>} />
           <Route path="/tools/position-map"        element={<ProtectedRoute><PositionMap /></ProtectedRoute>} />
           <Route path="/tools/cost-audit"          element={<ProtectedRoute><CostAudit /></ProtectedRoute>} />
           <Route path="/tools/integration-filter"  element={<ProtectedRoute><IntegrationFilter /></ProtectedRoute>} />

@@ -3,6 +3,77 @@ import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import Sidebar from '../components/Sidebar'
 
+// Between-session reflection prompts by theme.
+// Mentor can point the mentee to a relevant theme in conversation.
+const REFLECTION_PROMPTS = [
+  { theme: 'Clarity', prompt: 'This week, notice where you say "I don\'t know" when you may actually mean "I do know — but I do not want to act on it yet." What is that place?' },
+  { theme: 'Responsibility', prompt: 'Notice one place where you are waiting for clarity before acting. What small responsible action is already available to you?' },
+  { theme: 'Avoidance', prompt: 'Write down three moments where you avoided something. What emotion appeared just before the avoidance?' },
+  { theme: 'Alignment', prompt: 'Where did your actions match your values this week? Where did they drift?' },
+  { theme: 'Faith', prompt: 'Where did you remember Allah in your decision-making this week, and where did you leave Him out?' },
+  { theme: 'Direction', prompt: 'What gave you a sense of direction this week, even briefly? What was present in that moment that is absent at other times?' },
+  { theme: 'Pressure', prompt: 'Notice where you acted from fear of people\'s expectations. What would have looked different if you had acted from your own convictions?' },
+]
+
+function ReflectionPromptsPanel() {
+  const [open, setOpen] = useState(false)
+  const [selected, setSelected] = useState(null)
+
+  return (
+    <div style={{
+      borderBottom: '1px solid var(--line)',
+      background: 'var(--cream)',
+    }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{
+          width: '100%', textAlign: 'left', padding: '12px 18px',
+          background: 'transparent', cursor: 'pointer',
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        }}
+      >
+        <span style={{ fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--gold)', fontWeight: 600, fontFamily: 'var(--font-body)' }}>
+          Reflection Prompts
+        </span>
+        <span style={{ fontSize: 12, color: 'var(--mute)' }}>{open ? '▴' : '▾'}</span>
+      </button>
+
+      {open && (
+        <div style={{ padding: '0 18px 16px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
+            {REFLECTION_PROMPTS.map((p, i) => (
+              <button
+                key={i}
+                onClick={() => setSelected(selected === i ? null : i)}
+                style={{
+                  padding: '5px 10px', fontSize: 12,
+                  fontFamily: 'var(--font-body)',
+                  background: selected === i ? 'var(--navy)' : 'var(--off-white)',
+                  color: selected === i ? 'var(--cream)' : 'var(--ink-soft)',
+                  border: `1px solid ${selected === i ? 'var(--navy)' : 'var(--line)'}`,
+                  borderRadius: 3, cursor: 'pointer',
+                }}
+              >
+                {p.theme}
+              </button>
+            ))}
+          </div>
+          {selected !== null && (
+            <p style={{
+              fontFamily: 'var(--font-display)', fontStyle: 'italic',
+              fontSize: 14, color: 'var(--navy)', lineHeight: 1.65,
+              margin: 0, padding: '12px 14px',
+              background: 'var(--off-white)', borderLeft: '2px solid var(--gold)',
+            }}>
+              {REFLECTION_PROMPTS[selected].prompt}
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function BetweenSessions() {
   const { user, profile } = useAuth()
   const [messages, setMessages] = useState([])
@@ -181,6 +252,7 @@ export default function BetweenSessions() {
     <div className="portal-shell">
       <Sidebar />
       <div className="main-area" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <ReflectionPromptsPanel />
         <div className="msg-shell" style={{ flex: 1 }}>
           <div className="thread-list">
             <div className="thread-list-header">
