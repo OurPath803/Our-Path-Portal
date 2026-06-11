@@ -31,6 +31,7 @@ import MentorApplications from './pages/mentor/MentorApplications'
 
 import Training from './pages/Training'
 import Induction from './pages/Induction'
+import Profile from './pages/Profile'
 
 import OCSCheckin from './pages/tools/OCSCheckin'
 import PositionMap from './pages/tools/PositionMap'
@@ -82,6 +83,7 @@ export default function App() {
           <Route path="/safeguarding" element={<Safeguarding />} />
 
           {/* Protected portal — mentees */}
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/journal" element={<ProtectedRoute><Journal /></ProtectedRoute>} />
           <Route path="/sessions" element={<ProtectedRoute><Sessions /></ProtectedRoute>} />

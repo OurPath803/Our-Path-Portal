@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabase'
 
 const MENTEE_NAV = [
   { to: '/dashboard', ico: '◐', label: 'Home' },
+  { to: '/profile',   ico: '○', label: 'Profile' },
   { to: '/journal',   ico: '◇', label: 'Journal' },
   { to: '/sessions',  ico: '◈', label: 'Sessions' },
   { to: '/between',   ico: '◉', label: 'Between sessions' },
@@ -103,7 +104,7 @@ function NavItems({ onClose }) {
         <button
           onClick={handleSignOut}
           style={{
-            marginTop: 12, background: 'transparent', color: 'rgba(245,238,217,0.5)',
+            marginTop: 12, background: 'transparent', color: 'rgba(250,250,248,0.5)',
             fontSize: 12, padding: 0, letterSpacing: '0.05em',
           }}
         >
