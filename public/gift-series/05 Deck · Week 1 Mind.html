@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gift Series · Week 1 · The Mind</title>
+<link rel="stylesheet" href="assets/terra.css">
+<link rel="stylesheet" href="assets/document.css">
+<link rel="stylesheet" href="assets/deck.css">
+<style> html,body{margin:0;height:100%;background:#0e1a1f;} </style>
+</head>
+<body>
+<deck-stage width="1920" height="1080" data-gift="mind"></deck-stage>
+
+<script src="assets/ourpath.js"></script>
+<script src="assets/content.js"></script>
+<script src="assets/decks.js"></script>
+<script>
+  const stage = document.querySelector('deck-stage');
+  window.Deck.render(stage.getAttribute('data-gift'), stage);
+</script>
+<script src="deck-stage.js"></script>
+</body>
+</html>

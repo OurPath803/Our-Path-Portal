@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OurPath · Gift Series Posters</title>
+<link rel="stylesheet" href="assets/terra.css">
+<link rel="stylesheet" href="assets/posters.css">
+<style>
+  body { background: var(--cream-200); margin: 0;
+    background-image: radial-gradient(1200px 700px at 50% -5%, rgba(196,153,60,0.05), transparent 60%); }
+  .page-head { max-width: 1120px; margin: 0 auto; padding: 48px 40px 8px; }
+  .page-head .eyebrow { font-family: var(--body); font-weight: 600; font-size: 12px; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--gold-deep); }
+  .page-head h1 { font-family: var(--display); font-weight: 600; font-size: 40px; color: var(--navy); margin: 10px 0 0; }
+  .page-head p { font-family: var(--body); font-size: 14px; color: var(--ink-60); line-height: 1.6; max-width: 620px; margin: 10px 0 0; }
+
+  .gallery { max-width: 1120px; margin: 0 auto; padding: 24px 40px 90px; display: flex; flex-direction: column; gap: 56px; }
+  .grp-label { font-family: var(--body); font-weight: 600; font-size: 12px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--navy); padding-bottom: 12px; border-bottom: 1px solid var(--line); margin-bottom: 28px; }
+  .pair { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+  .item { display: flex; flex-direction: column; gap: 12px; }
+  .item .cap { font-family: var(--body); font-size: 12px; letter-spacing: .04em; color: var(--ink-60); }
+  .item .cap b { color: var(--navy); font-weight: 600; }
+
+  /* scaled preview frames — full-res poster scaled down for screen */
+  .frame { background: #fff; box-shadow: 0 16px 44px rgba(26,47,54,0.16); overflow: hidden; flex: none; }
+  .frame .scaler { transform-origin: top left; }
+  .f-a4 { width: 360px; height: 509px; }
+  .f-a4 .scaler { width: 794px; height: 1123px; transform: scale(0.45339); }
+  .f-sq { width: 360px; height: 360px; }
+  .f-sq .scaler { width: 1080px; height: 1080px; transform: scale(0.33333); }
+
+  /* print: one poster per page at true size */
+  @media print {
+    body { background: #fff; }
+    .page-head, .grp-label, .no-print { display: none !important; }
+    .gallery { max-width: none; margin: 0; padding: 0; gap: 0; display: block; }
+    .pair { display: block; gap: 0; }
+    .item { gap: 0; }
+    .item .cap { display: none; }
+    .frame { box-shadow: none; width: auto; height: auto; page-break-after: always; }
+    .frame .scaler { transform: none !important; width: auto !important; height: auto !important; }
+    .f-a4 .scaler .pos { width: 794px; height: 1123px; }
+    .f-sq .scaler .pos { width: 1080px; height: 1080px; }
+    @page { size: auto; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page-head">
+  <div class="eyebrow">The Gift Series · Posters</div>
+  <h1>The Poster Family</h1>
+  <p>The series master plus four gift posters, each in A4 portrait (print) and 1080 × 1080 (social). This page renders every poster at full resolution and works offline. Use your browser's Print (Cmd / Ctrl + P) to save print-ready PDFs, one poster per page.</p>
+</div>
+<div class="gallery" id="gallery"></div>
+
+<script src="assets/ourpath.js"></script>
+<script src="assets/posters.js"></script>
+<script>
+  const groups = [
+    { label: 'Series Master', key: 'master', title: 'The Gift Series' },
+    { label: 'Week 1 · The Mind', key: 'mind', title: 'Slate-teal · the Position Map' },
+    { label: 'Week 2 · The Heart', key: 'heart', title: 'Terracotta · the Cost Audit' },
+    { label: 'Week 3 · The Soul', key: 'soul', title: 'Aubergine · the Integration Filter' },
+    { label: 'Week 4 · The Hands', key: 'hands', title: 'Ochre · the Orientation Framework' },
+  ];
+  function frame(key, size) {
+    const cls = size === 'square' ? 'f-sq' : 'f-a4';
+    const cap = size === 'square' ? 'A4 → <b>1080 × 1080 social</b>' : '<b>A4 portrait · print</b>';
+    return `<div class="item">
+      <div class="frame ${cls}"><div class="scaler">${Posters.build(key, size)}</div></div>
+      <div class="cap">${size === 'square' ? '1080 × 1080 · social' : 'A4 portrait · print'}</div>
+    </div>`;
+  }
+  document.getElementById('gallery').innerHTML = groups.map(g =>
+    `<section>
+      <div class="grp-label">${g.label}</div>
+      <div class="pair">${frame(g.key, 'a4')}${frame(g.key, 'square')}</div>
+    </section>`
+  ).join('');
+</script>
+</body>
+</html>

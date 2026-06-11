@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OurPath · The Gift Series, Workshop Pack</title>
+<link rel="stylesheet" href="assets/terra.css">
+<style>
+  body { background: var(--cream); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 40px 100px; }
+
+  /* hero */
+  .hero { background: var(--navy); color: var(--offwhite); margin: 0 -40px 0; padding: 64px 64px 72px;
+    background-image: radial-gradient(1100px 560px at 80% -10%, rgba(196,153,60,.13), transparent 60%); position: relative; overflow: hidden; }
+  .hero-logo { margin-bottom: 56px; }
+  .hero h1 { font-family: var(--display); font-weight: 600; font-size: 84px; line-height: .96; letter-spacing: -.02em; margin: 0; color: var(--offwhite); }
+  .hero .sub { font-family: var(--display); font-style: italic; font-size: 30px; color: var(--gold-soft); margin-top: 14px; }
+  .hero .lede { font-family: var(--body); font-size: 16.5px; line-height: 1.65; color: rgba(245,240,232,.84); max-width: 560px; margin: 26px 0 0; }
+  .hero-gifts { display: flex; gap: 38px; margin-top: 44px; }
+  .hg { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .hg .ic { } .hg .nm { font-family: var(--display); font-size: 18px; color: var(--offwhite); }
+  .hg .dm { font-family: var(--body); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); }
+  .hero-corner { position: absolute; right: -60px; bottom: -80px; color: rgba(196,153,60,.1); }
+  .hero-tag { position: absolute; top: 64px; right: 64px; font-family: var(--body); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); border: 1px solid rgba(196,153,60,.4); border-radius: 999px; padding: 8px 16px; }
+
+  /* section blocks */
+  .seq { padding-top: 56px; }
+  .seq-head { display: flex; align-items: baseline; gap: 16px; margin: 0 0 6px; }
+  .seq-num { font-family: var(--display); font-style: italic; font-size: 24px; color: var(--gold-deep); }
+  .seq-title { font-family: var(--display); font-weight: 600; font-size: 30px; color: var(--navy); margin: 0; }
+  .seq-note { font-family: var(--body); font-size: 13.5px; color: var(--ink-60); margin: 0 0 22px 56px; line-height: 1.55; }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .grid.g3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.g4 { grid-template-columns: repeat(4, 1fr); }
+
+  .card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); text-decoration: none;
+    transition: transform .15s, box-shadow .15s, border-color .15s; overflow: hidden; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(26,47,54,.13); border-color: var(--gold); }
+  .card .bar { height: 4px; background: var(--gold); }
+  .card .body { padding: 22px 24px 24px; flex: 1; display: flex; flex-direction: column; }
+  .card .kdot { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 14px; color: var(--gold-deep); }
+  .card .kdot .ic { display: inline-flex; }
+  .card .kind { font-family: var(--body); font-weight: 600; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-60); }
+  .card h3 { font-family: var(--display); font-weight: 600; font-size: 23px; color: var(--navy); margin: 0 0 6px; line-height: 1.08; }
+  .card p { font-family: var(--body); font-size: 12.5px; line-height: 1.5; color: var(--ink-60); margin: 0; }
+  .card .go { margin-top: 16px; font-family: var(--body); font-weight: 600; font-size: 12.5px; color: var(--gold-deep); display: flex; align-items: center; gap: 7px; }
+  .card .go .arr { transition: transform .15s; }
+  .card:hover .go .arr { transform: translateX(4px); }
+  .card .meta { font-family: var(--body); font-size: 11px; color: var(--ink-60); margin-top: 4px; }
+
+  /* gift-tinted cards */
+  .card.mind .bar { background: var(--mind); } .card.mind .kdot { color: var(--mind); } .card.mind .go { color: var(--mind); }
+  .card.heart .bar { background: var(--heart); } .card.heart .kdot { color: var(--heart); } .card.heart .go { color: var(--heart); }
+  .card.soul .bar { background: var(--soul); } .card.soul .kdot { color: var(--soul); } .card.soul .go { color: var(--soul); }
+  .card.hands .bar { background: var(--hands); } .card.hands .kdot { color: var(--hands); } .card.hands .go { color: var(--hands); }
+  .card.mind:hover, .card.heart:hover, .card.soul:hover, .card.hands:hover { border-color: currentColor; }
+
+  /* feature card (brand + master poster) */
+  .feature { grid-column: span 2; flex-direction: row; }
+  .feature .ill { width: 200px; flex: none; background: var(--navy); display: grid; place-items: center; color: var(--gold-soft); }
+  .feature.cream-ill .ill { background: var(--cream-200); color: var(--gold-deep); }
+
+  footer.pagefoot { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .nonclinical-pill { display: inline-flex; gap: 9px; align-items: center; font-family: var(--body); font-size: 12px; color: var(--navy); border: 1px solid var(--gold); border-radius: 999px; padding: 8px 16px; background: rgba(196,153,60,.08); }
+
+  @media (max-width: 880px) { .grid, .grid.g3, .grid.g4 { grid-template-columns: 1fr 1fr; } .feature { grid-column: span 2; } }
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-logo" data-op-logo='{"orientation":"horizontal","size":22,"onNavy":true}'></div>
+  <span class="hero-tag">Online workshop pack · Google Meet</span>
+  <h1>The Gift Series</h1>
+  <div class="sub">Four Gifts · Four Weeks · Mind · Heart · Soul · Hands</div>
+  <p class="lede">A complete, ready-to-deliver workshop pack, developmental mentoring that bridges classical Islamic psychospiritual tradition and Western developmental science. Built on a recognised occupational-therapy group format, carried by OurPath's four tools, and held within a clear non-clinical boundary.</p>
+  <div class="hero-gifts" id="hero-gifts"></div>
+  <div class="hero-corner" id="hero-corner"></div>
+</div>
+
+<div class="wrap">
+
+  <!-- 1 BRAND -->
+  <section class="seq">
+    <div class="seq-head"><span class="seq-num">1</span><h2 class="seq-title">The brand</h2></div>
+    <p class="seq-note">The TERRA system, palette, type, the four-gift motif, logo lockup, and slide master that hold the whole pack together.</p>
+    <div class="grid">
+      <a class="card feature cream-ill" href="01 Brand Foundations.html">
+        <div class="ill" id="brand-ill"></div>
+        <div class="body">
+          <span class="kdot"><span class="kind">Design system</span></span>
+          <h3>TERRA Brand Foundations</h3>
+          <p>Logo, palette, typography, the four gift icons, slide master, and document chrome, the visual language for every artifact.</p>
+          <span class="go">Open <span class="arr">→</span></span>
+        </div>
+      </a>
+      <a class="card feature" href="02 Posters.html">
+        <div class="ill" id="poster-ill"></div>
+        <div class="body">
+          <span class="kdot"><span class="kind">Posters · print + social</span></span>
+          <h3>The Poster Family</h3>
+          <p>Series master + four gift posters, each in A4 portrait and 1080² social, laid out on a canvas to compare side by side.</p>
+          <span class="go">Open <span class="arr">→</span></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 2 CORE DOCS -->
+  <section class="seq">
+    <div class="seq-head"><span class="seq-num">2</span><h2 class="seq-title">The core documents</h2></div>
+    <p class="seq-note">The manual the facilitator runs from, and the workbook each participant writes in.</p>
+    <div class="grid">
+      <a class="card" href="03 Facilitator Protocol.html">
+        <div class="bar"></div>
+        <div class="body">
+          <span class="kdot"><span class="kind">16-page manual</span></span>
+          <h3>Facilitator Protocol &amp; Group Manual</h3>
+          <p>Full OT group protocol, the four session plans on Cole's Seven Steps, safeguarding, outcome measures, and references.</p>
+          <span class="go">Open <span class="arr">→</span></span>
+        </div>
+      </a>
+      <a class="card" href="04 Participant Workbook.html">
+        <div class="bar"></div>
+        <div class="body">
+          <span class="kdot"><span class="kind">Fillable booklet</span></span>
+          <h3>Participant Workbook</h3>
+          <p>Check-In tracker and the four tool worksheets, fillable on screen, your writing saved as you go, ready to print.</p>
+          <span class="go">Open <span class="arr">→</span></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 3 DECKS -->
+  <section class="seq">
+    <div class="seq-head"><span class="seq-num">3</span><h2 class="seq-title">The session decks</h2></div>
+    <p class="seq-note">One 16:9 deck per week, built on the seven steps and legible across Google Meet. Use arrow keys to navigate; print to PDF from the deck menu.</p>
+    <div class="grid g4" id="decks"></div>
+  </section>
+
+  <!-- 4 RUN-SHEETS -->
+  <section class="seq">
+    <div class="seq-head"><span class="seq-num">4</span><h2 class="seq-title">The run-sheets</h2></div>
+    <p class="seq-note">Minute-by-minute facilitator scripts for Google Meet, setup, spoken lines, screen-share cues, and contingencies.</p>
+    <div class="grid g4" id="runsheets"></div>
+  </section>
+
+  <!-- 5 FORMS & GUIDES -->
+  <section class="seq">
+    <div class="seq-head"><span class="seq-num">5</span><h2 class="seq-title">Forms, cards &amp; guides</h2></div>
+    <p class="seq-note">The measurement, safety, and adaptation layer that wraps the programme.</p>
+    <div class="grid">
+      <a class="card" href="07 Outcome Forms.html">
+        <div class="bar"></div>
+        <div class="body">
+          <span class="kdot"><span class="kind">Fillable forms</span></span>
+          <h3>Outcome Measure Forms</h3>
+          <p>Pre &amp; post Check-In, per-session exit tickets, and an optional two-week follow-up, tap to rate, saved as you go.</p>
+          <span class="go">Open <span class="arr">→</span></span>
+        </div>
+      </a>
+      <a class="card heart" href="08 Safeguarding Card.html">
+        <div class="bar"></div>
+        <div class="body">
+          <span class="kdot"><span class="kind">Keep visible</span></span>
+          <h3>Safeguarding &amp; Signposting Card</h3>
+          <p>Scope boundaries, risk markers, the response steps, and the full resource list, to hand in every session.</p>
+          <span class="go">Open <span class="arr">→</span></span>
+        </div>
+      </a>
+      <a class="card soul" href="09 Group Agreement.html">
+        <div class="bar"></div>
+        <div class="body">
+          <span class="kdot"><span class="kind">One-pager</span></span>
+          <h3>Group Agreement</h3>
+          <p>The seven ground rules, confidentiality and its limits, camera-optional, patterns not private detail, recording consent.</p>
+          <span class="go">Open <span class="arr">→</span></span>
+        </div>
+      </a>
+      <a class="card mind" href="10 Adaptation Guide.html">
+        <div class="bar"></div>
+        <div class="body">
+          <span class="kdot"><span class="kind">Activity grading</span></span>
+          <h3>Audience Adaptation Guide</h3>
+          <p>How to flex each session up or down for four audiences, tone, language, swaps, timing, and safeguarding notes.</p>
+          <span class="go">Open <span class="arr">→</span></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    <span class="op-footer" data-op-footer></span>
+    <span class="nonclinical-pill">● &nbsp;Non-clinical · cannot diagnose, treat, or replace therapy</span>
+  </footer>
+</div>
+
+<script src="assets/ourpath.js"></script>
+<script src="assets/content.js"></script>
+<script>
+  const G = OurPath.GIFTS;
+  const order = ['mind','heart','soul','hands'];
+  const DOM = { mind:'Psychological', heart:'Social/Emo', soul:'Spiritual', hands:'Physical' };
+  const TOOLS = { mind:'Position Map', heart:'Cost Audit', soul:'Integration Filter', hands:'Orientation Framework' };
+  const WEEKDATES = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+
+  // hero gifts
+  document.getElementById('hero-gifts').innerHTML = order.map(k =>
+    `<div class="hg"><span class="ic" style="color:var(--${k});filter:saturate(1.4) brightness(1.3)">${OurPath.icon(k,{size:40,stroke:1.6})}</span><span class="nm">${G[k].name}</span><span class="dm">${DOM[k]}</span></div>`
+  ).join('');
+  document.getElementById('hero-corner').innerHTML = OurPath.icon('soul',{size:300,stroke:1.1});
+
+  // brand + poster illustrations
+  document.getElementById('brand-ill').innerHTML = OurPath.seal(96,'gold');
+  document.getElementById('poster-ill').innerHTML = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">${order.map(k=>`<span style="color:var(--${k});filter:saturate(1.4) brightness(1.25)">${OurPath.icon(k,{size:44,stroke:1.6})}</span>`).join('')}</div>`;
+
+  // decks
+  document.getElementById('decks').innerHTML = order.map((k,i) =>
+    `<a class="card ${k}" href="05 Deck · Week ${i+1} ${G[k].name}.html">
+      <div class="bar"></div>
+      <div class="body">
+        <span class="kdot"><span class="ic">${OurPath.icon(k,{size:26,stroke:1.8})}</span><span class="kind">${WEEKDATES[i]}</span></span>
+        <h3>The ${G[k].name}</h3>
+        <p>${TOOLS[k]}</p>
+        <span class="go">Present <span class="arr">→</span></span>
+      </div>
+    </a>`
+  ).join('');
+
+  // run-sheets
+  document.getElementById('runsheets').innerHTML = order.map((k,i) =>
+    `<a class="card ${k}" href="06 Run-Sheet · Week ${i+1} ${G[k].name}.html">
+      <div class="bar"></div>
+      <div class="body">
+        <span class="kdot"><span class="ic">${OurPath.icon(k,{size:26,stroke:1.8})}</span><span class="kind">${WEEKDATES[i]}</span></span>
+        <h3>The ${G[k].name}</h3>
+        <p>Google Meet run-sheet &amp; script</p>
+        <span class="go">Open <span class="arr">→</span></span>
+      </div>
+    </a>`
+  ).join('');
+</script>
+</body>
+</html>

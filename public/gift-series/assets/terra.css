@@ -1,0 +1,181 @@
+/* ============================================================
+   OurPath, TERRA Design System
+   Shared tokens, type, and primitives for The Gift Series pack
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Cormorant+SC:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+:root {
+  /* ---- TERRA base palette (aligned to the real OurPath brand assets) ---- */
+  --navy:        #1A2F36;  /* deep teal-ink, primary / authority / text */
+  --navy-700:    #24414A;
+  --navy-300:    #5D7178;
+  --gold:        #C4993C;
+  --gold-soft:   #D4AF5A;
+  --gold-deep:   #A87E28;
+  --cream:       #F5F0E8;
+  --cream-200:   #EFE7DA;
+  --cream-300:   #E6DAC4;
+  --charcoal:    #2B2A27;
+  --ink-60:      #55606a;
+  --grey:        #8A9BA0;  /* brand grey, taglines, quiet labels */
+  --offwhite:    #F5F0E8;
+  --line:        #DDD3C2;
+
+  /* ---- Per-gift accent identities (separated from the teal primary) ---- */
+  --mind:        #3D6A78;  /* slate-teal, clarity, cognition */
+  --mind-soft:   #D9E4E6;
+  --heart:       #B05F44;  /* terracotta / rose-clay, connection */
+  --heart-soft:  #EEDDD3;
+  --soul:        #57385A;  /* deep aubergine, meaning, depth */
+  --soul-soft:   #E6DCE4;
+  --hands:       #9C6A1E;  /* earthy amber-ochre, doing, the body */
+  --hands-soft:  #ECE0C6;
+
+  /* ---- Type ---- */
+  --display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --smallcaps: 'Cormorant SC', 'Cormorant Garamond', serif;
+  --body: 'DM Sans', system-ui, -apple-system, sans-serif;
+
+  /* ---- Rhythm ---- */
+  --rule: 2px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--body);
+  color: var(--charcoal);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- Display type ---- */
+.tx-display {
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+}
+.tx-eyebrow {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+.tx-kicker {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--navy-300);
+}
+.tx-body { line-height: 1.6; }
+
+/* ---- Thin gold rule ---- */
+.gold-rule {
+  height: 0;
+  border: none;
+  border-top: 2px solid var(--gold);
+  width: 64px;
+  margin: 0;
+}
+
+/* ============================================================
+   LOGO LOCKUP, faithful vector rebuild of the OurPath brand
+   Compass mark · "OurPath" (Cormorant) · "Guidance & Mentoring"
+   ============================================================ */
+.op-logo { display: inline-flex; align-items: center; line-height: 1; }
+.op-logo.stacked { flex-direction: column; text-align: center; gap: 16px; }
+.op-logo.horizontal { flex-direction: row; align-items: center; gap: 16px; }
+.op-mark { flex: none; display: flex; }
+.op-hdiv { width: 1px; align-self: center; background: var(--gold); opacity: 0.4; }
+.op-text { display: flex; flex-direction: column; }
+.op-logo.stacked .op-text { align-items: center; }
+.op-logo.horizontal .op-text { gap: 5px; }
+.op-word {
+  font-family: var(--display);
+  font-weight: 300;
+  letter-spacing: 0.11em;
+  color: var(--navy);
+  white-space: nowrap;
+}
+.op-word .path { font-weight: 600; font-style: italic; }
+.op-logo.on-navy .op-word { color: var(--offwhite); }
+
+/* stacked divider: gold rule · dot · gold rule */
+.op-divline { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 11px 0; }
+.op-divline .seg { height: 1px; width: 52px; background: var(--gold); opacity: 0.6; }
+.op-divline .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+
+.op-tag {
+  font-family: var(--smallcaps);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.36em;
+  color: var(--grey);
+  white-space: nowrap;
+  /* indent compensates for trailing letter-spacing to keep it centred */
+  text-indent: 0.36em;
+}
+.op-logo.horizontal .op-tag { letter-spacing: 0.26em; text-indent: 0.26em; }
+.op-logo.on-navy .op-tag { color: #7A9098; }
+
+/* ============================================================
+   FOOTER, non-clinical line on every artifact
+   ============================================================ */
+.op-footer {
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--ink-60);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.op-footer .dot { color: var(--gold); }
+.op-footer.on-navy { color: var(--gold-soft); }
+
+/* ============================================================
+   PRINT SHEETS
+   ============================================================ */
+.sheet {
+  background: var(--cream);
+  position: relative;
+  margin: 0 auto;
+  box-shadow: 0 20px 60px rgba(27,42,74,0.18);
+}
+.sheet.a4 { width: 794px; min-height: 1123px; }   /* A4 @ 96dpi */
+.sheet.square { width: 1080px; height: 1080px; }
+
+.stage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 48px 24px 80px;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(201,162,39,0.06), transparent 60%),
+    var(--cream-200);
+}
+
+/* gift chip */
+.gift-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--body); font-weight: 600; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 6px 12px; border-radius: 999px;
+  border: 1px solid currentColor;
+}
+
+@media print {
+  .stage { background: #fff; padding: 0; gap: 0; }
+  .sheet { box-shadow: none; margin: 0; }
+  .no-print { display: none !important; }
+  @page { margin: 0; }
+}

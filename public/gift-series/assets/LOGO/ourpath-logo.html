@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OurPath Guidance — Logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+SC:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --teal:   #1A2F36;
+    --gold:   #C4993C;
+    --gold-l: #D4AF5A;
+    --cream:  #F5F0E8;
+    --grey:   #8A9BA0;
+  }
+
+  body {
+    background: #0e1a1f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 60px;
+    padding: 60px 40px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  .label {
+    color: #4a6068;
+    font-family: 'Cormorant SC', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  /* ─── LOGO CARD ─── */
+  .logo-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 80px;
+    position: relative;
+    width: 640px;
+  }
+
+  .logo-card.light {
+    background: #F5F0E8;
+  }
+
+  .logo-card.dark {
+    background: #1A2F36;
+  }
+
+  /* corner ornaments */
+  .logo-card::before,
+  .logo-card::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-color: var(--gold);
+    border-style: solid;
+    opacity: 0.5;
+  }
+  .logo-card::before { top: 20px; left: 20px; border-width: 1px 0 0 1px; }
+  .logo-card::after  { bottom: 20px; right: 20px; border-width: 0 1px 1px 0; }
+
+  /* ─── MARK ─── */
+  .mark-wrap {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 24px;
+  }
+
+  .mark-svg {
+    width: 64px;
+    height: 64px;
+  }
+
+  /* ─── WORDMARK ─── */
+  .wordmark {
+    text-align: center;
+  }
+
+  .wordmark-main {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    font-size: 52px;
+    letter-spacing: 6px;
+    line-height: 1;
+    display: block;
+  }
+
+  .wordmark-main .our { font-weight: 300; }
+  .wordmark-main .path { font-weight: 600; font-style: italic; }
+
+  .logo-card.light .wordmark-main { color: #1A2F36; }
+  .logo-card.dark  .wordmark-main { color: #F5F0E8; }
+
+  .divider-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 14px auto;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .divider-line span {
+    display: block;
+    height: 1px;
+    width: 60px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+
+  .divider-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .tagline {
+    font-family: 'Cormorant SC', serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+  }
+
+  .logo-card.light .tagline { color: #8A9BA0; }
+  .logo-card.dark  .tagline { color: #7A9098; }
+
+  /* ─── HORIZONTAL LOCKUP ─── */
+  .logo-horiz {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 44px 64px;
+    width: 640px;
+    position: relative;
+  }
+
+  .logo-horiz::before,
+  .logo-horiz::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--gold);
+    border-style: solid;
+    opacity: 0.4;
+  }
+  .logo-horiz::before { top: 16px; left: 16px; border-width: 1px 0 0 1px; }
+  .logo-horiz::after  { bottom: 16px; right: 16px; border-width: 0 1px 1px 0; }
+
+  .logo-horiz.light { background: #F5F0E8; }
+  .logo-horiz.dark  { background: #1A2F36; }
+
+  .horiz-mark svg {
+    width: 44px;
+    height: 44px;
+  }
+
+  .horiz-divider {
+    width: 1px;
+    height: 48px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  .horiz-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .horiz-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 34px;
+    letter-spacing: 4px;
+    line-height: 1;
+  }
+
+  .horiz-name .path { font-weight: 600; font-style: italic; }
+
+  .logo-horiz.light .horiz-name { color: #1A2F36; }
+  .logo-horiz.dark  .horiz-name { color: #F5F0E8; }
+
+  .horiz-tag {
+    font-family: 'Cormorant SC', serif;
+    font-weight: 300;
+    font-size: 9.5px;
+    letter-spacing: 4.5px;
+    text-transform: uppercase;
+  }
+
+  .logo-horiz.light .horiz-tag { color: #8A9BA0; }
+  .logo-horiz.dark  .horiz-tag { color: #7A9098; }
+
+  /* ─── ICON ONLY ─── */
+  .icon-only {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    position: relative;
+  }
+
+  .icon-only.light { background: #F5F0E8; }
+  .icon-only.dark  { background: #1A2F36; }
+  .icon-only.gold  { background: #C4993C; }
+
+  .icon-only svg {
+    width: 64px;
+    height: 64px;
+  }
+
+  .row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ─── STACKED LIGHT ─── -->
+<div>
+  <p class="label">Primary — Light</p>
+  <div class="logo-card light">
+    <div class="mark-wrap">
+      <svg class="mark-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer refined circle -->
+        <circle cx="32" cy="32" r="30" stroke="#C4993C" stroke-width="0.75" opacity="0.35"/>
+        <!-- Inner thin circle -->
+        <circle cx="32" cy="32" r="22" stroke="#C4993C" stroke-width="0.5" opacity="0.25"/>
+        <!-- Path arc — the journey line -->
+        <path d="M 10 38 Q 20 20, 32 32 Q 44 44, 54 26"
+              stroke="#C4993C" stroke-width="1.5" fill="none"
+              stroke-linecap="round" opacity="0.9"/>
+        <!-- Terminus dot -->
+        <circle cx="54" cy="26" r="2.5" fill="#C4993C" opacity="0.9"/>
+        <!-- Origin dot -->
+        <circle cx="10" cy="38" r="1.5" fill="#C4993C" opacity="0.5"/>
+        <!-- Central compass cross — fine lines -->
+        <line x1="32" y1="14" x2="32" y2="50" stroke="#1A2F36" stroke-width="0.5" opacity="0.2"/>
+        <line x1="14" y1="32" x2="50" y2="32" stroke="#1A2F36" stroke-width="0.5" opacity="0.2"/>
+        <!-- Cardinal tick marks -->
+        <line x1="32" y1="4"  x2="32" y2="8"  stroke="#C4993C" stroke-width="1" opacity="0.5"/>
+        <line x1="32" y1="56" x2="32" y2="60" stroke="#C4993C" stroke-width="1" opacity="0.5"/>
+        <line x1="4"  y1="32" x2="8"  y2="32" stroke="#C4993C" stroke-width="1" opacity="0.5"/>
+        <line x1="56" y1="32" x2="60" y2="32" stroke="#C4993C" stroke-width="1" opacity="0.5"/>
+        <!-- Centre point -->
+        <circle cx="32" cy="32" r="1.5" fill="#1A2F36" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="wordmark">
+      <span class="wordmark-main"><span class="our">Our</span><span class="path">Path</span></span>
+      <div class="divider-line"><span></span><div class="divider-dot"></div><span></span></div>
+      <span class="tagline">Guidance &amp; Mentoring</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── STACKED DARK ─── -->
+<div>
+  <p class="label">Primary — Dark</p>
+  <div class="logo-card dark">
+    <div class="mark-wrap">
+      <svg class="mark-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" stroke="#C4993C" stroke-width="0.75" opacity="0.35"/>
+        <circle cx="32" cy="32" r="22" stroke="#C4993C" stroke-width="0.5" opacity="0.25"/>
+        <path d="M 10 38 Q 20 20, 32 32 Q 44 44, 54 26"
+              stroke="#C4993C" stroke-width="1.5" fill="none"
+              stroke-linecap="round" opacity="0.9"/>
+        <circle cx="54" cy="26" r="2.5" fill="#C4993C" opacity="0.9"/>
+        <circle cx="10" cy="38" r="1.5" fill="#C4993C" opacity="0.5"/>
+        <line x1="32" y1="14" x2="32" y2="50" stroke="#F5F0E8" stroke-width="0.5" opacity="0.12"/>
+        <line x1="14" y1="32" x2="50" y2="32" stroke="#F5F0E8" stroke-width="0.5" opacity="0.12"/>
+        <line x1="32" y1="4"  x2="32" y2="8"  stroke="#C4993C" stroke-width="1" opacity="0.6"/>
+        <line x1="32" y1="56" x2="32" y2="60" stroke="#C4993C" stroke-width="1" opacity="0.6"/>
+        <line x1="4"  y1="32" x2="8"  y2="32" stroke="#C4993C" stroke-width="1" opacity="0.6"/>
+        <line x1="56" y1="32" x2="60" y2="32" stroke="#C4993C" stroke-width="1" opacity="0.6"/>
+        <circle cx="32" cy="32" r="1.5" fill="#F5F0E8" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="wordmark">
+      <span class="wordmark-main"><span class="our">Our</span><span class="path">Path</span></span>
+      <div class="divider-line"><span></span><div class="divider-dot"></div><span></span></div>
+      <span class="tagline">Guidance &amp; Mentoring</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── HORIZONTAL LOCKUPS ─── -->
+<div>
+  <p class="label">Horizontal — Light</p>
+  <div class="logo-horiz light">
+    <div class="horiz-mark">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" stroke="#C4993C" stroke-width="0.75" opacity="0.35"/>
+        <circle cx="32" cy="32" r="22" stroke="#C4993C" stroke-width="0.5" opacity="0.25"/>
+        <path d="M 10 38 Q 20 20, 32 32 Q 44 44, 54 26" stroke="#C4993C" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.9"/>
+        <circle cx="54" cy="26" r="2.5" fill="#C4993C" opacity="0.9"/>
+        <circle cx="10" cy="38" r="1.5" fill="#C4993C" opacity="0.5"/>
+        <line x1="32" y1="4"  x2="32" y2="8"  stroke="#C4993C" stroke-width="1" opacity="0.5"/>
+        <line x1="32" y1="56" x2="32" y2="60" stroke="#C4993C" stroke-width="1" opacity="0.5"/>
+        <line x1="4"  y1="32" x2="8"  y2="32" stroke="#C4993C" stroke-width="1" opacity="0.5"/>
+        <line x1="56" y1="32" x2="60" y2="32" stroke="#C4993C" stroke-width="1" opacity="0.5"/>
+        <circle cx="32" cy="32" r="1.5" fill="#1A2F36" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="horiz-divider"></div>
+    <div class="horiz-text">
+      <span class="horiz-name"><span class="our">Our</span><span class="path">Path</span></span>
+      <span class="horiz-tag">Guidance &amp; Mentoring</span>
+    </div>
+  </div>
+</div>
+
+<div>
+  <p class="label">Horizontal — Dark</p>
+  <div class="logo-horiz dark">
+    <div class="horiz-mark">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" stroke="#C4993C" stroke-width="0.75" opacity="0.35"/>
+        <circle cx="32" cy="32" r="22" stroke="#C4993C" stroke-width="0.5" opacity="0.25"/>
+        <path d="M 10 38 Q 20 20, 32 32 Q 44 44, 54 26" stroke="#C4993C" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.9"/>
+        <circle cx="54" cy="26" r="2.5" fill="#C4993C" opacity="0.9"/>
+        <circle cx="10" cy="38" r="1.5" fill="#C4993C" opacity="0.5"/>
+        <line x1="32" y1="4"  x2="32" y2="8"  stroke="#C4993C" stroke-width="1" opacity="0.6"/>
+        <line x1="32" y1="56" x2="32" y2="60" stroke="#C4993C" stroke-width="1" opacity="0.6"/>
+        <line x1="4"  y1="32" x2="8"  y2="32" stroke="#C4993C" stroke-width="1" opacity="0.6"/>
+        <line x1="56" y1="32" x2="60" y2="32" stroke="#C4993C" stroke-width="1" opacity="0.6"/>
+        <circle cx="32" cy="32" r="1.5" fill="#F5F0E8" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="horiz-divider"></div>
+    <div class="horiz-text">
+      <span class="horiz-name"><span class="our">Our</span><span class="path">Path</span></span>
+      <span class="horiz-tag">Guidance &amp; Mentoring</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── ICON MARKS ─── -->
+<div>
+  <p class="label">Icon Mark</p>
+  <div class="row">
+    <div class="icon-only light">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" stroke="#C4993C" stroke-width="0.75" opacity="0.4"/>
+        <circle cx="32" cy="32" r="22" stroke="#C4993C" stroke-width="0.5" opacity="0.25"/>
+        <path d="M 10 38 Q 20 20, 32 32 Q 44 44, 54 26" stroke="#C4993C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <circle cx="54" cy="26" r="2.5" fill="#C4993C"/>
+        <circle cx="10" cy="38" r="1.5" fill="#C4993C" opacity="0.5"/>
+        <line x1="32" y1="4"  x2="32" y2="8"  stroke="#C4993C" stroke-width="1" opacity="0.5"/>
+        <line x1="32" y1="56" x2="32" y2="60" stroke="#C4993C" stroke-width="1" opacity="0.5"/>
+        <line x1="4"  y1="32" x2="8"  y2="32" stroke="#C4993C" stroke-width="1" opacity="0.5"/>
+        <line x1="56" y1="32" x2="60" y2="32" stroke="#C4993C" stroke-width="1" opacity="0.5"/>
+        <circle cx="32" cy="32" r="1.5" fill="#1A2F36" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="icon-only dark">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" stroke="#C4993C" stroke-width="0.75" opacity="0.4"/>
+        <circle cx="32" cy="32" r="22" stroke="#C4993C" stroke-width="0.5" opacity="0.25"/>
+        <path d="M 10 38 Q 20 20, 32 32 Q 44 44, 54 26" stroke="#C4993C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <circle cx="54" cy="26" r="2.5" fill="#C4993C"/>
+        <circle cx="10" cy="38" r="1.5" fill="#C4993C" opacity="0.5"/>
+        <line x1="32" y1="4"  x2="32" y2="8"  stroke="#C4993C" stroke-width="1" opacity="0.6"/>
+        <line x1="32" y1="56" x2="32" y2="60" stroke="#C4993C" stroke-width="1" opacity="0.6"/>
+        <line x1="4"  y1="32" x2="8"  y2="32" stroke="#C4993C" stroke-width="1" opacity="0.6"/>
+        <line x1="56" y1="32" x2="60" y2="32" stroke="#C4993C" stroke-width="1" opacity="0.6"/>
+        <circle cx="32" cy="32" r="1.5" fill="#F5F0E8" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="icon-only gold">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" stroke="#1A2F36" stroke-width="0.75" opacity="0.3"/>
+        <circle cx="32" cy="32" r="22" stroke="#1A2F36" stroke-width="0.5" opacity="0.2"/>
+        <path d="M 10 38 Q 20 20, 32 32 Q 44 44, 54 26" stroke="#1A2F36" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.8"/>
+        <circle cx="54" cy="26" r="2.5" fill="#1A2F36" opacity="0.8"/>
+        <circle cx="10" cy="38" r="1.5" fill="#1A2F36" opacity="0.4"/>
+        <line x1="32" y1="4"  x2="32" y2="8"  stroke="#1A2F36" stroke-width="1" opacity="0.4"/>
+        <line x1="32" y1="56" x2="32" y2="60" stroke="#1A2F36" stroke-width="1" opacity="0.4"/>
+        <line x1="4"  y1="32" x2="8"  y2="32" stroke="#1A2F36" stroke-width="1" opacity="0.4"/>
+        <line x1="56" y1="32" x2="60" y2="32" stroke="#1A2F36" stroke-width="1" opacity="0.4"/>
+        <circle cx="32" cy="32" r="1.5" fill="#1A2F36" opacity="0.5"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

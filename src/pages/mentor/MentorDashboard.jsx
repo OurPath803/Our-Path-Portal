@@ -11,6 +11,101 @@ function formatDate(d) {
   })
 }
 
+// Base path for Gift Series HTML files served from public/gift-series/
+const GS = '/gift-series/'
+
+const GIFT_GROUPS = [
+  {
+    label: 'Programme materials',
+    items: [
+      { title: 'Facilitator Protocol',   file: '03 Facilitator Protocol.html',   tag: 'Protocol' },
+      { title: 'Participant Workbook',    file: '04 Participant Workbook.html',    tag: 'Workbook' },
+      { title: 'Group Agreement',        file: '09 Group Agreement.html',         tag: 'Group' },
+      { title: 'Outcome Forms',          file: '07 Outcome Forms.html',           tag: 'Forms' },
+      { title: 'Safeguarding Card',      file: '08 Safeguarding Card.html',       tag: 'Safeguarding' },
+      { title: 'Adaptation Guide',       file: '10 Adaptation Guide.html',        tag: 'Guide' },
+    ],
+  },
+  {
+    label: 'Session decks',
+    items: [
+      { title: 'Week 1 — Mind',   file: '05 Deck · Week 1 Mind.html',   tag: 'Deck' },
+      { title: 'Week 2 — Heart',  file: '05 Deck · Week 2 Heart.html',  tag: 'Deck' },
+      { title: 'Week 3 — Soul',   file: '05 Deck · Week 3 Soul.html',   tag: 'Deck' },
+      { title: 'Week 4 — Hands',  file: '05 Deck · Week 4 Hands.html',  tag: 'Deck' },
+    ],
+  },
+  {
+    label: 'Run sheets',
+    items: [
+      { title: 'Week 1 — Mind',   file: '06 Run-Sheet · Week 1 Mind.html',   tag: 'Run sheet' },
+      { title: 'Week 2 — Heart',  file: '06 Run-Sheet · Week 2 Heart.html',  tag: 'Run sheet' },
+      { title: 'Week 3 — Soul',   file: '06 Run-Sheet · Week 3 Soul.html',   tag: 'Run sheet' },
+      { title: 'Week 4 — Hands',  file: '06 Run-Sheet · Week 4 Hands.html',  tag: 'Run sheet' },
+    ],
+  },
+]
+
+function GiftSeriesResources() {
+  return (
+    <div style={{ marginTop: 36 }}>
+      <div style={{ marginBottom: 16, paddingBottom: 12, borderBottom: '1px solid var(--line)' }}>
+        <div className="eyebrow" style={{ marginBottom: 4 }}>Gift Series · Facilitator Resources</div>
+        <h2 style={{
+          fontFamily: 'var(--font-display)', fontSize: 22,
+          color: 'var(--navy)', margin: 0,
+        }}>
+          Programme materials
+        </h2>
+      </div>
+
+      {GIFT_GROUPS.map(group => (
+        <div key={group.label} style={{ marginBottom: 24 }}>
+          <div style={{
+            fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase',
+            color: 'var(--mute)', fontFamily: 'var(--font-body)',
+            marginBottom: 10,
+          }}>
+            {group.label}
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            {group.items.map(item => (
+              <a
+                key={item.file}
+                href={GS + encodeURIComponent(item.file)}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '8px 14px',
+                  background: 'var(--off-white)',
+                  border: '1px solid var(--line)',
+                  borderRadius: 4,
+                  textDecoration: 'none',
+                  fontFamily: 'var(--font-body)', fontSize: 13,
+                  color: 'var(--navy)',
+                  transition: 'border-color 0.12s',
+                }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--gold)'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--line)'}
+              >
+                <span style={{
+                  fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
+                  color: 'var(--gold)', fontWeight: 600, fontFamily: 'var(--font-body)',
+                }}>
+                  {item.tag}
+                </span>
+                {item.title}
+                <span style={{ fontSize: 11, color: 'var(--mute)' }}>↗</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export default function MentorDashboard() {
   const { user, profile } = useAuth()
   const [rows, setRows] = useState([])
@@ -184,6 +279,9 @@ export default function MentorDashboard() {
               </table>
             </div>
           )}
+
+          {/* ── Gift Series facilitator materials ── */}
+          <GiftSeriesResources />
         </div>
       </div>
     </div>

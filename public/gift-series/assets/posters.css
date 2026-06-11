@@ -1,0 +1,136 @@
+/* ============================================================
+   OurPath, Gift Series poster styles  (namespace: .pos)
+   ============================================================ */
+
+.pos { width: 100%; height: 100%; position: relative; overflow: hidden;
+  font-family: var(--body); background: var(--cream); color: var(--charcoal); }
+.pos * { box-sizing: border-box; }
+.pos-pad { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; padding: 54px 56px 44px; }
+
+/* watermark */
+.pos-watermark { position: absolute; z-index: 1; right: -150px; bottom: -150px; color: var(--accent);
+  opacity: 0.06; pointer-events: none; }
+.pos-watermark.sq { right: -170px; bottom: -180px; }
+
+/* header */
+.pos-head { display: flex; justify-content: space-between; align-items: center; }
+.pos-head.center { justify-content: center; }
+.pos-week { font-family: var(--body); font-weight: 600; font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent);
+  border-radius: 999px; padding: 6px 14px; white-space: nowrap; }
+
+/* hero */
+.pos-hero { margin-top: 40px; }
+.pos-ic { color: var(--accent); margin-bottom: 22px; }
+.pos-eyebrow { font-family: var(--body); font-weight: 600; font-size: 12px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--accent); }
+.pos-eyebrow.on-navy { color: var(--gold-soft); }
+.pos-title { font-family: var(--display); font-weight: 600; font-size: 64px; line-height: 0.98;
+  letter-spacing: -0.015em; color: var(--navy); margin: 12px 0 0; }
+.pos-title.sq { font-size: 70px; }
+.pos-rule { width: 70px; border-top-width: 2px; margin: 24px 0 0; }
+.pos-strap { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 25px;
+  line-height: 1.3; color: var(--navy-300); margin: 20px 0 0; max-width: 460px; }
+.pos-strap.sq { font-size: 30px; max-width: 640px; }
+
+/* explore list */
+.pos-explore { margin-top: 34px; }
+.pos-explabel { font-family: var(--body); font-weight: 700; font-size: 12px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--navy); margin-bottom: 16px; }
+.pos-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.pos-list li { display: flex; gap: 13px; align-items: flex-start; }
+.pos-list .tick { flex: none; margin-top: 6px; display: flex; }
+.pos-list .bx { font-size: 16px; line-height: 1.5; color: var(--charcoal); }
+.pos-list .bx em { font-style: italic; color: var(--accent); font-weight: 500; }
+.pos-arabic { font-family: var(--display); font-style: italic; font-size: 16px; color: var(--ink-60);
+  margin-top: 20px; padding-left: 14px; border-left: 2px solid var(--accent); }
+
+/* details block (gift A4) */
+.pos-details { margin-top: auto; padding-top: 30px; }
+.pos-det-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 28px; }
+.pos-det-row + .pos-det-row { margin-top: 12px; }
+.det { display: flex; flex-direction: column; gap: 3px; }
+.det-k { font-family: var(--body); font-weight: 600; font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--accent); }
+.det-v { font-size: 14.5px; color: var(--navy); font-weight: 500; }
+
+/* CTA */
+.pos-cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 22px;
+  background: var(--navy); color: var(--offwhite); font-family: var(--body); font-weight: 600;
+  font-size: 15px; letter-spacing: .02em; padding: 13px 24px; border-radius: 999px; text-decoration: none; }
+.pos-cta .arr { transition: transform .2s; }
+.pos-cta.gold { background: var(--gold); color: var(--navy); }
+.pos-cta.sq { font-size: 17px; padding: 15px 28px; }
+.pos-join { font-size: 12px; color: var(--ink-60); margin-top: 14px; letter-spacing: .02em; }
+
+/* footer */
+.pos-foot { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); }
+.pos-foot.on-navy { border-top-color: rgba(255,255,255,.16); }
+.pos-nonclinical { display: block; font-size: 12px; color: var(--navy); font-weight: 500; }
+.pos-nonclinical.light { color: var(--gold-soft); }
+.pos-nonclinical.center { text-align: center; }
+.pos-footline { display: block; margin-top: 8px; }
+
+/* ---- square gift specifics ---- */
+.pos--sq .pos-pad { padding: 70px 76px 64px; }
+.pos-sq-mid { margin: auto 0; }
+.pos-sq-mid .pos-ic { margin-bottom: 26px; }
+.pos-list.sq { margin-top: 30px; gap: 16px; }
+.pos-list.sq .bx { font-size: 19px; }
+.pos-list.sq .tick { margin-top: 8px; }
+.pos-sq-foot { display: flex; flex-direction: column; gap: 18px; padding-top: 26px; border-top: 1px solid var(--line); }
+.sqf-line { display: flex; align-items: center; gap: 36px; }
+.sqf-line .det { gap: 4px; }
+.sqf-line .det-k { font-size: 11px; }
+.sqf-line .det-v { font-size: 17px; }
+.sqf-line .pos-cta { margin-top: 0; margin-left: auto; }
+.pos--sq .pos-nonclinical.center { font-size: 14px; }
+.sqf-when { font-size: 16px; color: var(--navy); font-weight: 500; }
+.sqf-when.light { color: var(--gold-soft); }
+
+/* ============================================================
+   SERIES MASTER  (.pos--master), navy ground
+   ============================================================ */
+.pos--master { background: var(--navy); color: var(--offwhite);
+  background-image: radial-gradient(1000px 520px at 50% -8%, rgba(201,162,39,.10), transparent 62%); }
+.pos--master .pos-pad { padding: 52px 58px 44px; text-align: center; align-items: center; }
+.m-hero { margin-top: 30px; }
+.m-title { font-family: var(--display); font-weight: 600; font-size: 76px; line-height: .98;
+  letter-spacing: -0.015em; color: var(--offwhite); margin: 14px 0 0; }
+.m-title.sq { font-size: 94px; }
+.m-sub { font-family: var(--display); font-style: italic; font-size: 27px; color: var(--gold-soft); margin-top: 8px; }
+.m-sub.sq { font-size: 34px; }
+.m-rule { width: 80px; margin: 22px auto 0; }
+.m-lede { font-size: 16px; line-height: 1.66; color: rgba(247,244,236,.86); max-width: 560px; margin: 22px auto 0; }
+.m-lede em { font-style: italic; color: var(--gold-soft); }
+
+/* arc row */
+.m-arc { display: flex; align-items: flex-start; justify-content: center; gap: 8px; margin-top: 42px; }
+.mrow-item { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 132px; }
+.mrow-ic { }
+.mrow-nm { font-family: var(--display); font-size: 23px; font-weight: 600; color: var(--offwhite); }
+.mrow-dom { font-family: var(--body); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); }
+.mrow-arrow { position: absolute; right: -16px; top: 18px; color: var(--gold); font-size: 22px; }
+.m-arcline { font-family: var(--display); font-style: italic; font-size: 16px; color: rgba(247,244,236,.7);
+  margin-top: 28px; }
+
+/* details (master) */
+.m-details { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 40px;
+  width: 100%; border-top: 1px solid rgba(255,255,255,.16); border-bottom: 1px solid rgba(255,255,255,.16); padding: 22px 0; }
+.m-det { display: flex; flex-direction: column; gap: 5px; }
+.md-k { font-family: var(--body); font-weight: 600; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-soft); }
+.md-v { font-size: 14px; color: var(--offwhite); font-weight: 500; line-height: 1.35; }
+.m-cta-row { display: flex; align-items: center; gap: 18px; margin-top: 30px; }
+.m-url { font-size: 13px; color: rgba(247,244,236,.7); }
+
+.pos--master .pos-foot { margin-top: auto; width: 100%; }
+
+/* master square */
+.msq-mid { margin: auto 0; width: 100%; }
+.msq-icons { display: flex; justify-content: center; gap: 48px; margin-top: 44px; }
+.msq-ic { display: flex; flex-direction: column; align-items: center; gap: 12px;
+  font-family: var(--display); font-size: 24px; font-weight: 600; color: var(--offwhite); }
+.m-arcline.sq { font-size: 19px; margin-top: 40px; }
+.msq-foot { display: flex; flex-direction: column; align-items: center; gap: 18px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.16); }
+.msq-foot .sqf-when.light { font-size: 17px; }
+.pos--master.pos--sq .pos-nonclinical.center { font-size: 14px; }

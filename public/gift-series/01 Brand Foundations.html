@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OurPath · TERRA Brand Foundations</title>
+<link rel="stylesheet" href="assets/terra.css">
+<style>
+  body { background: var(--cream); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 40px 120px; }
+
+  /* masthead */
+  .masthead { padding: 72px 0 40px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+  .masthead .eyebrow { margin-bottom: 26px; }
+  .masthead h1 { font-family: var(--display); font-weight: 600; font-size: 76px; line-height: .98; color: var(--navy); margin: 14px 0 0; letter-spacing: -0.015em; }
+  .masthead h1 em { font-style: italic; color: var(--gold-deep); }
+  .masthead .lede { font-size: 17px; line-height: 1.65; color: var(--ink-60); max-width: 620px; margin: 22px 0 0; }
+  .masthead .reg { display:flex; align-items:center; }
+
+  /* section scaffold */
+  section.block { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  .sec-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 14px; }
+  .sec-num { font-family: var(--display); font-style: italic; font-size: 26px; color: var(--gold-deep); }
+  .sec-title { font-family: var(--display); font-weight: 600; font-size: 34px; color: var(--navy); margin: 0; white-space: nowrap; }
+  .sec-note { font-size: 14px; color: var(--ink-60); line-height: 1.6; max-width: 640px; margin: 0 0 34px 62px; }
+
+  /* logo showcase */
+  .logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .logo-card { border: 1px solid var(--line); padding: 56px 40px; display: grid; place-items: center; min-height: 200px; }
+  .logo-card.navy { background: var(--navy); border-color: var(--navy); }
+  .logo-card.cream { background: var(--cream); }
+  .logo-card.lockup-left { place-items: start center; }
+  .usage { margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; }
+  .usage h4 { font-family: var(--body); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); margin: 0 0 8px; }
+  .usage p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--charcoal); }
+
+  /* palette */
+  .pal-group-label { font-family: var(--body); font-weight:600; font-size: 12px; letter-spacing:.14em; text-transform: uppercase; color: var(--ink-60); margin: 0 0 14px; }
+  .swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 34px; }
+  .sw { border: 1px solid var(--line); overflow: hidden; }
+  .sw .chip { height: 96px; }
+  .sw .meta { padding: 12px 14px; background: #fff; }
+  .sw .nm { font-size: 13px; font-weight: 600; color: var(--navy); }
+  .sw .hx { font-size: 12px; color: var(--ink-60); font-variant-numeric: tabular-nums; letter-spacing: .03em; margin-top: 2px; }
+  .gift-swatches { grid-template-columns: repeat(4, 1fr); }
+  .gift-sw .chip { height: 110px; display:flex; align-items:flex-end; padding: 14px; color: #fff; }
+  .gift-sw .chip .ic { width: 34px; height: 34px; }
+
+  /* type */
+  .type-spec { display: grid; gap: 4px; }
+  .type-row { display: grid; grid-template-columns: 150px 1fr; gap: 28px; align-items: baseline; padding: 18px 0; border-top: 1px solid var(--line); }
+  .type-row:first-child { border-top: none; }
+  .type-row .label { font-size: 12px; color: var(--ink-60); line-height: 1.5; }
+  .type-row .label b { display:block; color: var(--navy); font-size: 13px; letter-spacing: .04em; }
+  .specimen-display-xl { font-family: var(--display); font-weight: 600; font-size: 60px; color: var(--navy); line-height: 1; }
+  .specimen-display { font-family: var(--display); font-weight: 600; font-size: 38px; color: var(--navy); line-height: 1.05; }
+  .specimen-kicker { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 26px; color: var(--navy-300); }
+  .specimen-eyebrow { font-family: var(--body); font-weight: 600; font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-deep); }
+  .specimen-body { font-family: var(--body); font-size: 16px; line-height: 1.65; color: var(--charcoal); max-width: 560px; }
+  .specimen-small { font-family: var(--body); font-size: 12px; letter-spacing: .04em; color: var(--ink-60); }
+
+  /* gifts / motif */
+  .gifts4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .gift-card { border: 1px solid var(--line); background: #fff; padding: 30px 26px 28px; position: relative; overflow: hidden; }
+  .gift-card .bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+  .gift-card .ic { width: 56px; height: 56px; margin-bottom: 18px; }
+  .gift-card .wk { font-family: var(--body); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-60); }
+  .gift-card h3 { font-family: var(--display); font-weight: 600; font-size: 30px; margin: 4px 0 2px; color: var(--navy); }
+  .gift-card .dom { font-size: 12.5px; color: var(--ink-60); margin-bottom: 14px; }
+  .gift-card .tool { font-family: var(--body); font-weight: 600; font-size: 13px; color: var(--navy); }
+  .gift-card .tool span { font-weight: 400; color: var(--ink-60); }
+
+  .motif-strip { display:flex; align-items:center; justify-content:center; gap: 0; background: var(--navy); padding: 40px; }
+  .motif-strip .m { flex:1; display:flex; flex-direction:column; align-items:center; gap:12px; color: var(--gold-soft); border-right: 1px solid rgba(255,255,255,.12); }
+  .motif-strip .m:last-child { border-right:none; }
+  .motif-strip .m .ic { width: 40px; height: 40px; }
+  .motif-strip .m .lab { font-family: var(--body); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--offwhite); }
+
+  /* slide master + doc header */
+  .two { display:grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items:start; }
+  .slide-master { aspect-ratio: 16/9; background: var(--navy); position: relative; padding: 26px 32px; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden; }
+  .slide-master .sm-top { display:flex; justify-content:space-between; align-items:center; }
+  .slide-master .sm-eyebrow { font-family: var(--body); font-weight:600; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color: var(--gold-soft); }
+  .slide-master h2 { font-family: var(--display); font-weight:600; font-size: 34px; color: var(--offwhite); margin: 0; line-height:1.04; }
+  .slide-master .sm-kicker { font-family: var(--display); font-style:italic; font-size:16px; color: var(--gold-soft); margin-top:10px; max-width: 78%; line-height:1.3; }
+  .slide-master .sm-foot { display:flex; justify-content:space-between; align-items:center; }
+  .slide-master .corner-ic { position:absolute; right:-20px; bottom:-20px; width:180px; height:180px; color: rgba(201,162,39,.14); }
+  .caption { font-size: 12.5px; color: var(--ink-60); line-height:1.6; margin-top: 14px; }
+
+  .doc-demo { border: 1px solid var(--line); background:#fff; }
+  .doc-head { background: var(--cream); border-bottom: 2px solid var(--gold); padding: 18px 24px; display:flex; justify-content:space-between; align-items:center; }
+  .doc-body { padding: 22px 24px; }
+  .doc-body .h { font-family: var(--display); font-size: 22px; color: var(--navy); margin:0 0 8px; }
+  .doc-body p { font-size: 13px; line-height:1.6; color: var(--charcoal); margin:0; }
+  .doc-foot { border-top: 1px solid var(--line); padding: 12px 24px; }
+
+  .pagefoot { padding-top: 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  .nonclinical-pill { display:inline-flex; gap:8px; align-items:center; font-size:12px; color:var(--navy); border:1px solid var(--gold); border-radius:999px; padding:7px 14px; background: rgba(201,162,39,.08); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="reg" data-op-logo='{"orientation":"horizontal","size":24}'></div>
+    <div class="eyebrow specimen-eyebrow" style="margin-top:34px">The Gift Series · Design System</div>
+    <h1>TERRA<br><em>Brand Foundations</em></h1>
+    <p class="lede">The visual language for OurPath's <em style="font-style:italic">Gift Series</em> workshop pack, a quiet, scholarly system that holds classical psychospiritual tradition and Western developmental science in one calm frame. Earth, ink, and gold. Built to feel premium and unhurried, never corporate or hyped.</p>
+  </header>
+
+  <!-- 01 LOGO -->
+  <section class="block">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">Logo &amp; wordmark</h2></div>
+    <p class="sec-note">The lockup pairs the OurPath compass mark, a journey path read through a crosshair, with “OurPath” in Cormorant Garamond and the tagline <em>Guidance &amp; Mentoring</em> in small-caps. Use the teal version on cream, the light version on teal. Clear space ≥ the mark height on all sides.</p>
+    <div class="logo-grid">
+      <div class="logo-card cream"><div data-op-logo='{"orientation":"horizontal","size":34}'></div></div>
+      <div class="logo-card navy"><div data-op-logo='{"orientation":"horizontal","size":34,"onNavy":true}'></div></div>
+      <div class="logo-card cream"><div data-op-logo='{"orientation":"stacked","size":38}'></div></div>
+      <div class="logo-card cream"><div data-op-logo='{"markOnly":true,"markSize":92}'></div></div>
+    </div>
+    <div class="usage">
+      <div><h4>Do</h4><p>Place top-centre or top-left on every cover, poster, slide master, and document header. Keep the mark, wordmark, and tagline locked together as one unit.</p></div>
+      <div><h4>Don't</h4><p>Don't recolour the wordmark, stretch it, set it on busy imagery, or drop the mark below ~24px where the journey path stops reading.</p></div>
+    </div>
+  </section>
+
+  <!-- 02 PALETTE -->
+  <section class="block">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Palette</h2></div>
+    <p class="sec-note">TERRA base carries authority and calm. Each gift then earns its own accent, layered over the base so the four read as a family yet stay individually recognisable.</p>
+    <p class="pal-group-label">TERRA base</p>
+    <div class="swatches" id="base-sw"></div>
+    <p class="pal-group-label">Per-gift accents</p>
+    <div class="swatches gift-swatches" id="gift-sw"></div>
+  </section>
+
+  <!-- 03 TYPE -->
+  <section class="block">
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Typography</h2></div>
+    <p class="sec-note">Two families only. <b style="color:var(--navy)">Cormorant Garamond</b> for display and quiet authority; <b style="color:var(--navy)">DM Sans</b> for body, labels, and UI. Generous leading throughout, the system breathes.</p>
+    <div class="type-spec">
+      <div class="type-row"><div class="label"><b>Display XL</b>Cormorant 600 · titles</div><div class="specimen-display-xl">Four Gifts, Four Weeks</div></div>
+      <div class="type-row"><div class="label"><b>Display</b>Cormorant 600 · headings</div><div class="specimen-display">The Gift of the Mind</div></div>
+      <div class="type-row"><div class="label"><b>Kicker</b>Cormorant italic 500</div><div class="specimen-kicker">Before you change anything, see where you are.</div></div>
+      <div class="type-row"><div class="label"><b>Eyebrow</b>DM Sans 600 · 0.22em</div><div class="specimen-eyebrow">Psychological · Clarity · Learning</div></div>
+      <div class="type-row"><div class="label"><b>Body</b>DM Sans 400 · 1.65</div><div class="specimen-body">Each session develops the whole person across four domains through psychoeducation and resilience-building, structured, reflective, and unhurried.</div></div>
+      <div class="type-row"><div class="label"><b>Small / meta</b>DM Sans 400 · 0.04em</div><div class="specimen-small">OurPath Guidance Ltd · Non-clinical developmental support</div></div>
+    </div>
+  </section>
+
+  <!-- 04 GIFTS -->
+  <section class="block">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">The four gifts</h2></div>
+    <p class="sec-note">One motif runs through everything: Mind · Heart · Soul · Hands. Each gift maps to a domain, an embedded OurPath tool, and a week of the journey. The icons are fine line marks, recoloured to each gift's accent.</p>
+    <div class="gifts4" id="gifts4"></div>
+    <div class="motif-strip" id="motif" style="margin-top:28px"></div>
+    <p class="caption">The arc: Mind <em>(see clearly)</em> → Heart <em>(name what you carry &amp; reconnect)</em> → Soul <em>(integrate meaning)</em> → Hands <em>(choose and do)</em>. This is also the order of OurPath's four tools, experienced in sequence.</p>
+  </section>
+
+  <!-- 05 APPLICATIONS -->
+  <section class="block">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Slide master &amp; document chrome</h2></div>
+    <p class="sec-note">On-screen pieces run on a navy master with large legible type for Google Meet. Print documents use a cream canvas with a gold-ruled header and the non-clinical footer on every page.</p>
+    <div class="two">
+      <div>
+        <div class="slide-master">
+          <div class="sm-top">
+            <span class="sm-eyebrow">Week 1 · The Mind</span>
+            <span data-op-logo='{"orientation":"horizontal","size":15,"onNavy":true,"tagline":false}'></span>
+          </div>
+          <div>
+            <h2>The Gift of the Mind</h2>
+            <div class="sm-kicker">Before you change anything, see where you actually are.</div>
+          </div>
+          <div class="sm-foot">
+            <span class="op-footer on-navy" data-op-footer='{"onNavy":true}'></span>
+          </div>
+          <div class="corner-ic" id="sm-corner"></div>
+        </div>
+        <p class="caption">16:9 slide master, navy ground, gift eyebrow top-left, light logo top-right, oversized Cormorant title, faint gift icon bleeding off the corner.</p>
+      </div>
+      <div>
+        <div class="doc-demo">
+          <div class="doc-head">
+            <span data-op-logo='{"orientation":"horizontal","size":15,"tagline":false}'></span>
+            <span class="specimen-small">Facilitator Protocol · p.04</span>
+          </div>
+          <div class="doc-body">
+            <h3 class="h">Group title &amp; rationale</h3>
+            <p>A4 document header sits on cream beneath a 2px gold rule. Body in DM Sans, headings in Cormorant, with running page reference at right.</p>
+          </div>
+          <div class="doc-foot"><span class="op-footer" data-op-footer></span></div>
+        </div>
+        <p class="caption">Document header &amp; footer pattern used across the protocol, workbook, and forms.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="pagefoot">
+    <span class="op-footer" data-op-footer></span>
+    <span class="nonclinical-pill">● &nbsp;Non-clinical · cannot diagnose, treat, or replace therapy</span>
+  </div>
+</div>
+
+<script src="assets/ourpath.js"></script>
+<script>
+  // base palette swatches
+  const base = [
+    ['Teal','#1A2F36','#fff'], ['Gold','#C4993C','#1A2F36'], ['Cream','#F5F0E8','#2B2A27'],
+    ['Charcoal','#2B2A27','#fff'], ['Brand grey','#8A9BA0','#fff'],
+  ];
+  document.getElementById('base-sw').innerHTML = base.map(([nm,hx,tc]) =>
+    `<div class="sw"><div class="chip" style="background:${hx}"></div><div class="meta"><div class="nm">${nm}</div><div class="hx">${hx.toUpperCase()}</div></div></div>`
+  ).join('');
+
+  // gift accent swatches
+  const gifts = [
+    ['Mind','#3D6A78','mind'], ['Heart','#B05F44','heart'], ['Soul','#57385A','soul'], ['Hands','#9C6A1E','hands'],
+  ];
+  document.getElementById('gift-sw').innerHTML = gifts.map(([nm,hx,k]) =>
+    `<div class="sw gift-sw"><div class="chip" style="background:${hx}"><span class="ic">${OurPath.icon(k,{size:34,stroke:1.8})}</span></div><div class="meta"><div class="nm">${nm}</div><div class="hx">${hx.toUpperCase()}</div></div></div>`
+  ).join('');
+
+  // gift cards
+  const G = OurPath.GIFTS;
+  document.getElementById('gifts4').innerHTML = ['mind','heart','soul','hands'].map(k => {
+    const g = G[k];
+    return `<div class="gift-card">
+      <div class="bar" style="background:var(--${k})"></div>
+      <div class="ic" style="color:var(--${k})">${OurPath.icon(k,{size:56,stroke:1.8})}</div>
+      <div class="wk">Week ${g.week}</div>
+      <h3>${g.name}</h3>
+      <div class="dom">${g.domain}</div>
+      <div class="tool">${g.tool} <span>· anchor tool</span></div>
+    </div>`;
+  }).join('');
+
+  // motif strip
+  document.getElementById('motif').innerHTML = ['mind','heart','soul','hands'].map(k =>
+    `<div class="m"><span class="ic">${OurPath.icon(k,{size:40,stroke:1.7})}</span><span class="lab">${G[k].name}</span></div>`
+  ).join('');
+
+  // slide master corner icon
+  document.getElementById('sm-corner').innerHTML = OurPath.icon('mind',{size:180,stroke:1.4});
+</script>
+</body>
+</html>
