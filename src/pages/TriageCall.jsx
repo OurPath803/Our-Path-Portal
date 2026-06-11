@@ -1,38 +1,6 @@
-import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import MarketingHeader from '../components/MarketingHeader'
 import Footer from '../components/Footer'
-
-const CALENDLY_URL = 'https://calendly.com/hello-ourpathguidance/triage-call'
-
-function CalendlyEmbed({ url }) {
-  const ref = useRef(null)
-  useEffect(() => {
-    const existing = document.getElementById('calendly-script')
-    if (!existing) {
-      const s = document.createElement('script')
-      s.id = 'calendly-script'
-      s.src = 'https://assets.calendly.com/assets/external/widget.js'
-      s.async = true
-      document.head.appendChild(s)
-    }
-  }, [])
-
-  const params = new URLSearchParams({
-    hide_landing_page_details: '1',
-    hide_gdpr_banner: '1',
-    primary_color: '1b2b4b',
-  })
-
-  return (
-    <div
-      ref={ref}
-      className="calendly-inline-widget"
-      data-url={`${url}?${params.toString()}`}
-      style={{ minWidth: 320, height: 700, border: 'none' }}
-    />
-  )
-}
 
 export default function TriageCall() {
   return (
@@ -234,26 +202,17 @@ export default function TriageCall() {
         </div>
       </section>
 
-      {/* Calendly booking */}
-      <section className="calendly-section">
-        <div className="calendly-inner">
-          <div className="calendly-intro">
-            <div className="eyebrow">Start Here</div>
-            <h2>Begin with a free conversation.</h2>
-            <p>20 minutes. No obligation. We'll explore whether OurPath mentoring is the right fit for your development right now.</p>
-          </div>
-          <CalendlyEmbed url={CALENDLY_URL} />
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
+      {/* Next step CTAs — Calendly embed removed */}
       <section className="section-cta">
-        <div className="eyebrow">Prefer to write?</div>
-        <h2>Submit a referral instead.</h2>
-        <p>Fill in the intake form and we'll be in touch within 48 hours to arrange your conversation.</p>
+        <div className="eyebrow">Begin Here</div>
+        <h2>Begin with a free conversation.</h2>
+        <p>
+          To begin, create a free profile and we'll be in touch to arrange your first conversation.
+          Prefer to talk first? Reach out directly.
+        </p>
         <div className="cta-btns">
-          <Link to="/referral" className="btn btn-gold">Submit a Referral</Link>
-          <Link to="/" className="btn btn-ghost">Back to Home</Link>
+          <Link to="/referral" className="btn btn-gold">Create Your Profile</Link>
+          <Link to="/contact" className="btn btn-ghost">Get in Touch</Link>
         </div>
       </section>
 

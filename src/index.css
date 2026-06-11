@@ -713,7 +713,6 @@ a:hover { border-bottom-color: var(--gold); }
   .sz-right { padding: 36px 22px; }
 
   /* Stripe / Calendly embed iframe height tighter on phones. */
-  .calendly-inline-widget { height: 600px !important; }
 
   /* Bubble messages don't need 76% — let them go wider. */
   .bubble { max-width: 88%; }
@@ -1200,11 +1199,7 @@ a:hover { border-bottom-color: var(--gold); }
 .faq-q { font-family: var(--font-display); font-size: 19px; color: var(--navy); margin: 0 0 10px; }
 .faq-a { font-size: 15px; color: var(--ink-soft); line-height: 1.65; margin: 0; }
 
-.calendly-section { background: var(--cream); padding: 72px 48px 0; }
-.calendly-inner { max-width: 860px; margin: 0 auto; }
-.calendly-intro { text-align: center; margin-bottom: 32px; }
-.calendly-intro h2 { font-size: 32px; color: var(--navy); margin: 0 0 10px; }
-.calendly-intro p { font-size: 16px; color: var(--ink-soft); }
+/* Calendly CSS removed — embeds replaced with direct CTAs */
 
 /* ═══════════════════════════════════════════════════════════════════════════
    OUR STORY PAGE
@@ -1301,12 +1296,12 @@ a:hover { border-bottom-color: var(--gold); }
    REFERRAL PAGE
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.referral-hero { background: var(--navy); color: var(--cream); padding: 64px 48px 56px; }
-.referral-hero .eyebrow { color: var(--gold); margin-bottom: 12px; }
-.referral-hero h1 { font-size: 44px; color: var(--cream); margin: 0 0 14px; }
-.referral-hero > p { font-size: 16px; color: rgba(250,250,248,0.78); max-width: 560px; line-height: 1.6; margin: 0; }
+.referral-hero { background: var(--navy); color: var(--cream); padding: 80px 48px 70px; text-align: center; }
+.referral-hero .eyebrow { color: var(--gold); margin-bottom: 16px; }
+.referral-hero h1 { font-size: 48px; line-height: 1.08; color: var(--cream); max-width: 720px; margin: 0 auto 18px; }
+.referral-hero > p { font-size: 17px; color: rgba(250,250,248,0.78); max-width: 560px; line-height: 1.6; margin: 0 auto; }
 
-.referral-form-section { background: var(--cream); padding: 64px 48px 80px; display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: start; }
+.referral-form-section { background: var(--cream); padding: 64px 48px 80px; display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: start; max-width: 1200px; margin-left: auto; margin-right: auto; }
 .referral-sidebar h2 { font-size: 22px; color: var(--navy); margin: 0 0 12px; }
 .referral-sidebar > p { font-size: 14px; color: var(--ink-soft); line-height: 1.65; margin: 0 0 20px; }
 
@@ -1332,7 +1327,7 @@ a:hover { border-bottom-color: var(--gold); }
   .stat-item { border-right: none; border-bottom: 1px solid rgba(30,58,95,0.15); }
   .stat-item:last-child { border-bottom: none; }
   .mentoring-hero, .story-hero, .workshops-hero, .referral-hero { padding: 56px 24px 48px; }
-  .pricing-section, .faq-section, .how-it-works, .calendly-section,
+  .pricing-section, .faq-section, .how-it-works,
   .sessions-section, .beliefs-section { padding: 56px 24px; }
   .story-founder, .workshop-format { padding: 56px 24px; }
   .workshop-format-inner { gap: 32px; }

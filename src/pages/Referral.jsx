@@ -126,7 +126,7 @@ export default function Referral() {
             If you'd rather speak with us before filling in the form, book a free
             20-minute call instead.
           </p>
-          <Link to="/triage-call" className="btn btn-primary btn-sm">Book a Call</Link>
+          <Link to="/triage-call" className="btn btn-gold btn-sm">Book a Call</Link>
           <div className="contact-direct" style={{ marginTop: 24 }}>
             <p>Or email us directly</p>
             <a href="mailto:hello@ourpathguidance.co.uk">hello@ourpathguidance.co.uk</a>

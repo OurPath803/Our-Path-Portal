@@ -1,42 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import Sidebar from '../components/Sidebar'
 
-const CALENDLY_URL = 'https://calendly.com/hello-ourpathguidance/1-1-mentoring-session'
-
-function CalendlyEmbed({ url, name, email }) {
-  const ref = useRef(null)
-
-  useEffect(() => {
-    const existing = document.getElementById('calendly-script')
-    if (!existing) {
-      const script = document.createElement('script')
-      script.id = 'calendly-script'
-      script.src = 'https://assets.calendly.com/assets/external/widget.js'
-      script.async = true
-      document.head.appendChild(script)
-    }
-  }, [])
-
-  const params = new URLSearchParams({
-    hide_landing_page_details: '1',
-    hide_gdpr_banner: '1',
-    primary_color: '1b2b4b',
-  })
-  if (name) params.set('name', name)
-  if (email) params.set('email', email)
-
-  return (
-    <div
-      ref={ref}
-      className="calendly-inline-widget"
-      data-url={`${url}?${params.toString()}`}
-      style={{ minWidth: 320, height: 700, border: 'none' }}
-    />
-  )
-}
 
 export default function Sessions() {
   const { user, profile } = useAuth()
@@ -138,12 +105,29 @@ export default function Sessions() {
             </div>
           ) : (
             <div className="sessions-layout">
-              <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-                <CalendlyEmbed
-                  url={CALENDLY_URL}
-                  name={profile?.full_name}
-                  email={user?.email}
-                />
+              {/* Calendly embed removed — direct booking link below */}
+              <div className="card" style={{ textAlign: 'center', padding: '40px 28px' }}>
+                <div className="eyebrow" style={{ marginBottom: 14 }}>Schedule a session</div>
+                <p style={{
+                  fontSize: 15, lineHeight: 1.6, color: 'var(--ink-soft)',
+                  maxWidth: 400, margin: '0 auto 28px',
+                }}>
+                  To begin, create a free profile and we'll be in touch to arrange your first conversation.
+                  Prefer to talk first? Reach out directly.
+                </p>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
+                  <a
+                    href="https://calendly.com/hello-ourpathguidance/1-1-mentoring-session"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-gold"
+                  >
+                    Create Your Profile
+                  </a>
+                  <a href="mailto:hello@ourpathguidance.co.uk" className="btn btn-ghost">
+                    Get in Touch
+                  </a>
+                </div>
               </div>
 
               <div>
