@@ -138,6 +138,31 @@ export default function BarakahBase() {
 
       {/* Hero */}
       <section className="bb-hero">
+        {/* 12-spoke radial star — broadcasting/podcast motif, cream/gold on navy */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 32 }}>
+          <svg aria-hidden="true" width="120" height="120" viewBox="0 0 220 220" fill="none">
+            <line x1="110" y1="110" x2="110" y2="20" stroke="#C9A84C" strokeWidth="1.5"/>
+            <line x1="110" y1="110" x2="155" y2="32" stroke="rgba(250,250,248,0.28)" strokeWidth="1"/>
+            <line x1="110" y1="110" x2="188" y2="65" stroke="rgba(250,250,248,0.28)" strokeWidth="1"/>
+            <line x1="110" y1="110" x2="200" y2="110" stroke="#C9A84C" strokeWidth="1.5"/>
+            <line x1="110" y1="110" x2="188" y2="155" stroke="rgba(250,250,248,0.28)" strokeWidth="1"/>
+            <line x1="110" y1="110" x2="155" y2="188" stroke="rgba(250,250,248,0.28)" strokeWidth="1"/>
+            <line x1="110" y1="110" x2="110" y2="200" stroke="#C9A84C" strokeWidth="1.5"/>
+            <line x1="110" y1="110" x2="65" y2="188" stroke="rgba(250,250,248,0.28)" strokeWidth="1"/>
+            <line x1="110" y1="110" x2="32" y2="155" stroke="rgba(250,250,248,0.28)" strokeWidth="1"/>
+            <line x1="110" y1="110" x2="20" y2="110" stroke="#C9A84C" strokeWidth="1.5"/>
+            <line x1="110" y1="110" x2="32" y2="65" stroke="rgba(250,250,248,0.28)" strokeWidth="1"/>
+            <line x1="110" y1="110" x2="65" y2="32" stroke="rgba(250,250,248,0.28)" strokeWidth="1"/>
+            <circle cx="110" cy="110" r="90" stroke="rgba(250,250,248,0.12)" strokeWidth="1" fill="none"/>
+            <circle cx="110" cy="110" r="60" stroke="rgba(250,250,248,0.18)" strokeWidth="1" fill="none"/>
+            <circle cx="110" cy="110" r="30" stroke="rgba(201,168,76,0.45)" strokeWidth="1.2" fill="none"/>
+            <circle cx="110" cy="20" r="3" fill="#C9A84C"/>
+            <circle cx="200" cy="110" r="3" fill="#C9A84C"/>
+            <circle cx="110" cy="200" r="3" fill="#C9A84C"/>
+            <circle cx="20" cy="110" r="3" fill="#C9A84C"/>
+            <circle cx="110" cy="110" r="4.5" fill="#C9A84C" opacity="0.75"/>
+          </svg>
+        </div>
         <div className="eyebrow">Barakah Base · Series 1 · 2026</div>
         <h1>Where Strength Meets the Sacred</h1>
         <p className="lede">

@@ -9,6 +9,13 @@ export default function Landing() {
 
       {/* Hero */}
       <section className="hero">
+        {/* OurPath gold mark */}
+        <img
+          src="/ourpath-icon-gold.png"
+          alt=""
+          aria-hidden="true"
+          style={{ width: 68, height: 68, display: 'block', margin: '0 auto 28px', objectFit: 'contain' }}
+        />
         <div className="eyebrow">Mentoring · Reflection · Orientation</div>
         <h1>Personal Development Through Guidance &amp; Mentoring</h1>
         <p className="lede">
@@ -20,6 +27,24 @@ export default function Landing() {
           <Link to="/referral" className="btn btn-gold">Book a Free Conversation</Link>
           <Link to="/triage-call" className="btn btn-ghost">See How It Works</Link>
         </div>
+        {/* Geometric ornament — octagram skeleton, navy + gold */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 200 200"
+          fill="none"
+          style={{ width: 220, height: 220, display: 'block', margin: '36px auto 0', opacity: 0.13 }}
+        >
+          <rect x="42" y="42" width="116" height="116" stroke="#1E3A5F" strokeWidth="1.2" transform="rotate(0 100 100)"/>
+          <rect x="42" y="42" width="116" height="116" stroke="#1E3A5F" strokeWidth="1.2" transform="rotate(45 100 100)"/>
+          <rect x="22" y="22" width="156" height="156" stroke="#C9A84C" strokeWidth="0.7" transform="rotate(22.5 100 100)"/>
+          <circle cx="100" cy="100" r="58" stroke="#1E3A5F" strokeWidth="0.9"/>
+          <circle cx="100" cy="100" r="88" stroke="#1E3A5F" strokeWidth="0.5"/>
+          <circle cx="100" cy="100" r="8" stroke="#C9A84C" strokeWidth="1.4"/>
+          <circle cx="100" cy="12" r="2.5" fill="#C9A84C"/>
+          <circle cx="188" cy="100" r="2.5" fill="#C9A84C"/>
+          <circle cx="100" cy="188" r="2.5" fill="#C9A84C"/>
+          <circle cx="12" cy="100" r="2.5" fill="#C9A84C"/>
+        </svg>
       </section>
 
       {/* Where Most People Are */}
@@ -89,18 +114,36 @@ export default function Landing() {
           </div>
           <div className="pathways-grid">
             <div className="pathway-card">
+              {/* Single arch — 1-1 mentoring */}
+              <svg aria-hidden="true" width="44" height="44" viewBox="0 0 44 44" fill="none" style={{ marginBottom: 16 }}>
+                <path d="M 4 42 L 4 20 A 18 18 0 0 1 40 20 L 40 42" stroke="#C9A84C" strokeWidth="1.5"/>
+                <line x1="4" y1="42" x2="40" y2="42" stroke="#1E3A5F" strokeWidth="1.5"/>
+              </svg>
               <div className="pathway-type">1-1 Mentoring · Guided</div>
               <h3>Personalised Sessions</h3>
               <p>Someone to hold the structure while you do the work.</p>
               <Link to="/triage-call" className="btn btn-ghost btn-sm" style={{ alignSelf: 'flex-start' }}>How it works →</Link>
             </div>
             <div className="pathway-card">
+              {/* Triple arch — group workshop */}
+              <svg aria-hidden="true" width="60" height="44" viewBox="0 0 60 44" fill="none" style={{ marginBottom: 16 }}>
+                <path d="M 2 42 L 2 26 A 8 8 0 0 1 18 26 L 18 42 M 22 42 L 22 26 A 8 8 0 0 1 38 26 L 38 42 M 42 42 L 42 26 A 8 8 0 0 1 58 26 L 58 42" stroke="#C9A84C" strokeWidth="1.5"/>
+                <line x1="2" y1="42" x2="58" y2="42" stroke="#1E3A5F" strokeWidth="1.5"/>
+              </svg>
               <div className="pathway-type">Workshop Series · Group</div>
               <h3>4-Week Guided Experience</h3>
               <p>Small cohort. Structured reflective practice.</p>
               <Link to="/workshops" className="btn btn-ghost btn-sm" style={{ alignSelf: 'flex-start' }}>See the structure →</Link>
             </div>
             <div className="pathway-card">
+              {/* Concentric rings — independent practice */}
+              <svg aria-hidden="true" width="44" height="44" viewBox="0 0 44 44" fill="none" style={{ marginBottom: 16 }}>
+                <circle cx="22" cy="22" r="18" stroke="#1E3A5F" strokeWidth="1.5"/>
+                <circle cx="22" cy="22" r="10" stroke="#C9A84C" strokeWidth="1"/>
+                <circle cx="22" cy="22" r="3" fill="#C9A84C" opacity="0.6"/>
+                <line x1="22" y1="4" x2="22" y2="40" stroke="#C9A84C" strokeWidth="0.8" opacity="0.35"/>
+                <line x1="4" y1="22" x2="40" y2="22" stroke="#C9A84C" strokeWidth="0.8" opacity="0.35"/>
+              </svg>
               <div className="pathway-type">Reflective Journal · Independent</div>
               <h3>52 Weeks of Structured Practice</h3>
               <p>Coming soon.</p>

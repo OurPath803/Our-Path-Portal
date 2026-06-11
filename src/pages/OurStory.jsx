@@ -54,6 +54,20 @@ export default function OurStory() {
           </p>
         </div>
         <div className="founder-quote">
+          {/* Islamic 8-point star ornament — cream/gold on navy */}
+          <div style={{ textAlign: 'center', marginBottom: 24, paddingBottom: 20, borderBottom: '1px solid rgba(201,168,76,0.25)' }}>
+            <svg aria-hidden="true" width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <rect x="14" y="14" width="52" height="52" stroke="rgba(250,250,248,0.35)" strokeWidth="1" transform="rotate(0 40 40)"/>
+              <rect x="14" y="14" width="52" height="52" stroke="rgba(201,168,76,0.55)" strokeWidth="1" transform="rotate(45 40 40)"/>
+              <circle cx="40" cy="40" r="26" stroke="rgba(250,250,248,0.2)" strokeWidth="0.8"/>
+              <circle cx="40" cy="40" r="14" stroke="rgba(201,168,76,0.4)" strokeWidth="0.8"/>
+              <circle cx="40" cy="40" r="4" fill="#C9A84C" opacity="0.75"/>
+              <circle cx="40" cy="14" r="2" fill="#C9A84C" opacity="0.6"/>
+              <circle cx="66" cy="40" r="2" fill="#C9A84C" opacity="0.6"/>
+              <circle cx="40" cy="66" r="2" fill="#C9A84C" opacity="0.6"/>
+              <circle cx="14" cy="40" r="2" fill="#C9A84C" opacity="0.6"/>
+            </svg>
+          </div>
           <blockquote>
             "When you discover your path, you stop being lost to all the others."
           </blockquote>

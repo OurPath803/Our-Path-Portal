@@ -156,6 +156,25 @@ export default function Training() {
           Progression requires demonstrated competency, not completion of content.
         </p>
         <Link to="/contact" className="btn btn-gold">Enquire About Training</Link>
+        {/* Five ascending arcs — five practitioner levels, cream/gold on navy */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 220 120"
+          fill="none"
+          style={{ width: 220, height: 120, display: 'block', margin: '40px auto 0' }}
+        >
+          <path d="M 20 110 A 20 20 0 0 1 60 110" stroke="rgba(250,250,248,0.2)" strokeWidth="1.5"/>
+          <path d="M 20 110 A 40 40 0 0 1 100 110" stroke="rgba(250,250,248,0.3)" strokeWidth="1.5"/>
+          <path d="M 20 110 A 60 60 0 0 1 140 110" stroke="rgba(250,250,248,0.45)" strokeWidth="1.5"/>
+          <path d="M 20 110 A 80 80 0 0 1 180 110" stroke="rgba(250,250,248,0.6)" strokeWidth="1.5"/>
+          <path d="M 20 110 A 90 90 0 0 1 200 110" stroke="#C9A84C" strokeWidth="1.5"/>
+          <line x1="0" y1="110" x2="220" y2="110" stroke="rgba(201,168,76,0.35)" strokeWidth="1"/>
+          <circle cx="40" cy="90" r="2" fill="rgba(201,168,76,0.5)"/>
+          <circle cx="60" cy="70" r="2" fill="rgba(201,168,76,0.65)"/>
+          <circle cx="80" cy="50" r="2" fill="rgba(201,168,76,0.8)"/>
+          <circle cx="100" cy="30" r="2" fill="rgba(201,168,76,0.9)"/>
+          <circle cx="110" cy="20" r="3.5" fill="#C9A84C"/>
+        </svg>
       </section>
 
       {/* Five Levels */}

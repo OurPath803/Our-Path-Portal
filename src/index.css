@@ -319,7 +319,7 @@ a:hover { border-bottom-color: var(--gold); }
 .msg-body { display: flex; flex-direction: column; background: var(--cream); overflow: hidden; }
 .msg-head {
   padding: 16px 22px; border-bottom: 1px solid var(--line);
-  background: #FAF7F0; flex-shrink: 0;
+  background: var(--off-white); flex-shrink: 0;
 }
 .msg-head .nm { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: var(--navy); }
 .msg-head .meta { font-size: 12px; color: var(--mute); font-style: italic; }
@@ -328,12 +328,12 @@ a:hover { border-bottom-color: var(--gold); }
   display: flex; flex-direction: column; gap: 14px;
 }
 .bubble { max-width: 76%; padding: 12px 16px; border-radius: 10px; font-size: 14px; line-height: 1.55; }
-.bubble.m { background: #FAF7F0; border: 1px solid var(--line); align-self: flex-start; }
+.bubble.m { background: var(--off-white); border: 1px solid var(--line); align-self: flex-start; }
 .bubble.u { background: var(--navy); color: var(--cream); align-self: flex-end; }
 .bubble .t { font-size: 10px; margin-top: 4px; opacity: 0.6; letter-spacing: 0.05em; }
 .msg-input {
   padding: 14px 22px; border-top: 1px solid var(--line);
-  background: #FAF7F0; display: flex; gap: 10px; align-items: flex-end; flex-shrink: 0;
+  background: var(--off-white); display: flex; gap: 10px; align-items: flex-end; flex-shrink: 0;
 }
 .msg-input textarea { min-height: 44px; max-height: 120px; }
 
