@@ -30,6 +30,7 @@ import MentorManage from './pages/mentor/MentorManage'
 import MentorApplications from './pages/mentor/MentorApplications'
 
 import Training from './pages/Training'
+import Induction from './pages/Induction'
 
 import OCSCheckin from './pages/tools/OCSCheckin'
 import PositionMap from './pages/tools/PositionMap'
@@ -71,6 +72,8 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/referral" element={<Referral />} />
           <Route path="/training" element={<Training />} />
+          {/* Public induction form — token in URL acts as auth */}
+          <Route path="/induction/:token" element={<Induction />} />
 
           {/* Legal — public */}
           <Route path="/privacy" element={<Privacy />} />

@@ -164,6 +164,20 @@ export default function BarakahBase() {
         </div>
       </section>
 
+      {/* Bottom CTA */}
+      <section className="section-cta">
+        <div className="eyebrow">Take the next step</div>
+        <h2>Ready to go deeper?</h2>
+        <p>
+          The conversations in Barakah Base are the beginning. One-to-one mentoring is
+          where the work happens.
+        </p>
+        <div className="cta-btns">
+          <Link to="/triage-call" className="btn btn-gold">Explore Mentoring</Link>
+          <Link to="/contact" className="btn btn-ghost">Get in Touch</Link>
+        </div>
+      </section>
+
       <Footer />
 
       {/* Episode detail modal */}

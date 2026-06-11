@@ -25,11 +25,17 @@ function daysUntil(d) {
 }
 
 const TOOL_ROUTES = {
-  'ocs-checkin':        { label: 'OCS Check-In',          path: '/tools/ocs-checkin',       description: 'Rate your five dimensions' },
-  'position-map':       { label: 'Position Map',           path: '/tools/position-map',       description: 'See where you stand' },
-  'cost-audit':         { label: 'Cost Audit',             path: '/tools/cost-audit',         description: 'Name the cost of what you carry' },
-  'integration-filter': { label: 'Integration Filter',     path: '/tools/integration-filter', description: 'Sort experience from accumulation' },
-  'orientation':        { label: 'Orientation Framework',  path: '/tools/orientation',        description: 'Choose your direction deliberately' },
+  'ocs-checkin':        { label: 'OCS Check-In',                path: '/tools/ocs-checkin',        description: 'Rate your five dimensions' },
+  'nine-domains':       { label: 'Nine Reflection Domains',     path: '/tools/nine-domains',       description: 'Explore the nine territories' },
+  'progress-review':    { label: 'Progress Review',             path: '/tools/progress-review',    description: 'Name what has shifted' },
+  'clarity-map':        { label: 'Clarity Map',                 path: '/tools/clarity-map',        description: 'Sort what you know from what you assume' },
+  'decision-sheet':     { label: 'Decision Discernment Sheet',  path: '/tools/decision-sheet',     description: 'Work through a live decision' },
+  'energy-audit':       { label: 'Energy & Capacity Audit',     path: '/tools/energy-audit',       description: 'Audit what drains and sustains you' },
+  'values-alignment':   { label: 'Values-to-Actions Alignment', path: '/tools/values-alignment',   description: 'Close the gap between values and action' },
+  'position-map':       { label: 'Position Map',                path: '/tools/position-map',       description: 'See where you stand' },
+  'cost-audit':         { label: 'Cost Audit',                  path: '/tools/cost-audit',         description: 'Name the cost of what you carry' },
+  'integration-filter': { label: 'Integration Filter',          path: '/tools/integration-filter', description: 'Sort experience from accumulation' },
+  'orientation':        { label: 'Orientation Framework',       path: '/tools/orientation',        description: 'Choose your direction deliberately' },
 }
 
 export default function Dashboard() {

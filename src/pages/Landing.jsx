@@ -173,7 +173,7 @@ export default function Landing() {
               <h3>Qiman — Institute of Arabic &amp; Islamic Sciences</h3>
               <p>Scholarly partnership in Islamic education and pastoral formation</p>
             </div>
-            <a href="https://qiman.co.uk" target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-sm">Visit website →</a>
+            <a href="https://www.qiman.org" target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-sm">Visit website →</a>
           </div>
         </div>
       </section>

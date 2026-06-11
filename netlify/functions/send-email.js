@@ -455,6 +455,39 @@ just reply to this email.</p>
 <p>${SIGN_OFF}</p>`,
   }),
 
+  // ───────────── Client induction pack ─────────────
+  induction_pack: ({ name, inductionUrl }) => ({
+    subject: 'Your OurPath Induction Pack — please complete before your first session',
+    text:
+`Hello ${name || 'there'},
+
+Your mentor has sent you the OurPath Client Induction Pack.
+
+Please complete it before your first session — it only takes a few minutes. Your answers help your mentor understand where you are and what you'd like from the work.
+
+Complete your induction pack:
+${inductionUrl}
+
+This link is personal to you. There's no login required.
+
+If you have any questions, reply to this email.
+
+${SIGN_OFF}`,
+    html:
+`<p>Hello ${esc(name || 'there')},</p>
+<p>Your mentor has sent you the OurPath Client Induction Pack.</p>
+<p>Please complete it before your first session — it only takes a few minutes.
+Your answers help your mentor understand where you are and what you'd like from the work.</p>
+<p style="margin: 24px 0;">
+  <a href="${esc(inductionUrl)}" style="background:#1B2B4B;color:#F5EED9;padding:12px 24px;text-decoration:none;font-weight:600;border-radius:4px;">
+    Complete your induction pack →
+  </a>
+</p>
+<p style="font-size:13px;color:#8A8070;">This link is personal to you. There's no login required.<br>
+If you have any questions, reply to this email.</p>
+<p>${SIGN_OFF}</p>`,
+  }),
+
   // ───────────── Post-Session-Zero nurture sequence ─────────────
 
   // Day 2 — gentle "anything come up?" follow-up
