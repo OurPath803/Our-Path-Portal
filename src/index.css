@@ -89,7 +89,7 @@ a:hover { border-bottom-color: var(--gold); }
 .section-rule--center { margin: 0 auto; }
 
 /* Marketing nav — hamburger */
-.mkt-logo-img { height: 30px; width: auto; display: block; }
+.mkt-logo-img { height: 38px; width: auto; display: block; image-rendering: -webkit-optimize-contrast; }
 .nav-hamburger {
   display: none;
   flex-direction: column;
@@ -804,8 +804,8 @@ a:hover { border-bottom-color: var(--gold); }
 }
 /* Desktop sidebar: full wordmark fits the 240px-wide column */
 .sidebar .logo.logo-img img {
-  max-width: 168px; max-height: 36px; width: auto; height: auto;
-  display: block; object-fit: contain;
+  max-width: 176px; max-height: 40px; width: auto; height: auto;
+  display: block; object-fit: contain; image-rendering: -webkit-optimize-contrast;
 }
 /* Mobile top bar (sticky) — short height, no border on this variant */
 .mobile-top-bar .logo.logo-img {
@@ -818,8 +818,8 @@ a:hover { border-bottom-color: var(--gold); }
 /* Drawer matches sidebar — the bug fix: without this rule the img used its
    native PNG size, so the logo ballooned when the drawer opened. */
 .mobile-drawer-inner .logo.logo-img img {
-  max-width: 168px; max-height: 36px; width: auto; height: auto;
-  display: block; object-fit: contain;
+  max-width: 176px; max-height: 40px; width: auto; height: auto;
+  display: block; object-fit: contain; image-rendering: -webkit-optimize-contrast;
 }
 
 /* ──────────────────────────────────────────────────────────────────────────

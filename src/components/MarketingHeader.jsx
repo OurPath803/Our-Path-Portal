@@ -20,6 +20,7 @@ export default function MarketingHeader({ variant = 'dark' }) {
         <Link to="/triage-call" onClick={close}>Mentoring</Link>
         <Link to="/our-story" onClick={close}>Our Story</Link>
         <Link to="/workshops" onClick={close}>Workshops</Link>
+        <Link to="/training" onClick={close}>Training</Link>
         <Link to="/barakah-base" onClick={close}>Barakah Base</Link>
         <Link to="/blog" onClick={close}>Blog</Link>
         <Link to="/contact" onClick={close}>Contact</Link>

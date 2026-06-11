@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import Sidebar from '../components/Sidebar'
 import Footer from '../components/Footer'
-
-// CTA target for all new-visitor links throughout the blog
-const PROFILE_URL = '/triage-call'
+import MarketingHeader from '../components/MarketingHeader'
 
 function BlogList({ posts, error }) {
   return (
@@ -23,9 +21,9 @@ function BlogList({ posts, error }) {
                 to={`/blog/${post.slug}`}
                 style={{
                   display: 'block',
-                  background: 'var(--surface, #fff)',
-                  border: '1px solid var(--rule, rgba(0,0,0,0.08))',
-                  borderRadius: 12,
+                  background: 'var(--off-white)',
+                  border: '1px solid var(--line)',
+                  borderRadius: 6,
                   padding: '1.75rem 2rem',
                   textDecoration: 'none',
                   color: 'inherit',
@@ -43,8 +41,9 @@ function BlogList({ posts, error }) {
                   {post.members_only && (
                     <span style={{
                       fontSize: '.7rem', letterSpacing: '0.1em',
-                      background: 'var(--gold, #C9A84C)', color: '#fff',
+                      background: 'var(--gold)', color: 'var(--navy)',
                       padding: '0.2rem 0.55rem', borderRadius: 4, textTransform: 'uppercase',
+                      fontWeight: 600,
                     }}>Members</span>
                   )}
                 </div>
@@ -113,32 +112,20 @@ export default function Blog() {
     )
   }
 
-  // Logged-out layout — public marketing chrome with a "create profile" CTA
+  // Logged-out layout — standard marketing chrome
   return (
     <div style={{ background: 'var(--cream)', minHeight: '100vh' }}>
-      <header className="mkt-header">
-        <div className="mkt-logo">OurPath<span> Guidance</span></div>
-        <nav className="mkt-nav">
-          <Link to="/" style={{ borderBottom: 'none', color: 'var(--ink-soft)' }}>Home</Link>
-          <Link to="/blog" style={{ borderBottom: 'none', color: 'var(--ink)' }}>Blog</Link>
-          <Link to="/rhythms" style={{ borderBottom: 'none', color: 'var(--ink-soft)' }}>Rhythms</Link>
-        </nav>
-        <div className="mkt-cta-set">
-          <Link to="/login" className="btn btn-ghost btn-sm">Sign in</Link>
-          <Link to={PROFILE_URL} className="btn btn-primary btn-sm">Create your profile</Link>
-        </div>
-      </header>
+      <MarketingHeader />
 
-      <div className="hero" style={{ paddingBottom: '2rem' }}>
+      <section className="workshops-hero">
         <div className="eyebrow">Reflections</div>
         <h1>Writing on growth, clarity, and development.</h1>
-        <p className="lede">
-          The real questions beneath the surface of a managed life.
-        </p>
-      </div>
+        <p>The real questions beneath the surface of a managed life.</p>
+        <Link to="/triage-call" className="btn btn-gold">Book a Free Conversation</Link>
+      </section>
 
-      <section style={{ padding: '2rem 0 5rem' }}>
-        <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 1.5rem' }}>
+      <section className="mkt-section">
+        <div className="section-inner" style={{ maxWidth: 840 }}>
           <BlogList posts={posts} error={error} />
         </div>
       </section>

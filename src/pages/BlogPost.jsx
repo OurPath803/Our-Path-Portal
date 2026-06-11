@@ -33,8 +33,9 @@ function PostBody({ status, post }) {
             })}
             {post.members_only && (
               <span style={{
-                marginLeft: '0.75rem', background: 'var(--gold, #C9A84C)',
-                color: '#fff', padding: '0.2rem 0.55rem', borderRadius: 4,
+                marginLeft: '0.75rem', background: 'var(--gold)',
+                color: 'var(--navy)', fontWeight: 600,
+                padding: '0.2rem 0.55rem', borderRadius: 4,
               }}>Members only</span>
             )}
           </div>

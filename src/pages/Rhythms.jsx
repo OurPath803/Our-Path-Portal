@@ -154,8 +154,9 @@ export default function Rhythms() {
 
         {isActive && currentRhythm && (
           <div style={{
-            textAlign: 'center', padding: '16px 40px', background: '#E8F5EE',
-            borderBottom: '1px solid var(--line)', fontSize: 14,
+            textAlign: 'center', padding: '16px 40px',
+            background: 'rgba(39,174,96,0.08)',
+            borderBottom: '1px solid rgba(39,174,96,0.2)', fontSize: 14,
             color: 'var(--success)', fontStyle: 'italic', fontFamily: 'Cormorant Garamond, serif',
           }}>
             You're currently on the <strong>{currentRhythm}</strong> rhythm. To change or cancel, email{' '}

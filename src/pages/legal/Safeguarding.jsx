@@ -5,10 +5,11 @@ export default function Safeguarding() {
     <LegalShell title="Safeguarding & support" updated="30 April 2026">
       {/* ───────────────────────────── If you're in crisis ─── */}
       <div style={{
-        background: '#FDEDEB', border: '1px solid #E8B8B0',
+        background: 'rgba(192,57,43,0.07)', border: '1px solid rgba(192,57,43,0.25)',
+        borderLeft: '3px solid var(--danger)',
         borderRadius: 6, padding: '20px 22px', marginBottom: 28,
       }}>
-        <h2 style={{ marginTop: 0, color: '#9B4848' }}>If you're in crisis right now</h2>
+        <h2 style={{ marginTop: 0, color: 'var(--danger)' }}>If you're in crisis right now</h2>
         <p style={{ marginBottom: 8 }}>
           OurPath is not an emergency service. If you or someone else is in immediate danger,
           or you can't keep yourself safe, please contact one of these now:
