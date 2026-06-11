@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OurPath · Level Certificates</title>
+<link rel="stylesheet" href="terra.css"/>
+<style>
+  /* ---- Certificate face (A4 landscape, 1123 x 794) ---- */
+  .cert{ width:1123px; height:794px; color:var(--navy); }
+  .cert-keyline{ position:absolute; inset:24px; border:1px solid var(--gold); pointer-events:none; }
+  .cert-keyline::before{ content:""; position:absolute; inset:6px; border:1px solid var(--cream-line); }
+  .cnr{ position:absolute; width:9px; height:9px; }
+  .cnr svg{ display:block; }
+  .cnr.tl{ top:-5px; left:-5px; } .cnr.tr{ top:-5px; right:-5px; }
+  .cnr.bl{ bottom:-5px; left:-5px; } .cnr.br{ bottom:-5px; right:-5px; }
+
+  /* level tab — colour + glyph + number so level is never colour-only */
+  .cert-tab{ position:absolute; top:24px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:9px;
+    background:var(--tab); color:#fff; padding:7px 18px 6px; border-radius:0 0 3px 3px;
+    font-family:var(--sans); font-weight:600; font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; }
+  .cert-tab .lvl5{ }
+  .level-5 .cert-tab{ color:var(--navy); }
+
+  .cert-body{ position:absolute; inset:24px; padding:42px 88px 92px; display:flex; flex-direction:column; align-items:center; text-align:center; }
+
+  .cert-head{ display:flex; flex-direction:column; align-items:center; gap:9px; }
+  .cert-eyebrow{ margin-top:16px; width:100%; display:flex; flex-direction:column; align-items:center; gap:5px; }
+  .cert-eyebrow .ar{ font-family:var(--arabic); font-size:46px; line-height:1; color:var(--navy); font-weight:700; }
+  .cert-eyebrow .tl{ font-family:var(--sans); font-weight:600; font-size:13px; letter-spacing:.34em; text-transform:uppercase; color:var(--accent); padding-left:.34em; white-space:nowrap; }
+
+  .cert-register{ margin-top:14px; width:100%; font-family:var(--sans); font-weight:500; font-size:12px; letter-spacing:.30em; text-transform:uppercase; color:var(--navy-70); }
+  .cert-certifies{ margin-top:13px; width:100%; font-family:var(--serif); font-style:italic; font-size:18px; color:var(--navy-70); }
+  .cert-name{ font-family:var(--serif); font-weight:500; font-size:54px; line-height:1.04; color:var(--navy); margin:5px 0 2px; letter-spacing:.005em; white-space:nowrap; }
+  .cert-name-rule{ width:300px; height:1px; background:var(--cream-line); margin:6px 0 18px; position:relative; }
+  .cert-name-rule::after{ content:""; position:absolute; left:50%; top:50%; width:7px; height:7px; transform:translate(-50%,-50%) rotate(45deg); background:var(--gold); }
+
+  .cert-award{ font-family:var(--sans); font-weight:400; font-size:16px; line-height:1.62; color:var(--navy-70); max-width:74ch; text-wrap:pretty; }
+  .cert-award strong{ color:var(--navy); font-weight:600; }
+
+  .cert-designation{ margin-top:15px; width:100%; font-family:var(--serif); font-weight:600; font-size:26px; color:var(--navy); letter-spacing:.01em; }
+  .level-5 .cert-designation{ color:var(--gold-deep); }
+  .cert-subdesig{ margin-top:5px; width:100%; font-family:var(--sans); font-weight:500; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--navy-40); }
+
+  .cert-seal{ margin-top:auto; }
+  .cert-seal .terra-seal{ display:block; }
+
+  /* lower band */
+  .cert-band{ width:100%; display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-top:20px; }
+  .cert-band .col{ display:flex; flex-direction:column; gap:3px; }
+  .cert-band .col.left{ flex:1; align-items:flex-start; text-align:left; }
+  .cert-band .col.mid{ flex:0 0 auto; align-items:center; text-align:center; }
+  .cert-band .col.right{ flex:1; align-items:flex-end; text-align:right; }
+  .cert-band .lab{ font-family:var(--sans); font-weight:600; font-size:8.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--navy-40); white-space:nowrap; }
+  .cert-band .val{ font-family:var(--serif); font-size:16px; color:var(--navy); white-space:nowrap; }
+  .cert-band .signline{ width:210px; border-bottom:1px solid var(--navy); margin-bottom:5px; height:22px; display:flex; align-items:flex-end; justify-content:center; }
+  .cert-band .signline .sig{ font-family:"Cormorant Garamond"; font-style:italic; font-weight:500; font-size:23px; color:var(--navy); transform:translateY(4px); white-space:nowrap; }
+  .cert-band .certno{ font-family:var(--sans); font-weight:600; font-size:12px; letter-spacing:.12em; color:var(--accent); white-space:nowrap; }
+  .cert-band .certno-lab{ font-family:var(--sans); font-weight:600; font-size:8.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--navy-40); margin-bottom:3px; white-space:nowrap; }
+
+  .cert-foot{ position:absolute; left:24px; right:24px; bottom:30px; display:flex; flex-direction:column; align-items:center; gap:7px; padding:0 70px; }
+  .cert-foot .gold-rule{ width:120px; }
+  .cert-foot .disc{ font-family:var(--sans); font-size:9px; line-height:1.5; color:var(--navy-70); text-align:center; max-width:96ch; }
+  .cert-foot .site{ font-family:var(--sans); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--navy-40); }
+  .cert-foot .site .diamond{ color:var(--gold); margin:0 .5em; }
+
+  /* faint geometric watermark behind the body */
+  .cert-watermark{ position:absolute; left:50%; top:54%; transform:translate(-50%,-50%); opacity:.05; pointer-events:none; }
+</style>
+</head>
+<body>
+<div class="gallery">
+  <div class="gallery-head">
+    <div class="kicker">The OurPath Practitioner Pathway · Section 1</div>
+    <h1>Level Certificates</h1>
+    <p>One master template, rendered as five mentor-track faces from Asās to Ijāzah. A4 landscape (297 × 210&nbsp;mm). All copy lives in the editable <code>LEVELS</code> data; the level accent deepens with seniority and gold is reserved for the Ijāzah seal. Each face carries the recipient field, bilingual level name, award title, issue date, certificate number, signature line and level seal.</p>
+  </div>
+  <div id="sheets"></div>
+</div>
+
+<script src="terra.js"></script>
+<script>
+const YEAR = 2026;
+// ---- Editable certificate data (one family, five faces) ----
+const LEVELS = [
+  {
+    level:1, cls:'level-1', glyph:'الأساس', translit:'Asās', subtitle:'Foundation',
+    register:'Certificate of Completion',
+    award:`has completed the Foundation level of the OurPath Practitioner Pathway and is recognised as having completed <strong>OurPath Foundation (Level&nbsp;1 · Asās)</strong>.`,
+    designation:'OurPath Foundation Certificate',
+    subdesig:'Level 1 · Asās · Foundation',
+    certno:`OP-FND-L1-2024-001`, date:'14 March 2024'
+  },
+  {
+    level:2, cls:'level-2', glyph:'المعرفة', translit:'Maʿrifah', subtitle:'Knowledge',
+    register:'Certificate of Completion',
+    award:`has completed the Knowledge level, demonstrating working command of the OurPath developmental model and its evidence base, and is recognised at <strong>OurPath Knowledge (Level&nbsp;2 · Maʿrifah)</strong>.`,
+    designation:'OurPath Knowledge Certificate',
+    subdesig:'Level 2 · Maʿrifah · Knowledge',
+    certno:`OP-KNW-L2-2024-001`, date:'9 November 2024'
+  },
+  {
+    level:3, cls:'level-3', glyph:'الممارسة', translit:'Mumārasah', subtitle:'Supervised Practice',
+    register:'Certificate of Certification',
+    award:`has completed foundational learning, observed practice, and probationary supervision, and is hereby recognised as an <strong>OurPath Certified Mentor (Level&nbsp;3 · Mumārasah)</strong>.`,
+    designation:'OurPath Certified Mentor',
+    subdesig:'Level 3 · Mumārasah · Supervised Practice',
+    certno:`OP-MEN-L3-2025-001`, date:'22 May 2025'
+  },
+  {
+    level:4, cls:'level-4', glyph:'الإتقان', translit:'Itqān', subtitle:'Proficient Practice',
+    register:'Certificate of Advanced Practice',
+    award:`has demonstrated proficient independent practice through portfolio and case study, and is recognised as an <strong>OurPath Advanced Mentor (Level&nbsp;4 · Itqān)</strong>.`,
+    designation:'OurPath Advanced Mentor',
+    subdesig:'Level 4 · Itqān · Proficient Practice',
+    certno:`OP-MEN-L4-2026-001`, date:'28 February 2026'
+  },
+  {
+    level:5, cls:'level-5', glyph:'الإجازة', translit:'Ijāzah', subtitle:'Authorisation to Teach',
+    register:'Ijāzah · Certificate of Authorisation',
+    award:`is hereby granted authorisation to train, supervise and assess practitioners of the OurPath Practitioner Pathway, and is recognised as an <strong>OurPath Authorised Trainer &amp; Supervisor (Level&nbsp;5 · Ijāzah)</strong>.`,
+    designation:'OurPath Authorised Trainer & Supervisor',
+    subdesig:'Level 5 · Ijāzah · Authorisation to Teach',
+    certno:`OP-IJZ-L5-2026-001`, date:'7 June 2026'
+  },
+];
+
+const RECIPIENT = 'Yusuf Ibrahim Adeyemi';
+const DISCLAIMER = 'This is an internal professional designation awarded by OurPath Guidance Ltd. It is not a regulated or statutory qualification, nor a health, therapy, or clinical credential.';
+
+function corner(pos){
+  return `<span class="cnr ${pos}"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 L9 4.5 L4.5 9 L0 4.5 Z" fill="var(--gold)"/></svg></span>`;
+}
+
+function renderCert(d){
+  const isGold = d.level===5;
+  const seal = terraSeal({ size:106, level:d.level, glyph:d.glyph, gold:isGold });
+  const wm = terraWordmark({ scale:0.72, tagline:false });
+  const watermark = terraMark({ size:380, theme:'light' });
+  return `
+  <div class="paper cert ${d.cls}" data-w="1123" data-h="794">
+    <div class="cert-watermark">${watermark}</div>
+    <div class="cert-keyline">${corner('tl')}${corner('tr')}${corner('bl')}${corner('br')}</div>
+    <div class="cert-tab">${d.translit} · Level ${['','I','II','III','IV','V'][d.level]}</div>
+    <div class="cert-body">
+      <div class="cert-head">${wm}</div>
+      <div class="cert-eyebrow">
+        <div class="ar">${d.glyph}</div>
+        <div class="tl">${d.translit} · ${d.subtitle}</div>
+      </div>
+      <div class="cert-register">${d.register}</div>
+      <div class="cert-certifies">This certifies that</div>
+      <div class="cert-name">${RECIPIENT}</div>
+      <div class="cert-name-rule"></div>
+      <div class="cert-award">${d.award}</div>
+      <div class="cert-designation">${d.designation}</div>
+      <div class="cert-subdesig">${d.subdesig}</div>
+      <div class="cert-seal">${seal}</div>
+      <div class="cert-band">
+        <div class="col left">
+          <span class="lab">Issued</span>
+          <span class="val">${d.date}</span>
+        </div>
+        <div class="col mid">
+          <span class="certno-lab">Certificate No.</span>
+          <span class="certno">${d.certno}</span>
+        </div>
+        <div class="col right">
+          <span class="signline"><span class="sig">Sawon Moazzem</span></span>
+          <span class="val" style="font-size:14px;">Sawon Moazzem</span>
+          <span class="lab">Director / Lead Mentor</span>
+        </div>
+      </div>
+    </div>
+    <div class="cert-foot">
+      <div class="gold-rule"></div>
+      <div class="disc">${DISCLAIMER}</div>
+      <div class="site">ourpathguidance.co.uk <span class="diamond">◇</span></div>
+    </div>
+  </div>`;
+}
+
+const names = ['Foundation','Knowledge','Certified Mentor','Advanced Mentor','Authorised Trainer & Supervisor'];
+document.getElementById('sheets').innerHTML = LEVELS.map((d,i)=>`
+  <div class="frame">
+    <div class="label">
+      <span class="n">Level ${['I','II','III','IV','V'][i]}</span>
+      <span class="t">${d.translit} · ${names[i]}</span>
+      <span class="meta">A4 landscape · mentor track</span>
+    </div>
+    <div class="paper-mount paper-landscape">${renderCert(d)}</div>
+  </div>
+`).join('');
+
+terraFit();
+</script>
+</body>
+</html>

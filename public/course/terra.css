@@ -1,0 +1,108 @@
+/* ============================================================
+   TERRA — The OurPath Practitioner Pathway design system
+   Navy / Cream / Gold · Cormorant Garamond + DM Sans + Amiri
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Cormorant+SC:wght@300;400;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root{
+  /* Core TERRA palette — tuned to the genuine OurPath logo */
+  --navy:#1A2F36;   /* brand teal-ink (primary) */
+  --teal:#1A2F36;
+  --cream:#F5F0E8;  /* brand ground */
+  --gold:#C4993C;   /* brand gold */
+  --gold-l:#D4AF5A; /* lighter gold highlight */
+  --grey:#8A9BA0;   /* brand slate-grey (tagline / midpoint node) */
+
+  /* Derived tints */
+  --navy-90:#27424a;
+  --navy-70:#42595f;
+  --navy-40:#8A9BA0;
+  --navy-15:#d4dadc;
+  --cream-deep:#ECE4D4;
+  --cream-line:#E3D8C2;
+  --gold-soft:#D4AF5A;
+  --gold-deep:#9C7829;
+  --ink:#15262c;
+  --paper-edge:#e7ddc9;
+
+  /* Per-level supporting tone (ascending navy depth; gold reserved for L5) */
+  --accent:var(--navy);
+
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"DM Sans",system-ui,-apple-system,sans-serif;
+  --arabic:"Amiri","Cormorant Garamond",serif;
+
+  --rule-gold:1px solid var(--gold);
+}
+
+/* Per-level accents — ascending teal depth, navy/cream/gold stays dominant */
+.level-1{ --accent:#647C84; --seal-ring:#647C84; --seal-fill:transparent; --seal-glyph:var(--navy); --tab:#647C84; }
+.level-2{ --accent:#4C666F; --seal-ring:#4C666F; --seal-fill:transparent; --seal-glyph:var(--navy); --tab:#4C666F; }
+.level-3{ --accent:#36505A; --seal-ring:#36505A; --seal-fill:transparent; --seal-glyph:var(--navy); --tab:#36505A; }
+.level-4{ --accent:#24414A; --seal-ring:var(--gold); --seal-fill:transparent; --seal-glyph:var(--navy); --tab:#24414A; }
+.level-5{ --accent:#1A2F36; --seal-ring:var(--gold); --seal-fill:var(--gold); --seal-glyph:var(--cream); --tab:var(--gold); }
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:var(--sans);
+  color:var(--navy);
+  background:#cfc8b4;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- Responsive paper scaler ---------- */
+.gallery{ padding:56px clamp(16px,4vw,72px) 120px; }
+.gallery-head{ max-width:1123px; margin:0 auto 40px; }
+.gallery-head .kicker{ font-family:var(--sans); font-size:12px; letter-spacing:.32em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; }
+.gallery-head h1{ font-family:var(--serif); font-weight:500; color:var(--navy); font-size:clamp(28px,4vw,46px); margin:.18em 0 .1em; letter-spacing:.005em; }
+.gallery-head p{ font-size:15px; line-height:1.6; color:var(--navy-70); max-width:64ch; }
+
+.frame{ max-width:1123px; margin:0 auto 64px; }
+.frame > .label{ display:flex; align-items:baseline; gap:14px; margin:0 0 14px 2px; }
+.frame > .label .n{ font-family:var(--sans); font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep); }
+.frame > .label .t{ font-family:var(--serif); font-size:22px; color:var(--navy); font-weight:500; }
+.frame > .label .meta{ margin-left:auto; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--navy-40); }
+
+.paper-mount{ width:100%; max-width:var(--pw,1123px); margin:0 auto; position:relative; }
+.paper{
+  transform-origin:top left;
+  background:var(--cream);
+  position:relative;
+  overflow:hidden;
+}
+.paper-landscape{ --pw:1123px; }
+.paper-portrait{ --pw:794px; }
+
+/* soft printed-paper edge (not a drop shadow per se, a hairline) */
+.paper{ box-shadow:0 1px 0 var(--paper-edge), 0 24px 48px -28px rgba(27,43,75,.45); }
+
+/* ---------- Shared marks ---------- */
+.wordmark{ font-family:var(--serif); font-weight:600; color:var(--navy); letter-spacing:.02em; line-height:1; }
+.wordmark .lede{ display:block; }
+.wordmark .sub{ font-family:var(--sans); font-weight:600; letter-spacing:.42em; text-transform:uppercase; color:var(--gold-deep); }
+
+.gold-rule{ height:1px; background:var(--gold); border:0; }
+.gold-rule.short{ width:64px; margin:0 auto; }
+
+.arabic{ font-family:var(--arabic); direction:rtl; }
+
+.disclaimer{
+  font-family:var(--sans); font-size:9px; line-height:1.5; letter-spacing:.01em;
+  color:var(--navy-70); max-width:78ch; margin:0 auto;
+}
+.sitefoot{ font-family:var(--sans); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--navy-40); }
+.sitefoot .diamond{ color:var(--gold); margin:0 .5em; }
+
+/* utility */
+.smallcaps{ font-variant:small-caps; letter-spacing:.08em; }
+.tnum{ font-feature-settings:"tnum" 1; }
+
+@media print{
+  body{ background:#fff; }
+  .paper{ box-shadow:none; transform:none !important; }
+  .frame > .label, .gallery-head{ display:none; }
+}

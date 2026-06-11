@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>The OurPath Practitioner Pathway · Asset Pack</title>
+<link rel="stylesheet" href="terra.css"/>
+<style>
+  body{ background:var(--cream); color:var(--navy); }
+  .hero{ position:relative; padding:72px clamp(20px,5vw,90px) 56px; border-bottom:1px solid var(--cream-line); overflow:hidden; }
+  .hero .wm{ position:absolute; right:-60px; top:-40px; opacity:.05; pointer-events:none; }
+  .hero .inner{ max-width:1140px; margin:0 auto; position:relative; }
+  .hero .kicker{ font-family:var(--sans); font-weight:600; font-size:12px; letter-spacing:.32em; text-transform:uppercase; color:var(--gold-deep); }
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,68px); line-height:1.04; color:var(--navy); margin:.18em 0 0; letter-spacing:.004em; }
+  .hero .ar{ font-family:var(--arabic); font-size:30px; color:var(--gold-deep); margin-top:14px; }
+  .hero p{ font-family:var(--sans); font-size:16px; line-height:1.65; color:var(--navy-70); max-width:66ch; margin:18px 0 0; }
+  .hero .meta{ display:flex; gap:26px; margin-top:26px; flex-wrap:wrap; }
+  .hero .meta .mi{ font-family:var(--sans); font-size:12px; letter-spacing:.04em; color:var(--navy-70); display:flex; align-items:center; gap:8px; }
+  .hero .meta .mi b{ color:var(--navy); font-weight:600; }
+  .hero .meta .sw{ display:inline-flex; gap:5px; }
+  .hero .meta .sw i{ width:13px; height:13px; border-radius:50%; border:1px solid rgba(26,47,54,.2); }
+
+  .main{ max-width:1140px; margin:0 auto; padding:52px clamp(20px,5vw,90px) 110px; }
+  .group{ margin-bottom:48px; }
+  .group h2{ font-family:var(--sans); font-weight:600; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold-deep); margin:0 0 18px; display:flex; align-items:center; gap:14px; }
+  .group h2::after{ content:""; flex:1; height:1px; background:var(--cream-line); }
+
+  .cards{ display:grid; grid-template-columns:repeat(auto-fill,minmax(264px,1fr)); gap:16px; }
+  a.card{ text-decoration:none; color:inherit; background:#fff; border:1px solid var(--cream-line); border-radius:7px; overflow:hidden; display:flex; flex-direction:column; transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease; }
+  a.card:hover{ transform:translateY(-3px); box-shadow:0 16px 32px -22px rgba(26,47,54,.55); border-color:var(--gold); }
+  .card .thumb{ height:128px; background:var(--cream-deep); border-bottom:1px solid var(--cream-line); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .card .thumb.dark{ background:var(--navy); }
+  .card .body{ padding:15px 17px 17px; }
+  .card .sx{ font-family:var(--sans); font-weight:600; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold-deep); }
+  .card h3{ font-family:var(--serif); font-weight:600; font-size:21px; color:var(--navy); margin:5px 0 0; line-height:1.1; }
+  .card p{ font-family:var(--sans); font-size:12px; line-height:1.5; color:var(--navy-70); margin:7px 0 0; }
+
+  .foot{ border-top:1px solid var(--cream-line); padding:26px clamp(20px,5vw,90px); text-align:center; font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--navy-40); }
+  .foot .diamond{ color:var(--gold); margin:0 .5em; }
+
+  /* mini thumbnails */
+  .mini-cert{ width:150px; height:106px; background:var(--cream); border:1px solid var(--cream-line); border-radius:2px; position:relative; box-shadow:0 4px 10px -6px rgba(26,47,54,.4); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; }
+  .mini-cert .l1{ width:54px; height:1px; background:var(--gold); }
+  .mini-cert .l2{ font-family:var(--serif); font-size:13px; color:var(--navy); }
+  .mini-cert .l3{ width:30px; height:30px; }
+  .mini-doc{ width:74px; height:104px; background:#fff; border:1px solid var(--cream-line); border-radius:2px; box-shadow:0 4px 10px -6px rgba(26,47,54,.4); display:flex; flex-direction:column; gap:4px; padding:11px 9px; }
+  .mini-doc .b{ height:3px; border-radius:2px; background:var(--cream-line); }
+  .mini-doc .b.gold{ background:var(--gold); width:60%; }
+  .mini-doc .b.t{ background:var(--navy); width:80%; height:5px; margin-bottom:3px; }
+  .thumb-row{ display:flex; gap:8px; align-items:center; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="wm" id="herowm"></div>
+    <div class="inner">
+      <div class="kicker">Asset Pack · v2.0</div>
+      <h1>The OurPath<br>Practitioner Pathway</h1>
+      <div class="ar">المسار · al-Masīr</div>
+      <p>Design assets for OurPath Guidance Ltd, a five-level certifiable training programme for mentors and administrators. Every asset shares one visual system.</p>
+      <div class="meta">
+        <span class="mi"><b>13</b> asset sets</span>
+        <span class="mi">Type <b>Cormorant&nbsp;Garamond · DM&nbsp;Sans</b></span>
+        <span class="mi">Palette <span class="sw"><i style="background:var(--navy)"></i><i style="background:var(--cream)"></i><i style="background:var(--gold)"></i></span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="main" id="main"></div>
+
+  <div class="foot">OurPath Guidance Ltd <span class="diamond">◇</span> ourpathguidance.co.uk <span class="diamond">◇</span> Internal asset pack v2.0</div>
+
+<script src="terra.js"></script>
+<script>
+document.getElementById('herowm').innerHTML = terraMark({size:420, theme:'light'});
+
+const miniCert = `<div class="mini-cert"><div style="font-family:var(--arabic);font-size:11px;color:var(--gold-deep);">الأساس</div><div class="l1"></div><div class="l2">Certificate</div><div class="l3" id="ms"></div></div>`;
+const miniDoc = (gold)=>`<div class="mini-doc"><div class="b t"></div><div class="b gold"></div><div class="b"></div><div class="b"></div><div class="b" style="width:70%"></div><div class="b"></div></div>`;
+
+const GROUPS = [
+  { name:'The Brand Spine', items:[
+    { s:'Section 1', t:'Level Certificates', d:'Five mentor-track faces, Asās → Ijāzah. A4 landscape.', href:'Certificates.html', thumb:'cert' },
+    { s:'Section 2', t:'Badges & Seals', d:'Five digital medallions for signatures, LinkedIn, web.', href:'Badges.html', thumb:'badge', dark:true },
+    { s:'Section 3', t:'Programme Handbook', d:'Cover + interior masters. A4 portrait.', href:'Handbook.html', thumb:'doc' },
+    { s:'Section 4', t:'Slide Deck Template', d:'16:9 master with six slide styles for live delivery.', href:'Deck.html', thumb:'deck', dark:true },
+  ]},
+  { name:'Practice Instruments', items:[
+    { s:'Section 5', t:'OCS Check-In Sheet', d:'The five-dimension scored session instrument.', href:'OCS-CheckIn.html', thumb:'doc' },
+    { s:'Section 6', t:'Model Reference Cards', d:'Five desk cards for the core teaching vocabulary.', href:'Reference-Cards.html', thumb:'card' },
+    { s:'Section 7', t:'Reflective Portfolio', d:'Fillable evidence record. Gibbs/Kolb scaffold.', href:'Reflective-Portfolio.html', thumb:'doc' },
+    { s:'Section 8', t:'Session Observation', d:'Level 3 outcome observation grid.', href:'Observation-Form.html', thumb:'doc' },
+    { s:'Section 9', t:'Viva Rubric', d:'Levels 4–5 four-band marking sheet.', href:'Viva-Rubric.html', thumb:'doc' },
+    { s:'Section 10', t:'GLH Log', d:'Guided learning hours with per-level targets.', href:'GLH-Log.html', thumb:'doc' },
+  ]},
+  { name:'Governance & Orientation', items:[
+    { s:'Section 11', t:'Codes of Conduct', d:'Mentor + Administrator single-sheet codes.', href:'Codes-of-Conduct.html', thumb:'doc' },
+    { s:'Section 12', t:'Trainee Welcome Pack', d:'Booklet + exportable ladder diagram.', href:'Welcome-Pack.html', thumb:'ladder' },
+    { s:'Section 13', t:'Register Card', d:'Public certificate-verification card, 3 states.', href:'Register-Card.html', thumb:'badge' },
+  ]},
+];
+
+function thumbFor(kind, dark){
+  if(kind==='cert') return `<div class="mini-cert"><div style="font-family:var(--arabic);font-size:11px;color:var(--gold-deep);">الأساس</div><div class="l1"></div><div class="l2">Certificate</div>${terraSeal({size:28,level:1,glyph:'الأساس'})}</div>`;
+  if(kind==='badge') return `<div class="thumb-row">${terraBadge({size:74,level:5,glyph:'الإجازة',translit:'Ijāzah',designation:'Authorised',gold:true})}</div>`;
+  if(kind==='card') return `<div class="thumb-row">${terraSeal({size:46,level:3,glyph:'الممارسة'})}<div style="font-family:var(--serif);font-size:15px;color:var(--navy);">al-Masīr</div></div>`;
+  if(kind==='deck') return `<div style="font-family:var(--arabic);font-size:46px;color:var(--gold-l);">المعرفة</div>`;
+  if(kind==='ladder') return `<div style="display:flex;align-items:flex-end;gap:4px;height:70px;">${[20,32,44,56,68].map((h,i)=>`<div style="width:13px;height:${h}px;background:${i===4?'var(--gold)':'var(--navy)'};opacity:${0.5+i*0.12};border-radius:2px 2px 0 0;"></div>`).join('')}</div>`;
+  return miniDoc();
+}
+
+document.getElementById('main').innerHTML = GROUPS.map(g=>`
+  <div class="group">
+    <h2>${g.name}</h2>
+    <div class="cards">
+      ${g.items.map(it=>`
+        <a class="card" href="${it.href}">
+          <div class="thumb ${it.dark?'dark':''}">${thumbFor(it.thumb,it.dark)}</div>
+          <div class="body">
+            <div class="sx">${it.s}</div>
+            <h3>${it.t}</h3>
+            <p>${it.d}</p>
+          </div>
+        </a>`).join('')}
+    </div>
+  </div>`).join('');
+</script>
+</body>
+</html>

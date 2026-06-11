@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OurPath · Programme Handbook</title>
+<link rel="stylesheet" href="terra.css"/>
+<style>
+  .doc{ width:794px; height:1123px; color:var(--navy); display:flex; flex-direction:column; }
+  .doc-pad{ flex:1; display:flex; flex-direction:column; padding:64px 72px 54px; position:relative; }
+
+  /* running header / footer */
+  .rh{ display:flex; align-items:center; justify-content:space-between; padding-bottom:11px; border-bottom:1px solid var(--cream-line); }
+  .rh .l{ display:flex; align-items:center; gap:10px; font-family:var(--sans); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--navy-40); }
+  .rh .r{ font-family:var(--sans); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+  .rf{ display:flex; align-items:center; justify-content:space-between; padding-top:12px; border-top:1px solid var(--cream-line); font-family:var(--sans); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--navy-40); }
+  .rf .diamond{ color:var(--gold); margin:0 .5em; }
+  .doc-body{ flex:1; padding:30px 0 26px; }
+
+  /* type scale */
+  .eyebrow{ font-family:var(--sans); font-weight:600; font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--gold-deep); }
+  h2.sec{ font-family:var(--serif); font-weight:500; font-size:34px; line-height:1.1; color:var(--navy); margin:.2em 0 .1em; letter-spacing:.005em; }
+  h3.sub{ font-family:var(--serif); font-weight:600; font-size:20px; color:var(--navy); margin:0 0 .3em; }
+  p.body{ font-family:var(--sans); font-weight:400; font-size:11.5pt; line-height:1.62; color:var(--navy-90); margin:0 0 1em; text-wrap:pretty; }
+  p.body.small{ font-size:10.5pt; }
+  .lead{ font-family:var(--serif); font-size:17px; line-height:1.5; color:var(--navy-70); font-style:italic; }
+
+  .cols2{ column-count:2; column-gap:32px; }
+  .cols2 p{ margin-top:0; }
+
+  /* level summary table */
+  .ltable{ width:100%; border-collapse:collapse; margin-top:8px; }
+  .ltable tr{ border-bottom:1px solid var(--cream-line); }
+  .ltable tr:first-child{ border-top:1px solid var(--gold); }
+  .ltable th{ text-align:left; vertical-align:top; width:150px; padding:11px 16px 11px 0; font-family:var(--sans); font-weight:600; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
+  .ltable td{ vertical-align:top; padding:11px 0; font-family:var(--sans); font-size:11pt; line-height:1.5; color:var(--navy-90); }
+
+  /* callouts */
+  .callout{ border:1px solid var(--cream-line); border-left:2px solid var(--gold); background:var(--cream-deep); padding:16px 18px; border-radius:3px; margin:18px 0; }
+  .callout .ctitle{ font-family:var(--sans); font-weight:600; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:6px; display:flex; align-items:center; gap:7px; }
+  .callout p{ font-family:var(--sans); font-size:10.5pt; line-height:1.55; color:var(--navy-90); margin:0; }
+  .callout.decision{ border-left-color:var(--accent); }
+  .callout.decision .ctitle{ color:var(--accent); }
+  .callout.quiet{ background:transparent; border-left-color:var(--navy-40); }
+
+  .pullquote{ font-family:var(--serif); font-style:italic; font-size:21px; line-height:1.42; color:var(--navy); text-align:center; padding:6px 24px; margin:6px 0 4px; }
+  .pullquote .src{ display:block; font-family:var(--sans); font-style:normal; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--navy-40); margin-top:14px; }
+
+  /* reading list */
+  .rl{ list-style:none; padding:0; margin:6px 0 0; }
+  .rl li{ display:flex; gap:16px; padding:12px 0; border-bottom:1px solid var(--cream-line); }
+  .rl .yr{ font-family:var(--serif); font-size:15px; color:var(--gold-deep); flex:0 0 84px; }
+  .rl .meta b{ font-family:var(--serif); font-weight:600; font-size:15px; color:var(--navy); }
+  .rl .meta .auth{ font-family:var(--sans); font-size:10pt; color:var(--navy-40); }
+  .rl .meta p{ font-family:var(--sans); font-size:10pt; line-height:1.5; color:var(--navy-90); margin:3px 0 0; }
+
+  /* arabic quiet header for section opener */
+  .opener{ flex:1; display:flex; flex-direction:column; }
+  .opener .glyphwrap{ position:relative; padding:44px 0 30px; display:flex; flex-direction:column; align-items:center; }
+  .opener .arbig{ font-family:var(--arabic); font-size:120px; line-height:1; color:var(--navy); opacity:0.10; position:absolute; top:6px; }
+  .opener .ardisplay{ font-family:var(--arabic); font-size:62px; color:var(--navy); position:relative; }
+  .opener .romantitle{ font-family:var(--serif); font-weight:500; font-size:40px; color:var(--navy); margin-top:10px; position:relative; }
+  .opener .meta{ font-family:var(--sans); font-weight:600; font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--accent); margin-top:14px; }
+
+  /* cover */
+  .cover{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; }
+  .cover .ct{ font-family:var(--serif); font-weight:500; font-size:39px; line-height:1.14; color:var(--navy); margin:32px 0 0; letter-spacing:.005em; max-width:13ch; }
+  .cover .cs{ font-family:var(--serif); font-style:italic; font-size:17px; color:var(--navy-70); margin-top:18px; max-width:40ch; }
+  .cover .arabic-line{ font-family:var(--arabic); font-size:30px; color:var(--gold-deep); margin-top:30px; }
+  .cover .arabic-tl{ font-family:var(--sans); font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--navy-40); margin-top:8px; }
+  .cover .ver{ position:absolute; bottom:0; font-family:var(--sans); font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--navy-40); }
+  .cbrackets::before,.cbrackets::after{ content:""; position:absolute; width:40px; height:40px; border-color:var(--gold); border-style:solid; opacity:.55; }
+  .cbrackets::before{ top:0; left:0; border-width:1px 0 0 1px; }
+  .cbrackets::after{ bottom:0; right:0; border-width:0 1px 1px 0; }
+</style>
+</head>
+<body>
+<div class="gallery">
+  <div class="gallery-head">
+    <div class="kicker">The OurPath Practitioner Pathway · Section 3</div>
+    <h1>Programme Handbook</h1>
+    <p>A4 portrait document template: a cover plus the interior masters the curriculum drops into. The section opener, a two-column body page, the level-summary table, the callout system (disclaimer &amp; ⚠️ decision), and a reading-list style. Shown here populated with the genuine OurPath developmental model so each master reads true. Running footer carries the page number and <code>ourpathguidance.co.uk ◇</code>.</p>
+  </div>
+  <div id="pages"></div>
+</div>
+
+<script src="terra.js"></script>
+<script>
+function page(label, inner, pageNo, sectionR){
+  return `
+  <div class="frame">
+    <div class="label"><span class="n">${label.n}</span><span class="t">${label.t}</span><span class="meta">A4 portrait</span></div>
+    <div class="paper-mount paper-portrait">
+      <div class="paper doc" data-w="794" data-h="1123">
+        <div class="doc-pad">
+          <div class="rh">
+            <div class="l">${terraMark({size:18})}<span>The OurPath Practitioner Pathway</span></div>
+            <div class="r">${sectionR||''}</div>
+          </div>
+          <div class="doc-body">${inner}</div>
+          <div class="rf"><span>OurPath Guidance Ltd · Programme Handbook v2.0</span><span>ourpathguidance.co.uk <span class="diamond">◇</span> &nbsp;·&nbsp; ${pageNo}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ---- COVER ----
+const cover = `
+  <div class="frame">
+    <div class="label"><span class="n">Cover</span><span class="t">Programme Handbook</span><span class="meta">A4 portrait</span></div>
+    <div class="paper-mount paper-portrait">
+      <div class="paper doc" data-w="794" data-h="1123">
+        <div class="doc-pad">
+          <div class="cover cbrackets">
+            ${terraWordmark({ scale:0.92 })}
+            <div class="ct">The OurPath Practitioner Pathway</div>
+            <div class="cs">A 5-Level Certifiable Programme for Mentors and Administrators</div>
+            <div class="arabic-line">المسار</div>
+            <div class="arabic-tl">al-Masīr · The Pathway</div>
+            <div class="ver">v2.0 · OurPath Guidance Ltd · Internal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+// ---- SECTION OPENER ----
+const opener = `
+  <div class="frame">
+    <div class="label"><span class="n">Master A</span><span class="t">Section opener</span><span class="meta">A4 portrait</span></div>
+    <div class="paper-mount paper-portrait">
+      <div class="paper doc level-2" data-w="794" data-h="1123">
+        <div class="doc-pad">
+          <div class="rh"><div class="l">${terraMark({size:18})}<span>The OurPath Practitioner Pathway</span></div><div class="r">Level 2 · Maʿrifah</div></div>
+          <div class="doc-body opener">
+            <div class="glyphwrap">
+              <div class="arbig">المعرفة</div>
+              <div class="ardisplay">المعرفة</div>
+              <div class="romantitle">Maʿrifah · Knowledge</div>
+              <div class="meta">Level 2 · The Knowledge Level</div>
+            </div>
+            <p class="lead" style="text-align:center;max-width:54ch;margin:8px auto 0;">Working command of the OurPath developmental model and the evidence base beneath it: the vocabulary, the Pathway Framework, and the convergences between Islamic psychospiritual tradition and contemporary developmental science.</p>
+            <div style="margin-top:auto;">${terraBrandDivider('light',120)}</div>
+          </div>
+          <div class="rf"><span>OurPath Guidance Ltd · Programme Handbook v2.0</span><span>ourpathguidance.co.uk <span class="diamond">◇</span> &nbsp;·&nbsp; 14</span></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+// ---- BODY / TWO-COLUMN + LEVEL TABLE ----
+const body = page(
+  {n:'Master B', t:'Body page · two-column + level table'},
+  `<div class="eyebrow">2.1 · The Tazkiyah Principle</div>
+   <h2 class="sec">The soul has a trajectory</h2>
+   <div class="cols2">
+     <p class="body">Tazkiyah, the purification and cultivation of the <em>nafs</em> (self), is the classical Islamic framework for human development. It is not a therapeutic modality but an ontological orientation: the work of development is to align daily life with the soul's trajectory.</p>
+     <p class="body">OurPath draws from this tradition not as religious instruction but as a structural lens. The three stations of the nafs, <em>al-ammāra</em>, <em>al-lawwāma</em> and <em>al-muṭmaʾinna</em>, function as developmental markers: where is a person's inner life pulling them, and toward what?</p>
+   </div>
+   <h3 class="sub" style="margin-top:18px;">Level 2 · Maʿrifah summary</h3>
+   <table class="ltable">
+     <tr><th>Purpose</th><td>To establish working command of the OurPath developmental model and its evidence base.</td></tr>
+     <tr><th>Guided hours</th><td>≈ 30 guided learning hours (taught + directed study).</td></tr>
+     <tr><th>Key outcomes</th><td>Articulates the six-phase Pathway Framework; maps the Nine Reflection Domains; explains the Islamic–Western convergences accurately.</td></tr>
+     <tr><th>Evidence</th><td>Knowledge assessment; annotated convergence map; reflective commentary.</td></tr>
+     <tr><th>Award</th><td>OurPath Knowledge Certificate <span style="color:var(--navy-40)">(Level 2 · Maʿrifah)</span></td></tr>
+   </table>`,
+  '14', 'Level 2 · Maʿrifah');
+
+// ---- CALLOUTS ----
+const callouts = page(
+  {n:'Master C', t:'Callouts · disclaimer, decision & pull-quote'},
+  `<div class="eyebrow">House styles · emphasis</div>
+   <h2 class="sec">Callouts &amp; decisions</h2>
+   <p class="body">Three emphasis styles carry weight without breaking the calm of the page: the mandatory disclaimer, a progression decision, and a pull-quote for the model's anchoring ideas.</p>
+   <div class="callout">
+     <div class="ctitle">${terraMark({size:14})} Mandatory disclaimer</div>
+     <p>This is an internal professional designation awarded by OurPath Guidance Ltd. It is not a regulated or statutory qualification, nor a health, therapy, or clinical credential.</p>
+   </div>
+   <div class="callout decision">
+     <div class="ctitle">⚠️ Progression decision</div>
+     <p>A trainee may not enter Level 3 supervised practice until the Level 2 knowledge assessment is passed, a Mentor Code of Conduct is signed, and Session-Zero observation is scheduled.</p>
+   </div>
+   <div class="pullquote">
+     “The human being is not primarily a problem to be solved, but a trust, an <span style="font-style:normal;font-family:var(--arabic);">أمانة</span>, to be unfolded, gradually and in relationship.”
+     <span class="src">Philosophical Foundations · §1.1</span>
+   </div>`,
+  '21', 'Reference');
+
+// ---- READING LIST ----
+const reading = page(
+  {n:'Master D', t:'Reading-list style'},
+  `<div class="eyebrow">Knowledge Compendium</div>
+   <h2 class="sec">Core reading</h2>
+   <p class="body small">The intellectual sources of the model: classical Islamic texts alongside contemporary developmental works.</p>
+   <ul class="rl">
+     <li><span class="yr">d. 1111</span><div class="meta"><b>Iḥyāʾ ʿUlūm al-Dīn</b> &nbsp;<span class="auth">Imam al-Ghazālī</span><p>Core framework for nafs, qalb and tazkiyah; the most comprehensive classical treatment of Islamic psychology.</p></div></li>
+     <li><span class="yr">d. 1350</span><div class="meta"><b>Madārij al-Sālikīn</b> &nbsp;<span class="auth">Ibn al-Qayyim</span><p>Map of the stations (maqāmāt) and states (aḥwāl) of the journey; source for the phase sequencing.</p></div></li>
+     <li><span class="yr">1959</span><div class="meta"><b>Man's Search for Meaning</b> &nbsp;<span class="auth">Viktor Frankl</span><p>Logotherapy and the primacy of meaning; foundation for Purpose as a primary field.</p></div></li>
+     <li><span class="yr">1991</span><div class="meta"><b>Motivational Interviewing</b> &nbsp;<span class="auth">Miller &amp; Rollnick</span><p>The spirit of partnership, acceptance, evocation and compassion that informs the mentor stance.</p></div></li>
+     <li><span class="yr">2006</span><div class="meta"><b>Mindset</b> &nbsp;<span class="auth">Carol Dweck</span><p>Growth vs fixed mindset; underpins the Growth field and the response to setback.</p></div></li>
+   </ul>`,
+  '47', 'Compendium');
+
+document.getElementById('pages').innerHTML = cover + opener + body + callouts + reading;
+terraFit();
+</script>
+</body>
+</html>

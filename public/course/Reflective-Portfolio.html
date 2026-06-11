@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OurPath · Reflective Portfolio</title>
+<link rel="stylesheet" href="terra.css"/>
+<style>
+  .doc{ width:794px; height:1123px; color:var(--navy); }
+  .dp{ position:absolute; inset:0; padding:58px 64px 46px; display:flex; flex-direction:column; }
+  .rh{ display:flex; align-items:center; justify-content:space-between; padding-bottom:11px; border-bottom:1px solid var(--cream-line); }
+  .rh .l{ display:flex; align-items:center; gap:10px; font-family:var(--sans); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--navy-40); }
+  .rh .r{ font-family:var(--sans); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+  .rf{ margin-top:auto; display:flex; align-items:center; justify-content:space-between; padding-top:12px; border-top:1px solid var(--cream-line); font-family:var(--sans); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--navy-40); }
+  .rf .diamond{ color:var(--gold); margin:0 .5em; }
+  .db{ flex:1; padding:26px 0 18px; }
+
+  .eyebrow{ font-family:var(--sans); font-weight:600; font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold-deep); }
+  h2.t{ font-family:var(--serif); font-weight:500; font-size:32px; line-height:1.08; color:var(--navy); margin:6px 0 0; }
+  p.intro{ font-family:var(--sans); font-size:11pt; line-height:1.55; color:var(--navy-70); margin:12px 0 0; max-width:62ch; }
+
+  .field{ margin-top:10px; }
+  .field .fl{ font-family:var(--sans); font-weight:600; font-size:8.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--navy-40); }
+  .field .fline{ height:18px; border-bottom:1px dotted var(--navy-40); }
+
+  .lines{ background-image:repeating-linear-gradient(transparent,transparent 25px,var(--cream-line) 25px,var(--cream-line) 26px); }
+
+  /* cover */
+  .cover{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; }
+  .cover .ct{ font-family:var(--serif); font-weight:500; font-size:44px; line-height:1.08; color:var(--navy); margin-top:26px; }
+  .cover .cs{ font-family:var(--serif); font-style:italic; font-size:17px; color:var(--navy-70); margin-top:12px; }
+  .cover .holder{ margin-top:42px; width:60%; }
+  .cbr::before,.cbr::after{ content:""; position:absolute; width:36px; height:36px; border-color:var(--gold); border-style:solid; opacity:.55; }
+  .cbr::before{ top:0; left:0; border-width:1px 0 0 1px; } .cbr::after{ bottom:0; right:0; border-width:0 1px 1px 0; }
+
+  /* contents */
+  .toc{ list-style:none; padding:0; margin:18px 0 0; }
+  .toc li{ display:flex; align-items:baseline; gap:14px; padding:14px 0; border-bottom:1px solid var(--cream-line); }
+  .toc .num{ font-family:var(--serif); font-size:18px; color:var(--gold-deep); width:34px; }
+  .toc .nm{ font-family:var(--serif); font-weight:600; font-size:18px; color:var(--navy); }
+  .toc .ds{ font-family:var(--sans); font-size:10pt; color:var(--navy-70); }
+  .toc .dot{ flex:1; border-bottom:1px dotted var(--navy-40); transform:translateY(-4px); }
+  .toc .pg{ font-family:var(--sans); font-size:10pt; color:var(--navy-40); }
+
+  /* gibbs scaffold */
+  .gibbs{ display:flex; flex-direction:column; gap:13px; margin-top:16px; }
+  .gstep{ border:1px solid var(--cream-line); border-left:2px solid var(--accent); border-radius:3px; padding:11px 14px 13px; }
+  .gstep .gh{ display:flex; align-items:baseline; gap:9px; }
+  .gstep .gn{ font-family:var(--sans); font-weight:700; font-size:10px; letter-spacing:.1em; color:var(--accent); }
+  .gstep .gt{ font-family:var(--serif); font-weight:600; font-size:16px; color:var(--navy); }
+  .gstep .gp{ display:block; font-family:var(--sans); font-style:italic; font-size:9.5pt; color:var(--navy-40); margin:2px 0 0 26px; }
+  .gstep .gl{ margin-top:7px; height:50px; }
+  .gstep.tall .gl{ height:64px; }
+
+  /* logs */
+  .sec-block{ margin-top:6px; }
+  .sec-block + .sec-block{ margin-top:20px; }
+  .blab{ font-family:var(--sans); font-weight:600; font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:8px; display:flex; align-items:center; gap:7px; }
+  table.log{ width:100%; border-collapse:collapse; }
+  table.log th{ font-family:var(--sans); font-weight:600; font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:var(--navy-40); text-align:left; padding:6px 8px; border-bottom:1px solid var(--gold); }
+  table.log td{ height:26px; border-bottom:1px solid var(--cream-line); padding:0 8px; }
+</style>
+</head>
+<body>
+<div class="gallery">
+  <div class="gallery-head">
+    <div class="kicker">The OurPath Practitioner Pathway · Section 7</div>
+    <h1>Reflective Portfolio</h1>
+    <p>A4 portrait, fillable: the practitioner's evidence record, built to be added to from Level&nbsp;3 upward. Cover and contents, the Gibbs/Kolb reflective-entry scaffold, and a logs page for case reviews, supervision notes and CPD.</p>
+  </div>
+  <div id="pages"></div>
+</div>
+
+<script src="terra.js"></script>
+<script>
+function shell(label, level, sectionR, page, inner){
+  return `
+  <div class="frame">
+    <div class="label"><span class="n">${label.n}</span><span class="t">${label.t}</span><span class="meta">A4 portrait · fillable</span></div>
+    <div class="paper-mount paper-portrait">
+      <div class="paper doc ${level||''}" data-w="794" data-h="1123">
+        <div class="dp">
+          <div class="rh"><div class="l">${terraMark({size:18})}<span>Reflective Portfolio</span></div><div class="r">${sectionR||''}</div></div>
+          <div class="db">${inner}</div>
+          <div class="rf"><span>OurPath Guidance Ltd · Reflective Portfolio v2.0</span><span>ourpathguidance.co.uk <span class="diamond">◇</span> &nbsp;·&nbsp; ${page}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// COVER (custom, no header)
+const cover = `
+  <div class="frame">
+    <div class="label"><span class="n">Cover</span><span class="t">Reflective Portfolio</span><span class="meta">A4 portrait</span></div>
+    <div class="paper-mount paper-portrait">
+      <div class="paper doc level-3" data-w="794" data-h="1123">
+        <div class="dp">
+          <div class="cover cbr">
+            ${terraWordmark({scale:0.86})}
+            <div class="eyebrow" style="margin-top:34px;">Levels 3–5 · Mentor Track</div>
+            <div class="ct">Reflective Portfolio</div>
+            <div class="cs">A continuous record of practice, supervision and reflection</div>
+            <div class="holder">
+              <div class="field"><div class="fl">Practitioner</div><div class="fline"></div></div>
+              <div class="field"><div class="fl">Current level</div><div class="fline"></div></div>
+              <div class="field"><div class="fl">Opened (date)</div><div class="fline"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+// CONTENTS
+const contents = shell({n:'Page', t:'Contents'}, 'level-3', 'Contents', '02', `
+  <div class="eyebrow">What this portfolio holds</div>
+  <h2 class="t">Contents</h2>
+  <p class="intro">Assembled progressively as you move through supervised practice. Each section carries its own evidence; the reflective entries tie them together.</p>
+  <ul class="toc">
+    <li><span class="num">01</span><span class="nm">Guided Learning Hours</span><span class="ds">notional &amp; taught hours log</span><span class="dot"></span><span class="pg">p. 04</span></li>
+    <li><span class="num">02</span><span class="nm">Case Reviews</span><span class="ds">anonymised developmental cases</span><span class="dot"></span><span class="pg">p. 08</span></li>
+    <li><span class="num">03</span><span class="nm">Observed Practice</span><span class="ds">session observation feedback</span><span class="dot"></span><span class="pg">p. 14</span></li>
+    <li><span class="num">04</span><span class="nm">Supervision Notes</span><span class="ds">records of supervision sessions</span><span class="dot"></span><span class="pg">p. 18</span></li>
+    <li><span class="num">05</span><span class="nm">CPD Log</span><span class="ds">continuing professional development</span><span class="dot"></span><span class="pg">p. 24</span></li>
+    <li><span class="num">06</span><span class="nm">Reflective Entries</span><span class="ds">Gibbs / Kolb reflective cycle</span><span class="dot"></span><span class="pg">p. 28</span></li>
+  </ul>`);
+
+// REFLECTIVE ENTRY (Gibbs scaffold)
+const gibbs = shell({n:'Master', t:'Reflective entry · Gibbs / Kolb'}, 'level-3', 'Reflective Entries', '28', `
+  <div class="eyebrow">Reflective Entry No. ___</div>
+  <h2 class="t">A structured reflection</h2>
+  <div style="display:flex; gap:14px; margin-top:10px;">
+    <div class="field" style="flex:1;"><div class="fl">Date</div><div class="fline"></div></div>
+    <div class="field" style="flex:2;"><div class="fl">Focus / trigger event</div><div class="fline"></div></div>
+    <div class="field" style="flex:1;"><div class="fl">Phase / domain</div><div class="fline"></div></div>
+  </div>
+  <div class="gibbs">
+    <div class="gstep"><div class="gh"><span class="gn">01</span><span class="gt">Description</span></div><span class="gp">What happened?</span><div class="gl lines"></div></div>
+    <div class="gstep"><div class="gh"><span class="gn">02</span><span class="gt">Feelings</span></div><span class="gp">What was I thinking and feeling?</span><div class="gl lines"></div></div>
+    <div class="gstep"><div class="gh"><span class="gn">03</span><span class="gt">Evaluation &amp; Analysis</span></div><span class="gp">What was good or difficult? What sense can I make of it?</span><div class="gl tall lines"></div></div>
+    <div class="gstep"><div class="gh"><span class="gn">04</span><span class="gt">Conclusion</span></div><span class="gp">What else could I have done?</span><div class="gl lines"></div></div>
+    <div class="gstep"><div class="gh"><span class="gn">05</span><span class="gt">Action Plan</span></div><span class="gp">If it arose again, what would I do?</span><div class="gl lines"></div></div>
+  </div>`);
+
+// LOGS
+const logs = shell({n:'Master', t:'Logs · case · supervision · CPD'}, 'level-3', 'Records', '18', `
+  <div class="eyebrow">Records &amp; evidence</div>
+  <h2 class="t">Practice logs</h2>
+  <div class="sec-block">
+    <div class="blab">${terraMark({size:13})} Case review summary</div>
+    <table class="log"><tr><th style="width:80px;">Date</th><th style="width:90px;">Case ref</th><th>Presenting focus</th><th style="width:120px;">Phase</th><th style="width:90px;">Outcome</th></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr></table>
+  </div>
+  <div class="sec-block">
+    <div class="blab">${terraMark({size:13})} Supervision notes</div>
+    <table class="log"><tr><th style="width:80px;">Date</th><th style="width:130px;">Supervisor</th><th>Themes discussed &amp; actions</th><th style="width:90px;">Hours</th></tr>
+      <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></table>
+  </div>
+  <div class="sec-block">
+    <div class="blab">${terraMark({size:13})} CPD log</div>
+    <table class="log"><tr><th style="width:80px;">Date</th><th>Activity</th><th style="width:120px;">Type</th><th style="width:70px;">Hours</th></tr>
+      <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></table>
+  </div>`);
+
+document.getElementById('pages').innerHTML = cover + contents + gibbs + logs;
+terraFit();
+</script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OurPath · Model Reference Cards</title>
+<link rel="stylesheet" href="terra.css"/>
+<style>
+  .card{ width:794px; height:559px; color:var(--navy); }
+  .cp{ position:absolute; inset:0; padding:34px 42px 26px; display:flex; flex-direction:column; }
+  .card-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:18px; }
+  .card-head > div:first-child{ flex:1; min-width:0; }
+  .card-head .mk{ flex:0 0 auto; }
+  .card-head .eyebrow{ font-family:var(--sans); font-weight:600; font-size:9.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold-deep); }
+  .card-head h2{ font-family:var(--serif); font-weight:600; font-size:29px; line-height:1.04; color:var(--navy); margin:4px 0 0; }
+  .card-head .ar{ font-family:var(--arabic); font-size:22px; color:var(--gold-deep); margin-top:3px; }
+  .card-head .mk{ text-align:right; }
+  .card-head .mk .tag{ font-family:var(--sans); font-weight:600; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin-top:6px; }
+  .grule{ height:1px; background:var(--gold); margin:14px 0 0; }
+  .card-body{ flex:1; display:flex; flex-direction:column; justify-content:center; }
+  .card-foot{ display:flex; justify-content:space-between; align-items:center; font-family:var(--sans); font-size:8.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--navy-40); padding-top:10px; }
+  .card-foot .diamond{ color:var(--gold); margin:0 .5em; }
+
+  /* phase flow */
+  .pflow{ display:flex; align-items:stretch; }
+  .pchip{ flex:1; background:var(--cream-deep); border:1px solid var(--cream-line); border-top:2px solid var(--accent); border-radius:3px; padding:14px 12px; display:flex; flex-direction:column; gap:6px; }
+  .pchip .pn{ font-family:var(--sans); font-weight:700; font-size:10px; letter-spacing:.1em; color:var(--accent); }
+  .pchip .pen{ font-family:var(--serif); font-weight:600; font-size:17px; color:var(--navy); line-height:1.05; }
+  .pchip .par{ font-family:var(--arabic); font-size:15px; color:var(--gold-deep); }
+  .pchip .pt{ font-family:var(--sans); font-size:10px; line-height:1.35; color:var(--navy-70); }
+  .parrow{ flex:0 0 20px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:15px; }
+
+  /* nine domains grid */
+  .ngrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:11px; }
+  .ncell{ border:1px solid var(--cream-line); border-radius:3px; padding:11px 13px; display:flex; flex-direction:column; gap:3px; background:var(--cream); }
+  .ncell .nh{ display:flex; align-items:baseline; gap:8px; }
+  .ncell .nn{ font-family:var(--serif); font-weight:600; font-size:18px; color:var(--gold-deep); }
+  .ncell .nt{ font-family:var(--serif); font-weight:600; font-size:14.5px; color:var(--navy); line-height:1.04; }
+  .ncell .nq{ font-family:var(--sans); font-style:italic; font-size:10px; color:var(--navy-70); }
+  .ncell .nf{ font-family:var(--sans); font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:var(--navy-40); margin-top:1px; }
+
+  /* stances + dispositions */
+  .stances{ display:grid; grid-template-columns:repeat(4,1fr); gap:11px; }
+  .stance{ border:1px solid var(--cream-line); border-radius:3px; padding:13px 13px 14px; background:var(--cream-deep); }
+  .stance .sh{ display:flex; align-items:baseline; justify-content:space-between; }
+  .stance .se{ font-family:var(--serif); font-weight:600; font-size:18px; color:var(--navy); }
+  .stance .sa{ font-family:var(--arabic); font-size:15px; color:var(--gold-deep); }
+  .stance .sd{ font-family:var(--sans); font-size:10px; line-height:1.4; color:var(--navy-70); margin-top:7px; }
+  .dlabel{ font-family:var(--sans); font-weight:600; font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep); margin:18px 0 9px; }
+  .disps{ display:flex; gap:9px; }
+  .disp{ flex:1; text-align:center; border:1px solid var(--cream-line); border-radius:3px; padding:9px 6px; }
+  .disp b{ display:block; font-family:var(--serif); font-weight:600; font-size:15px; color:var(--navy); }
+  .disp span{ font-family:var(--sans); font-size:8.5px; line-height:1.3; color:var(--navy-70); }
+
+  /* position map axes */
+  .axes{ display:flex; flex-direction:column; gap:18px; padding:4px 4px 0; }
+  .axis .alab{ display:flex; align-items:baseline; gap:10px; margin-bottom:7px; }
+  .axis .an{ font-family:var(--serif); font-weight:600; font-size:18px; color:var(--navy); }
+  .axis .aq{ font-family:var(--sans); font-style:italic; font-size:10.5px; color:var(--navy-40); white-space:nowrap; }
+  .axisbar{ display:flex; align-items:center; gap:12px; }
+  .axisbar .pole{ font-family:var(--sans); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--navy-70); width:120px; }
+  .axisbar .pole.hi{ text-align:right; }
+  .axisbar .track{ flex:1; height:2px; background:var(--cream-line); position:relative; }
+  .axisbar .ticks{ flex:1; display:flex; justify-content:space-between; }
+  .axisbar .tk{ width:13px; height:13px; border-radius:50%; border:1.3px solid var(--accent); }
+
+  /* digestion flow */
+  .dflow{ display:flex; align-items:stretch; }
+  .dstep{ flex:1; text-align:center; padding:14px 8px; display:flex; flex-direction:column; gap:7px; align-items:center; }
+  .dstep .dnum{ width:30px; height:30px; border-radius:50%; border:1.5px solid var(--gold); color:var(--gold-deep); font-family:var(--sans); font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .dstep .den{ font-family:var(--serif); font-weight:600; font-size:17px; color:var(--navy); }
+  .dstep .ddesc{ font-family:var(--sans); font-size:9.5px; line-height:1.35; color:var(--navy-70); }
+  .darrow{ flex:0 0 16px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:14px; }
+</style>
+</head>
+<body>
+<div class="gallery">
+  <div class="gallery-head">
+    <div class="kicker">The OurPath Practitioner Pathway · Section 6</div>
+    <h1>Model Reference Cards</h1>
+    <p>The core teaching vocabulary, as one set of A5-landscape desk cards in print and digital. Built from the genuine OurPath developmental model. Five cards: the Pathway, the Nine Reflection Domains, the Mentor Stances &amp; Dispositions, the Position Map, and the Digestion Framework.</p>
+  </div>
+  <div id="cards"></div>
+</div>
+
+<script src="terra.js"></script>
+<script>
+function card(idx, accentClass, head, ar, tag, bodyHTML){
+  return `
+  <div class="frame">
+    <div class="label"><span class="n">Card ${idx}</span><span class="t">${head}</span><span class="meta">A5 landscape</span></div>
+    <div class="paper-mount" style="--pw:794px;">
+      <div class="paper card ${accentClass}" data-w="794" data-h="559">
+        <div class="cp">
+          <div class="card-head">
+            <div>
+              <div class="eyebrow">Reference Card · ${String(idx).padStart(2,'0')}</div>
+              <h2>${head}</h2>
+              <div class="ar">${ar}</div>
+            </div>
+            <div class="mk">${terraMark({size:34,theme:'light'})}<div class="tag">${tag}</div></div>
+          </div>
+          <div class="grule"></div>
+          <div class="card-body">${bodyHTML}</div>
+          <div class="card-foot"><span>OurPath developmental model · ${tag}</span><span>ourpathguidance.co.uk <span class="diamond">◇</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// CARD 1 — Pathway
+const phases = [
+  ['1','Orientation','التوجّه','Receive, locate and orient.'],
+  ['2','Excavation','الكشف','Surface what lies beneath.'],
+  ['3','Clarification','الوُضوح','Name values &amp; direction.'],
+  ['4','Construction','البِناء','Build plans; activate agency.'],
+  ['5','Integration','التكامل','Test, refine and embed.'],
+  ['6','Transmission','الإرسال','Receive support, then give it.'],
+];
+const c1body = `<div class="pflow">${phases.map((p,i)=>`
+  <div class="pchip"><span class="pn">PHASE ${p[0]}</span><span class="pen">${p[1]}</span><span class="par">${p[2]}</span><span class="pt">${p[3]}</span></div>
+  ${i<phases.length-1?'<div class="parrow">→</div>':''}`).join('')}</div>
+  <p style="font-family:var(--sans);font-size:10.5px;color:var(--navy-40);text-align:center;margin:18px 0 0;letter-spacing:.04em;">The six sequential phases of the Pathway Framework, the structural spine of the model.</p>`;
+
+// CARD 2 — Nine Domains
+const domains = [
+  ['1','Identity &amp; Origin','“Who am I?”','Fitra · Nasab'],
+  ['2','Values &amp; Conviction','“What do I stand for?”','Aqida · Taqwa'],
+  ['3','Purpose &amp; Direction','“Where am I going?”','Maqasid · Niyyah'],
+  ['4','Relationships &amp; Community','“Who am I with?”','Suhba · Umma'],
+  ['5','Work &amp; Contribution','“What am I doing?”','Khalifa · Kasb'],
+  ['6','Inner State &amp; Spiritual Life','“My heart’s condition?”','Muraqaba · Ahwal'],
+  ['7','Obstacles &amp; Patterns','“What holds me back?”','Nafs al-Ammara'],
+  ['8','Growth &amp; Learning','“How am I developing?”','Talab al-ʿIlm'],
+  ['9','Legacy &amp; Contribution','“What am I leaving?”','Sadaqa Jariya'],
+];
+const c2body = `<div class="ngrid">${domains.map(d=>`
+  <div class="ncell"><div class="nh"><span class="nn">${d[0]}</span><span class="nt">${d[1]}</span></div><span class="nq">${d[2]}</span><span class="nf">${d[3]}</span></div>`).join('')}</div>`;
+
+// CARD 3 — Stances + Dispositions
+const stances = [
+  ['Witness','شاهد','Heard without interpretation or direction.'],
+  ['Mirror','مرآة','Reflect the pattern not yet seen.'],
+  ['Guide','دليل','Direction, offered with humility.'],
+  ['Companion','رفيق','Presence in difficulty, without fixing.'],
+];
+const disps = [
+  ['Adab','Dignified respect'],
+  ['Ikhlāṣ','Purity of intention'],
+  ['Ṣabr','Patient endurance'],
+  ['Amāna','Trustworthiness'],
+  ['Tawāḍuʿ','Humility'],
+];
+const c3body = `
+  <div class="stances">${stances.map(s=>`
+    <div class="stance"><div class="sh"><span class="se">${s[0]}</span><span class="sa">${s[1]}</span></div><div class="sd">${s[2]}</div></div>`).join('')}</div>
+  <div class="dlabel">Five mentor dispositions</div>
+  <div class="disps">${disps.map(d=>`<div class="disp"><b>${d[0]}</b><span>${d[1]}</span></div>`).join('')}</div>`;
+
+// CARD 4 — Position Map
+const axes = [
+  ['Clarity','Do they understand their own direction?','Confused','Clear'],
+  ['Commitment','How invested are they in their change?','Ambivalent','Committed'],
+  ['Capacity','Do they have what is needed to act?','Depleted','Resourced'],
+  ['Context','Is the environment helping or resisting?','Constraining','Enabling'],
+];
+const c4body = `<div class="axes">${axes.map(a=>`
+  <div class="axis">
+    <div class="alab"><span class="an">${a[0]}</span><span class="aq">${a[1]}</span></div>
+    <div class="axisbar"><span class="pole">${a[2]}</span><span class="ticks"><span class="tk"></span><span class="tk"></span><span class="tk"></span><span class="tk"></span><span class="tk"></span></span><span class="pole hi">${a[3]}</span></div>
+  </div>`).join('')}</div>`;
+
+// CARD 5 — Digestion Framework
+const steps = [
+  ['1','Experience','Raw event or encounter'],
+  ['2','Exposure','Named and acknowledged'],
+  ['3','Reflection','Muḥasaba · what happened?'],
+  ['4','Extraction','What does this mean?'],
+  ['5','Integration','How does this change me?'],
+  ['6','Expression','How do I embody this?'],
+];
+const c5body = `<div class="dflow">${steps.map((s,i)=>`
+  <div class="dstep"><span class="dnum">${s[0]}</span><span class="den">${s[1]}</span><span class="ddesc">${s[2]}</span></div>
+  ${i<steps.length-1?'<div class="darrow">→</div>':''}`).join('')}</div>
+  <p style="font-family:var(--sans);font-size:10.5px;color:var(--navy-40);text-align:center;margin:20px 0 0;letter-spacing:.04em;">Not all experience is automatically absorbed; digestion needs the right conditions, sequence and time.</p>`;
+
+document.getElementById('cards').innerHTML =
+  card(1,'level-1','The Pathway','المسار · al-Masīr','The Pathway', c1body) +
+  card(2,'level-2','The Nine Reflection Domains','المجالات · al-Majālāt','Reflection Domains', c2body) +
+  card(3,'level-3','Mentor Stances &amp; Dispositions','المقامات · al-Maqāmāt','Orientation', c3body) +
+  card(4,'level-4','The Position Map','الموقع · al-Mawqiʿ','Position Map', c4body) +
+  card(5,'level-5','The Digestion Framework','الهضم · al-Haḍm','Digestion', c5body);
+terraFit();
+</script>
+</body>
+</html>

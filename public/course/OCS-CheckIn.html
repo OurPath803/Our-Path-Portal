@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OurPath · OCS Check-In Sheet</title>
+<link rel="stylesheet" href="terra.css"/>
+<style>
+  .sheet{ width:794px; height:1123px; color:var(--navy); }
+  .sp{ position:absolute; inset:0; padding:52px 56px 40px; display:flex; flex-direction:column; }
+
+  .top{ display:flex; justify-content:space-between; align-items:flex-start; }
+  .top .ti .eyebrow{ font-family:var(--sans); font-weight:600; font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold-deep); }
+  .top .ti h1{ font-family:var(--serif); font-weight:600; font-size:27px; color:var(--navy); margin:3px 0 0; line-height:1.04; white-space:nowrap; }
+  .top .ti .ar{ font-family:var(--arabic); font-size:19px; color:var(--gold-deep); margin-top:5px; }
+  .subhead{ font-family:var(--sans); font-size:10.5pt; line-height:1.5; color:var(--navy-70); margin:12px 0 0; max-width:64ch; }
+
+  .meta{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:16px; border:1px solid var(--cream-line); border-radius:3px; overflow:hidden; }
+  .meta .m{ padding:9px 12px; border-right:1px solid var(--cream-line); }
+  .meta .m:last-child{ border-right:0; }
+  .meta .lab{ font-family:var(--sans); font-weight:600; font-size:8px; letter-spacing:.14em; text-transform:uppercase; color:var(--navy-40); }
+  .meta .fill{ height:16px; border-bottom:1px dotted var(--navy-40); margin-top:5px; }
+
+  /* score key */
+  .keybar{ margin-top:18px; display:flex; align-items:stretch; border:1px solid var(--gold); border-radius:3px; overflow:hidden; }
+  .keybar .kc{ flex:1; padding:8px 10px; border-right:1px solid var(--cream-line); display:flex; flex-direction:column; gap:2px; background:var(--cream-deep); }
+  .keybar .kc:last-child{ border-right:0; }
+  .keybar .kn{ display:flex; align-items:center; gap:7px; }
+  .keybar .kn b{ width:18px; height:18px; border-radius:50%; background:var(--navy); color:var(--cream); font-family:var(--sans); font-weight:700; font-size:11px; display:flex; align-items:center; justify-content:center; }
+  .keybar .kt{ font-family:var(--sans); font-weight:600; font-size:9.5px; letter-spacing:.04em; color:var(--navy); text-transform:uppercase; }
+  .keybar .kd{ font-family:var(--sans); font-size:8.5px; line-height:1.35; color:var(--navy-70); }
+
+  /* dimension rows */
+  .dims{ margin-top:16px; border-top:1px solid var(--gold); }
+  .drow{ display:grid; grid-template-columns:1fr 150px 150px; align-items:center; gap:14px; padding:13px 0; border-bottom:1px solid var(--cream-line); }
+  .drow .d-left{ }
+  .drow .d-name{ display:flex; align-items:baseline; gap:9px; }
+  .drow .d-name b{ font-family:var(--serif); font-weight:600; font-size:19px; color:var(--navy); }
+  .drow .d-name .ar{ font-family:var(--arabic); font-size:16px; color:var(--gold-deep); }
+  .drow .d-name .tl{ font-family:var(--sans); font-size:8.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--navy-40); }
+  .drow .d-def{ font-family:var(--sans); font-size:9.5pt; line-height:1.4; color:var(--navy-70); margin-top:3px; max-width:42ch; }
+  .scol-h{ font-family:var(--sans); font-weight:600; font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:var(--navy-40); text-align:center; margin-bottom:5px; }
+  .bubbles{ display:flex; gap:7px; justify-content:center; }
+  .bub{ width:25px; height:25px; border-radius:50%; border:1.4px solid var(--accent); color:var(--accent); font-family:var(--sans); font-weight:600; font-size:11px; display:flex; align-items:center; justify-content:center; }
+  .dhead{ display:grid; grid-template-columns:1fr 150px 150px; gap:14px; padding-bottom:6px; }
+  .dhead .scol-h.first{ text-align:left; }
+
+  /* longitudinal + notes */
+  .lower{ margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .panel{ border:1px solid var(--cream-line); border-radius:3px; padding:12px 14px; }
+  .panel .pt{ font-family:var(--sans); font-weight:600; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:9px; }
+  .long table{ width:100%; border-collapse:collapse; }
+  .long th{ font-family:var(--sans); font-weight:600; font-size:8px; letter-spacing:.08em; text-transform:uppercase; color:var(--navy-40); text-align:center; padding:3px 2px; }
+  .long th.l{ text-align:left; }
+  .long td{ font-family:var(--sans); font-size:10px; color:var(--navy-90); text-align:center; padding:6px 2px; border-top:1px solid var(--cream-line); }
+  .long td.l{ text-align:left; font-weight:600; color:var(--navy); }
+  .long td .cell{ height:13px; border-bottom:1px dotted var(--navy-40); }
+  .notes .lines{ height:108px; background-image:repeating-linear-gradient(transparent,transparent 23px,var(--cream-line) 23px,var(--cream-line) 24px); }
+
+  .foot{ margin-top:auto; padding-top:12px; border-top:1px solid var(--cream-line); display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--sans); font-size:9px; letter-spacing:.1em; color:var(--navy-40); }
+  .foot .warn{ text-transform:uppercase; letter-spacing:.14em; }
+  .foot .diamond{ color:var(--gold); margin:0 .5em; }
+</style>
+</head>
+<body>
+<div class="gallery">
+  <div class="gallery-head">
+    <div class="kicker">The OurPath Practitioner Pathway · Section 5</div>
+    <h1>The OurPath Check-In Scale (OCS)</h1>
+    <p>A4 portrait session instrument, scored at the start of every session and re-scored at close. Five dimensions, each with its Arabic and definition on a 1–5 scale, a prominent score key, Start/Close columns, a three-session longitudinal strip, and a Mentor Notes box.</p>
+  </div>
+
+  <div class="frame">
+    <div class="label"><span class="n">Instrument</span><span class="t">OCS Check-In Sheet</span><span class="meta">A4 portrait · fillable</span></div>
+    <div class="paper-mount paper-portrait">
+      <div class="paper sheet level-3" data-w="794" data-h="1123">
+        <div class="sp">
+          <div class="top">
+            <div class="ti">
+              <div class="eyebrow">OurPath · Session Instrument</div>
+              <h1>The OurPath Check-In Scale</h1>
+              <div class="ar">المقياس · OCS</div>
+            </div>
+            <div data-mark style="margin-top:4px;"></div>
+          </div>
+          <p class="subhead">Scored at the start of every session and re-scored at close. This tracks developmental movement. It is a check-in, not a clinical test.</p>
+
+          <div class="meta">
+            <div class="m"><div class="lab">Mentee</div><div class="fill"></div></div>
+            <div class="m"><div class="lab">Mentor</div><div class="fill"></div></div>
+            <div class="m"><div class="lab">Session No.</div><div class="fill"></div></div>
+            <div class="m"><div class="lab">Date</div><div class="fill"></div></div>
+          </div>
+
+          <div class="keybar">
+            <div class="kc"><div class="kn"><b>1</b><span class="kt">Absent</span></div><div class="kd">Not experienced; reported as wholly absent.</div></div>
+            <div class="kc"><div class="kn"><b>2</b><span class="kt">Flickering</span></div><div class="kd">Appears occasionally and briefly; not stable.</div></div>
+            <div class="kc"><div class="kn"><b>3</b><span class="kt">Fragile</span></div><div class="kd">Present but easily disrupted; needs effort.</div></div>
+            <div class="kc"><div class="kn"><b>4</b><span class="kt">Stable</span></div><div class="kd">Reliably present; challenges reduce, not erase.</div></div>
+            <div class="kc"><div class="kn"><b>5</b><span class="kt">Integrated</span></div><div class="kd">Embedded; persists without conscious effort.</div></div>
+          </div>
+
+          <div class="dims">
+            <div class="dhead">
+              <div class="scol-h first">Dimension &amp; definition</div>
+              <div class="scol-h">Start of session</div>
+              <div class="scol-h">Close of session</div>
+            </div>
+            <div id="rows"></div>
+          </div>
+
+          <div class="lower">
+            <div class="panel long">
+              <div class="pt">Longitudinal · last 3 sessions</div>
+              <table>
+                <tr><th class="l">Dimension</th><th>S−3</th><th>S−2</th><th>S−1</th><th>Now</th></tr>
+                <tr><td class="l">Clarity</td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td></tr>
+                <tr><td class="l">Agency</td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td></tr>
+                <tr><td class="l">Groundedness</td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td></tr>
+                <tr><td class="l">Energy</td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td></tr>
+                <tr><td class="l">Momentum</td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td></tr>
+              </table>
+            </div>
+            <div class="panel notes">
+              <div class="pt">Mentor notes · focus dimension &amp; movement</div>
+              <div class="lines"></div>
+            </div>
+          </div>
+
+          <div class="foot">
+            <span class="warn">Not a validated psychological scale.</span>
+            <span>ourpathguidance.co.uk <span class="diamond">◇</span> OCS v2.0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="terra.js"></script>
+<script>
+const DIMS = [
+  { en:'Clarity',      ar:'وُضوح', tl:'Wuḍūḥ',     def:'How clearly the person understands their direction, values, and next steps.' },
+  { en:'Agency',       ar:'فاعلية', tl:'Fāʿiliyya', def:'The degree to which the person feels capable of initiating purposeful action.' },
+  { en:'Groundedness', ar:'ثُمور',  tl:'Thumūr',    def:'Rootedness in identity, values and spiritual orientation amid external pressure.' },
+  { en:'Energy',       ar:'هِمّة',  tl:'Himma',     def:'Motivational and physical vitality directed toward meaningful goals.' },
+  { en:'Momentum',     ar:'سَيْر',  tl:'Sira',      def:'Forward movement: progression from insight to consistent, sustained action.' },
+];
+function bubbles(){ return '<div class="bubbles">'+[1,2,3,4,5].map(n=>`<span class="bub">${n}</span>`).join('')+'</div>'; }
+document.getElementById('rows').innerHTML = DIMS.map(d=>`
+  <div class="drow">
+    <div class="d-left">
+      <div class="d-name"><b>${d.en}</b><span class="ar">${d.ar}</span><span class="tl">${d.tl}</span></div>
+      <div class="d-def">${d.def}</div>
+    </div>
+    <div>${bubbles()}</div>
+    <div>${bubbles()}</div>
+  </div>`).join('');
+document.querySelectorAll('[data-mark]').forEach(el=> el.innerHTML = terraMark({size:40, theme:'light'}));
+terraFit();
+</script>
+</body>
+</html>

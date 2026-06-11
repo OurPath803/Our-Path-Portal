@@ -1,0 +1,919 @@
+ 
+OurPath Guidance 
+Developmental Model Handbook 
+
+المسار 
+al-Masir 
+The Pathway 
+
+Working Document | Version 1.0 | Internal Use 
+
+Preface 
+OurPath Guidance operates in the space between traditional mosque provision and clinical therapy. The developmental model documented in this handbook constitutes the intellectual and practical architecture through which that space is navigated — with precision, with care, and with grounding in both Islamic psychospiritual tradition and contemporary developmental science. 
+This handbook is not a manual. It is a reference architecture. Each section maps a distinct layer of the model: the philosophical commitments that underpin it, the sequential framework through which it operates, the fields and domains it activates, and the convergences between Islamic and Western frameworks it draws upon. 
+وَنَفْسٍ وَمَا سَوَّاهَا ۝ فَأَلْهَمَهَا فُجُورَهَا وَتَقْوَاهَا 
+Wa nafsin wa ma sawwaha, fa-alhamaha fujuraha wa taqwaha 
+By the soul and that which fashioned it — and inspired it with its depravity and its piety. [Ash-Shams: 7-8] 
+
+Section 1: Philosophical Foundations 
+1.1 The Core Proposition 
+The human being is not primarily a problem to be solved. The human being is a trust (amanah) to be unfolded — gradually, intentionally, and in relationship. OurPath&apos;s developmental model is built on this premise. 
+Growth, in this framework, is not measured by output alone. It is measured by the alignment between who a person is becoming and the purpose they were created to embody. The model therefore works at the intersection of identity, agency, and direction. 
+1.2 The Tazkiyah Principle 
+قَدْ أَفْلَحَ مَن زَكَّاهَا ۝ وَقَدْ خَابَ مَن دَسَّاهَا 
+Qad aflaha man zakkaha, wa qad khaba man dassaha 
+Successful is the one who purifies it. And failed is the one who suppresses it. [Ash-Shams: 9-10] 
+Tazkiyah — the purification and cultivation of the nafs (self) — is the classical Islamic framework for human development. It is not a therapeutic modality. It is an ontological orientation: the soul has a trajectory, and the work of development is to align daily life with that trajectory. 
+OurPath draws from this tradition not as religious instruction but as a structural lens. The stages of the nafs (nafs al-ammara, nafs al-lawwama, nafs al-mutma&apos;inna) function as developmental markers: where is this person&apos;s inner life pulling them, and toward what? 
+The Three Stations of the Nafs 
+Station 
+Arabic 
+Transliteration 
+Developmental Implication 
+The Commanding Self 
+النَّفْس الأَمَّارَة 
+Nafs al-Ammara 
+Reactive, impulse-driven. Development begins by surfacing what drives the person without their awareness. 
+The Reproaching Self 
+النَّفْس اللَّوَّامَة 
+Nafs al-Lawwama 
+Self-aware, conflicted. The person recognises misalignment but oscillates. Core work happens here. 
+The Tranquil Self 
+النَّفْس الْمُطْمَئِنَّة 
+Nafs al-Mutma&apos;inna 
+Integrated, purposeful. Direction, values and action are coherent. The goal horizon of the model. 
+
+1.3 The Western Developmental Strand 
+The model draws selectively from the following frameworks, not as equivalents to the Islamic tradition but as parallel maps of overlapping terrain: 
+Framework 
+Theorist(s) 
+Contribution to OurPath Model 
+Psychosocial Development 
+Erik Erikson 
+Stages of identity formation and the role of crisis in development. Particularly Stages 5-8 (Identity vs Role Confusion through Integrity vs Despair). 
+Hierarchy of Needs 
+Abraham Maslow 
+Ordering of developmental attention: safety and belonging as prerequisites for self-actualisation. 
+Self-Determination Theory 
+Deci &amp; Ryan 
+Autonomy, competence, and relatedness as universal psychological needs driving intrinsic motivation. 
+Motivational Interviewing 
+Miller &amp; Rollnick 
+Ambivalence as the natural state of change; the practitioner&apos;s role as evoker rather than expert. 
+Narrative Therapy 
+White &amp; Epston 
+Identity as story. Re-authoring as a primary mechanism of developmental change. 
+Positive Psychology 
+Seligman et al. 
+PERMA model: Positive Emotion, Engagement, Relationships, Meaning, Achievement as flourishing architecture. 
+Occupational Science 
+Wilcock, Townsend 
+Occupation as identity expression. Doing, being, belonging, becoming as developmental modalities. 
+Cognitive Behavioural Models 
+Beck, Ellis 
+Thought-feeling-action loops. Identifying and restructuring unhelpful cognitive patterns. 
+
+1.4 The Convergence Map 
+The following table maps Islamic psychospiritual concepts directly onto their Western theoretical counterparts, establishing where the frameworks speak the same language through different vocabularies. 
+Islamic Concept 
+Arabic 
+Western Equivalent 
+Shared Terrain 
+Tazkiyah 
+تَزْكِيَة 
+Personal Development / Self-Actualisation 
+The movement from reactive selfhood toward integrated, purposeful personhood. 
+Muraqaba 
+مُرَاقَبَة 
+Mindfulness / Present-Moment Awareness 
+Sustained, non-reactive attention to one&apos;s inner states and outer conduct. 
+Muhasaba 
+مُحَاسَبَة 
+Reflective Practice / Journaling 
+Deliberate self-audit as a mechanism for course-correction and growth. 
+Tawbah 
+تَوْبَة 
+Growth Mindset / Post-Traumatic Growth 
+Failure as a turning point rather than a terminus; the self is not fixed. 
+Himma 
+هِمَّة 
+Intrinsic Motivation / Grit 
+Sustained aspiration directed toward a worthy end, not contingent on external reward. 
+Tawakkul 
+تَوَكُّل 
+Acceptance &amp; Commitment / Locus of Control 
+Acting fully within one&apos;s capacity while releasing attachment to outcomes. 
+Akhira Orientation 
+آخِرَة 
+Existential Meaning / Logotherapy (Frankl) 
+A horizon beyond the immediate that organises and dignifies present action. 
+Suhba 
+صُحْبَة 
+Therapeutic Alliance / Mentoring Relationship 
+The relationship as the primary vehicle of transformation. 
+Nafs al-Lawwama 
+النَّفْس اللَّوَّامَة 
+Ambivalence (MI) / Transition Zone 
+The productive discomfort of being caught between who one is and who one could be. 
+Fitra 
+فِطْرَة 
+Core Self / Authentic Identity 
+The original, unconditioned disposition of the person prior to social formation. 
+
+Section 2: The Pathway Framework 
+The Pathway Framework is the structural spine of the OurPath developmental model. It sequences the work of development into six phases, each with a distinct focus, a set of activated fields, and a named transition point that marks progression. 
+2.1 Framework Overview 
+Pathway Framework — Sequential Flow 
+Phase 1 
+Orientation 
+→ 
+Phase 2 
+Excavation 
+→ 
+Phase 3 
+Clarification 
+→ 
+Phase 4 
+Construction 
+→ 
+Phase 5 
+Integration 
+→ 
+Phase 6 
+Transmission 
+Figure 1: The six phases of the OurPath Pathway Framework 
+
+2.2 Phase Descriptions 
+Each phase below contains: the Islamic concept anchoring it, the Western parallel, the developmental task, and the fields it activates. 
+
+Phase 1 
+Orientation 
+al-Tawajjuh 
+التَّوَجُّه 
+Turning Toward 
+The person is received, located, and oriented. The relationship is established. The presenting situation is mapped without premature intervention. 
+▪ Presenting context 
+▪ Fitra baseline 
+▪ Psychosocial history 
+▪ Referral source 
+▪ Readiness for change 
+▪ Session Zero protocol 
+
+Phase 2 
+Excavation 
+al-Kashf 
+الكَشْف 
+Unveiling 
+The layers beneath the presenting situation are surfaced. Patterns, narratives, and formative experiences are examined. The inner landscape is mapped. 
+▪ Core narratives 
+▪ Identity anchors 
+▪ Nafs station assessment 
+▪ Cognitive distortions 
+▪ Family and community influence 
+▪ Meaning frameworks 
+
+Phase 3 
+Clarification 
+al-Wuduh 
+الوُضُوح 
+Clarity 
+The person&apos;s values, direction, and core commitments are named with precision. Ambivalence is worked through. A developmental horizon is established. 
+▪ Values mapping 
+▪ Motivational architecture 
+▪ Role and purpose alignment 
+▪ Position Map completion 
+▪ Decision-making framework 
+▪ Clarity score (OCS baseline) 
+
+Phase 4 
+Construction 
+al-Bina&apos; 
+البِنَاء 
+Building 
+Practical architecture for the person&apos;s goals and commitments is built. Plans are made. Obstacles are identified. Agency is activated. 
+▪ Goal architecture 
+▪ 90-day planning 
+▪ Cost Audit 
+▪ Integration Filter 
+▪ Obstacle mapping 
+▪ Action sequencing 
+
+Phase 5 
+Integration 
+al-Takamul 
+التَّكَامُل 
+Integration 
+The new patterns, behaviours, and orientations are tested, refined, and embedded. Setbacks are processed. Consistency is established. 
+▪ Progress review 
+▪ Muhasaba practice 
+▪ Pattern reinforcement 
+▪ OCS tracking 
+▪ Relapse and setback processing 
+▪ Peer and community anchoring 
+
+Phase 6 
+Transmission 
+al-Irsal 
+الإِرْسَال 
+Sending Forth 
+The person moves from receiving developmental support to offering it. Knowledge is consolidated, contribution is activated, legacy is considered. 
+▪ Exit planning 
+▪ Legacy mapping 
+▪ Contribution channels 
+▪ Peer mentoring capacity 
+▪ Closure and discharge 
+▪ Outcome measurement 
+
+Section 3: The Sequence System 
+The Sequence System governs how movement through the Pathway Framework is structured within and between sessions. It is the micro-architecture of the work: what happens in what order and why. 
+3.1 The Session Arc 
+Standard Session Sequence 
+Open 
+Check-In 
+→ 
+Orient 
+Last Session / Current Frame 
+→ 
+Explore 
+Core Work 
+→ 
+Distil 
+Key Insights 
+→ 
+Commit 
+Next Steps 
+→ 
+Close 
+OCS + End 
+Figure 2: Standard OurPath session arc 
+
+3.2 The Nine Reflection Domains 
+Every session draws from one or more of the Nine Reflection Domains. These are the primary territories of inquiry. The mentor selects domains based on the person&apos;s current phase and presenting material. 
+Domain 
+Primary Lens 
+Islamic Frame 
+Western Frame 
+Core Questions 
+1. Identity &amp; Origin 
+Who am I? 
+Fitra, Nasab 
+Erikson, Narrative Therapy 
+What is the original version of this person before formation? 
+2. Values &amp; Conviction 
+What do I stand for? 
+Aqida, Taqwa 
+Values Clarification, ACT 
+What are the non-negotiables this person will not compromise? 
+3. Purpose &amp; Direction 
+Where am I going? 
+Maqasid, Niyyah 
+Logotherapy, Ikigai 
+What horizon organises this person&apos;s daily choices? 
+4. Relationships &amp; Community 
+Who am I with? 
+Suhba, Umma 
+Attachment Theory, SDT Relatedness 
+What relationships are shaping and are being shaped by this person? 
+5. Work &amp; Contribution 
+What am I doing? 
+Khalifa, Kasb 
+Occupational Science, PERMA-Engagement 
+How does this person&apos;s occupation express and develop their purpose? 
+6. Inner State &amp; Spiritual Life 
+What is the condition of my heart? 
+Muraqaba, Ahwal 
+Mindfulness, Emotional Intelligence 
+What is the quality of this person&apos;s inner life? 
+7. Obstacles &amp; Patterns 
+What is holding me back? 
+Nafs al-Ammara, Waswas 
+CBT, Shadow Work (Jung) 
+What recurring patterns, thoughts, or circumstances obstruct growth? 
+8. Growth &amp; Learning 
+How am I developing? 
+Talab al-&apos;Ilm, Tawadu 
+Growth Mindset, Reflective Practice 
+What is this person learning and how is it changing them? 
+9. Legacy &amp; Contribution 
+What am I leaving? 
+Sadaqa Jariya, Mirath 
+Erikson Generativity, Positive Legacy 
+What is this person building that will outlast their direct involvement? 
+
+Section 4: The Digestion Framework 
+The Digestion Framework governs how experience is processed into development. The metaphor is metabolic: not all experience is automatically absorbed. Digestion requires the right conditions, the right sequence, and sufficient time. 
+4.1 The Digestion Sequence 
+Experience Digestion Flow 
+Experience 
+Raw event or encounter 
+→ 
+Exposure 
+Named and acknowledged 
+→ 
+Reflection 
+Muhasaba: what happened? 
+→ 
+Extraction 
+What does this mean? 
+→ 
+Integration 
+How does this change me? 
+→ 
+Expression 
+How do I embody this? 
+Figure 3: The Digestion Framework sequence 
+
+4.2 Conditions for Digestion 
+Condition 
+Description 
+Blocked When 
+Safety 
+The person must feel sufficiently safe to examine their experience without threat to their sense of self. 
+Trust in the relationship is absent or the environment is destabilising. 
+Naming 
+The experience must be brought into language. Unnamed experience remains emotionally active but cognitively inaccessible. 
+The person lacks vocabulary, is dissociated, or is in acute distress. 
+Distance 
+Sufficient temporal or emotional distance from the experience to allow reflection rather than reaction. 
+The event is too recent or the emotional charge too high. 
+Framework 
+A conceptual or narrative structure into which the experience can be organised and made meaningful. 
+The person lacks a coherent meaning-making system or existing framework is broken. 
+Intention 
+The person must be oriented toward growth, not merely toward relief or validation. 
+Developmental readiness is low; the person is in survival mode. 
+
+Section 5: Fields of the Model 
+A &apos;field&apos; is a domain of the person&apos;s life that the developmental model engages. The OurPath model activates fields differently depending on the phase of the Pathway Framework and the active Reflection Domain. The following tables map all fields, their definitions, and their relational structures. 
+5.1 Primary Fields 
+Field 
+Definition 
+Islamic Anchor 
+Western Anchor 
+Phase of Activation 
+Identity 
+The person&apos;s stable sense of self: who they are across contexts, relationships, and time. 
+Fitra, Nasab 
+Erikson, Narrative Therapy 
+1, 2, 3 
+Values 
+The non-negotiable commitments that organise the person&apos;s choices and give them coherence. 
+Aqida, Taqwa, Niyyah 
+Values Clarification, ACT 
+2, 3 
+Purpose 
+The overarching directional horizon that gives the person&apos;s life its structure and meaning. 
+Maqasid, Risala 
+Logotherapy, Ikigai 
+3, 4 
+Agency 
+The person&apos;s capacity to initiate purposeful action from an internal rather than reactive orientation. 
+Fa&apos;iliyya, Irada 
+Self-Determination Theory 
+3, 4, 5 
+Relationships 
+The network of connections through which the person is shaped, supported, and held accountable. 
+Suhba, Rahm 
+Attachment Theory, Social Capital 
+1, 2, 5 
+Work &amp; Occupation 
+The expression of identity and purpose through what the person does — vocationally and socially. 
+Khalifa, Kasb 
+Occupational Science, PERMA 
+3, 4, 5 
+Inner Life 
+The person&apos;s spiritual, emotional, and psychological interior: the quality of their experience of being themselves. 
+Ruh, Qalb, Ahwal 
+Emotional Intelligence, Mindfulness 
+2, 3, 5 
+Patterns 
+Recurring thoughts, behaviours, and narratives — habitual and often below conscious awareness — that shape outcomes. 
+Nafs al-Ammara, &apos;Ada 
+CBT Schema Theory, Habit Science 
+2, 3, 4 
+Growth 
+The person&apos;s orientation toward learning, expansion, and becoming — their developmental momentum. 
+Talab al-&apos;Ilm, Tawadu 
+Growth Mindset, Mastery 
+4, 5, 6 
+Legacy 
+The enduring contribution the person is building, beyond personal gain, toward others and future generations. 
+Sadaqa Jariya, Mirath 
+Generativity (Erikson), Positive Legacy 
+5, 6 
+
+5.2 Secondary Fields 
+Secondary fields emerge in response to the person&apos;s specific context. They are not universally activated but appear as required. 
+Secondary Field 
+When Activated 
+Primary Field Link 
+Family System 
+When family dynamics are a primary source of pattern or obstacle. 
+Identity, Relationships 
+Cultural Identity 
+When ethnicity, nationality, or cultural background is in productive or dissonant tension with development. 
+Identity, Values 
+Spiritual Practice 
+When the quality and consistency of the person&apos;s worship and devotional life is directly relevant to their development. 
+Inner Life, Values 
+Financial Orientation 
+When economic pressure, aspiration, or avoidance is shaping choices and limiting growth. 
+Work &amp; Occupation, Agency 
+Physical Health 
+When the person&apos;s somatic experience — energy, sleep, nutrition, movement — is functionally limiting their development. 
+Inner Life, Agency 
+Mental Health 
+When psychological or psychiatric factors are active and require acknowledgement within the developmental frame. 
+Inner Life, Patterns 
+Community Belonging 
+When the person&apos;s sense of communal membership or exclusion is a live developmental issue. 
+Relationships, Identity 
+Knowledge &amp; Learning 
+When formal or informal learning is a site of growth, obstacle, or unexplored potential. 
+Growth, Work &amp; Occupation 
+
+5.3 Field Interaction Map 
+Fields do not operate in isolation. The following table documents the primary interaction patterns — which fields most commonly activate one another. 
+Field A 
+Field B 
+Nature of Interaction 
+Identity 
+Values 
+Identity coherence depends on values clarity. Values drift produces identity fragmentation. 
+Identity 
+Patterns 
+Unexamined patterns often express a suppressed or undeveloped aspect of identity. 
+Values 
+Agency 
+High values clarity without agency produces guilt. High agency without values clarity produces drift. 
+Purpose 
+Work &amp; Occupation 
+Purposeless occupation produces disengagement. Purposeful occupation produces flourishing. 
+Inner Life 
+Patterns 
+Unregulated inner life (anxiety, shame, unprocessed grief) generates and sustains destructive patterns. 
+Relationships 
+Identity 
+Identity is formed, confirmed, and challenged primarily in and through relationships. 
+Agency 
+Growth 
+Agency activates growth. Absence of agency produces stagnation regardless of insight. 
+Legacy 
+Purpose 
+Legacy is the temporal extension of purpose. Without purpose, legacy remains abstract. 
+
+Section 6: The Position Map 
+The Position Map is an assessment and orientation tool. It locates the person within four dimensions simultaneously, producing a developmental snapshot that guides the mentor&apos;s approach. 
+6.1 The Four Dimensions 
+Dimension 
+Axis 
+Lower Pole 
+Upper Pole 
+Assessment Question 
+Clarity 
+Low ↔ High 
+Confused about direction, values, or identity. 
+Clear sense of who they are, where they are going, and why. 
+How well does this person understand their own direction? 
+Commitment 
+Low ↔ High 
+Ambivalent, avoidant, or not yet engaged in their own development. 
+Fully committed to growth and willing to do the required work. 
+How invested is this person in their own change? 
+Capacity 
+Low ↔ High 
+Resources (time, energy, support, skills) are stretched or depleted. 
+Sufficient internal and external resources to sustain developmental work. 
+Does this person have what is needed to act on their intentions? 
+Context 
+Enabling ↔ Constraining 
+Environment actively resists growth (relationships, structures, culture). 
+Environment supports and facilitates growth. 
+Is the person&apos;s context working with or against their development? 
+
+6.2 Position Reading Protocol 
+Position Map — Assessment Flowchart 
+Session Zero 
+Initial intake 
+→ 
+Score 1-5 
+Each dimension 
+→ 
+Map Pattern 
+High / Low profile 
+→ 
+Identify Focus 
+Lowest dimension 
+→ 
+Set Phase 
+Assign pathway phase 
+Figure 4: Position Map assessment protocol 
+
+Position Profile 
+Pattern 
+Developmental Priority 
+High Clarity, Low Commitment 
+Knows the path but will not walk it. 
+Motivational work. Surface ambivalence. Explore the cost of non-movement. 
+High Commitment, Low Clarity 
+Ready to move but does not know where. 
+Orientation and values clarification. Map purpose before building plans. 
+Low Capacity, High Clarity + Commitment 
+Knows and wants but cannot sustain. 
+Resource mapping. Reduce load. Build support structures before expanding demands. 
+Constraining Context, High Internal Profile 
+Ready internally but environment resists. 
+Context strategy. Relationship mapping. Gradual boundary renegotiation. 
+Low across all dimensions 
+Pre-developmental. Safety first. 
+Relationship-building only. No goal-setting until basic trust and stability are present. 
+
+Section 7: The Cost Audit &amp; Integration Filter 
+7.1 The Cost Audit 
+Every developmental commitment carries a cost. The Cost Audit ensures that the person understands, accepts, and plans for what change will actually require of them. It prevents the collapse of well-intentioned plans through unexamined cost. 
+Cost Domain 
+Questions 
+Islamic Frame 
+Time 
+What time will this require? What currently occupies that time? What must be released? 
+Waqt — time as sacred trust. Every hour is an amanah. 
+Energy 
+What will this ask of the person physically, emotionally, and cognitively? What currently depletes them? 
+Himma — aspirational energy is finite and must be invested wisely. 
+Relationships 
+Who will be affected by this change? Who will resist it? Who must be negotiated with? 
+Huquq — the rights of others constrain individual development. 
+Identity 
+What version of self must be released for the new to emerge? What is the grief in that? 
+Nafs — the transition between stations of the nafs is not painless. 
+Financial 
+What economic implications does this change carry? What is the person&apos;s current financial capacity? 
+Rizq — provision is from Allah, but planning is from the person. 
+Spiritual 
+Does this commitment strengthen or weaken the person&apos;s connection to their values and worship? 
+Taqwa — any path that distances from God requires examination. 
+
+7.2 The Integration Filter 
+The Integration Filter is applied before any commitment is finalised. It asks whether the proposed change is coherent with the person&apos;s existing life architecture or whether it requires restructuring before it can be embedded. 
+Filter Question 
+Pass Condition 
+Fail Condition — Action Required 
+Does this fit within my values? 
+The commitment aligns with stated values and does not require compromise. 
+Return to values clarification. Resolve the conflict before proceeding. 
+Does this align with my purpose? 
+The commitment moves toward the person&apos;s stated directional horizon. 
+Examine whether the horizon is correct or whether the commitment needs reframing. 
+Can I sustain this? 
+The person has sufficient capacity (time, energy, support) to maintain this over the relevant horizon. 
+Conduct Cost Audit. Reduce scope or build capacity first. 
+Have I accounted for the costs? 
+All major costs have been named and accepted. 
+Return to Cost Audit. Name what has been avoided. 
+Does this strengthen or damage key relationships? 
+The commitment is either neutral to or strengthening of the person&apos;s most important relationships. 
+Map relationship implications. Develop a communication plan. 
+Am I doing this from agency or reaction? 
+The commitment arises from considered intention, not fear, social pressure, or impulsive resolution. 
+Apply motivational inquiry. Surface the real driver before proceeding. 
+
+Section 8: The OurPath Check-In Scale (OCS) 
+The OCS is the primary measurement instrument of the developmental model. It tracks movement across five dimensions at every session, generating a longitudinal profile of the person&apos;s developmental state. 
+8.1 The Five Dimensions 
+Dimension 
+Definition 
+Clarity 
+Wuduh 
+وُضُوح 
+How clearly does the person understand their direction, values, and next steps? 
+Agency 
+Fa&apos;iliyya 
+فَاعِلِيَّة 
+The degree to which the person feels capable of initiating purposeful action. 
+Groundedness 
+Thumur 
+ثُمُور 
+Rootedness in identity, values, and spiritual orientation amid external pressure. 
+Energy 
+Himma 
+هِمَّة 
+Motivational and physical vitality directed toward meaningful goals. 
+Momentum 
+Sira 
+سَيْر 
+Forward movement: progression from insight to consistent, sustained action. 
+
+8.2 Scoring Protocol 
+Score 
+Label 
+Description 
+1 
+Absent 
+The dimension is not experienced. The person reports its complete absence from their current life. 
+2 
+Flickering 
+The dimension appears occasionally and briefly. Not yet stable or reliable. 
+3 
+Present but fragile 
+The dimension is available but easily disrupted. Requires active effort to maintain. 
+4 
+Stable 
+The dimension is reliably present. External challenges reduce but do not eliminate it. 
+5 
+Integrated 
+The dimension is embedded. It persists across contexts and does not require conscious maintenance. 
+
+8.3 OCS Tracking Protocol 
+OCS Session Flow 
+Pre-Session 
+Person scores 1-5 on each dimension 
+→ 
+Review 
+Mentor reviews against last session 
+→ 
+Identify 
+Lowest score = focus dimension 
+→ 
+Integrate 
+OCS feeds session agenda 
+→ 
+Close 
+Post-session re-score 
+Figure 5: OCS tracking flow within a session 
+
+8.4 OCS Interpretation — Pattern Guide 
+Pattern 
+Interpretation 
+Developmental Implication 
+Clarity high, Agency low 
+The person understands their path but cannot yet initiate movement. 
+Agency-building work. Small, concrete, achievable actions. Review obstacle map. 
+Agency high, Groundedness low 
+The person is active but unanchored. Busy but not rooted. 
+Slow down. Reconnect to values and spiritual practice before expanding activity. 
+Momentum high, Energy low 
+External progress is occurring but internal resources are depleted. 
+Immediate sustainability review. Risk of burnout. Introduce recovery practices. 
+All scores rising 
+Developmental momentum is established across dimensions. 
+Affirm. Introduce greater challenge. Begin transition planning toward Phase 5 or 6. 
+Sustained plateau (3 sessions) 
+The person has reached a ceiling in their current structure. 
+Review phase. Introduce new domain. Examine what is not being addressed. 
+Sharp drop across one session 
+A significant event has disrupted developmental stability. 
+Prioritise the person over the plan. Process the event before returning to agenda. 
+
+Section 9: The Orientation Framework 
+The Orientation Framework governs how the mentor is oriented within the work. It is not a set of techniques but a set of stances — the quality of presence and approach that the model requires. 
+9.1 The Four Mentor Stances 
+Stance 
+Arabic 
+When Applied 
+What It Requires 
+What It Avoids 
+Witness 
+شَاهِد — Shahid 
+When the person needs to be heard without interpretation or direction. 
+Full attentive presence. Suspension of the mentor&apos;s own frame. 
+Advice, reframing, solution-offering. 
+Mirror 
+مِرْآة — Mir&apos;a 
+When the person cannot see a pattern or assumption clearly. 
+Precise and non-judgmental reflection of what the mentor is observing. 
+Projection, interpretation, diagnosis. 
+Guide 
+دَلِيل — Dalil 
+When the person has sufficient insight and needs directional input. 
+Clear, honest, values-aligned direction offered with humility. 
+Directionality before readiness. Unsolicited guidance. 
+Companion 
+رَفِيق — Rafiq 
+When the person is in difficulty and needs to not be alone in it. 
+Genuine solidarity. Presence in difficulty without fixing. 
+Problem-solving, premature hope, bypassing the difficulty. 
+
+9.2 Mentor Disposition Requirements 
+Disposition 
+Definition 
+Violated When 
+Adab 
+A posture of dignified respect for the person, the work, and the knowledge brought to it. 
+The mentor is casual, dismissive, or treats the session as routine. 
+Ikhlas 
+Purity of intention. The mentor is present for the person&apos;s development, not their own need. 
+The mentor seeks to be impressive, needed, or validated by the person. 
+Sabr 
+Patient endurance. Development cannot be rushed. The mentor holds the pace the person requires. 
+The mentor pushes the pace, sets premature goals, or loses patience with slow progress. 
+Amana 
+Trustworthiness. Everything shared remains with the mentor and is used only for the person&apos;s benefit. 
+Confidentiality is breached or the person&apos;s disclosure is used for any other purpose. 
+Tawadu 
+Intellectual and personal humility. The mentor does not know the person better than the person knows themselves. 
+The mentor imposes interpretation, diagnoses, or assumes understanding before it is earned. 
+
+9.3 Decision Framework — Session-Level 
+In-Session Decision Flow 
+What is present? 
+Name the material 
+→ 
+What is needed? 
+Stance selection 
+→ 
+What is the field? 
+Domain identification 
+→ 
+What is the phase? 
+Phase check 
+→ 
+What is the move? 
+Intervention or question 
+Figure 6: In-session decision framework 
+
+Section 10: Mirror-Reading Reflective Architecture 
+Mirror-Reading is the practitioner&apos;s primary interpretive method. It is grounded in the classical Islamic concept of the qalb (heart) as a mirror — capable of reflecting reality with clarity when polished, and distorting it when covered. 
+10.1 The Three Layers of Reading 
+Layer 
+What Is Being Read 
+Method 
+Islamic Grounding 
+Surface 
+What the person presents: their words, the content of their account, their stated concerns. 
+Listening, clarifying, summarising. 
+Sama&apos; — attentive hearing as an act of respect. 
+Pattern 
+What recurs: the recurring themes, the words used repeatedly, the narrative structures the person reaches for. 
+Pattern-tracking, reflective questioning, gentle naming. 
+Muhasaba — discerning the habitual tendencies of the self. 
+Depth 
+What is beneath: the formative experiences, the protected assumptions, the ungrieved losses, the unarticulated values. 
+Deep listening, silence, evocative questioning, careful confrontation. 
+Kashf — unveiling what the nafs has concealed from itself. 
+
+10.2 The Mirror Conditions 
+A mirror reflects clearly only when the following conditions are met. The same is true of the practitioner as mirror: 
+Condition 
+Practitioner Requirement 
+Blocked When 
+Polished 
+The practitioner&apos;s own unresolved material does not distort what they see in the person. 
+The practitioner has not done their own reflective work. 
+Stable 
+The practitioner holds a steady internal ground regardless of the material presented. 
+The practitioner is triggered, destabilised, or reactive in session. 
+Correctly positioned 
+The practitioner is close enough to see clearly but not so close that they merge with the person&apos;s perspective. 
+The practitioner over-identifies with the person or maintains excessive clinical distance. 
+Illuminated 
+The session has sufficient light — trust, safety, and willingness — for the person to be seen at all. 
+The relationship has not yet established the conditions for genuine self-disclosure. 
+
+Section 11: Knowledge Compendium Reference Map 
+This section maps the intellectual sources of the OurPath developmental model — the classical Islamic texts and scholars alongside the contemporary Western works and theorists from which the model draws. 
+11.1 Primary Islamic Sources 
+Work / Tradition 
+Scholar / Origin 
+Contribution to Model 
+Ihya&apos; &apos;Ulum al-Din 
+Imam al-Ghazali (d. 1111) 
+Core framework for nafs, qalb, and tazkiyah. The most comprehensive classical treatment of Islamic psychology and development. 
+Minhaj al-Qasideen 
+Ibn Qudama al-Maqdisi (d. 1223) 
+Accessible synthesis of the Ihya&apos;. Foundation of the three-stage nafs framework used in the model. 
+Madarij al-Salikin 
+Ibn al-Qayyim al-Jawziyya (d. 1350) 
+Detailed map of the stations (maqamat) and states (ahwal) of the developmental journey. Primary source for the Phase Framework sequencing. 
+Al-Risala al-Qushayriyya 
+Al-Qushayri (d. 1074) 
+Classical Sufi taxonomy of inner states. Vocabulary for the Nine Reflection Domains. 
+Quranic Sciences (Tafsir) 
+Multiple — primary: Ibn Kathir, al-Tabari, al-Sa&apos;di 
+Quranic framing of human nature, development, trial, and purpose. 
+Hadith Literature 
+Sahih al-Bukhari, Sahih Muslim, primary collections 
+Prophetic precedent for pastoral care, mentoring, and character development. 
+
+11.2 Primary Western Sources 
+Work 
+Author 
+Contribution to Model 
+The Decision Book 
+Krogerus &amp; Tschappeler 
+Structural influence: decision models, visual frameworks, and the discipline of mapping complex ideas into clear, usable diagrams. 
+Identity and the Life Cycle 
+Erik Erikson 
+Psychosocial stage theory. Primary framework for understanding where a person is in their developmental arc. 
+Man&apos;s Search for Meaning 
+Viktor Frankl 
+Logotherapy and the primacy of meaning. Foundation for Purpose as a primary field. 
+Motivational Interviewing 
+Miller &amp; Rollnick 
+Core questioning approach. The spirit of MI (partnership, acceptance, evocation, compassion) directly informs the mentor stance. 
+Narrative Therapy: The Social Construction of Preferred Realities 
+Jill Freedman &amp; Gene Combs 
+Re-authoring methodology. Framework for working with the person&apos;s life narrative. 
+Drive 
+Daniel Pink 
+Autonomy, mastery, purpose as the architecture of intrinsic motivation. Maps to SDT and the Agency field. 
+The Body Keeps the Score 
+Bessel van der Kolk 
+Somatic dimension of development. Understanding why insight alone is insufficient for change. 
+Mindset 
+Carol Dweck 
+Growth vs fixed mindset. Underpins the Growth field and the response to failure and setback. 
+Willpower Instinct 
+Kelly McGonigal 
+Self-regulation science. Foundation for understanding why the person struggles to act on what they know. 
+
+Section 12: The Three-Tier Delivery Model 
+The OurPath developmental model is delivered through three distinct channels. Each tier serves a different function and reaches the person at a different depth and frequency. 
+Tier 
+Format 
+Frequency 
+Function 
+Primary Mechanism 
+Tier 1 
+Reflective Journal 
+Daily / Weekly 
+Self-directed development. The person works the model independently through structured reflection prompts. 
+Muhasaba — self-audit. The journal as a practitioner when no practitioner is present. 
+Tier 2 
+Workshops &amp; Group Sessions 
+Monthly / Quarterly 
+Community-based development. The model is applied in facilitated group settings, drawing on suhba and collective wisdom. 
+Suhba — the developmental power of being in the company of those who are also seeking. 
+Tier 3 
+1-to-1 Mentoring 
+Weekly / Fortnightly 
+Depth developmental work. The full model is applied in the dyadic relationship, session by session, over a structured package. 
+The relationship as the primary vehicle. All other instruments serve this encounter. 
+
+12.1 Tier Interaction 
+The three tiers are designed to be mutually reinforcing. A person in Tier 3 mentoring is encouraged to use the Tier 1 journal between sessions and may be introduced to Tier 2 workshops at appropriate phases of their development. 
+Tier 1 
+Journal: daily self-practice 
+→ 
+Tier 2 
+Workshop: monthly community 
+→ 
+Tier 3 
+Mentoring: weekly depth 
+Figure 7: Three-tier delivery architecture 
+
+Section 13: Complete Model Integration Map 
+The following table is the master reference for the OurPath developmental model. It maps all six phases of the Pathway Framework against the fields they activate, the OCS dimensions they primarily affect, the reflection domains they draw from, and the Islamic and Western frameworks they engage. 
+Phase 
+Primary Fields 
+OCS Focus 
+Reflection Domains 
+Islamic Frame 
+Western Frame 
+1 — Orientation 
+Identity, Relationships 
+Clarity, Groundedness 
+1. Identity &amp; Origin
+4. Relationships 
+Fitra, Suhba, Amanah 
+Rapport (MI), Erikson Stage 5, Attachment 
+2 — Excavation 
+Identity, Patterns, Inner Life 
+Clarity, Groundedness 
+1. Identity
+6. Inner State
+7. Obstacles &amp; Patterns 
+Nafs al-Ammara, Muraqaba, Kashf 
+Narrative Therapy, CBT Schema, Shadow Work 
+3 — Clarification 
+Values, Purpose, Agency 
+Clarity, Agency 
+2. Values
+3. Purpose
+6. Inner State 
+Niyyah, Maqasid, Tawba 
+Values Clarification, Logotherapy, ACT 
+4 — Construction 
+Agency, Work &amp; Occupation, Growth 
+Agency, Momentum 
+3. Purpose
+5. Work
+8. Growth 
+Khalifa, Irada, Tawakkul 
+Goal Theory, SDT Autonomy, Drive (Pink) 
+5 — Integration 
+All fields (refinement) 
+All five (tracking) 
+All nine (contextual) 
+Muhasaba, Himma, Sabr 
+Reflective Practice, Habit Science, PERMA 
+6 — Transmission 
+Legacy, Relationships, Growth 
+Momentum, Energy 
+4. Relationships
+9. Legacy
+8. Growth 
+Sadaqa Jariya, Suhba, Risala 
+Generativity (Erikson), Positive Legacy, Leadership 
+
+OurPath Guidance · Developmental Model Handbook · Version 1.0 
+Working Document. For internal use and editing. 

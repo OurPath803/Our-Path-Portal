@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OurPath · Codes of Conduct</title>
+<link rel="stylesheet" href="terra.css"/>
+<link rel="stylesheet" href="forms.css"/>
+<style>
+  .clauses{ margin-top:6px; }
+  .clause{ padding:15px 0; border-bottom:1px solid var(--cream-line); display:grid; grid-template-columns:42px 1fr; gap:6px 16px; }
+  .clause .cn{ font-family:var(--serif); font-weight:600; font-size:22px; color:var(--gold-deep); line-height:1; }
+  .clause .ch{ font-family:var(--serif); font-weight:600; font-size:19px; color:var(--navy); }
+  .clause .cd{ grid-column:2; font-family:var(--sans); font-style:italic; font-size:10pt; color:var(--navy-70); margin-top:1px; }
+  .clause .cph{ grid-column:2; margin-top:9px; height:52px; }
+  .placeholder{ grid-column:2; font-family:var(--sans); font-size:8.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--navy-40); margin-top:7px; display:flex; align-items:center; gap:8px; }
+  .placeholder::before{ content:""; width:10px; height:10px; border:1px solid var(--gold); transform:rotate(45deg); display:inline-block; }
+  .declare{ font-family:var(--sans); font-size:10pt; line-height:1.55; color:var(--navy-90); margin-top:16px; }
+  .certref{ display:flex; align-items:center; gap:12px; margin-top:14px; font-family:var(--sans); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--navy-40); }
+  .certref .cv{ flex:1; border-bottom:1px dotted var(--navy-40); height:16px; max-width:280px; }
+</style>
+</head>
+<body>
+<div class="gallery">
+  <div class="gallery-head">
+    <div class="kicker">The OurPath Practitioner Pathway · Section 11</div>
+    <h1>Codes of Conduct</h1>
+    <p>Two single-sheet documents, one for mentors and one for administrators. Layout only: each carries the five styled placeholder clause sections (Scope · Confidentiality &amp; Data · Safeguarding &amp; Escalation · Boundaries · Decertification), a declaration with signature/date block, and a linked certificate-number reference. Final clause text drops into the ruled space.</p>
+  </div>
+  <div id="docs"></div>
+</div>
+
+<script src="terra.js"></script>
+<script>
+const SECTIONS = {
+  mentor: [
+    ['01','Scope','The remit of OurPath mentoring and what this designation does and does not authorise.'],
+    ['02','Confidentiality &amp; Data','Handling of disclosures, session notes and OCS records; lawful, minimal data use.'],
+    ['03','Safeguarding &amp; Escalation','Recognising risk; the threshold and route for escalation beyond the developmental frame.'],
+    ['04','Boundaries','Dual relationships, scope of competence, and the line between mentoring and therapy.'],
+    ['05','Decertification','Grounds and process by which a designation may be suspended or revoked.'],
+  ],
+  admin: [
+    ['01','Scope','The administrator’s role in supporting the Pathway and the limits of that role.'],
+    ['02','Confidentiality &amp; Data','Access controls, record retention and data protection for trainee and client records.'],
+    ['03','Safeguarding &amp; Escalation','Duties on receiving a safeguarding concern; who is informed and when.'],
+    ['04','Boundaries','Separation of administrative duties from mentoring; impartiality and conflicts of interest.'],
+    ['05','Decertification','Administrative process for recording suspensions, revocations and the register.'],
+  ],
+};
+
+function doc(kind, title, ar, accent){
+  const secs = SECTIONS[kind];
+  return `
+  <div class="frame">
+    <div class="label"><span class="n">${kind==='mentor'?'Sheet A':'Sheet B'}</span><span class="t">Code of Conduct · ${kind==='mentor'?'Mentor':'Administrator'}</span><span class="meta">A4 portrait</span></div>
+    <div class="paper-mount paper-portrait">
+      <div class="paper sheet ${accent}" data-w="794" data-h="1123">
+        <div class="sp">
+          <div class="form-head">
+            <div class="ti">
+              <div class="eyebrow">OurPath Guidance · Professional Standards</div>
+              <h1>${title}</h1>
+              <div class="ar">${ar}</div>
+            </div>
+            <div class="mk" data-mark></div>
+          </div>
+          <p class="subhead">A condition of holding an OurPath designation. By signing, the holder agrees to abide by the clauses set out below. <span style="color:var(--navy-40);">[Final clause text to be supplied by OurPath Guidance Ltd.]</span></p>
+          <div class="grule"></div>
+
+          <div class="clauses">
+            ${secs.map(s=>`
+              <div class="clause">
+                <div class="cn">${s[0]}</div>
+                <div class="ch">${s[1]}</div>
+                <div class="cd">${s[2]}</div>
+                <div class="cph lines"></div>
+              </div>`).join('')}
+          </div>
+
+          <p class="declare">I have read, understood and agree to abide by this Code of Conduct. I understand that this is an internal professional designation and that breach may result in suspension or revocation.</p>
+
+          <div class="certref"><span>Linked certificate no.</span><span class="cv"></span><span style="color:var(--navy-40);">OP-[TRACK]-[LEVEL]-YYYY-NNN</span></div>
+
+          <div class="signrow" style="margin-top:18px;">
+            <div class="sig"><div class="sigline"></div><div class="siglab">${kind==='mentor'?'Mentor':'Administrator'} signature &amp; date</div></div>
+            <div class="sig"><div class="sigline"></div><div class="siglab">Sawon Moazzem, Director · countersignature</div></div>
+          </div>
+
+          <div class="form-foot">
+            <span>This is an internal professional standard, not a regulated or statutory code.</span>
+            <span>ourpathguidance.co.uk <span class="diamond">◇</span> COC v2.0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+document.getElementById('docs').innerHTML =
+  doc('mentor','Mentor Code of Conduct','الميثاق · al-Mīthāq','level-3') +
+  doc('admin','Administrator Code of Conduct','الميثاق · al-Mīthāq','level-2');
+document.querySelectorAll('[data-mark]').forEach(el=> el.innerHTML = terraMark({size:40, theme:'light'}));
+terraFit();
+</script>
+</body>
+</html>

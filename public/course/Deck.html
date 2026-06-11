@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OurPath · Deck Master Template</title>
+<link rel="stylesheet" href="terra.css"/>
+<style>
+  deck-stage:not(:defined){ visibility:hidden; }
+  html,body{ margin:0; background:#0e1a1f; }
+
+  section{ font-family:var(--sans); color:var(--navy); overflow:hidden; }
+  .bg-cream{ background:var(--cream); }
+  .bg-teal{ background:var(--navy); color:var(--cream); }
+  .pad{ position:absolute; inset:0; padding:104px 112px 96px; display:flex; flex-direction:column; }
+
+  /* footer */
+  .dfoot{ position:absolute; left:112px; right:112px; bottom:52px; display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--sans); font-size:18px; letter-spacing:.16em; text-transform:uppercase; color:var(--navy-40);
+    border-top:1px solid var(--cream-line); padding-top:20px; }
+  .bg-teal .dfoot{ color:#7d9298; border-top-color:rgba(245,240,232,.16); }
+  .dfoot .diamond{ color:var(--gold); margin:0 .55em; }
+
+  .eyebrow{ font-family:var(--sans); font-weight:600; font-size:21px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold-deep); }
+  .bg-teal .eyebrow{ color:var(--gold-l); }
+
+  /* title slide */
+  .title-wrap{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:6px; }
+  .title-ar{ font-family:var(--arabic); font-size:96px; line-height:1; color:var(--gold-l); margin-bottom:6px; }
+  .title-main{ font-family:var(--serif); font-weight:500; font-size:104px; line-height:1.02; color:var(--cream); letter-spacing:.005em; }
+  .title-sub{ font-family:var(--serif); font-style:italic; font-size:34px; color:#aebcc0; margin-top:18px; }
+  .title-meta{ font-family:var(--sans); font-weight:600; font-size:20px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold-l); margin-top:30px; }
+
+  /* divider slide */
+  .div-wrap{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; }
+  .div-arbig{ position:absolute; font-family:var(--arabic); font-size:380px; line-height:1; color:var(--navy); opacity:.07; }
+  .div-num{ font-family:var(--sans); font-weight:600; font-size:22px; letter-spacing:.32em; text-transform:uppercase; color:var(--gold-deep); position:relative; }
+  .div-title{ font-family:var(--serif); font-weight:500; font-size:88px; color:var(--navy); position:relative; margin-top:12px; }
+  .div-ar{ font-family:var(--arabic); font-size:46px; color:var(--gold-deep); position:relative; margin-top:12px; }
+
+  /* content slide */
+  .c-title{ font-family:var(--serif); font-weight:500; font-size:68px; line-height:1.06; color:var(--navy); margin:14px 0 0; max-width:22ch; }
+  .c-lead{ font-family:var(--serif); font-style:italic; font-size:32px; line-height:1.4; color:var(--navy-70); margin:26px 0 0; max-width:40ch; }
+  .c-list{ list-style:none; padding:0; margin:40px 0 0; display:flex; flex-direction:column; gap:22px; max-width:46ch; }
+  .c-list li{ display:flex; gap:20px; align-items:flex-start; font-size:27px; line-height:1.45; color:var(--navy-90); }
+  .c-list .mk{ flex:0 0 auto; width:11px; height:11px; transform:rotate(45deg); background:var(--gold); margin-top:11px; }
+
+  /* model-component slide — phase flow */
+  .m-title{ font-family:var(--serif); font-weight:500; font-size:58px; color:var(--navy); margin:8px 0 0; }
+  .flow{ display:flex; align-items:stretch; gap:0; margin-top:54px; }
+  .pcard{ flex:1; background:var(--cream-deep); border:1px solid var(--cream-line); border-top:2px solid var(--accent); border-radius:4px; padding:26px 22px; display:flex; flex-direction:column; gap:10px; }
+  .pcard .pn{ font-family:var(--sans); font-weight:700; font-size:15px; letter-spacing:.14em; color:var(--accent); }
+  .pcard .pen{ font-family:var(--serif); font-weight:600; font-size:30px; color:var(--navy); line-height:1.05; }
+  .pcard .par{ font-family:var(--arabic); font-size:24px; color:var(--gold-deep); }
+  .pcard .pt{ font-family:var(--sans); font-size:17px; line-height:1.4; color:var(--navy-70); margin-top:2px; }
+  .arrow{ flex:0 0 34px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:26px; }
+
+  /* reflective prompt slide */
+  .r-wrap{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:42px; }
+  .r-mark{ opacity:.9; }
+  .r-line{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:62px; line-height:1.32; color:var(--navy); max-width:24ch; }
+  .r-cap{ font-family:var(--sans); font-weight:600; font-size:18px; letter-spacing:.28em; text-transform:uppercase; color:var(--navy-40); }
+
+  /* closing */
+  .close-wrap{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:26px; }
+  .close-main{ font-family:var(--serif); font-weight:500; font-size:92px; color:var(--cream); }
+  .close-sub{ font-family:var(--sans); font-size:22px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-l); }
+
+  /* Entrance animation removed for reliable capture/print/PPTX export.
+     .anim / .anim2 classes are harmless no-ops kept on the markup. */
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 1 · TITLE -->
+  <section data-label="Title" class="bg-teal" data-screen-label="Title">
+    <div class="pad">
+      <div class="title-wrap">
+        <div data-mark-dark style="margin-bottom:14px;"></div>
+        <div class="title-ar anim">المعرفة</div>
+        <div class="title-main anim2">The Knowledge Level</div>
+        <div class="title-sub anim2">Working command of the model and its evidence base</div>
+        <div class="title-meta anim2">OurPath Practitioner Pathway · Level 2 · Maʿrifah</div>
+      </div>
+      <div class="dfoot"><span>OurPath Guidance · Live Training</span><span>Level 2 · Maʿrifah <span class="diamond">◇</span> ourpathguidance.co.uk</span></div>
+    </div>
+  </section>
+
+  <!-- 2 · SECTION DIVIDER -->
+  <section data-label="Divider" class="bg-cream" data-screen-label="Section divider">
+    <div class="pad">
+      <div class="div-wrap">
+        <div class="div-arbig">المسار</div>
+        <div class="div-num anim">Section Two</div>
+        <div class="div-title anim2">The Pathway Framework</div>
+        <div class="div-ar anim2">al-Masīr · the structural spine</div>
+      </div>
+      <div class="dfoot"><span>Level 2 · Maʿrifah</span><span>ourpathguidance.co.uk <span class="diamond">◇</span> 02</span></div>
+    </div>
+  </section>
+
+  <!-- 3 · CONTENT -->
+  <section data-label="Content" class="bg-cream" data-screen-label="Content">
+    <div class="pad">
+      <div class="eyebrow anim">2.1 · Framework overview</div>
+      <h2 class="c-title anim2">Development sequenced into six phases</h2>
+      <p class="c-lead anim2">Each phase carries a distinct focus, a set of activated fields, and a named transition that marks progression.</p>
+      <ul class="c-list">
+        <li class="anim2"><span class="mk"></span><span>The work moves from <strong>orientation</strong> through <strong>excavation</strong> and <strong>clarification</strong> toward building and embedding.</span></li>
+        <li class="anim2"><span class="mk"></span><span>Phases are not rigid stages. A person may revisit earlier ground as new material surfaces.</span></li>
+        <li class="anim2"><span class="mk"></span><span>The final phase, <strong>Transmission</strong>, turns the person from receiving support to offering it.</span></li>
+      </ul>
+      <div class="dfoot"><span>Level 2 · Maʿrifah</span><span>ourpathguidance.co.uk <span class="diamond">◇</span> 03</span></div>
+    </div>
+  </section>
+
+  <!-- 4 · MODEL COMPONENT (diagram) -->
+  <section data-label="Model" class="bg-cream level-3" data-screen-label="Model component">
+    <div class="pad">
+      <div class="eyebrow anim">The model · diagram</div>
+      <h2 class="m-title anim2">The Pathway Framework · <span style="font-family:var(--arabic);">المسار</span></h2>
+      <div class="flow anim2">
+        <div class="pcard"><span class="pn">PHASE 1</span><span class="pen">Orientation</span><span class="par">التوجّه</span><span class="pt">Receive, locate and orient; establish the relationship.</span></div>
+        <div class="arrow">→</div>
+        <div class="pcard"><span class="pn">PHASE 2</span><span class="pen">Excavation</span><span class="par">الكشف</span><span class="pt">Surface the layers beneath the presenting situation.</span></div>
+        <div class="arrow">→</div>
+        <div class="pcard"><span class="pn">PHASE 3</span><span class="pen">Clarification</span><span class="par">الوُضوح</span><span class="pt">Name values and direction with precision.</span></div>
+        <div class="arrow">→</div>
+        <div class="pcard"><span class="pn">PHASE 4</span><span class="pen">Construction</span><span class="par">البِناء</span><span class="pt">Build the architecture for goals; activate agency.</span></div>
+        <div class="arrow">→</div>
+        <div class="pcard"><span class="pn">PHASE 5</span><span class="pen">Integration</span><span class="par">التكامل</span><span class="pt">Test, refine and embed the new patterns.</span></div>
+        <div class="arrow">→</div>
+        <div class="pcard"><span class="pn">PHASE 6</span><span class="pen">Transmission</span><span class="par">الإرسال</span><span class="pt">Move from receiving support to offering it.</span></div>
+      </div>
+      <div class="dfoot"><span>Level 2 · Maʿrifah</span><span>ourpathguidance.co.uk <span class="diamond">◇</span> 04</span></div>
+    </div>
+  </section>
+
+  <!-- 5 · REFLECTIVE PROMPT -->
+  <section data-label="Reflect" class="bg-cream" data-screen-label="Reflective prompt">
+    <div class="pad">
+      <div class="r-wrap">
+        <div class="r-cap anim">A question to sit with</div>
+        <div class="r-line anim2">“Where is this person’s inner life pulling them, and toward what?”</div>
+        <div data-mark class="r-mark anim2"></div>
+      </div>
+      <div class="dfoot"><span>Level 2 · Maʿrifah</span><span>ourpathguidance.co.uk <span class="diamond">◇</span> 05</span></div>
+    </div>
+  </section>
+
+  <!-- 6 · CLOSING -->
+  <section data-label="Close" class="bg-teal" data-screen-label="Closing">
+    <div class="pad">
+      <div class="close-wrap">
+        <div data-mark-dark></div>
+        <div class="close-main anim2">Shukran</div>
+        <div class="close-sub anim2">Thank you · OurPath Guidance</div>
+      </div>
+      <div class="dfoot"><span>Level 2 · Maʿrifah</span><span>ourpathguidance.co.uk <span class="diamond">◇</span></span></div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script src="terra.js"></script>
+<script src="deck-stage.js"></script>
+<script>
+  document.querySelectorAll('[data-mark]').forEach(el=> el.innerHTML = terraMark({size:64, theme:'light'}));
+  document.querySelectorAll('[data-mark-dark]').forEach(el=> el.innerHTML = terraMark({size:84, theme:'dark'}));
+</script>
+</body>
+</html>

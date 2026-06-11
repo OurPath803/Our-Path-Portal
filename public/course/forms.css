@@ -1,0 +1,74 @@
+/* ============================================================
+   TERRA forms — shared A4-portrait form chrome
+   Used by observation, viva, GLH, codes, register assets.
+   ============================================================ */
+
+.sheet{ width:794px; height:1123px; color:var(--navy); }
+.sp{ position:absolute; inset:0; padding:54px 58px 40px; display:flex; flex-direction:column; }
+
+/* header */
+.form-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:18px; }
+.form-head > .ti{ flex:1; min-width:0; }
+.form-head .eyebrow{ font-family:var(--sans); font-weight:600; font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold-deep); }
+.form-head h1{ font-family:var(--serif); font-weight:600; font-size:29px; line-height:1.04; color:var(--navy); margin:4px 0 0; }
+.form-head .ar{ font-family:var(--arabic); font-size:19px; color:var(--gold-deep); margin-top:4px; }
+.form-head .mk{ flex:0 0 auto; text-align:right; }
+.subhead{ font-family:var(--sans); font-size:10.5pt; line-height:1.5; color:var(--navy-70); margin:12px 0 0; max-width:66ch; }
+
+.grule{ height:1px; background:var(--gold); margin:16px 0; }
+
+/* meta field grid */
+.meta{ display:grid; gap:0; border:1px solid var(--cream-line); border-radius:3px; overflow:hidden; }
+.meta.c4{ grid-template-columns:repeat(4,1fr); }
+.meta.c3{ grid-template-columns:repeat(3,1fr); }
+.meta.c2{ grid-template-columns:repeat(2,1fr); }
+.meta .m{ padding:9px 12px; border-right:1px solid var(--cream-line); border-top:1px solid var(--cream-line); }
+.meta .m:nth-child(-n+4){ border-top:0; }
+.meta .m.last,.meta .m:last-child{ border-right:0; }
+.meta .lab{ font-family:var(--sans); font-weight:600; font-size:8px; letter-spacing:.14em; text-transform:uppercase; color:var(--navy-40); }
+.meta .fill{ height:16px; border-bottom:1px dotted var(--navy-40); margin-top:5px; }
+
+/* generic field */
+.field .fl{ font-family:var(--sans); font-weight:600; font-size:8.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--navy-40); }
+.field .fline{ height:18px; border-bottom:1px dotted var(--navy-40); }
+
+/* tables */
+table.ftable{ width:100%; border-collapse:collapse; }
+table.ftable th{ font-family:var(--sans); font-weight:600; font-size:8.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--navy-40); text-align:left; padding:8px 10px; border-bottom:1px solid var(--gold); vertical-align:bottom; }
+table.ftable th.c{ text-align:center; }
+table.ftable td{ font-family:var(--sans); font-size:10.5pt; color:var(--navy-90); padding:9px 10px; border-bottom:1px solid var(--cream-line); vertical-align:top; }
+table.ftable td.c{ text-align:center; }
+table.ftable tr.fillrow td{ height:26px; }
+
+/* criterion row label */
+.crit b{ font-family:var(--serif); font-weight:600; font-size:14.5px; color:var(--navy); display:block; line-height:1.15; }
+.crit span{ font-family:var(--sans); font-size:9pt; color:var(--navy-70); }
+
+/* rating dots */
+.dots{ display:flex; gap:9px; justify-content:center; }
+.dot-o{ width:18px; height:18px; border-radius:50%; border:1.4px solid var(--accent); }
+.dot-o.sq{ border-radius:3px; }
+
+/* titled fill box */
+.box{ border:1px solid var(--cream-line); border-radius:3px; padding:11px 14px; }
+.box .bt{ font-family:var(--sans); font-weight:600; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:8px; display:flex; align-items:center; gap:7px; }
+.lines{ background-image:repeating-linear-gradient(transparent,transparent 23px,var(--cream-line) 23px,var(--cream-line) 24px); }
+
+/* outcome chips */
+.outcome{ display:flex; gap:12px; align-items:center; }
+.ochip{ display:flex; align-items:center; gap:9px; border:1px solid var(--cream-line); border-radius:3px; padding:9px 16px; }
+.ochip .bx{ width:16px; height:16px; border:1.4px solid var(--accent); border-radius:3px; }
+.ochip .ox{ font-family:var(--serif); font-weight:600; font-size:15px; color:var(--navy); }
+.ochip .oc{ font-family:var(--sans); font-size:8.5px; letter-spacing:.06em; color:var(--navy-40); }
+
+/* signature block */
+.signrow{ display:flex; gap:30px; margin-top:6px; }
+.signrow .sig{ flex:1; }
+.signrow .sigline{ height:30px; border-bottom:1px solid var(--navy); }
+.signrow .siglab{ font-family:var(--sans); font-weight:600; font-size:8px; letter-spacing:.14em; text-transform:uppercase; color:var(--navy-40); margin-top:6px; }
+
+/* footer */
+.form-foot{ margin-top:auto; padding-top:12px; border-top:1px solid var(--cream-line); display:flex; justify-content:space-between; align-items:center;
+  font-family:var(--sans); font-size:9px; letter-spacing:.1em; color:var(--navy-40); }
+.form-foot .warn{ text-transform:uppercase; letter-spacing:.14em; }
+.form-foot .diamond{ color:var(--gold); margin:0 .5em; }

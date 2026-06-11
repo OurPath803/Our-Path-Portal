@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OurPath · Level Badges & Digital Seals</title>
+<link rel="stylesheet" href="terra.css"/>
+<style>
+  body{ background:#e7e1d2; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:56px clamp(16px,4vw,64px) 120px; }
+  .head .kicker{ font-family:var(--sans); font-size:12px; letter-spacing:.32em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; }
+  .head h1{ font-family:var(--serif); font-weight:500; color:var(--navy); font-size:clamp(30px,4.4vw,48px); margin:.16em 0 .12em; }
+  .head p{ font-size:15px; line-height:1.65; color:var(--navy-70); max-width:70ch; }
+
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:26px; margin-top:40px; }
+  .card{ background:var(--cream); border:1px solid var(--cream-line); border-radius:4px; padding:30px 30px 24px; display:flex; flex-direction:column; align-items:center; }
+  .card .lvtag{ align-self:flex-start; font-family:var(--sans); font-weight:600; font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--accent); }
+  .duo{ display:flex; gap:0; margin:18px 0 6px; border-radius:4px; overflow:hidden; border:1px solid var(--cream-line); }
+  .duo .pane{ width:148px; height:148px; display:flex; align-items:center; justify-content:center; }
+  .duo .pane.lite{ background:var(--cream-deep); }
+  .duo .pane.dark{ background:var(--navy); }
+  .card h3{ font-family:var(--serif); font-weight:600; font-size:21px; line-height:1.18; color:var(--navy); margin:16px 0 0; text-align:center; }
+  .card .sub{ font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--navy-40); margin-top:7px; }
+  .legible{ display:flex; align-items:center; gap:12px; margin-top:18px; padding-top:16px; border-top:1px solid var(--cream-line); width:100%; justify-content:center; }
+  .legible .n{ font-family:var(--sans); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--navy-40); }
+  .specs{ margin-top:14px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  .chip{ font-family:var(--sans); font-size:10px; font-weight:500; letter-spacing:.06em; color:var(--navy-70); background:var(--cream-deep); border:1px solid var(--cream-line); padding:3px 9px; border-radius:20px; }
+
+  .note{ margin-top:34px; background:var(--cream); border:1px solid var(--cream-line); border-left:2px solid var(--gold); border-radius:4px; padding:18px 22px; font-size:13px; line-height:1.6; color:var(--navy-70); max-width:760px; }
+  .note b{ color:var(--navy); font-weight:600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="kicker">The OurPath Practitioner Pathway · Section 2</div>
+    <h1>Level Badges &amp; Digital Seals</h1>
+    <p>Square medallions for email signatures, LinkedIn and the website, built as scalable SVG so they stay crisp at any size and export cleanly to transparent PNG at 512&nbsp;and 1024&nbsp;px. Each bears the Arabic glyph, level numeral and the English designation in a tight ring of DM&nbsp;Sans small caps. Gold deepens with seniority; the Ijāzah badge is struck fully in gold.</p>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="note">
+    <b>Export.</b> Each badge is vector. To produce the deliverable transparent PNGs at 512&nbsp;px and 1024&nbsp;px (and an .svg), render the medallion alone on a transparent canvas. The coin face is opaque so it reads on any background; the legibility strip above confirms the glyph and numeral hold at 64&nbsp;px.
+  </div>
+</div>
+
+<script src="terra.js"></script>
+<script>
+const BADGES = [
+  { level:1, glyph:'الأساس', translit:'Asās',     designation:'Foundation',            name:'OurPath Foundation' },
+  { level:2, glyph:'المعرفة', translit:'Maʿrifah',  designation:'Knowledge',             name:'OurPath Knowledge' },
+  { level:3, glyph:'الممارسة',translit:'Mumārasah', designation:'Certified Mentor',      name:'OurPath Certified Mentor' },
+  { level:4, glyph:'الإتقان', translit:'Itqān',     designation:'Advanced Mentor',       name:'OurPath Advanced Mentor' },
+  { level:5, glyph:'الإجازة', translit:'Ijāzah',    designation:'Authorised Trainer',    name:'Authorised Trainer & Supervisor' },
+];
+
+document.getElementById('grid').innerHTML = BADGES.map(b=>{
+  const cls = 'level-'+b.level;
+  const gold = b.level===5;
+  const big = terraBadge({ size:128, level:b.level, glyph:b.glyph, translit:b.translit, designation:b.designation, gold:gold });
+  const small = terraBadge({ size:64, level:b.level, glyph:b.glyph, translit:b.translit, designation:b.designation, gold:gold });
+  return `
+  <div class="card ${cls}">
+    <div class="lvtag">Level ${['I','II','III','IV','V'][b.level-1]} · ${b.translit}</div>
+    <div class="duo">
+      <div class="pane lite">${big}</div>
+      <div class="pane dark">${big}</div>
+    </div>
+    <h3>${b.name}</h3>
+    <div class="sub">${b.designation}</div>
+    <div class="specs">
+      <span class="chip">SVG</span>
+      <span class="chip">PNG 512</span>
+      <span class="chip">PNG 1024</span>
+      <span class="chip">Transparent</span>
+    </div>
+    <div class="legible">
+      <span class="n">Legible at 64px</span>
+      ${small}
+    </div>
+  </div>`;
+}).join('');
+</script>
+</body>
+</html>

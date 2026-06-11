@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OurPath · Verification Register Card</title>
+<link rel="stylesheet" href="terra.css"/>
+<style>
+  body{ background:#e7e1d2; }
+  .wrap{ max-width:1000px; margin:0 auto; padding:56px clamp(16px,4vw,56px) 120px; }
+  .head .kicker{ font-family:var(--sans); font-size:12px; letter-spacing:.32em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; }
+  .head h1{ font-family:var(--serif); font-weight:500; color:var(--navy); font-size:clamp(30px,4.4vw,48px); margin:.16em 0 .12em; }
+  .head p{ font-size:15px; line-height:1.65; color:var(--navy-70); max-width:68ch; }
+
+  .frame2{ margin-top:38px; }
+  .frame2 .lbl{ font-family:var(--sans); font-weight:600; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:13px; }
+
+  /* register card — landscape, official */
+  .rcard{ width:560px; background:var(--cream); border:1px solid var(--cream-line); border-radius:6px; overflow:hidden; box-shadow:0 18px 40px -24px rgba(26,47,54,.5); }
+  .rcard .rc-top{ background:var(--navy); color:var(--cream); padding:16px 22px; display:flex; align-items:center; justify-content:space-between; }
+  .rc-top .lft{ display:flex; align-items:center; gap:13px; }
+  .rc-top .nm{ font-family:var(--serif); }
+  .rc-top .nm .a{ font-size:20px; font-weight:300; letter-spacing:.06em; }
+  .rc-top .nm .a b{ font-weight:600; font-style:italic; }
+  .rc-top .nm .b{ font-family:var(--sans); font-size:8px; letter-spacing:.24em; text-transform:uppercase; color:#9fb0b5; margin-top:2px; }
+  .rc-top .vrf{ font-family:var(--sans); font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-l); }
+
+  .rc-body{ padding:20px 22px 16px; display:grid; grid-template-columns:1fr 1fr; gap:14px 26px; }
+  .rc-field .l{ font-family:var(--sans); font-weight:600; font-size:8.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--navy-40); }
+  .rc-field .v{ font-family:var(--serif); font-size:20px; color:var(--navy); margin-top:2px; }
+  .rc-field .v.mono{ font-family:var(--sans); font-weight:600; font-size:15px; letter-spacing:.04em; color:var(--navy); }
+  .rc-field.full{ grid-column:1 / -1; }
+
+  .status{ display:inline-flex; align-items:center; gap:8px; padding:5px 13px; border-radius:20px; font-family:var(--sans); font-weight:600; font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
+  .status .dot{ width:8px; height:8px; border-radius:50%; }
+  .status.active{ background:rgba(31,138,91,.12); color:#1F7A52; } .status.active .dot{ background:#1F8A5B; }
+  .status.susp{ background:rgba(196,153,60,.16); color:var(--gold-deep); } .status.susp .dot{ background:var(--gold); }
+  .status.rev{ background:rgba(154,60,60,.12); color:#9A3C3C; } .status.rev .dot{ background:#9A3C3C; }
+
+  .rc-foot{ border-top:1px solid var(--cream-line); padding:13px 22px; display:flex; align-items:center; justify-content:space-between; }
+  .rc-foot .verify{ font-family:var(--sans); font-size:11px; letter-spacing:.04em; color:var(--navy-70); }
+  .rc-foot .verify b{ color:var(--navy); font-weight:600; }
+  .rc-foot .seal{ line-height:0; }
+
+  .variants{ display:flex; gap:18px; flex-wrap:wrap; margin-top:10px; }
+  .vchip{ background:var(--cream); border:1px solid var(--cream-line); border-radius:6px; padding:14px 18px; display:flex; align-items:center; gap:14px; min-width:240px; }
+  .vchip .seal{ line-height:0; }
+  .vchip .meta .no{ font-family:var(--sans); font-weight:600; font-size:13px; color:var(--navy); }
+  .vchip .meta .nm{ font-family:var(--serif); font-size:15px; color:var(--navy-70); }
+  .vchip .meta .st{ margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="kicker">The OurPath Practitioner Pathway · Section 13</div>
+    <h1>Verification Register Card</h1>
+    <p>A small, official landscape card for the future public verification page: the record a visitor sees when checking a certificate number. Minimal: holder, level, issue date, and a clear status. Shown with the three status states beneath.</p>
+  </div>
+
+  <div class="frame2">
+    <div class="lbl">Register card · primary</div>
+    <div class="rcard">
+      <div class="rc-top">
+        <div class="lft">
+          <span data-mark-dark></span>
+          <span class="nm"><span class="a">Our<b>Path</b></span><span class="b">Practitioner Register</span></span>
+        </div>
+        <span class="vrf">Verified record</span>
+      </div>
+      <div class="rc-body">
+        <div class="rc-field"><div class="l">Certificate no.</div><div class="v mono">OP-MEN-L3-2025-001</div></div>
+        <div class="rc-field"><div class="l">Status</div><div class="v"><span class="status active"><span class="dot"></span>Active</span></div></div>
+        <div class="rc-field"><div class="l">Holder</div><div class="v">Yusuf Ibrahim Adeyemi</div></div>
+        <div class="rc-field"><div class="l">Level</div><div class="v" style="white-space:nowrap;">III · Mumārasah</div><div style="font-family:var(--sans);font-size:11px;color:var(--navy-40);margin-top:1px;">Certified Mentor</div></div>
+        <div class="rc-field"><div class="l">Issued</div><div class="v">22 May 2025</div></div>
+        <div class="rc-field"><div class="l">Awarded by</div><div class="v" style="font-size:16px;">OurPath Guidance Ltd</div></div>
+      </div>
+      <div class="rc-foot">
+        <div class="verify">Verify at <b>ourpathguidance.co.uk</b></div>
+        <div class="seal" data-seal></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="frame2">
+    <div class="lbl">Status states</div>
+    <div class="variants" id="variants"></div>
+  </div>
+</div>
+
+<script src="terra.js"></script>
+<script>
+  document.querySelectorAll('[data-mark-dark]').forEach(el=> el.innerHTML = terraMark({size:30, theme:'dark'}));
+  document.querySelectorAll('[data-seal]').forEach(el=> el.innerHTML = terraSeal({size:46, level:3, glyph:'الممارسة'}));
+
+  const states = [
+    { cls:'active', label:'Active',    no:'OP-MEN-L3-2025-001', nm:'Yusuf I. Adeyemi' },
+    { cls:'susp',   label:'Suspended', no:'OP-MEN-L4-2024-007', nm:'Layla H. Karim' },
+    { cls:'rev',    label:'Revoked',   no:'OP-FND-L1-2023-019', nm:'Omar S. Bello' },
+  ];
+  document.getElementById('variants').innerHTML = states.map(s=>`
+    <div class="vchip">
+      <span class="seal">${terraSeal({size:44, level:3, glyph:'الممارسة'})}</span>
+      <div class="meta">
+        <div class="no">${s.no}</div>
+        <div class="nm">${s.nm}</div>
+        <div class="st"><span class="status ${s.cls}"><span class="dot"></span>${s.label}</span></div>
+      </div>
+    </div>`).join('');
+</script>
+</body>
+</html>

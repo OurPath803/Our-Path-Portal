@@ -14,6 +14,63 @@ function formatDate(d) {
 // Base path for Gift Series HTML files served from public/gift-series/
 const GS = '/gift-series/'
 
+// Base path for Practitioner Training files served from public/course/
+const COURSE = '/course/'
+
+const TRAINING_RESOURCES = [
+  { title: 'Course Handbook',        file: 'Handbook.html',             tag: 'Handbook' },
+  { title: 'Reference Cards',        file: 'Reference-Cards.html',      tag: 'Reference' },
+  { title: 'Observation Form',       file: 'Observation-Form.html',     tag: 'Form' },
+  { title: 'Reflective Portfolio',   file: 'Reflective-Portfolio.html', tag: 'Portfolio' },
+  { title: 'Viva Rubric',            file: 'Viva-Rubric.html',          tag: 'Rubric' },
+  { title: 'GLH Log',                file: 'GLH-Log.html',              tag: 'Log' },
+]
+
+function TrainingResources() {
+  return (
+    <div style={{ marginTop: 36 }}>
+      <div style={{ marginBottom: 16, paddingBottom: 12, borderBottom: '1px solid var(--line)' }}>
+        <div className="eyebrow" style={{ marginBottom: 4 }}>Practitioner Training · Mentor Resources</div>
+        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 22, color: 'var(--navy)', margin: 0 }}>
+          Course materials
+        </h2>
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+        {TRAINING_RESOURCES.map(item => (
+          <a
+            key={item.file}
+            href={COURSE + item.file}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '8px 14px',
+              background: 'var(--off-white)',
+              border: '1px solid var(--line)',
+              borderRadius: 4,
+              textDecoration: 'none',
+              fontFamily: 'var(--font-body)', fontSize: 13,
+              color: 'var(--navy)',
+              transition: 'border-color 0.12s',
+            }}
+            onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--gold)'}
+            onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--line)'}
+          >
+            <span style={{
+              fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
+              color: 'var(--gold)', fontWeight: 600, fontFamily: 'var(--font-body)',
+            }}>
+              {item.tag}
+            </span>
+            {item.title}
+            <span style={{ fontSize: 11, color: 'var(--mute)' }}>↗</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 const GIFT_GROUPS = [
   {
     label: 'Programme materials',
@@ -282,6 +339,9 @@ export default function MentorDashboard() {
 
           {/* ── Gift Series facilitator materials ── */}
           <GiftSeriesResources />
+
+          {/* ── Practitioner Training resources ── */}
+          <TrainingResources />
         </div>
       </div>
     </div>

@@ -6,9 +6,9 @@ import { useTheme, THEMES } from '../lib/theme'
 
 // Tiny preview swatches that hint at each theme's palette.
 const PREVIEWS = {
-  cream:  { bg: '#F5EED9', card: '#FAF7F0', accent: '#C9A84C', text: '#1B2B4B' },
+  cream:  { bg: '#FAFAF8', card: '#FAF7F0', accent: '#C9A84C', text: '#1E3A5F' },
   night:  { bg: '#0E1A1F', card: '#1A2A30', accent: '#C9A84C', text: '#E8EFE8' },
-  sand:   { bg: '#EDE3CC', card: '#FFF4DB', accent: '#B8884F', text: '#1B2B4B' },
+  sand:   { bg: '#EDE3CC', card: '#FFF4DB', accent: '#B8884F', text: '#1E3A5F' },
   forest: { bg: '#EBEEDD', card: '#F8FAEC', accent: '#8B7E3E', text: '#142B30' },
 }
 

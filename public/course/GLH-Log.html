@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OurPath · Guided Learning Hours Log</title>
+<link rel="stylesheet" href="terra.css"/>
+<link rel="stylesheet" href="forms.css"/>
+<style>
+  .targets{ display:flex; gap:9px; margin-top:4px; }
+  .tcard{ flex:1; border:1px solid var(--cream-line); border-top:2px solid var(--accent); border-radius:3px; padding:9px 11px; }
+  .tcard .tl{ font-family:var(--sans); font-weight:600; font-size:8.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+  .tcard .tar{ font-family:var(--arabic); font-size:13px; color:var(--gold-deep); }
+  .tcard .th{ font-family:var(--serif); font-weight:600; font-size:18px; color:var(--navy); margin-top:3px; }
+  .tcard .ts{ font-family:var(--sans); font-size:8px; color:var(--navy-40); }
+  .glh td.c, .glh th.c{ text-align:center; }
+  .totalrow td{ border-top:1px solid var(--gold); border-bottom:0; font-family:var(--sans); font-weight:600; font-size:11pt; color:var(--navy); padding-top:11px; }
+  .totalrow .tlab{ text-align:right; letter-spacing:.08em; text-transform:uppercase; font-size:9px; color:var(--navy-40); }
+  .typekey{ display:flex; gap:14px; margin-top:9px; flex-wrap:wrap; }
+  .typekey span{ font-family:var(--sans); font-size:9px; letter-spacing:.04em; color:var(--navy-70); display:flex; align-items:center; gap:6px; }
+  .typekey i{ width:9px; height:9px; border-radius:2px; background:var(--accent); display:inline-block; }
+</style>
+</head>
+<body>
+<div class="gallery">
+  <div class="gallery-head">
+    <div class="kicker">The OurPath Practitioner Pathway · Section 10</div>
+    <h1>Guided Learning Hours Log</h1>
+    <p>A4 portrait. A running record of taught, directed, practice and assessment hours, with per-level targets at the top and verifier initials against every entry.</p>
+  </div>
+
+  <div class="frame">
+    <div class="label"><span class="n">Form</span><span class="t">GLH Log</span><span class="meta">A4 portrait · fillable</span></div>
+    <div class="paper-mount paper-portrait">
+      <div class="paper sheet level-2" data-w="794" data-h="1123">
+        <div class="sp">
+          <div class="form-head">
+            <div class="ti">
+              <div class="eyebrow">OurPath · Hours Record</div>
+              <h1>Guided Learning Hours</h1>
+              <div class="ar">الساعات · al-Sāʿāt</div>
+            </div>
+            <div class="mk" data-mark></div>
+          </div>
+
+          <div class="grule"></div>
+          <div style="font-family:var(--sans);font-weight:600;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:9px;">Per-level targets (indicative GLH)</div>
+          <div class="targets">
+            <div class="tcard level-1"><div class="tl">L1 Asās</div><div class="tar">الأساس</div><div class="th">~10 h</div><div class="ts">Foundation</div></div>
+            <div class="tcard level-2"><div class="tl">L2 Maʿrifah</div><div class="tar">المعرفة</div><div class="th">~30 h</div><div class="ts">Knowledge</div></div>
+            <div class="tcard level-3"><div class="tl">L3 Mumārasah</div><div class="tar">الممارسة</div><div class="th">48 / 30 h</div><div class="ts">Mentor / Ops</div></div>
+            <div class="tcard level-4"><div class="tl">L4 Itqān</div><div class="tar">الإتقان</div><div class="th">106 / 62 h</div><div class="ts">Mentor / Ops</div></div>
+            <div class="tcard level-5"><div class="tl">L5 Ijāzah</div><div class="tar">الإجازة</div><div class="th">~58 h</div><div class="ts">Authorisation</div></div>
+          </div>
+
+          <div class="meta c3" style="margin-top:18px;">
+            <div class="m"><div class="lab">Practitioner</div><div class="fill"></div></div>
+            <div class="m"><div class="lab">Working towards (level)</div><div class="fill"></div></div>
+            <div class="m last"><div class="lab">Period</div><div class="fill"></div></div>
+          </div>
+
+          <div class="typekey">
+            <span><i></i>Taught</span><span><i></i>Directed</span><span><i></i>Practice</span><span><i></i>Assessment</span>
+          </div>
+
+          <table class="ftable glh" style="margin-top:12px;">
+            <tr>
+              <th style="width:88px;">Date</th>
+              <th>Activity</th>
+              <th style="width:120px;">Type</th>
+              <th class="c" style="width:64px;">Hours</th>
+              <th class="c" style="width:70px;">Verifier</th>
+            </tr>
+            <tbody id="rows"></tbody>
+            <tr class="totalrow"><td></td><td></td><td class="tlab">Running total</td><td class="c"></td><td></td></tr>
+          </table>
+
+          <div class="form-foot">
+            <span>Verifier initials confirm the hours were completed as recorded.</span>
+            <span>ourpathguidance.co.uk <span class="diamond">◇</span> GLH v2.0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="terra.js"></script>
+<script>
+  let rows=''; for(let i=0;i<13;i++){ rows += '<tr class="fillrow"><td></td><td></td><td></td><td class="c"></td><td class="c"></td></tr>'; }
+  document.getElementById('rows').innerHTML = rows;
+  document.querySelectorAll('[data-mark]').forEach(el=> el.innerHTML = terraMark({size:40, theme:'light'}));
+  terraFit();
+</script>
+</body>
+</html>

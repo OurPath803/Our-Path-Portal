@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OurPath · Trainee Welcome Pack</title>
+<link rel="stylesheet" href="terra.css"/>
+<style>
+  .doc{ width:794px; height:1123px; color:var(--navy); }
+  .dp{ position:absolute; inset:0; padding:56px 62px 44px; display:flex; flex-direction:column; }
+  .rh{ display:flex; align-items:center; justify-content:space-between; padding-bottom:11px; border-bottom:1px solid var(--cream-line); }
+  .rh .l{ display:flex; align-items:center; gap:10px; font-family:var(--sans); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--navy-40); }
+  .rh .r{ font-family:var(--sans); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+  .rf{ margin-top:auto; display:flex; align-items:center; justify-content:space-between; padding-top:12px; border-top:1px solid var(--cream-line); font-family:var(--sans); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--navy-40); }
+  .rf .diamond{ color:var(--gold); margin:0 .5em; }
+  .db{ flex:1; padding:24px 0 16px; display:flex; flex-direction:column; }
+
+  .eyebrow{ font-family:var(--sans); font-weight:600; font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold-deep); }
+  h2.t{ font-family:var(--serif); font-weight:500; font-size:32px; line-height:1.08; color:var(--navy); margin:6px 0 0; }
+  p.body{ font-family:var(--sans); font-size:11pt; line-height:1.6; color:var(--navy-90); margin:12px 0 0; max-width:62ch; text-wrap:pretty; }
+
+  /* welcome */
+  .welcome{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; }
+  .welcome .lead{ font-family:var(--serif); font-style:italic; font-size:22px; line-height:1.5; color:var(--navy-70); max-width:46ch; margin-top:30px; }
+  .welcome .sig{ font-family:"Cormorant Garamond"; font-style:italic; font-size:22px; color:var(--navy); margin-top:30px; }
+  .welcome .sigt{ font-family:var(--sans); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--navy-40); margin-top:5px; }
+  .cbr::before,.cbr::after{ content:""; position:absolute; width:36px; height:36px; border-color:var(--gold); border-style:solid; opacity:.55; }
+  .cbr::before{ top:0; left:0; border-width:1px 0 0 1px; } .cbr::after{ bottom:0; right:0; border-width:0 1px 1px 0; }
+
+  /* vertical ladder */
+  .tl-v{ margin-top:22px; display:flex; flex-direction:column; gap:11px; }
+  .tl-rung{ display:flex; }
+  .tl-step{ width:var(--w); min-width:340px; margin-left:auto; display:flex; align-items:center; gap:15px; background:var(--cream-deep); border:1px solid var(--cream-line); border-right:3px solid var(--accent); border-radius:4px; padding:11px 16px; }
+  .tl-seal{ flex:0 0 auto; line-height:0; }
+  .tl-lvl{ font-family:var(--sans); font-weight:600; font-size:8.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+  .tl-en{ font-family:var(--serif); font-weight:600; font-size:18px; color:var(--navy); line-height:1.1; }
+  .tl-award{ font-family:var(--sans); font-size:9.5px; color:var(--navy-70); margin-top:1px; }
+
+  /* what to expect list */
+  .expect{ margin-top:8px; display:flex; flex-direction:column; }
+  .erow{ display:grid; grid-template-columns:54px 1fr; gap:16px; padding:13px 0; border-bottom:1px solid var(--cream-line); align-items:start; }
+  .erow .en{ font-family:var(--serif); font-weight:600; font-size:22px; color:var(--gold-deep); }
+  .erow .eh{ font-family:var(--serif); font-weight:600; font-size:17px; color:var(--navy); }
+  .erow .ed{ font-family:var(--sans); font-size:10pt; line-height:1.5; color:var(--navy-70); margin-top:2px; }
+
+  /* two-col info */
+  .info2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:8px; }
+  .icard{ border:1px solid var(--cream-line); border-top:2px solid var(--accent); border-radius:4px; padding:16px 18px; }
+  .icard h3{ font-family:var(--serif); font-weight:600; font-size:18px; color:var(--navy); margin:0 0 6px; display:flex; align-items:center; gap:9px; }
+  .icard p{ font-family:var(--sans); font-size:10pt; line-height:1.55; color:var(--navy-70); margin:0; }
+  .icard ul{ margin:8px 0 0; padding-left:0; list-style:none; }
+  .icard li{ font-family:var(--sans); font-size:10pt; line-height:1.5; color:var(--navy-90); padding:4px 0 4px 18px; position:relative; }
+  .icard li::before{ content:""; position:absolute; left:2px; top:9px; width:6px; height:6px; transform:rotate(45deg); background:var(--gold); }
+
+  /* checklist */
+  .checklist{ margin-top:8px; }
+  .crow{ display:flex; align-items:flex-start; gap:14px; padding:12px 0; border-bottom:1px solid var(--cream-line); }
+  .crow .cb{ flex:0 0 auto; width:20px; height:20px; border:1.5px solid var(--accent); border-radius:4px; margin-top:1px; }
+  .crow .ct{ font-family:var(--serif); font-weight:600; font-size:16px; color:var(--navy); }
+  .crow .cs{ font-family:var(--sans); font-size:9.5pt; color:var(--navy-70); margin-top:1px; }
+</style>
+</head>
+<body>
+<div class="gallery">
+  <div class="gallery-head">
+    <div class="kicker">The OurPath Practitioner Pathway · Section 12</div>
+    <h1>Trainee Welcome Pack</h1>
+    <p>A short A4 portrait booklet: welcome, the pathway at a glance (the 5-level ladder, Asās to Ijāzah), what to expect per level, how certification works, the supervision rhythm, and a checklist. The ladder is also exported on its own as a landscape diagram for the website (last frame).</p>
+  </div>
+  <div id="pages"></div>
+</div>
+
+<script src="terra.js"></script>
+<script src="ladder.js"></script>
+<script>
+function shell(label, level, sectionR, page, inner, custom){
+  return `
+  <div class="frame">
+    <div class="label"><span class="n">${label.n}</span><span class="t">${label.t}</span><span class="meta">${custom||'A4 portrait'}</span></div>
+    <div class="paper-mount paper-portrait">
+      <div class="paper doc ${level||''}" data-w="794" data-h="1123">
+        <div class="dp">
+          <div class="rh"><div class="l">${terraMark({size:18})}<span>Trainee Welcome Pack</span></div><div class="r">${sectionR||''}</div></div>
+          <div class="db">${inner}</div>
+          <div class="rf"><span>OurPath Guidance Ltd · Welcome Pack v2.0</span><span>ourpathguidance.co.uk <span class="diamond">◇</span> &nbsp;·&nbsp; ${page}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// 1 — WELCOME
+const welcome = `
+  <div class="frame">
+    <div class="label"><span class="n">Page 1</span><span class="t">Welcome</span><span class="meta">A4 portrait</span></div>
+    <div class="paper-mount paper-portrait">
+      <div class="paper doc level-1" data-w="794" data-h="1123">
+        <div class="dp">
+          <div class="welcome cbr">
+            ${terraWordmark({scale:0.92})}
+            <div class="eyebrow" style="margin-top:34px;">As-salāmu ʿalaykum</div>
+            <div class="lead">You are beginning a path of disciplined, reflective service that joins a classical tradition of inner development with the care of contemporary practice. We are glad you are here.</div>
+            <div class="sig">Sawon Moazzem</div>
+            <div class="sigt">Director / Lead Mentor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+// 2 — PATHWAY AT A GLANCE (ladder)
+const glance = shell({n:'Page 2', t:'The pathway at a glance'}, 'level-3', 'The Pathway', '02', `
+  <div class="eyebrow">Asās → Ijāzah</div>
+  <h2 class="t">The pathway at a glance</h2>
+  <p class="body">Five levels, each building on the last, from foundational understanding to the authorisation to train and supervise others.</p>
+  ${terraLadderV()}`);
+
+// 3 — WHAT TO EXPECT
+const expect = shell({n:'Page 3', t:'What to expect per level'}, 'level-3', 'Per level', '03', `
+  <div class="eyebrow">The journey, level by level</div>
+  <h2 class="t">What to expect</h2>
+  <div class="expect">
+    <div class="erow"><div class="en">I</div><div><div class="eh">Asās · Foundation</div><div class="ed">Orientation to the model, the tradition behind it, and the posture of a mentor. Taught, with light reflective work.</div></div></div>
+    <div class="erow"><div class="en">II</div><div><div class="eh">Maʿrifah · Knowledge</div><div class="ed">Working command of the framework and its evidence base. Knowledge assessment and a convergence map.</div></div></div>
+    <div class="erow"><div class="en">III</div><div><div class="eh">Mumārasah · Supervised Practice</div><div class="ed">Observed practice and probationary supervision. You begin running real sessions with the OCS check-in.</div></div></div>
+    <div class="erow"><div class="en">IV</div><div><div class="eh">Itqān · Proficient Practice</div><div class="ed">Independent practice evidenced through portfolio, case study and viva. Greater autonomy and complexity.</div></div></div>
+    <div class="erow"><div class="en">V</div><div><div class="eh">Ijāzah · Authorisation</div><div class="ed">Authorisation to train, supervise and assess others, passing the practice onward.</div></div></div>
+  </div>`);
+
+// 4 — HOW CERTIFICATION WORKS + SUPERVISION RHYTHM
+const certinfo = shell({n:'Page 4', t:'Certification & supervision'}, 'level-3', 'How it works', '04', `
+  <div class="eyebrow">The shape of progression</div>
+  <h2 class="t">How certification works</h2>
+  <div class="info2" style="margin-top:18px;">
+    <div class="icard"><h3 data-mk>Earning each level</h3><ul>
+      <li>Complete the guided learning hours for the level.</li>
+      <li>Submit the required evidence: assessment, portfolio or viva.</li>
+      <li>Pass observed practice (from Level 3 upward).</li>
+      <li>Receive your certificate, seal and digital badge.</li>
+    </ul></div>
+    <div class="icard"><h3 data-mk>The supervision rhythm</h3><p>From Level&nbsp;3, practice is held in regular supervision:</p><ul>
+      <li>Session-Zero observation before solo practice.</li>
+      <li>Monthly group supervision throughout.</li>
+      <li>1:1 supervision at agreed case milestones.</li>
+      <li>Annual review against the Code of Conduct.</li>
+    </ul></div>
+  </div>
+  <div style="margin-top:20px;border:1px solid var(--cream-line);border-left:2px solid var(--gold);background:var(--cream-deep);border-radius:3px;padding:14px 18px;">
+    <div style="font-family:var(--sans);font-weight:600;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:6px;">A note on scope</div>
+    <p style="font-family:var(--sans);font-size:10pt;line-height:1.55;color:var(--navy-90);margin:0;">This is an internal professional designation awarded by OurPath Guidance Ltd. It is not a regulated or statutory qualification, nor a health, therapy, or clinical credential.</p>
+  </div>`);
+
+// 5 — CHECKLIST
+const checklist = shell({n:'Page 5', t:'Getting started checklist'}, 'level-3', 'Checklist', '05', `
+  <div class="eyebrow">Before your first session</div>
+  <h2 class="t">Getting started</h2>
+  <div class="checklist">
+    <div class="crow"><div class="cb"></div><div><div class="ct">Read the Programme Handbook</div><div class="cs">The model, the levels, and how the pathway fits together.</div></div></div>
+    <div class="crow"><div class="cb"></div><div><div class="ct">Sign your Code of Conduct</div><div class="cs">Required before any supervised practice begins.</div></div></div>
+    <div class="crow"><div class="cb"></div><div><div class="ct">Meet your supervisor</div><div class="cs">Arrange your Session-Zero observation.</div></div></div>
+    <div class="crow"><div class="cb"></div><div><div class="ct">Open your Reflective Portfolio</div><div class="cs">Start your GLH log and first reflective entry.</div></div></div>
+    <div class="crow"><div class="cb"></div><div><div class="ct">Learn the OCS check-in</div><div class="cs">Practise scoring the five dimensions before you use it live.</div></div></div>
+    <div class="crow"><div class="cb"></div><div><div class="ct">Confirm your level target</div><div class="cs">Agree your guided-learning-hours goal with your mentor.</div></div></div>
+  </div>`);
+
+// 6 — STANDALONE LANDSCAPE LADDER (website diagram)
+const ladderH = `
+  <div class="frame">
+    <div class="label"><span class="n">Export</span><span class="t">Pathway ladder, landscape diagram</span><span class="meta">For website · 1123 × 559</span></div>
+    <div class="paper-mount" style="--pw:1123px;">
+      <div class="paper" data-w="1123" data-h="559" style="background:var(--cream);">
+        <div style="position:absolute;inset:0;padding:40px 50px 36px;display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div><div style="font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);">The OurPath Practitioner Pathway</div>
+            <div style="font-family:var(--serif);font-weight:500;font-size:30px;color:var(--navy);margin-top:3px;">Five levels, one path · <span style="font-family:var(--arabic);">المسار</span></div></div>
+            ${terraWordmarkH({scale:0.7})}
+          </div>
+          <div style="flex:1;display:flex;align-items:flex-end;margin-top:14px;">${terraLadderH()}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--cream-line);font-family:var(--sans);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy-40);">
+            <span>From Foundation to Authorisation to Teach</span><span>ourpathguidance.co.uk <span style="color:var(--gold);">◇</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+document.getElementById('pages').innerHTML = welcome + glance + expect + certinfo + checklist + ladderH;
+document.querySelectorAll('.icard h3[data-mk]').forEach(el=> el.insertAdjacentHTML('afterbegin', terraMark({size:15,theme:'light'})));
+terraFit();
+</script>
+
+<style>
+  /* landscape ladder */
+  .tl-h{ display:flex; align-items:flex-end; gap:14px; width:100%; }
+  .tl-col{ flex:1; display:flex; flex-direction:column; justify-content:flex-end; }
+  .tl-riser{ width:100%; background:linear-gradient(180deg,var(--cream-deep),transparent); border-left:2px solid var(--accent); }
+  .tl-card{ border:1px solid var(--cream-line); border-top:2px solid var(--accent); border-radius:4px; padding:14px 12px 16px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:3px; background:var(--cream); }
+  .tl-card .tl-seal{ margin-bottom:4px; line-height:0; }
+  .tl-card .tl-lvl{ font-family:var(--sans); font-weight:600; font-size:8.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+  .tl-card .tl-ar{ font-family:var(--arabic); font-size:18px; color:var(--gold-deep); }
+  .tl-card .tl-en{ font-family:var(--serif); font-weight:600; font-size:18px; color:var(--navy); line-height:1.05; }
+  .tl-card .tl-sub{ font-family:var(--sans); font-size:9px; color:var(--navy-40); letter-spacing:.04em; }
+  .tl-card .tl-award{ font-family:var(--sans); font-size:9.5px; color:var(--navy-70); margin-top:4px; padding-top:6px; border-top:1px solid var(--cream-line); width:100%; }
+</style>
+</body>
+</html>
