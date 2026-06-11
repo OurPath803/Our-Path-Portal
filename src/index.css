@@ -954,6 +954,9 @@ a:hover { border-bottom-color: var(--gold); }
 }
 .bb-episodes-head {
   margin-bottom: 40px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .bb-episodes-head h2 {
   font-size: 28px; color: var(--navy); margin: 0;
@@ -964,6 +967,7 @@ a:hover { border-bottom-color: var(--gold); }
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   max-width: 1100px;
+  margin: 0 auto;
 }
 
 .bb-card {
@@ -1217,7 +1221,7 @@ a:hover { border-bottom-color: var(--gold); }
 .stat-num { font-family: var(--font-display); font-size: 44px; color: var(--navy); line-height: 1; margin-bottom: 8px; }
 .stat-label { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); font-family: var(--font-body); font-weight: 600; opacity: 0.75; }
 
-.story-founder { background: var(--cream); padding: 72px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.story-founder { background: var(--cream); padding: 72px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; max-width: 1100px; margin: 0 auto; }
 .founder-text h2 { font-size: 36px; color: var(--navy); margin: 0 0 20px; }
 .founder-text p { font-size: 16px; color: var(--ink-soft); line-height: 1.7; margin: 0 0 16px; }
 .founder-text p:last-child { margin-bottom: 0; }
@@ -1248,7 +1252,8 @@ a:hover { border-bottom-color: var(--gold); }
 .session-card h3 { font-family: var(--font-display); font-size: 20px; color: var(--navy); margin: 0 0 8px; }
 .session-tool { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); font-family: var(--font-body); background: var(--cream-deep); display: inline-block; padding: 3px 8px; border-radius: 2px; }
 
-.workshop-format { background: var(--off-white); padding: 56px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.workshop-format { background: var(--off-white); padding: 56px 48px; }
+.workshop-format-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; max-width: 1100px; margin: 0 auto; }
 .format-block h2 { font-size: 28px; color: var(--navy); margin: 0 0 16px; }
 .format-block p { font-size: 16px; color: var(--ink-soft); line-height: 1.7; margin: 0 0 16px; }
 .format-block p:last-child { margin-bottom: 0; }
@@ -1260,7 +1265,7 @@ a:hover { border-bottom-color: var(--gold); }
    CONTACT PAGE
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.contact-section { background: var(--cream); padding: 80px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.contact-section { background: var(--cream); padding: 80px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; max-width: 1100px; margin-left: auto; margin-right: auto; }
 .contact-left h1 { font-size: 44px; color: var(--navy); margin: 0 0 12px; }
 .contact-left .eyebrow { margin-bottom: 12px; }
 .contact-left > p { font-size: 16px; color: var(--ink-soft); line-height: 1.65; margin: 0 0 32px; }
@@ -1316,7 +1321,7 @@ a:hover { border-bottom-color: var(--gold); }
   .sessions-grid { grid-template-columns: 1fr; }
   .beliefs-grid { grid-template-columns: 1fr; }
   .pos-diagram { flex-direction: column; }
-  .story-founder, .workshop-format, .contact-section,
+  .story-founder, .workshop-format-inner, .contact-section,
   .referral-form-section { grid-template-columns: 1fr; gap: 40px; }
   .how-stages::before { display: none; }
   .mentoring-hero h1, .workshops-hero h1 { font-size: 34px; }
@@ -1330,6 +1335,7 @@ a:hover { border-bottom-color: var(--gold); }
   .pricing-section, .faq-section, .how-it-works, .calendly-section,
   .sessions-section, .beliefs-section { padding: 56px 24px; }
   .story-founder, .workshop-format { padding: 56px 24px; }
+  .workshop-format-inner { gap: 32px; }
   .contact-section, .referral-form-section { padding: 56px 24px; }
   .section-cta { padding: 56px 24px; }
 }

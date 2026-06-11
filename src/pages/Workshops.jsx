@@ -67,6 +67,7 @@ export default function Workshops() {
 
       {/* Format + Who it's for */}
       <section className="workshop-format">
+        <div className="workshop-format-inner">
         <div className="format-block">
           <div className="eyebrow" style={{ marginBottom: 12 }}>Format</div>
           <h2>Small groups. Structured practice.</h2>
@@ -96,6 +97,7 @@ export default function Workshops() {
             <strong style={{ color: 'var(--navy)' }}>Next cohort:</strong> Dates to be announced.
             Book a screening conversation for early access.
           </p>
+        </div>
         </div>
       </section>
 

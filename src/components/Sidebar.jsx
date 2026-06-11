@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 
@@ -22,22 +22,25 @@ const MENTOR_NAV = [
   { to: '/settings',            ico: '◌', label: 'Settings' },
 ]
 
-// Logo lockup — uses the horizontal light-on-dark logo if the file exists in
-// /public, with the typographic wordmark as a fallback. Hides the broken-image
-// icon if the asset is missing in this environment.
+// Logo lockup — links back to the public home page. Uses horizontal light-on-dark
+// logo with typographic fallback if the asset is missing.
 function Logo() {
   const [imgFailed, setImgFailed] = useState(false)
-  if (imgFailed) {
-    return <div className="logo">OurPath<span> Guidance</span></div>
-  }
+  const inner = imgFailed
+    ? <div className="logo">OurPath<span> Guidance</span></div>
+    : (
+      <div className="logo logo-img">
+        <img
+          src="/ourpath-horizontal-light.png"
+          alt="OurPath Guidance"
+          onError={() => setImgFailed(true)}
+        />
+      </div>
+    )
   return (
-    <div className="logo logo-img">
-      <img
-        src="/ourpath-horizontal-light.png"
-        alt="OurPath Guidance"
-        onError={() => setImgFailed(true)}
-      />
-    </div>
+    <Link to="/" style={{ textDecoration: 'none', borderBottom: 'none' }}>
+      {inner}
+    </Link>
   )
 }
 
