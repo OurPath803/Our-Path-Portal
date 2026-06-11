@@ -21,7 +21,7 @@ const CATEGORIES = [
   {
     id: 'dont_know',
     title: 'What I do not know',
-    prompt: 'Genuine gaps. Information I'm missing.',
+    prompt: "Genuine gaps. Information I'm missing.",
     colour: 'var(--charcoal)',
   },
   {
