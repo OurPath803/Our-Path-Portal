@@ -82,7 +82,10 @@ export default function BetweenSessions() {
   const [text, setText] = useState('')
   const [loading, setLoading] = useState(true)
   const [sending, setSending] = useState(false)
+  const [attachFile, setAttachFile] = useState(null)  // File | null
+  const [uploadErr, setUploadErr] = useState('')
   const feedRef = useRef(null)
+  const fileInputRef = useRef(null)
 
   useEffect(() => {
     if (!user || !profile) return
@@ -191,13 +194,52 @@ export default function BetweenSessions() {
     }, 50)
   }
 
+  function handleFileSelect(e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    if (file.size > 10 * 1024 * 1024) {
+      setUploadErr('File too large — maximum 10 MB.')
+      return
+    }
+    setUploadErr('')
+    setAttachFile(file)
+    // Reset input so the same file can be reselected if removed
+    e.target.value = ''
+  }
+
   async function send() {
-    if (!text.trim() || !counterpartId || sending) return
+    if ((!text.trim() && !attachFile) || !counterpartId || sending) return
     setSending(true)
+    setUploadErr('')
+
+    let attachment_url = null
+    let attachment_name = null
+
+    // Upload attachment to Supabase Storage if present
+    if (attachFile) {
+      const ext = attachFile.name.split('.').pop()
+      const path = `${user.id}/${Date.now()}.${ext}`
+      const { error: upErr } = await supabase.storage
+        .from('message-attachments')
+        .upload(path, attachFile, { cacheControl: '3600', upsert: false })
+      if (upErr) {
+        setUploadErr(`Upload failed: ${upErr.message}`)
+        setSending(false)
+        return
+      }
+      const { data: { publicUrl } } = supabase.storage
+        .from('message-attachments')
+        .getPublicUrl(path)
+      attachment_url  = publicUrl
+      attachment_name = attachFile.name
+      setAttachFile(null)
+    }
+
     const msg = {
-      sender_id: user.id,
+      sender_id:   user.id,
       recipient_id: counterpartId,
-      body: text.trim(),
+      body:        text.trim() || '',
+      ...(attachment_url && { attachment_url, attachment_name }),
     }
     const { data } = await supabase.from('messages').insert(msg).select().single()
     if (data) {
@@ -212,6 +254,7 @@ export default function BetweenSessions() {
           .eq('id', counterpartId)
           .maybeSingle()
         if (receiver?.email) {
+          const snippet = msg.body || (attachment_name ? `📎 ${attachment_name}` : '')
           fetch('/.netlify/functions/send-email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -220,7 +263,7 @@ export default function BetweenSessions() {
               to: receiver.email,
               data: {
                 senderName: profile?.full_name ?? 'Someone',
-                snippet: msg.body,
+                snippet,
               },
             }),
           }).catch(() => {})
@@ -265,7 +308,9 @@ export default function BetweenSessions() {
               <div className="nm">{counterpartName} · {isMentor ? 'Mentee' : 'Mentor'}</div>
               <div className="snip">
                 {lastMessage
-                  ? lastMessage.body.slice(0, 80) + (lastMessage.body.length > 80 ? '…' : '')
+                  ? (lastMessage.body
+                      ? lastMessage.body.slice(0, 80) + (lastMessage.body.length > 80 ? '…' : '')
+                      : lastMessage.attachment_name ? `📎 ${lastMessage.attachment_name}` : '')
                   : 'Start your first message.'}
               </div>
               {lastMessage && (
@@ -297,14 +342,79 @@ export default function BetweenSessions() {
                     key={m.id}
                     className={'bubble ' + (m.sender_id === user.id ? 'u' : 'm')}
                   >
-                    {m.body}
+                    {m.body && <div>{m.body}</div>}
+                    {m.attachment_url && (
+                      <a
+                        href={m.attachment_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: 'flex', alignItems: 'center', gap: 6,
+                          marginTop: m.body ? 8 : 0,
+                          fontSize: 13, textDecoration: 'none',
+                          color: m.sender_id === user.id ? 'rgba(250,250,248,0.9)' : 'var(--navy)',
+                          background: m.sender_id === user.id ? 'rgba(0,0,0,0.15)' : 'var(--cream-deep)',
+                          padding: '6px 10px', borderRadius: 4,
+                        }}
+                      >
+                        <span style={{ fontSize: 15 }}>📎</span>
+                        <span style={{ textDecoration: 'underline' }}>{m.attachment_name || 'Attachment'}</span>
+                      </a>
+                    )}
                     <div className="t">{formatTime(m.created_at)}</div>
                   </div>
                 ))
               )}
             </div>
 
+            {/* File attachment preview + error */}
+            {(attachFile || uploadErr) && (
+              <div style={{
+                padding: '6px 14px',
+                background: uploadErr ? 'rgba(192,57,43,0.07)' : 'var(--cream-deep)',
+                borderTop: '1px solid var(--line)',
+                display: 'flex', alignItems: 'center', gap: 8, fontSize: 13,
+              }}>
+                {uploadErr ? (
+                  <span style={{ color: 'var(--error)' }}>{uploadErr}</span>
+                ) : (
+                  <>
+                    <span style={{ color: 'var(--navy)' }}>📎 {attachFile.name}</span>
+                    <button
+                      onClick={() => { setAttachFile(null); setUploadErr('') }}
+                      style={{
+                        background: 'none', border: 'none', cursor: 'pointer',
+                        color: 'var(--mute)', fontSize: 16, lineHeight: 1, padding: 0,
+                      }}
+                      title="Remove attachment"
+                    >×</button>
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* Hidden file input */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              style={{ display: 'none' }}
+              onChange={handleFileSelect}
+              accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.gif,.webp"
+            />
+
             <div className="msg-input">
+              {/* Paperclip button */}
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                title="Attach file"
+                style={{
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  padding: '0 8px', fontSize: 18, color: 'var(--mute)',
+                  alignSelf: 'center', flexShrink: 0, lineHeight: 1,
+                }}
+              >
+                📎
+              </button>
               <textarea
                 value={text}
                 onChange={e => setText(e.target.value)}
@@ -316,7 +426,7 @@ export default function BetweenSessions() {
                 className="btn btn-primary btn-sm"
                 style={{ alignSelf: 'stretch' }}
                 onClick={send}
-                disabled={sending || !text.trim()}
+                disabled={sending || (!text.trim() && !attachFile)}
               >
                 Send
               </button>

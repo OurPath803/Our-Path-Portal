@@ -628,8 +628,8 @@ async function logNotification(recipientEmail, type, subjectId = null) {
 // ---------------------------------------------------------------------------
 async function sendViaResend({ to, subject, text, html }) {
   if (!RESEND_API_KEY) {
-    console.warn('RESEND_API_KEY missing — skipping email send', { to, subject })
-    return { skipped: true }
+    console.error('RESEND_API_KEY not set — cannot send email', { to, subject })
+    throw new Error('Email service not configured. Add RESEND_API_KEY to Netlify environment variables.')
   }
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',

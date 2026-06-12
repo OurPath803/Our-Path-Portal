@@ -324,8 +324,13 @@ export default function MentorManage() {
       }),
     })
 
+    let errDetail = ''
     if (!res.ok) {
-      setInductionFlash('Pack created but email failed to send. Copy the link below and send manually.')
+      try {
+        const resData = await res.json()
+        errDetail = resData?.error ? ` (${resData.error})` : ''
+      } catch (_) {}
+      setInductionFlash(`Pack created but email failed to send${errDetail}. Copy the link below and send manually.`)
     } else {
       setInductionFlash(`Induction pack sent to ${mentee.email}.`)
     }
