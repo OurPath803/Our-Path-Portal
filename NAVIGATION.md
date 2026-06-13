@@ -129,9 +129,11 @@ Where you write session records for a mentee. Each note can capture:
 - OCS scores (Clarity, Agency, Groundedness, Energy, Momentum)
 - Reflection domains covered
 - What moved, observations, next intention
-- Whether to share the note with the mentee (they see it in `/notes`)
 
-Also contains the messaging thread — same thread as BetweenSessions, viewed from your side. You can send messages and attach files here.
+No messaging here — session recording only.
+
+### `/between?with=:menteeId` — Messaging (mentor side)
+Same page clients use, but when you're logged in as mentor it detects your role and sets the mentee as your counterpart. Access this via the **Messages** button next to each mentee on the Mentor Dashboard. Full attachment support — paperclip button lets you send PDFs, documents, and images up to 10 MB.
 
 ### `/mentor/journal/:menteeId` — View Mentee Journal
 Read-only view of entries the mentee has chosen to share with you.
