@@ -357,7 +357,9 @@ export default function BetweenSessions() {
                           padding: '6px 10px', borderRadius: 4,
                         }}
                       >
-                        <span style={{ fontSize: 15 }}>📎</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                          <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+                        </svg>
                         <span style={{ textDecoration: 'underline' }}>{m.attachment_name || 'Attachment'}</span>
                       </a>
                     )}
@@ -379,7 +381,10 @@ export default function BetweenSessions() {
                   <span style={{ color: 'var(--error)' }}>{uploadErr}</span>
                 ) : (
                   <>
-                    <span style={{ color: 'var(--navy)' }}>📎 {attachFile.name}</span>
+                    <span style={{ color: 'var(--navy)', display: 'flex', alignItems: 'center', gap: 5 }}>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg>
+                      {attachFile.name}
+                    </span>
                     <button
                       onClick={() => { setAttachFile(null); setUploadErr('') }}
                       style={{
@@ -409,11 +414,13 @@ export default function BetweenSessions() {
                 title="Attach file"
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer',
-                  padding: '0 8px', fontSize: 18, color: 'var(--mute)',
-                  alignSelf: 'center', flexShrink: 0, lineHeight: 1,
+                  padding: '0 8px', alignSelf: 'center', flexShrink: 0, lineHeight: 1,
+                  color: 'var(--mute)', display: 'flex', alignItems: 'center',
                 }}
               >
-                📎
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+                </svg>
               </button>
               <textarea
                 value={text}
