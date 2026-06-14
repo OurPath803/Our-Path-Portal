@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import MentorRoute from './components/MentorRoute'
+import DirectorRoute from './components/DirectorRoute'
 
 import Landing from './pages/Landing'
 import Login from './pages/Login'
@@ -22,6 +23,8 @@ import OurStory from './pages/OurStory'
 import Workshops from './pages/Workshops'
 import Contact from './pages/Contact'
 import Referral from './pages/Referral'
+
+import DirectorDashboard from './pages/director/DirectorDashboard'
 
 import MentorDashboard from './pages/mentor/MentorDashboard'
 import MentorNotes from './pages/mentor/MentorNotes'
@@ -103,6 +106,9 @@ export default function App() {
           <Route path="/tools/cost-audit"          element={<ProtectedRoute><CostAudit /></ProtectedRoute>} />
           <Route path="/tools/integration-filter"  element={<ProtectedRoute><IntegrationFilter /></ProtectedRoute>} />
           <Route path="/tools/orientation"         element={<ProtectedRoute><OrientationFramework /></ProtectedRoute>} />
+
+          {/* Director only */}
+          <Route path="/director" element={<DirectorRoute><DirectorDashboard /></DirectorRoute>} />
 
           {/* Mentor only */}
           <Route path="/mentor" element={<MentorRoute><MentorDashboard /></MentorRoute>} />

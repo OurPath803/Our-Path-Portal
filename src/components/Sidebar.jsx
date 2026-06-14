@@ -23,6 +23,14 @@ const MENTOR_NAV = [
   { to: '/settings',            ico: '◌', label: 'Settings' },
 ]
 
+const DIRECTOR_NAV = [
+  { to: '/director',            ico: '◈', label: 'Overview' },
+  { to: '/mentor',              ico: '◐', label: 'Mentor console' },
+  { to: '/mentor/applications', ico: '◇', label: 'Applications' },
+  { to: '/blog',                ico: '◆', label: 'Reading' },
+  { to: '/settings',            ico: '◌', label: 'Settings' },
+]
+
 // Logo lockup — links back to the public home page. Uses horizontal light-on-dark
 // logo with typographic fallback if the asset is missing.
 function Logo() {
@@ -48,12 +56,13 @@ function Logo() {
 function NavItems({ onClose }) {
   const { user, profile, signOut } = useAuth()
   const navigate = useNavigate()
+  const isDirector = profile?.role === 'director'
   const isStaff = profile?.role === 'mentor' || profile?.role === 'admin'
-  const NAV = isStaff ? MENTOR_NAV : MENTEE_NAV
+  const NAV = isDirector ? DIRECTOR_NAV : isStaff ? MENTOR_NAV : MENTEE_NAV
   const [rhythm, setRhythm] = useState(null)
 
   useEffect(() => {
-    if (!user || isStaff) return
+    if (!user || isStaff || isDirector) return
     supabase
       .from('subscriptions')
       .select('rhythm, status')
@@ -95,11 +104,13 @@ function NavItems({ onClose }) {
         <div className="role">
           {profile?.role === 'admin'
             ? 'Admin'
-            : profile?.role === 'mentor'
-              ? 'Mentor'
-              : (rhythm
-                  ? `${rhythm.charAt(0).toUpperCase() + rhythm.slice(1)} rhythm · with Ustadh Shakil`
-                  : 'No rhythm yet · with Ustadh Shakil')}
+            : profile?.role === 'director'
+              ? 'Director'
+              : profile?.role === 'mentor'
+                ? 'Mentor'
+                : (rhythm
+                    ? `${rhythm.charAt(0).toUpperCase() + rhythm.slice(1)} rhythm · with Ustadh Shakil`
+                    : 'No rhythm yet · with Ustadh Shakil')}
         </div>
         <button
           onClick={handleSignOut}
