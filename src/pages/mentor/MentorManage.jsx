@@ -43,6 +43,180 @@ const SESSION_STATUSES = [
   { value: 'no_show', label: 'No-show' },
 ]
 
+// Renders a tool_responses.responses JSONB in a readable format for the mentor.
+function ToolResponseViewer({ slug, data }) {
+  if (!data) return null
+
+  // OCS Check-In: structured tabs
+  if (slug === 'ocs-checkin') {
+    const OCS_LABELS = { 1: 'Absent', 2: 'Flickering', 3: 'Present but fragile', 4: 'Stable', 5: 'Integrated' }
+    return (
+      <div style={{ fontSize: 13, lineHeight: 1.7 }}>
+        {data.pre && Object.entries(data.pre).map(([k, v]) => v?.trim() ? (
+          <div key={k} style={{ marginBottom: 8 }}>
+            <div style={{ color: 'var(--mute)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{k.replace(/_/g,' ')}</div>
+            <div style={{ color: 'var(--charcoal)' }}>{v}</div>
+          </div>
+        ) : null)}
+        {data.scores && (
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '8px 0' }}>
+            {Object.entries(data.scores).map(([dim, score]) => score > 0 ? (
+              <div key={dim} style={{ textAlign: 'center' }}>
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: 22, color: 'var(--gold)' }}>{score}</div>
+                <div style={{ fontSize: 11, color: 'var(--mute)' }}>{dim} · {OCS_LABELS[score]}</div>
+              </div>
+            ) : null)}
+          </div>
+        )}
+        {data.post && Object.entries(data.post).map(([k, v]) => v?.trim() ? (
+          <div key={k} style={{ marginBottom: 8 }}>
+            <div style={{ color: 'var(--mute)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{k.replace(/_/g,' ')}</div>
+            <div style={{ color: 'var(--charcoal)' }}>{v}</div>
+          </div>
+        ) : null)}
+      </div>
+    )
+  }
+
+  // Position Map: score bars
+  if (slug === 'position-map') {
+    return (
+      <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', fontSize: 13 }}>
+        {data.scores && Object.entries(data.scores).map(([dim, score]) => (
+          <div key={dim} style={{ flex: '1 0 100px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+              <span style={{ color: 'var(--charcoal)' }}>{dim}</span>
+              <span style={{ color: 'var(--gold)', fontWeight: 600 }}>{score}/5</span>
+            </div>
+            <div style={{ height: 5, background: 'var(--line)', borderRadius: 3 }}>
+              <div style={{ height: '100%', width: `${(score/5)*100}%`, background: 'var(--gold)', borderRadius: 3 }} />
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  // Values Alignment: table-style
+  if (slug === 'values-alignment') {
+    return (
+      <div style={{ fontSize: 13 }}>
+        {(data.values ?? []).filter(v => v.name?.trim()).map((v, i) => (
+          <div key={i} style={{ display: 'flex', gap: 12, marginBottom: 6, alignItems: 'baseline' }}>
+            <span style={{ minWidth: 120, color: 'var(--navy)', fontWeight: 500 }}>{v.name}</span>
+            <span style={{ color: v.visible === 'yes' ? 'var(--success)' : v.visible === 'no' ? 'var(--error)' : 'var(--mute)', minWidth: 80 }}>
+              {v.visible === 'yes' ? '✓ Visible' : v.visible === 'no' ? '✗ Not this week' : 'Partial'}
+            </span>
+            {v.notes && <span style={{ color: 'var(--charcoal)' }}>{v.notes}</span>}
+          </div>
+        ))}
+        {data.reflections && Object.values(data.reflections).some(v => v?.trim()) && (
+          <div style={{ marginTop: 10, borderTop: '1px solid var(--line)', paddingTop: 10 }}>
+            {Object.entries(data.reflections).map(([i, v]) => v?.trim() ? (
+              <div key={i} style={{ marginBottom: 8, color: 'var(--charcoal)' }}>{v}</div>
+            ) : null)}
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  // Cost Audit: item list
+  if (slug === 'cost-audit') {
+    return (
+      <div style={{ fontSize: 13 }}>
+        {(data.items ?? []).filter(i => i.name?.trim()).map((item, idx) => (
+          <div key={idx} style={{ marginBottom: 10, paddingBottom: 10, borderBottom: '1px solid var(--line)' }}>
+            <div style={{ fontWeight: 500, color: 'var(--navy)', marginBottom: 4 }}>{item.name}</div>
+            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', color: 'var(--ink-soft)' }}>
+              {['time','energy','focus','joy','choice'].map(k => item[k]?.trim() ? (
+                <span key={k}><strong>{k}:</strong> {item[k]}</span>
+              ) : null)}
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  // Integration Filter: entries
+  if (slug === 'integration-filter') {
+    return (
+      <div style={{ fontSize: 13 }}>
+        {(data.entries ?? []).filter(e => e.what?.trim()).map((e, idx) => (
+          <div key={idx} style={{ marginBottom: 12, paddingBottom: 12, borderBottom: '1px solid var(--line)' }}>
+            <div style={{ fontWeight: 500, color: 'var(--navy)', marginBottom: 6 }}>{e.what}</div>
+            {['learned','accumulated','carrying','forward'].map(k => e[k]?.trim() ? (
+              <div key={k} style={{ marginBottom: 4 }}>
+                <span style={{ color: 'var(--mute)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.07em' }}>{k}: </span>
+                <span style={{ color: 'var(--charcoal)' }}>{e[k]}</span>
+              </div>
+            ) : null)}
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  // Orientation Framework: statement
+  if (slug === 'orientation') {
+    return (
+      <div style={{ fontSize: 13, lineHeight: 1.7 }}>
+        {data.currentPhase && (
+          <div style={{ marginBottom: 8 }}>
+            <span style={{ color: 'var(--mute)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Phase: </span>
+            <span style={{ color: 'var(--navy)', fontWeight: 500 }}>{data.currentPhase}</span>
+          </div>
+        )}
+        {['season','requires','moving_toward','moving_away','faithful_next'].map(k => data[k]?.trim() ? (
+          <div key={k} style={{ marginBottom: 8 }}>
+            <div style={{ color: 'var(--mute)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{k.replace(/_/g,' ')}</div>
+            <div style={{ color: 'var(--charcoal)' }}>{data[k]}</div>
+          </div>
+        ) : null)}
+      </div>
+    )
+  }
+
+  // Generic fallback: render all key-value pairs recursively
+  function renderValue(val, depth = 0) {
+    if (val === null || val === undefined || val === '') return null
+    if (typeof val === 'string' || typeof val === 'number') {
+      return <span style={{ color: 'var(--charcoal)' }}>{val}</span>
+    }
+    if (Array.isArray(val)) {
+      return (
+        <div style={{ paddingLeft: depth > 0 ? 12 : 0 }}>
+          {val.map((v, i) => (
+            <div key={i} style={{ marginBottom: 6 }}>{renderValue(v, depth + 1)}</div>
+          ))}
+        </div>
+      )
+    }
+    if (typeof val === 'object') {
+      return (
+        <div style={{ paddingLeft: depth > 0 ? 12 : 0 }}>
+          {Object.entries(val).map(([k, v]) => {
+            const rendered = renderValue(v, depth + 1)
+            if (!rendered) return null
+            return (
+              <div key={k} style={{ marginBottom: 8 }}>
+                <div style={{ color: 'var(--mute)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                  {k.replace(/_/g,' ')}
+                </div>
+                {rendered}
+              </div>
+            )
+          })}
+        </div>
+      )
+    }
+    return null
+  }
+
+  return <div style={{ fontSize: 13, lineHeight: 1.7 }}>{renderValue(data)}</div>
+}
+
 function formatDate(d) {
   if (!d) return '—'
   return new Date(d).toLocaleString('en-GB', {
@@ -83,6 +257,8 @@ export default function MentorManage() {
 
   // Tool assignment state
   const [toolAssignments, setToolAssignments] = useState([])
+  const [toolResponses, setToolResponses] = useState([])   // latest response per tool_slug
+  const [expandedResponse, setExpandedResponse] = useState(null) // tool_slug of open response
   const [assigningTool, setAssigningTool] = useState('')
   const [assignNotes, setAssignNotes] = useState('')
   const [savingTool, setSavingTool] = useState(false)
@@ -112,7 +288,7 @@ export default function MentorManage() {
     setLoading(true)
     setError('')
 
-    const [menteeRes, subRes, sesRes, toolRes, inductionRes] = await Promise.all([
+    const [menteeRes, subRes, sesRes, toolRes, responseRes, inductionRes] = await Promise.all([
       supabase.from('profiles')
         .select('id, full_name, email, role::text, mentor_id')
         .eq('id', menteeId).maybeSingle(),
@@ -125,6 +301,9 @@ export default function MentorManage() {
       supabase.from('tool_assignments')
         .select('*').eq('mentee_id', menteeId)
         .order('assigned_at', { ascending: false }),
+      supabase.from('tool_responses')
+        .select('*').eq('mentee_id', menteeId)
+        .order('created_at', { ascending: false }),
       supabase.from('induction_forms')
         .select('*').eq('mentee_id', menteeId)
         .order('sent_at', { ascending: false }).limit(1).maybeSingle(),
@@ -140,6 +319,14 @@ export default function MentorManage() {
     setSubscription(subRes.data)
     setSessions(sesRes.data ?? [])
     setToolAssignments(toolRes.data ?? [])
+    // Keep only most recent response per tool_slug
+    const seenSlugs = new Set()
+    const latestResponses = (responseRes.data ?? []).filter(r => {
+      if (seenSlugs.has(r.tool_slug)) return false
+      seenSlugs.add(r.tool_slug)
+      return true
+    })
+    setToolResponses(latestResponses)
     setInduction(inductionRes.data ?? null)
     if (subRes.data) {
       setSubForm({ rhythm: subRes.data.rhythm, status: subRes.data.status })
@@ -280,6 +467,11 @@ export default function MentorManage() {
     if (!confirm('Revoke access to this tool? The mentee will no longer see it on their dashboard.')) return
     await supabase.from('tool_assignments').update({ revoked_at: new Date().toISOString() }).eq('id', id)
     await load()
+  }
+
+  async function markResponseSeen(responseId) {
+    await supabase.from('tool_responses').update({ seen_by_mentor: true }).eq('id', responseId)
+    setToolResponses(rs => rs.map(r => r.id === responseId ? { ...r, seen_by_mentor: true } : r))
   }
 
   async function cancelSession(id) {
@@ -517,40 +709,93 @@ export default function MentorManage() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                     {toolAssignments.map(t => {
                       const meta = TOOL_OPTIONS.find(o => o.slug === t.tool_slug)
+                      const response = toolResponses.find(r => r.tool_slug === t.tool_slug)
+                      const isOpen = expandedResponse === t.tool_slug
                       return (
                         <div
                           key={t.id}
                           style={{
-                            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                            padding: '10px 12px',
-                            background: t.revoked_at ? 'transparent' : 'var(--off-white)',
                             borderRadius: 4,
-                            border: '1px solid var(--line)',
+                            border: `1px solid ${response && !response.seen_by_mentor ? 'var(--gold)' : 'var(--line)'}`,
+                            background: t.revoked_at ? 'transparent' : 'var(--off-white)',
                             opacity: t.revoked_at ? 0.5 : 1,
+                            overflow: 'hidden',
                           }}
                         >
-                          <div>
-                            <div style={{ fontSize: 14, color: 'var(--navy)', fontWeight: 500 }}>
-                              {meta?.label ?? t.tool_slug}
+                          <div style={{
+                            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                            padding: '10px 12px',
+                          }}>
+                            <div style={{ flex: 1 }}>
+                              <div style={{ fontSize: 14, color: 'var(--navy)', fontWeight: 500 }}>
+                                {meta?.label ?? t.tool_slug}
+                                {response && !response.seen_by_mentor && (
+                                  <span style={{
+                                    marginLeft: 8, fontSize: 10, background: 'var(--gold)',
+                                    color: 'var(--navy)', padding: '2px 6px', borderRadius: 10,
+                                    fontWeight: 700, letterSpacing: '0.05em',
+                                  }}>
+                                    NEW RESPONSE
+                                  </span>
+                                )}
+                              </div>
+                              {t.notes && (
+                                <div style={{ fontSize: 12, color: 'var(--mute)', marginTop: 2 }}>{t.notes}</div>
+                              )}
+                              <div style={{ fontSize: 11, color: 'var(--mute)', marginTop: 2 }}>
+                                {t.revoked_at
+                                  ? `Revoked ${formatDate(t.revoked_at)}`
+                                  : `Assigned ${formatDate(t.assigned_at)}`}
+                                {response && (
+                                  <span style={{ marginLeft: 8, color: 'var(--gold)' }}>
+                                    · Responded {formatDate(response.created_at)}
+                                  </span>
+                                )}
+                              </div>
                             </div>
-                            {t.notes && (
-                              <div style={{ fontSize: 12, color: 'var(--mute)', marginTop: 2 }}>{t.notes}</div>
-                            )}
-                            <div style={{ fontSize: 11, color: 'var(--mute)', marginTop: 2 }}>
-                              {t.revoked_at
-                                ? `Revoked ${formatDate(t.revoked_at)}`
-                                : `Assigned ${formatDate(t.assigned_at)}`}
+                            <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
+                              {response && (
+                                <button
+                                  type="button"
+                                  onClick={() => setExpandedResponse(isOpen ? null : t.tool_slug)}
+                                  className="btn btn-ghost btn-sm"
+                                  style={{ fontSize: 11, padding: '4px 8px' }}
+                                >
+                                  {isOpen ? 'Hide' : 'View response'}
+                                </button>
+                              )}
+                              {!t.revoked_at && (
+                                <button
+                                  type="button"
+                                  onClick={() => revokeTool(t.id)}
+                                  className="btn btn-ghost btn-sm"
+                                  style={{ fontSize: 11, padding: '4px 8px' }}
+                                >
+                                  Revoke
+                                </button>
+                              )}
                             </div>
                           </div>
-                          {!t.revoked_at && (
-                            <button
-                              type="button"
-                              onClick={() => revokeTool(t.id)}
-                              className="btn btn-ghost btn-sm"
-                              style={{ fontSize: 11, padding: '4px 8px', flexShrink: 0 }}
-                            >
-                              Revoke
-                            </button>
+
+                          {/* Expanded response view */}
+                          {isOpen && response && (
+                            <div style={{
+                              borderTop: '1px solid var(--line)',
+                              padding: '14px 16px',
+                              background: 'var(--cream)',
+                            }}>
+                              <ToolResponseViewer slug={t.tool_slug} data={response.responses} />
+                              {!response.seen_by_mentor && (
+                                <button
+                                  type="button"
+                                  onClick={() => markResponseSeen(response.id)}
+                                  className="btn btn-ghost btn-sm"
+                                  style={{ marginTop: 12, fontSize: 11 }}
+                                >
+                                  Mark as seen
+                                </button>
+                              )}
+                            </div>
                           )}
                         </div>
                       )

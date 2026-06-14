@@ -10,6 +10,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
+import ShareWithMentor from '../../components/ShareWithMentor'
+import { useToolSave } from '../../lib/useToolSave'
 
 const SECTIONS = [
   {
@@ -37,6 +39,7 @@ const SECTIONS = [
 const CLOSING_Q = 'If I could name one thing this period has asked of me, it would be…'
 
 export default function ProgressReview() {
+  const { save, saving, saved, error, lastShared } = useToolSave('progress-review')
   const [answers, setAnswers] = useState({})
   const [closing, setClosing] = useState('')
 
@@ -125,19 +128,13 @@ export default function ProgressReview() {
             </div>
           </div>
 
-          {allFilled && (
-            <div style={{
-              maxWidth: 640, marginTop: 24,
-              padding: '16px 22px',
-              background: 'var(--navy)', borderRadius: 4,
-            }}>
-              <p style={{ fontSize: 13, color: 'rgba(245,238,217,0.75)', margin: 0, fontStyle: 'italic', fontFamily: 'var(--font-display)' }}>
-                Review complete. Share this with your mentor — or keep it for yourself.
-              </p>
-            </div>
-          )}
+          <ShareWithMentor
+            onShare={() => save({ answers, closing })}
+            saving={saving} saved={saved} error={error} lastShared={lastShared}
+            hasContent={Object.values(answers).some(v => v?.trim()) || !!closing.trim()}
+          />
 
-          <div style={{ marginTop: 32 }}>
+          <div style={{ marginTop: 20 }}>
             <Link to="/dashboard" className="btn btn-ghost btn-sm">← Back to dashboard</Link>
           </div>
         </div>

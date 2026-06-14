@@ -14,6 +14,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
+import ShareWithMentor from '../../components/ShareWithMentor'
+import { useToolSave } from '../../lib/useToolSave'
 import { REFLECTION_DOMAINS } from '../../lib/constants/frameworks'
 
 const DOMAIN_PROMPTS = {
@@ -29,6 +31,7 @@ const DOMAIN_PROMPTS = {
 }
 
 export default function NineDomains() {
+  const { save, saving, saved, error, lastShared } = useToolSave('nine-domains')
   const [answers, setAnswers] = useState({})
   const [expanded, setExpanded] = useState(null)
 
@@ -131,22 +134,13 @@ export default function NineDomains() {
             })}
           </div>
 
-          {filled > 0 && (
-            <div style={{
-              maxWidth: 680, marginTop: 28,
-              background: 'var(--navy)', color: 'var(--cream)',
-              padding: '20px 24px', borderRadius: 4,
-            }}>
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: 16, color: 'var(--gold)' }}>
-                {filled} of 9 domains reflected on.
-              </span>
-              <p style={{ fontSize: 13, color: 'rgba(245,238,217,0.65)', margin: '6px 0 0' }}>
-                Share this with your mentor at your next session.
-              </p>
-            </div>
-          )}
+          <ShareWithMentor
+            onShare={() => save({ answers })}
+            saving={saving} saved={saved} error={error} lastShared={lastShared}
+            hasContent={filled > 0}
+          />
 
-          <div style={{ marginTop: 32 }}>
+          <div style={{ marginTop: 20 }}>
             <Link to="/dashboard" className="btn btn-ghost btn-sm">← Back to dashboard</Link>
           </div>
         </div>

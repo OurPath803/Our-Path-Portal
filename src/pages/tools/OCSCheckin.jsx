@@ -12,6 +12,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
+import ShareWithMentor from '../../components/ShareWithMentor'
+import { useToolSave } from '../../lib/useToolSave'
 import { OCS_DIMENSIONS, OCS_SCALE } from '../../lib/constants/frameworks'
 
 const SCALE_LABELS = {
@@ -92,6 +94,7 @@ function ReflectiveQuestions({ questions, values, onChange }) {
 }
 
 export default function OCSCheckin() {
+  const { save, saving, saved, error, lastShared } = useToolSave('ocs-checkin')
   const [tab, setTab] = useState('ocs')
 
   // Pre-session state
@@ -108,6 +111,9 @@ export default function OCSCheckin() {
   // Post-session state
   const [postAnswers, setPostAnswers] = useState({})
   function setPostAnswer(id, val) { setPostAnswers(a => ({ ...a, [id]: val })) }
+
+  const hasContent = allScored || Object.values(preAnswers).some(v => v?.trim()) || Object.values(postAnswers).some(v => v?.trim())
+  function handleShare() { save({ pre: preAnswers, scores, post: postAnswers }) }
 
   return (
     <div className="portal-shell">
@@ -234,7 +240,13 @@ export default function OCSCheckin() {
             </>
           )}
 
-          <div style={{ marginTop: 32 }}>
+          <ShareWithMentor
+            onShare={handleShare}
+            saving={saving} saved={saved} error={error} lastShared={lastShared}
+            hasContent={hasContent}
+          />
+
+          <div style={{ marginTop: 20 }}>
             <Link to="/dashboard" className="btn btn-ghost btn-sm">← Back to dashboard</Link>
           </div>
         </div>

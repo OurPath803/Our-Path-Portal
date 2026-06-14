@@ -5,6 +5,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
+import ShareWithMentor from '../../components/ShareWithMentor'
+import { useToolSave } from '../../lib/useToolSave'
 
 const COST_CATEGORIES = [
   { id: 'time',   label: 'Time',   description: 'How many hours per week does this take?' },
@@ -17,6 +19,7 @@ const COST_CATEGORIES = [
 const INITIAL_ITEM = { name: '', time: '', energy: '', focus: '', joy: '', choice: '' }
 
 export default function CostAudit() {
+  const { save, saving, saved, error, lastShared } = useToolSave('cost-audit')
   const [items, setItems] = useState([{ ...INITIAL_ITEM, id: 1 }])
   const [nextId, setNextId] = useState(2)
 
@@ -142,7 +145,13 @@ export default function CostAudit() {
             </p>
           </div>
 
-          <div style={{ marginTop: 24 }}>
+          <ShareWithMentor
+            onShare={() => save({ items })}
+            saving={saving} saved={saved} error={error} lastShared={lastShared}
+            hasContent={items.some(i => i.name.trim())}
+          />
+
+          <div style={{ marginTop: 20 }}>
             <Link to="/dashboard" className="btn btn-ghost btn-sm">← Back to dashboard</Link>
           </div>
         </div>

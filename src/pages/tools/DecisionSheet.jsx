@@ -12,6 +12,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
+import ShareWithMentor from '../../components/ShareWithMentor'
+import { useToolSave } from '../../lib/useToolSave'
 
 const SECTIONS = [
   {
@@ -47,6 +49,7 @@ const SECTIONS = [
 ]
 
 export default function DecisionSheet() {
+  const { save, saving, saved, error, lastShared } = useToolSave('decision-sheet')
   const [answers, setAnswers] = useState({})
   function setAnswer(id, val) { setAnswers(a => ({ ...a, [id]: val })) }
 
@@ -119,7 +122,13 @@ export default function DecisionSheet() {
             </p>
           </div>
 
-          <div style={{ marginTop: 32 }}>
+          <ShareWithMentor
+            onShare={() => save({ answers })}
+            saving={saving} saved={saved} error={error} lastShared={lastShared}
+            hasContent={!!answers['decision']?.trim()}
+          />
+
+          <div style={{ marginTop: 20 }}>
             <Link to="/dashboard" className="btn btn-ghost btn-sm">← Back to dashboard</Link>
           </div>
         </div>

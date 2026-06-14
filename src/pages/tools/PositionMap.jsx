@@ -6,6 +6,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
+import ShareWithMentor from '../../components/ShareWithMentor'
+import { useToolSave } from '../../lib/useToolSave'
 import { POSITION_MAP_DIMENSIONS } from '../../lib/constants/frameworks'
 
 const DIMENSION_DESCRIPTIONS = {
@@ -16,6 +18,7 @@ const DIMENSION_DESCRIPTIONS = {
 }
 
 export default function PositionMap() {
+  const { save, saving, saved, error, lastShared } = useToolSave('position-map')
   const [scores, setScores] = useState(
     Object.fromEntries(POSITION_MAP_DIMENSIONS.map(d => [d, 0]))
   )
@@ -119,7 +122,13 @@ export default function PositionMap() {
             </div>
           )}
 
-          <div style={{ marginTop: 32 }}>
+          <ShareWithMentor
+            onShare={() => save({ scores })}
+            saving={saving} saved={saved} error={error} lastShared={lastShared}
+            hasContent={allScored}
+          />
+
+          <div style={{ marginTop: 20 }}>
             <Link to="/dashboard" className="btn btn-ghost btn-sm">← Back to dashboard</Link>
           </div>
         </div>

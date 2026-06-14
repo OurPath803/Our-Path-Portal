@@ -5,6 +5,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
+import ShareWithMentor from '../../components/ShareWithMentor'
+import { useToolSave } from '../../lib/useToolSave'
 
 const FILTER_QUESTIONS = [
   {
@@ -42,6 +44,7 @@ const FILTER_QUESTIONS = [
 const INITIAL_ENTRY = Object.fromEntries(FILTER_QUESTIONS.map(q => [q.id, '']))
 
 export default function IntegrationFilter() {
+  const { save, saving, saved, error, lastShared } = useToolSave('integration-filter')
   const [entries, setEntries] = useState([{ ...INITIAL_ENTRY, id: 1 }])
   const [nextId, setNextId] = useState(2)
   const [activeEntry, setActiveEntry] = useState(1)
@@ -149,7 +152,13 @@ export default function IntegrationFilter() {
             </p>
           </div>
 
-          <div style={{ marginTop: 24 }}>
+          <ShareWithMentor
+            onShare={() => save({ entries })}
+            saving={saving} saved={saved} error={error} lastShared={lastShared}
+            hasContent={entries.some(e => e.what?.trim())}
+          />
+
+          <div style={{ marginTop: 20 }}>
             <Link to="/dashboard" className="btn btn-ghost btn-sm">← Back to dashboard</Link>
           </div>
         </div>

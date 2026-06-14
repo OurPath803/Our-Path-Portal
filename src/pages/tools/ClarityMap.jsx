@@ -10,6 +10,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
+import ShareWithMentor from '../../components/ShareWithMentor'
+import { useToolSave } from '../../lib/useToolSave'
 
 const CATEGORIES = [
   {
@@ -51,6 +53,7 @@ const DEEPER_QUESTIONS = [
 ]
 
 export default function ClarityMap() {
+  const { save, saving, saved, error, lastShared } = useToolSave('clarity-map')
   const [answers, setAnswers] = useState({})
   function setAnswer(id, val) { setAnswers(a => ({ ...a, [id]: val })) }
 
@@ -126,7 +129,13 @@ export default function ClarityMap() {
             </div>
           </div>
 
-          <div style={{ marginTop: 32 }}>
+          <ShareWithMentor
+            onShare={() => save({ answers })}
+            saving={saving} saved={saved} error={error} lastShared={lastShared}
+            hasContent={Object.values(answers).some(v => v?.trim())}
+          />
+
+          <div style={{ marginTop: 20 }}>
             <Link to="/dashboard" className="btn btn-ghost btn-sm">← Back to dashboard</Link>
           </div>
         </div>

@@ -6,6 +6,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
+import ShareWithMentor from '../../components/ShareWithMentor'
+import { useToolSave } from '../../lib/useToolSave'
 import { AL_MASIR_PHASES } from '../../lib/constants/frameworks'
 
 const ORIENTATION_QUESTIONS = [
@@ -37,6 +39,7 @@ const ORIENTATION_QUESTIONS = [
 ]
 
 export default function OrientationFramework() {
+  const { save, saving, saved, error, lastShared } = useToolSave('orientation')
   const [form, setForm] = useState(
     Object.fromEntries(ORIENTATION_QUESTIONS.map(q => [q.id, '']))
   )
@@ -143,14 +146,16 @@ export default function OrientationFramework() {
                 and moving away from {form.moving_away.toLowerCase()}.
                 My next faithful step is {form.faithful_next.toLowerCase()}.
               </blockquote>
-              <p style={{ fontSize: 12, color: 'rgba(245,238,217,0.5)', marginTop: 16, marginBottom: 0 }}>
-                Saving your Orientation Statement will be available in the next update.
-                For now, copy or screenshot this to bring to your next session.
-              </p>
             </div>
           )}
 
-          <div style={{ marginTop: 28 }}>
+          <ShareWithMentor
+            onShare={() => save({ currentPhase, ...form })}
+            saving={saving} saved={saved} error={error} lastShared={lastShared}
+            hasContent={Object.values(form).some(v => v?.trim())}
+          />
+
+          <div style={{ marginTop: 20 }}>
             <Link to="/dashboard" className="btn btn-ghost btn-sm">Back to dashboard</Link>
           </div>
         </div>

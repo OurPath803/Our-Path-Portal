@@ -10,6 +10,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
+import ShareWithMentor from '../../components/ShareWithMentor'
+import { useToolSave } from '../../lib/useToolSave'
 
 const REFLECTION_QUESTIONS = [
   'Where did your actions align with your values this week — even briefly?',
@@ -20,6 +22,7 @@ const REFLECTION_QUESTIONS = [
 const EMPTY_VALUE = { name: '', visible: '', notes: '' }
 
 export default function ValuesAlignment() {
+  const { save, saving, saved, error, lastShared } = useToolSave('values-alignment')
   const [values, setValues] = useState([
     { ...EMPTY_VALUE },
     { ...EMPTY_VALUE },
@@ -166,7 +169,13 @@ export default function ValuesAlignment() {
             </div>
           </div>
 
-          <div style={{ marginTop: 32 }}>
+          <ShareWithMentor
+            onShare={() => save({ values, reflections })}
+            saving={saving} saved={saved} error={error} lastShared={lastShared}
+            hasContent={values.some(v => v.name.trim())}
+          />
+
+          <div style={{ marginTop: 20 }}>
             <Link to="/dashboard" className="btn btn-ghost btn-sm">← Back to dashboard</Link>
           </div>
         </div>

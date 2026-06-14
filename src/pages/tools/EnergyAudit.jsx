@@ -9,6 +9,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from '../../components/Sidebar'
+import ShareWithMentor from '../../components/ShareWithMentor'
+import { useToolSave } from '../../lib/useToolSave'
 
 const AUDIT_SECTIONS = [
   {
@@ -40,6 +42,7 @@ const CAPACITY_QUESTIONS = [
 ]
 
 export default function EnergyAudit() {
+  const { save, saving, saved, error, lastShared } = useToolSave('energy-audit')
   const [auditAnswers, setAuditAnswers] = useState({})
   const [capacityScores, setCapacityScores] = useState({})
   const [nextStep, setNextStep] = useState('')
@@ -170,7 +173,13 @@ export default function EnergyAudit() {
             </div>
           </div>
 
-          <div style={{ marginTop: 32 }}>
+          <ShareWithMentor
+            onShare={() => save({ audit: auditAnswers, capacity: capacityScores, nextStep })}
+            saving={saving} saved={saved} error={error} lastShared={lastShared}
+            hasContent={Object.values(auditAnswers).some(v => v?.trim()) || Object.values(capacityScores).some(v => v > 0)}
+          />
+
+          <div style={{ marginTop: 20 }}>
             <Link to="/dashboard" className="btn btn-ghost btn-sm">← Back to dashboard</Link>
           </div>
         </div>
