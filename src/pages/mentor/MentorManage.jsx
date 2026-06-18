@@ -486,6 +486,14 @@ export default function MentorManage() {
     await load()
   }
 
+  async function deleteInduction() {
+    if (!confirm('Delete this induction form? This cannot be undone.')) return
+    const { error } = await supabase.from('induction_forms').delete().eq('id', induction.id)
+    if (error) { setInductionFlash(`Delete failed: ${error.message}`); return }
+    setInduction(null)
+    setInductionFlash('Induction form deleted.')
+  }
+
   async function sendInductionPack() {
     if (!mentee?.email) { setInductionFlash('No email on record for this mentee.'); return }
     setSendingInduction(true)
@@ -603,14 +611,24 @@ export default function MentorManage() {
                     }}>
                       {window.location.origin}/induction/{induction.token}
                     </div>
-                    <button
-                      type="button"
-                      className="btn btn-ghost btn-sm"
-                      disabled={sendingInduction}
-                      onClick={sendInductionPack}
-                    >
-                      {sendingInduction ? 'Resending…' : 'Resend email'}
-                    </button>
+                    <div style={{ display: 'flex', gap: 8 }}>
+                      <button
+                        type="button"
+                        className="btn btn-ghost btn-sm"
+                        disabled={sendingInduction}
+                        onClick={sendInductionPack}
+                      >
+                        {sendingInduction ? 'Resending…' : 'Resend email'}
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-ghost btn-sm"
+                        style={{ color: 'var(--error)' }}
+                        onClick={deleteInduction}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <div>
@@ -644,6 +662,14 @@ export default function MentorManage() {
                           {induction.privacy_consent ? '✓' : '✗'} Privacy consent
                         </span>
                       </div>
+                      <button
+                        type="button"
+                        className="btn btn-ghost btn-sm"
+                        style={{ color: 'var(--error)', marginTop: 8, alignSelf: 'flex-start' }}
+                        onClick={deleteInduction}
+                      >
+                        Delete induction form
+                      </button>
                     </div>
                   </div>
                 )}

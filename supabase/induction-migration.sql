@@ -84,6 +84,19 @@ create policy "admin manages induction_forms"
     or has_role(auth.uid(), 'director'::app_role)
   );
 
+-- Mentors can delete induction forms for their assigned mentees
+drop policy if exists "mentor deletes induction_forms" on public.induction_forms;
+create policy "mentor deletes induction_forms"
+  on public.induction_forms for delete
+  using (
+    has_role(auth.uid(), 'mentor'::app_role)
+    and exists (
+      select 1 from public.profiles p
+      where p.id = induction_forms.mentee_id
+        and p.mentor_id = auth.uid()
+    )
+  );
+
 -- Public (anon) can read by token — needed so mentee can open the form link
 -- without being logged in. The token functions as a secret URL.
 drop policy if exists "anon reads induction by token" on public.induction_forms;
