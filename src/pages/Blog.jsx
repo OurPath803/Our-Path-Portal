@@ -8,7 +8,7 @@ import MarketingHeader from '../components/MarketingHeader'
 
 // ── Portal reading room (logged-in view) ────────────────────────────────────
 
-function PortalPostCard({ post, views }) {
+function PortalPostCard({ post }) {
   return (
     <Link
       to={`/blog/${post.slug}`}
@@ -47,11 +47,6 @@ function PortalPostCard({ post, views }) {
               padding: '2px 8px', borderRadius: 20, fontWeight: 700,
             }}>
               Members
-            </span>
-          )}
-          {views > 0 && (
-            <span style={{ fontSize: 11, color: 'var(--mute)', marginLeft: 'auto' }}>
-              {views} {views === 1 ? 'read' : 'reads'}
             </span>
           )}
         </div>
@@ -139,7 +134,6 @@ function PortalReadingRoom({ posts, error, viewCounts }) {
                 <PortalPostCard
                   key={post.id}
                   post={post}
-                  views={viewCounts[post.slug] ?? 0}
                 />
               ))}
             </div>
