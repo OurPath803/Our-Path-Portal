@@ -28,8 +28,8 @@ exports.handler = async (event) => {
     .eq('id', caller.id)
     .maybeSingle()
 
-  if (callerProfile?.role !== 'director') {
-    return { statusCode: 403, body: 'Forbidden — director only' }
+  if (!['director', 'admin'].includes(callerProfile?.role)) {
+    return { statusCode: 403, body: 'Forbidden — director/admin only' }
   }
 
   let body
@@ -57,8 +57,8 @@ exports.handler = async (event) => {
     return { statusCode: 404, body: JSON.stringify({ error: 'User not found.' }) }
   }
 
-  if (targetProfile.role === 'director') {
-    return { statusCode: 403, body: JSON.stringify({ error: 'Cannot delete another director account.' }) }
+  if (['director', 'admin'].includes(targetProfile.role)) {
+    return { statusCode: 403, body: JSON.stringify({ error: 'Cannot delete a director or admin account.' }) }
   }
 
   // Delete auth user — cascades to profiles and all dependent tables.
