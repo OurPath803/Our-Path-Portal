@@ -85,6 +85,12 @@ export default function BlogPost() {
         if (!data) return
         setPost(data)
         setStatus('ready')
+        // Fire-and-forget view count — don't await, don't surface errors to reader
+        fetch('/.netlify/functions/track-view', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug }),
+        }).catch(() => {})
       })
       .catch(err => {
         console.error('blog post error', err)

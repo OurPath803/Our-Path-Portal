@@ -139,6 +139,21 @@ export default function Induction() {
 
     setSubmitting(false)
     if (e) { setError(`Submission failed: ${e.message}`); return }
+
+    // Notify mentor — fire-and-forget, don't block the success screen
+    fetch('/.netlify/functions/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'induction_completed',
+        data: {
+          clientName:     form.full_name,
+          readinessScore: form.readiness_score,
+          whatBringsYou:  form.what_brings_you,
+        },
+      }),
+    }).catch(() => {}) // silent fail — induction already saved
+
     setStatus('done')
   }
 
@@ -226,7 +241,7 @@ export default function Induction() {
 
         <StepIndicator current={step} />
 
-        <div className="card" style={{ padding: '28px 32px' }}>
+        <div className="card" style={{ padding: '24px', overflowX: 'hidden' }}>
 
           {/* ── Step 0: About you ── */}
           {step === 0 && (
@@ -384,6 +399,7 @@ export default function Induction() {
                 padding: '16px 18px',
                 marginBottom: 20,
                 fontSize: 13, color: 'var(--charcoal)', lineHeight: 1.7,
+                overflowWrap: 'break-word', wordBreak: 'break-word',
               }}>
                 <div style={{ fontWeight: 600, color: 'var(--navy)', marginBottom: 6 }}>What this service is</div>
                 OurPath Guidance offers non-clinical, preventative developmental mentoring.

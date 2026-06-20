@@ -28,6 +28,8 @@ export default function DirectorDashboard() {
   const [mentors, setMentors] = useState([])   // [{ id, full_name, email, clientCount, lastSession }]
   const [pendingApps, setPendingApps] = useState([])
   const [unseenResponses, setUnseenResponses] = useState(0)
+  const [recentInductions, setRecentInductions] = useState([])
+  const [topPosts, setTopPosts] = useState([])
   const [loading, setLoading] = useState(true)
 
   // Invite mentor form
@@ -35,6 +37,14 @@ export default function DirectorDashboard() {
   const [inviting, setInviting] = useState(false)
   const [inviteFlash, setInviteFlash] = useState('')
   const [inviteError, setInviteError] = useState('')
+
+  // Account deletion state
+  const [deletingId, setDeletingId] = useState(null)
+  const [deleteFlash, setDeleteFlash] = useState('')
+  const [deleteError, setDeleteError] = useState('')
+
+  // All mentees (clients) list
+  const [mentees, setMentees] = useState([])
 
   useEffect(() => {
     if (!user) return
@@ -54,12 +64,16 @@ export default function DirectorDashboard() {
       appRes,
       sessionRes,
       unseenRes,
+      inductionRes,
+      blogViewsRes,
     ] = await Promise.all([
       supabase.from('profiles').select('id, full_name, email').eq('role', 'mentor'),
       supabase.from('profiles').select('id, full_name, email, mentor_id, created_at').eq('role', 'mentee'),
       supabase.from('applications').select('id, full_name, email, created_at, status').eq('status', 'pending').order('created_at', { ascending: false }),
       supabase.from('sessions').select('id, mentee_id, scheduled_at, status').gte('scheduled_at', monthStart.toISOString()),
       supabase.from('tool_responses').select('id', { count: 'exact' }).eq('seen_by_mentor', false),
+      supabase.from('induction_forms').select('id, full_name, completed_at, readiness_score').not('completed_at', 'is', null).order('completed_at', { ascending: false }).limit(10),
+      supabase.from('blog_views').select('slug, views').order('views', { ascending: false }).limit(10),
     ])
 
     const allMentors = mentorRes.data ?? []
@@ -78,8 +92,11 @@ export default function DirectorDashboard() {
     })
 
     setMentors(caseloads)
+    setMentees(allClients)
     setPendingApps(appRes.data ?? [])
     setUnseenResponses(unseenRes.count ?? 0)
+    setRecentInductions(inductionRes.data ?? [])
+    setTopPosts(blogViewsRes.data ?? [])
     setStats({
       mentors:           allMentors.length,
       clients:           allClients.length,
@@ -120,6 +137,35 @@ export default function DirectorDashboard() {
     setTimeout(() => { setInviteFlash(''); setInviteError('') }, 8000)
   }
 
+  async function deleteAccount(userId, name) {
+    if (!confirm(`Permanently delete "${name}"?\n\nThis removes their account, all sessions, tool data, and messages. This cannot be undone.`)) return
+    setDeletingId(userId)
+    setDeleteFlash('')
+    setDeleteError('')
+
+    const { data: { session } } = await supabase.auth.getSession()
+    const token = session?.access_token
+
+    const res = await fetch('/.netlify/functions/delete-account', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ userId }),
+    })
+
+    const resBody = await res.json().catch(() => ({}))
+    if (!res.ok) {
+      setDeleteError(resBody.error || 'Delete failed.')
+    } else {
+      setDeleteFlash(`"${resBody.name || name}" deleted.`)
+      await load()
+    }
+    setDeletingId(null)
+    setTimeout(() => { setDeleteFlash(''); setDeleteError('') }, 6000)
+  }
+
   function fmt(ts) {
     if (!ts) return '—'
     return new Date(ts).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -151,6 +197,14 @@ export default function DirectorDashboard() {
                   <StatCard label="Unseen tool responses" value={unseenResponses} sub="across all mentors" />
                 )}
               </div>
+
+              {/* ── Account deletion flash ── */}
+              {deleteFlash && (
+                <div className="auth-success" style={{ marginBottom: 16 }}>{deleteFlash}</div>
+              )}
+              {deleteError && (
+                <div className="auth-error" style={{ marginBottom: 16 }}>{deleteError}</div>
+              )}
 
               {/* ── Mentor caseloads ── */}
               <div className="card" style={{ marginBottom: 28 }}>
@@ -199,12 +253,27 @@ export default function DirectorDashboard() {
                             {m.sessionsThisMonth}
                           </td>
                           <td style={{ padding: '12px 10px' }}>
-                            <Link
-                              to={`/mentor`}
-                              style={{ fontSize: 12, color: 'var(--gold)' }}
-                            >
-                              View console →
-                            </Link>
+                            <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                              <Link
+                                to={`/mentor`}
+                                style={{ fontSize: 12, color: 'var(--gold)' }}
+                              >
+                                View console →
+                              </Link>
+                              <button
+                                type="button"
+                                onClick={() => deleteAccount(m.id, m.full_name ?? m.email)}
+                                disabled={deletingId === m.id}
+                                style={{
+                                  fontSize: 11, padding: '3px 8px', cursor: 'pointer',
+                                  border: '1px solid var(--error)', borderRadius: 4,
+                                  background: 'transparent', color: 'var(--error)',
+                                  fontFamily: 'inherit',
+                                }}
+                              >
+                                {deletingId === m.id ? 'Deleting…' : 'Delete'}
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       ))}
@@ -239,6 +308,153 @@ export default function DirectorDashboard() {
                       </div>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* ── Client accounts ── */}
+              <div className="card" style={{ marginBottom: 28 }}>
+                <div className="card-title">
+                  <h3>Client accounts</h3>
+                  <span className="tag">{mentees.length} clients</span>
+                </div>
+
+                {mentees.length === 0 ? (
+                  <p style={{ fontSize: 14, color: 'var(--mute)', fontStyle: 'italic' }}>
+                    No client accounts yet.
+                  </p>
+                ) : (
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+                    <thead>
+                      <tr style={{ textAlign: 'left', borderBottom: '1px solid var(--line)' }}>
+                        {['Client', 'Email', 'Joined', ''].map(h => (
+                          <th key={h} style={{
+                            padding: '8px 10px', fontSize: 11,
+                            textTransform: 'uppercase', letterSpacing: '0.08em',
+                            color: 'var(--mute)', fontWeight: 600,
+                          }}>{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {mentees.map(c => (
+                        <tr key={c.id} style={{ borderBottom: '1px solid var(--line)' }}>
+                          <td style={{ padding: '12px 10px', color: 'var(--navy)', fontWeight: 500 }}>
+                            {c.full_name ?? '—'}
+                          </td>
+                          <td style={{ padding: '12px 10px', color: 'var(--ink-soft)' }}>
+                            {c.email}
+                          </td>
+                          <td style={{ padding: '12px 10px', color: 'var(--mute)', fontSize: 13 }}>
+                            {fmt(c.created_at)}
+                          </td>
+                          <td style={{ padding: '12px 10px' }}>
+                            <button
+                              type="button"
+                              onClick={() => deleteAccount(c.id, c.full_name ?? c.email)}
+                              disabled={deletingId === c.id}
+                              style={{
+                                fontSize: 11, padding: '3px 8px', cursor: 'pointer',
+                                border: '1px solid var(--error)', borderRadius: 4,
+                                background: 'transparent', color: 'var(--error)',
+                                fontFamily: 'inherit',
+                              }}
+                            >
+                              {deletingId === c.id ? 'Deleting…' : 'Delete'}
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+
+              {/* ── Recent induction completions ── */}
+              <div className="card" style={{ marginBottom: 28 }}>
+                <div className="card-title">
+                  <h3>Induction completions</h3>
+                  <span className="tag">{recentInductions.length} on record</span>
+                </div>
+                {recentInductions.length === 0 ? (
+                  <p style={{ fontSize: 14, color: 'var(--mute)', fontStyle: 'italic' }}>
+                    No induction packs completed yet.
+                  </p>
+                ) : (
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+                    <thead>
+                      <tr style={{ textAlign: 'left', borderBottom: '1px solid var(--line)' }}>
+                        {['Client', 'Completed', 'Readiness'].map(h => (
+                          <th key={h} style={{
+                            padding: '8px 10px', fontSize: 11,
+                            textTransform: 'uppercase', letterSpacing: '0.08em',
+                            color: 'var(--mute)', fontWeight: 600,
+                          }}>{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {recentInductions.map(r => (
+                        <tr key={r.id} style={{ borderBottom: '1px solid var(--line)' }}>
+                          <td style={{ padding: '12px 10px', color: 'var(--navy)', fontWeight: 500 }}>
+                            {r.full_name || '—'}
+                          </td>
+                          <td style={{ padding: '12px 10px', color: 'var(--mute)', fontSize: 13 }}>
+                            {fmt(r.completed_at)}
+                          </td>
+                          <td style={{ padding: '12px 10px' }}>
+                            {r.readiness_score ? (
+                              <span style={{
+                                background: 'rgba(27,43,75,0.08)', color: 'var(--navy)',
+                                padding: '2px 8px', borderRadius: 10, fontSize: 13, fontWeight: 600,
+                              }}>
+                                {r.readiness_score} / 5
+                              </span>
+                            ) : '—'}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+
+              {/* ── Blog read counts ── */}
+              {topPosts.length > 0 && (
+                <div className="card" style={{ marginBottom: 28 }}>
+                  <div className="card-title">
+                    <h3>Blog — top reads</h3>
+                    <span className="tag">{topPosts.reduce((s, p) => s + p.views, 0)} total reads</span>
+                  </div>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+                    <thead>
+                      <tr style={{ textAlign: 'left', borderBottom: '1px solid var(--line)' }}>
+                        {['Post slug', 'Reads'].map(h => (
+                          <th key={h} style={{
+                            padding: '8px 10px', fontSize: 11,
+                            textTransform: 'uppercase', letterSpacing: '0.08em',
+                            color: 'var(--mute)', fontWeight: 600,
+                          }}>{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {topPosts.map(p => (
+                        <tr key={p.slug} style={{ borderBottom: '1px solid var(--line)' }}>
+                          <td style={{ padding: '12px 10px', color: 'var(--navy)', fontFamily: 'monospace', fontSize: 13 }}>
+                            {p.slug}
+                          </td>
+                          <td style={{ padding: '12px 10px' }}>
+                            <span style={{
+                              background: 'rgba(201,168,76,0.12)', color: 'var(--charcoal)',
+                              padding: '2px 8px', borderRadius: 10, fontSize: 13, fontWeight: 600,
+                            }}>
+                              {p.views}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               )}
 

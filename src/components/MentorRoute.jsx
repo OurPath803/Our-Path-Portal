@@ -12,8 +12,8 @@ export default function MentorRoute({ children }) {
     return <Navigate to="/login" replace />
   }
 
-  // Mentors, admins, and directors can all access mentor pages.
-  if (!['mentor', 'admin', 'director'].includes(profile?.role)) {
+  // Mentors, lead mentors, admins, and directors can all access mentor pages.
+  if (!['mentor', 'lead_mentor', 'admin', 'director'].includes(profile?.role)) {
     return <Navigate to="/dashboard" replace />
   }
 

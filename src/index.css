@@ -1283,7 +1283,7 @@ a:hover { border-bottom-color: var(--gold); }
 }
 .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--navy); }
 .form-textarea { resize: vertical; min-height: 100px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.mkt-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .form-section-title { font-family: var(--font-display); font-size: 20px; color: var(--navy); padding-top: 8px; border-top: 1px solid var(--line); margin: 0; }
 .form-success { background: var(--navy); color: var(--cream); padding: 48px; text-align: center; border-radius: 2px; }
 .form-success h2 { font-size: 28px; color: var(--cream); margin: 0 0 12px; }
@@ -1322,7 +1322,7 @@ a:hover { border-bottom-color: var(--gold); }
   .mentoring-hero h1, .workshops-hero h1 { font-size: 34px; }
   .story-hero h1 { font-size: 36px; }
   .section-cta h2 { font-size: 28px; }
-  .form-row { grid-template-columns: 1fr; }
+  .mkt-form .form-row { grid-template-columns: 1fr; }
   .stats-bar { grid-template-columns: 1fr; }
   .stat-item { border-right: none; border-bottom: 1px solid rgba(30,58,95,0.15); }
   .stat-item:last-child { border-bottom: none; }

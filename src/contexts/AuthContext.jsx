@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase'
 
 const AuthContext = createContext({})
@@ -7,29 +7,46 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
+  const userIdRef = useRef(null)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
+      userIdRef.current = session?.user?.id ?? null
       if (session?.user) fetchProfile(session.user.id)
       else setLoading(false)
     })
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
+      userIdRef.current = session?.user?.id ?? null
       if (session?.user) fetchProfile(session.user.id)
       else { setProfile(null); setLoading(false) }
     })
 
-    return () => subscription.unsubscribe()
+    // Re-fetch profile when tab regains focus — picks up any DB role changes
+    // without requiring a sign-out/sign-in cycle.
+    function onVisible() {
+      if (document.visibilityState === 'visible' && userIdRef.current) {
+        fetchProfile(userIdRef.current)
+      }
+    }
+    document.addEventListener('visibilitychange', onVisible)
+
+    return () => {
+      subscription.unsubscribe()
+      document.removeEventListener('visibilitychange', onVisible)
+    }
   }, [])
 
   async function fetchProfile(userId) {
-    // maybeSingle() rather than single() because the handle_new_user trigger
-    // may not have inserted the profile row yet right after signup.
     const { data } = await supabase.from('profiles').select('*').eq('id', userId).maybeSingle()
     setProfile(data)
     setLoading(false)
+  }
+
+  async function refreshProfile() {
+    if (userIdRef.current) await fetchProfile(userIdRef.current)
   }
 
   async function signUp(email, password, fullName) {
@@ -51,7 +68,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, profile, loading, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, profile, loading, signUp, signIn, signOut, refreshProfile }}>
       {children}
     </AuthContext.Provider>
   )

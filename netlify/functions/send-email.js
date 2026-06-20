@@ -455,6 +455,30 @@ just reply to this email.</p>
 <p>${SIGN_OFF}</p>`,
   }),
 
+  // ───────────── Induction completed — admin alert ─────────────
+  induction_completed: ({ clientName, readinessScore, whatBringsYou }) => ({
+    subject: `Induction pack completed — ${clientName || 'a client'}`,
+    text:
+`${clientName || 'A client'} has just completed their induction pack.
+
+Readiness score: ${readinessScore || '—'} / 5
+
+What brings them here:
+${whatBringsYou || '(not provided)'}
+
+Review their full responses in the portal:
+${SITE_URL}/mentor/applications
+
+${SIGN_OFF}`,
+    html:
+`<p><strong>${esc(clientName || 'A client')}</strong> has just completed their induction pack.</p>
+<p><strong>Readiness score:</strong> ${esc(String(readinessScore || '—'))} / 5</p>
+<p><strong>What brings them here:</strong><br/>
+<em>${esc(whatBringsYou || '(not provided)').replace(/\n/g, '<br/>')}</em></p>
+<p><a href="${SITE_URL}/mentor/applications">Review their full responses in the portal →</a></p>
+<p>${SIGN_OFF}</p>`,
+  }),
+
   // ───────────── Client induction pack ─────────────
   induction_pack: ({ name, inductionUrl }) => ({
     subject: 'Your OurPath Induction Pack — please complete before your first session',
@@ -674,7 +698,7 @@ exports.handler = async (event) => {
   }
 
   // Admin-bound templates: route to EMAIL_FROM regardless of `to`.
-  const adminBound = ['new_application', 'journal_shared', 'weekly_digest', 'contact_enquiry']
+  const adminBound = ['new_application', 'journal_shared', 'weekly_digest', 'contact_enquiry', 'induction_completed']
   const recipient = adminBound.includes(type) ? EMAIL_FROM : to
   if (!recipient) {
     return { statusCode: 400, body: 'Missing recipient' }
