@@ -579,7 +579,16 @@ export default function MentorManage() {
                 </div>
 
                 {inductionFlash && (
-                  <div className={inductionFlash.startsWith('Failed') || inductionFlash.startsWith('No email') ? 'auth-error' : 'auth-success'} style={{ marginBottom: 12 }}>
+                  <div
+                    className={
+                      inductionFlash.toLowerCase().includes('fail') ||
+                      inductionFlash.toLowerCase().includes('error') ||
+                      inductionFlash.toLowerCase().includes('no email')
+                        ? 'auth-error'
+                        : 'auth-success'
+                    }
+                    style={{ marginBottom: 12 }}
+                  >
                     {inductionFlash}
                   </div>
                 )}
