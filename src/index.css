@@ -41,7 +41,7 @@ h3 { font-size: 18px; margin: 0 0 6px; }
 h4 { font-size: 15px; margin: 0 0 4px; font-weight: 600; }
 p { margin: 0 0 12px; color: var(--ink-soft); }
 button { font: inherit; cursor: pointer; border: none; }
-input, textarea, select {
+input:not([type="radio"]):not([type="checkbox"]), textarea, select {
   font: inherit; color: inherit;
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -50,7 +50,7 @@ input, textarea, select {
   outline: none;
   width: 100%;
 }
-input:focus, textarea:focus, select:focus {
+input:not([type="radio"]):not([type="checkbox"]):focus, textarea:focus, select:focus {
   border-color: var(--navy);
   box-shadow: 0 0 0 3px var(--navy-light);
 }
