@@ -23,6 +23,7 @@ import {
   OCS_DIMENSIONS,
   REFLECTION_DOMAINS,
 } from '../../lib/constants/frameworks'
+import ToolsPalette from '../../components/session-tools/ToolsPalette'
 
 const EMPTY_NOTE = {
   ground_covered: '',
@@ -153,6 +154,9 @@ export default function MentorNotes() {
   const [commitments, setCommitments] = useState([])
   const [newCommitment, setNewCommitment] = useState('')
 
+  const [toolResults, setToolResults]       = useState({})
+  const [checkinHistory, setCheckinHistory] = useState([])
+
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [saveError, setSaveError] = useState('')
@@ -184,7 +188,7 @@ export default function MentorNotes() {
 
     const { data: s } = await supabase
       .from('sessions')
-      .select('id, scheduled_at, mode, status, phase, mentor_stance, ocs_clarity, ocs_agency, ocs_groundedness, ocs_energy, ocs_momentum, domains_explored, what_moved')
+      .select('id, scheduled_at, mode, status, phase, mentor_stance, ocs_clarity, ocs_agency, ocs_groundedness, ocs_energy, ocs_momentum, domains_explored, what_moved, tool_results')
       .eq('mentee_id', menteeId)
       .order('scheduled_at', { ascending: false })
 
@@ -211,6 +215,16 @@ export default function MentorNotes() {
     } else {
       setFramework(EMPTY_FRAMEWORK)
     }
+
+    // Load tool results and checkin history
+    setToolResults(sessionRow?.tool_results ?? {})
+
+    const { data: checkins } = await supabase
+      .from('checkins')
+      .select('id, created_at, ocs_clarity, ocs_agency, ocs_groundedness, ocs_energy, ocs_momentum')
+      .eq('mentee_id', menteeId)
+      .order('created_at', { ascending: true })
+    setCheckinHistory(checkins ?? [])
 
     // Load narrative note from session_notes
     const { data: existing } = await supabase
@@ -259,6 +273,26 @@ export default function MentorNotes() {
     })
   }
 
+  function handleToolResultChange(toolId, data) {
+    setToolResults(prev => ({ ...prev, [toolId]: data }))
+  }
+
+  async function handleToolCommitment(text, sourceTool) {
+    if (!text.trim() || !selectedSessionId) return
+    const { data, error } = await supabase
+      .from('commitments')
+      .insert({
+        mentee_id:   menteeId,
+        session_id:  selectedSessionId,
+        text:        text.trim(),
+        source_tool: sourceTool,
+      })
+      .select()
+      .single()
+    if (error) { console.error('Tool commitment failed:', error.message); return }
+    if (data) setCommitments(cs => [...cs, data])
+  }
+
   async function saveAll() {
     if (!selectedSessionId) return
     setSaving(true)
@@ -275,6 +309,7 @@ export default function MentorNotes() {
       ocs_momentum:     framework.ocs_momentum || null,
       domains_explored: framework.domains_explored.length > 0 ? framework.domains_explored : null,
       what_moved:       framework.what_moved || null,
+      tool_results: Object.keys(toolResults).length > 0 ? toolResults : null,
     }
     const { error: sesErr } = await supabase
       .from('sessions')
@@ -449,6 +484,16 @@ export default function MentorNotes() {
                     </div>
                   </div>
 
+                  {/* ── Tools palette ── */}
+                  <ToolsPalette
+                    sessionId={selectedSessionId}
+                    menteeId={menteeId}
+                    toolResults={toolResults}
+                    onToolResultChange={handleToolResultChange}
+                    onAddCommitment={handleToolCommitment}
+                    checkinHistory={checkinHistory}
+                  />
+
                   {/* ── Panel 2: Session content ── */}
                   <div className="card" style={{ marginBottom: 20, padding: '28px 32px' }}>
                     <SectionHead eyebrow="Session Content" title="Notes" />
@@ -519,6 +564,14 @@ export default function MentorNotes() {
                         <div key={c.id} className={'commit' + (c.completed ? ' done' : '')}>
                           <div className="check" />
                           <div className="t">{c.text}</div>
+                          {c.source_tool && (
+                            <span style={{
+                              marginLeft: 'auto', fontSize: 10, color: 'var(--mute)',
+                              fontWeight: 600, whiteSpace: 'nowrap',
+                            }}>
+                              ← {c.source_tool}
+                            </span>
+                          )}
                           <button
                             className="btn btn-ghost btn-sm"
                             style={{ marginLeft: 8, fontSize: 11, padding: '4px 8px' }}
