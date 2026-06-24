@@ -383,3 +383,12 @@ set mentor_id = (
 )
 where p.mentor_id is null
   and p.role = 'mentee'::app_role;
+
+-- session tools (v3) ----------------------------------------------------------
+-- tool_results stores each tool's state keyed by tool ID: { "t6": {...}, ... }
+alter table public.sessions
+  add column if not exists tool_results jsonb default '{}';
+
+-- source_tool records which OurPath tool generated a commitment (nullable)
+alter table public.commitments
+  add column if not exists source_tool text;
