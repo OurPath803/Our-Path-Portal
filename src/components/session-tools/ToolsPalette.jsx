@@ -15,15 +15,38 @@
 import { useState } from 'react'
 import { SESSION_TOOLS, TOOL_GROUP_COLOURS } from '../../lib/constants/frameworks'
 
-// Tool renderer map — populated in Task 15 after all tool components exist
-const TOOL_RENDERERS = {}
+import SessionZero              from './tools/SessionZero'
+import PreSessionReflection     from './tools/PreSessionReflection'
+import OCSCheckin               from './tools/OCSCheckin'
+import NineReflectionDomains    from './tools/NineReflectionDomains'
+import ClarityMap               from './tools/ClarityMap'
+import ResponsibilityMap        from './tools/ResponsibilityMap'
+import DecisionDiscernment      from './tools/DecisionDiscernment'
+import ValuesAndActions         from './tools/ValuesAndActions'
+import EnergyAndCapacity        from './tools/EnergyAndCapacity'
+import LifeSeason               from './tools/LifeSeason'
+import BetweenSessionCommitment from './tools/BetweenSessionCommitment'
+import ProgressReview           from './tools/ProgressReview'
+import WorkshopCard             from './tools/WorkshopCard'
+import OutcomeSummary           from './tools/OutcomeSummary'
+import PostSessionReflection    from './tools/PostSessionReflection'
 
-function ToolPlaceholder({ tool }) {
-  return (
-    <p style={{ fontSize: 13, color: 'var(--mute)', fontStyle: 'italic' }}>
-      {tool.description}
-    </p>
-  )
+const TOOL_RENDERERS = {
+  t1:  SessionZero,
+  t2:  PreSessionReflection,
+  t3:  OCSCheckin,
+  t4:  NineReflectionDomains,
+  t5:  ClarityMap,
+  t6:  ResponsibilityMap,
+  t7:  DecisionDiscernment,
+  t8:  ValuesAndActions,
+  t9:  EnergyAndCapacity,
+  t10: LifeSeason,
+  t11: BetweenSessionCommitment,
+  t12: ProgressReview,
+  t13: WorkshopCard,
+  t14: OutcomeSummary,
+  t15: PostSessionReflection,
 }
 
 export default function ToolsPalette({
@@ -63,7 +86,8 @@ export default function ToolsPalette({
 
       {/* Open tool panels — render above palette */}
       {openTools.map(tool => {
-        const Renderer = TOOL_RENDERERS[tool.id] || ToolPlaceholder
+        const Renderer = TOOL_RENDERERS[tool.id]
+        if (!Renderer) return null
         return (
           <div
             key={tool.id}
