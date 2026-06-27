@@ -342,6 +342,10 @@ export default function MentorNotes() {
       setSaveError(`Notes save failed: ${noteResult.error.message}`)
       return
     }
+    // Keep local sessions state in sync so switching sessions and back shows fresh data
+    setSessions(prev => prev.map(s =>
+      s.id === selectedSessionId ? { ...s, ...frameworkPayload } : s
+    ))
     setSaved(true)
     setTimeout(() => setSaved(false), 2500)
   }
@@ -486,6 +490,7 @@ export default function MentorNotes() {
 
                   {/* ── Tools palette ── */}
                   <ToolsPalette
+                    key={selectedSessionId}
                     sessionId={selectedSessionId}
                     menteeId={menteeId}
                     toolResults={toolResults}
