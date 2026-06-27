@@ -49,6 +49,16 @@ const GIFT_GROUPS = [
   },
 ]
 
+// "Today", "Tomorrow", "Mon 30 Jun", etc.
+function formatNextSession(iso) {
+  const d = new Date(iso)
+  const diffDays = Math.floor((d - Date.now()) / 86400000)
+  if (diffDays < 0)  return null
+  if (diffDays === 0) return 'Today'
+  if (diffDays === 1) return 'Tomorrow'
+  return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })
+}
+
 // "3 days ago", "2 weeks ago", etc.
 function relativeDate(iso) {
   if (!iso) return null
@@ -243,8 +253,11 @@ function MenteeCard({ r }) {
           </div>
         </div>
 
-        {/* Meta: rhythm, sessions, last journal */}
+        {/* Meta: upcoming session, rhythm, sessions, last journal */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+          {r.nextSession && formatNextSession(r.nextSession) && (
+            <Pill variant="gold">⬤ {formatNextSession(r.nextSession)}</Pill>
+          )}
           {r.rhythm
             ? <Pill variant="navy">{r.rhythm}</Pill>
             : <Pill>No rhythm</Pill>
@@ -388,11 +401,13 @@ export default function MentorDashboard() {
 
     const ids = mentees.map(m => m.id)
 
-    const [sessionsRes, unreadRes, journalsRes, subsRes] = await Promise.all([
+    const [sessionsRes, unreadRes, journalsRes, subsRes, upcomingRes] = await Promise.all([
       supabase.from('sessions').select('mentee_id').in('mentee_id', ids),
       supabase.from('messages').select('sender_id').eq('recipient_id', user.id).is('read_at', null).in('sender_id', ids),
       supabase.from('journal_entries').select('mentee_id, created_at').in('mentee_id', ids).order('created_at', { ascending: false }),
       supabase.from('subscriptions').select('mentee_id, rhythm, status, started_at').in('mentee_id', ids).order('started_at', { ascending: false }),
+      // Upcoming scheduled sessions — used to sort mentees by who's next
+      supabase.from('sessions').select('mentee_id, scheduled_at').in('mentee_id', ids).eq('status', 'scheduled').gte('scheduled_at', new Date().toISOString()).order('scheduled_at', { ascending: true }),
     ])
 
     const sessionCount = {}
@@ -415,16 +430,26 @@ export default function MentorDashboard() {
       if (!currentSub[s.mentee_id]) currentSub[s.mentee_id] = s
     })
 
+    // First upcoming scheduled session per mentee (already ordered soonest-first)
+    const nextSession = {}
+    ;(upcomingRes.data ?? []).forEach(s => {
+      if (!nextSession[s.mentee_id]) nextSession[s.mentee_id] = s.scheduled_at
+    })
+
     const built = mentees.map(m => ({
       ...m,
       sessions:    sessionCount[m.id] ?? 0,
       unread:      unreadCount[m.id] ?? 0,
       lastJournal: lastJournal[m.id] ?? null,
       rhythm:      currentSub[m.id]?.status === 'active' ? currentSub[m.id]?.rhythm : null,
+      nextSession: nextSession[m.id] ?? null,
     }))
 
-    // Sort: unread first, then by oldest journal (needs attention), then alphabetical
+    // Sort: upcoming sessions soonest-first, then unread, then oldest journal, then alphabetical
     built.sort((a, b) => {
+      if (a.nextSession && b.nextSession) return new Date(a.nextSession) - new Date(b.nextSession)
+      if (a.nextSession && !b.nextSession) return -1
+      if (!a.nextSession && b.nextSession) return 1
       if (b.unread !== a.unread) return b.unread - a.unread
       if (!a.lastJournal && b.lastJournal) return -1
       if (a.lastJournal && !b.lastJournal) return 1
@@ -452,7 +477,7 @@ export default function MentorDashboard() {
             <div className="eyebrow">Mentor console</div>
             <h1>Your caseload, {firstName}.</h1>
             <p className="pull">
-              Sorted by who needs attention first. Unread messages appear at the top.
+              Upcoming sessions at the top, then unread messages, then who needs attention.
             </p>
           </div>
 
